@@ -1,0 +1,9 @@
+header
+{
+    background-color: #ff4050;
+}
+.accountImg, .cartImg, .menuImg
+{
+    height: 70px;
+    width: 70px;
+}
