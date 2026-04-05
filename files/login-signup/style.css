@@ -10,10 +10,11 @@ body
 img
 {
     position: absolute;
+    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    filter: blur(1.5px);
+    filter: blur(2px);
 }
 img
 {
@@ -28,30 +29,35 @@ main
 .in,.up
 {
     z-index: 2;
-    border-radius: 5px;
-    width: 600px;
-    height: 300px;
+    width: 100%;     
+    max-width: 500px; 
+    min-height: 300px;
     padding: 20px;
 }
 .in
 {
-    background-color: #6A7E3F;
+    background-color: rgba(106, 126, 63, 0.95);
     border: 2px solid #6A7E3F;
+    border-radius: 5px 0 0 5px;
 }
 .up
 {
-    background-color: #486b27;
+    background-color: rgba(72, 107, 39, 0.95);
     border: 2px solid #486b27;
-}
-button
-{
-    border: 1px solid white;
-    background-color: #4C5C2D;
-    border-radius: 4px;
-    width: 90px;
-    height: 30px;
+    border-radius: 0 5px 5px 0;
 }
 div
 {
     display: flex;
+}
+
+
+@media (width < 768px)
+{
+    .in {
+        border-radius: 5px 5px 0 0; 
+    }
+    .up {
+        border-radius: 0 0 5px 5px;
+    }
 }
