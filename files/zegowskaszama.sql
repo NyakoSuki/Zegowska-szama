@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2026 at 07:15 PM
+-- Generation Time: Apr 07, 2026 at 09:46 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -20,6 +20,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `zegowskaszama`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `discounts`
+--
+
+CREATE TABLE `discounts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `procent` tinyint(3) DEFAULT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `end_date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -90,6 +104,12 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indeksy dla tabeli `discounts`
+--
+ALTER TABLE `discounts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeksy dla tabeli `ordered_products`
 --
 ALTER TABLE `ordered_products`
@@ -121,6 +141,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `discounts`
+--
+ALTER TABLE `discounts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ordered_products`
