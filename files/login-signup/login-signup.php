@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -14,8 +19,15 @@
             <span class="in">
                 <h3><b>LOGIN</b></h3>
                 <form action="login.php" method="post">
-                    <label for="usernameLogin">Username:<input id="usernameLogin" name="usernameLogin" type="text" require></label><br><br>
-                    <label for="passwordLogin">password:<input id="passwordLogin" name="passwordLogin" type="password" require></label><br><br>
+                    <label for="usernameLogin">Username:<input id="usernameLogin" name="usernameLogin" type="text" required></label><br><br>
+                    <label for="passwordLogin">password:<input id="passwordLogin" name="passwordLogin" type="password" required></label><br><br>
+                    <?php
+                        if(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false)
+                            {
+                                echo "<p>Niepoprawny login lub hasło!</p>";
+                                unset($_SESSION['correctData']);
+                            }
+                    ?>
                     <button class="btn btn-primary" type="submit">Login</button>
                     <button class="btn btn-danger" type="reset">reset</button>
                 </form>
@@ -23,9 +35,16 @@
             <span class="up">
                 <h3><b>SIGN UP</b></h3>
                     <form action="signup.php" method="post">
-                        <label for="usernameSignup">Username:<input id="usernameSignup" name="usernameSignup" type="text" require></label><br><br>
-                        <label for="emailSignup">Email:<input id="emailSignup" name="emailSignup" type="text" require></label><br><br>
-                        <label for="passwordSignup">password:<input id="passwordSignup" name="passwordSignup" type="password" require></label><br><br>
+                        <label for="usernameSignup">Username:<input id="usernameSignup" name="usernameSignup" type="text" required></label><br><br>
+                        <label for="emailSignup">Email:<input id="emailSignup" name="emailSignup" type="text" required></label><br><br>
+                        <label for="passwordSignup">password:<input id="passwordSignup" name="passwordSignup" type="password" required></label><br><br>
+                         <?php
+                            if(isset($_SESSION['userExists']) && $_SESSION['userExists'] === true)
+                                {
+                                    echo "<p>Użytkownik już istnieje!</p>";
+                                    unset($_SESSION['userExists']);
+                                }
+                        ?>
                         <button class="btn btn-primary" type="submit">Sign up</button>
                         <button class="btn btn-danger"  type="reset">reset</button>
                     </form>

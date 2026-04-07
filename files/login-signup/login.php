@@ -1,8 +1,10 @@
 <?php
 
+session_start();
+
 include "data_base.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST")
+if ($_SERVER["REQUEST_METHOD"] === "POST")
     {
         if (isset($_POST["usernameLogin"], $_POST["passwordLogin"]))
             {
@@ -10,9 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 $password = $_POST["passwordLogin"];
 
                 $hashedPassword = $connection->query("SELECT password FROM users WHERE username='$username'");
-                if($hashedPassword->num_rows == 0)
+                if($hashedPassword->num_rows === 0)
                     {
-                        echo "Zła nazwa użytkownika lub hasło";
+                        $_SESSION['correctData'] = false;
+                        header("Location: http://localhost/Zegowska-szama/files/login-signup/login-signup.php");
+                        exit;
                     }
                 else
                     {
@@ -21,7 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                             {
                                 header("Location: http://localhost/Zegowska-szama/files/index/index.html");
                                 exit;
-                            } 
+                            }
+                        else
+                            {
+                                $_SESSION['correctData'] = false;
+                                header("Location: http://localhost/Zegowska-szama/files/login-signup/login-signup.php");
+                                exit;
+                            }    
                     }
             }
     }
