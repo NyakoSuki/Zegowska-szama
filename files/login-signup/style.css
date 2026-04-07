@@ -26,6 +26,10 @@ main
     position: relative;
     height: 100vh;
 }
+input
+{
+    color: #222;
+}
 .in,.up
 {
     z-index: 2;
