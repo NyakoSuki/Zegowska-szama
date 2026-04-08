@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2026 at 09:46 PM
--- Wersja serwera: 10.4.32-MariaDB
--- Wersja PHP: 8.2.12
+-- Czas generowania: 08 Kwi 2026, 09:53
+-- Wersja serwera: 10.4.27-MariaDB
+-- Wersja PHP: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `zegowskaszama`
+-- Baza danych: `zegowskaszama`
 --
 
 -- --------------------------------------------------------
@@ -58,7 +58,7 @@ CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
-  `status` varchar(20) NOT NULL DEFAULT 'pending',
+  `status` enum('pending','ready','claimed','canceled') NOT NULL DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -70,13 +70,13 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(100) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` text DEFAULT NULL,
+  `price` decimal(10,2) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `stock` int(10) UNSIGNED DEFAULT NULL,
-  `is_available` tinyint(1) NOT NULL DEFAULT 1
+  `is_available` tinyint(1) UNSIGNED NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -87,15 +87,15 @@ CREATE TABLE `products` (
 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
-  `username` varchar(50) NOT NULL,
+  `username` varchar(40) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `role` varchar(20) NOT NULL DEFAULT 'user',
+  `role` enum('user','admin') NOT NULL DEFAULT 'user',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `last_login` datetime DEFAULT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `failed_attempts` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `failed_attempts` tinyint(1) NOT NULL DEFAULT 0,
   `last_failed_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -107,7 +107,8 @@ CREATE TABLE `users` (
 -- Indeksy dla tabeli `discounts`
 --
 ALTER TABLE `discounts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `discounts_products` (`product_id`);
 
 --
 -- Indeksy dla tabeli `ordered_products`
@@ -139,52 +140,58 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
--- AUTO_INCREMENT for table `discounts`
+-- AUTO_INCREMENT dla tabeli `discounts`
 --
 ALTER TABLE `discounts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ordered_products`
+-- AUTO_INCREMENT dla tabeli `ordered_products`
 --
 ALTER TABLE `ordered_products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT dla tabeli `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `products`
+-- AUTO_INCREMENT dla tabeli `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Ograniczenia dla zrzutów tabel
 --
 
 --
--- Constraints for table `ordered_products`
+-- Ograniczenia dla tabeli `discounts`
+--
+ALTER TABLE `discounts`
+  ADD CONSTRAINT `discounts_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Ograniczenia dla tabeli `ordered_products`
 --
 ALTER TABLE `ordered_products`
   ADD CONSTRAINT `op_orders` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   ADD CONSTRAINT `op_products` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 
 --
--- Constraints for table `orders`
+-- Ograniczenia dla tabeli `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
