@@ -1,67 +1,135 @@
-*
-{
+/* Reset / global */
+* {
     color: #FBF6F6;
     font-family: Courier;
 }
-body
-{
+
+body {
     background-color: #FF4050;
 }
-img
-{
-    position: absolute;
-    width: 100%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    filter: blur(2px);
-}
-img
-{
-    z-index: 1;
-    
-}
-main
-{
+
+/* Layout */
+main {
     position: relative;
     height: 100vh;
 }
-input
-{
-    color: #222;
+
+div {
+    display: flex;
 }
-.in,.up
-{
+
+/* Background image */
+img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    filter: blur(2px);
+    z-index: 1;
+}
+
+/* Panels */
+.in, .up {
     z-index: 2;
-    width: 100%;     
-    max-width: 500px; 
-    min-height: 300px;
+    width: 100%;
+    max-width: 500px;
+    min-height: 400px;
     padding: 20px;
 }
-.in
-{
+
+.in {
     background-color: rgba(106, 126, 63, 0.95);
     border: 2px solid #6A7E3F;
     border-radius: 5px 0 0 5px;
 }
-.up
-{
-    background-color: rgba(72, 107, 39, 0.95);
-    border: 2px solid #486b27;
+
+.up {
+    background-color: rgba(223, 46, 33, 0.95);
+    border: 2px solid rgba(223, 46, 33);
     border-radius: 0 5px 5px 0;
 }
-div
-{
-    display: flex;
+
+
+.in h3, .up h3 {
+    margin: 0;
+    padding: 0;
 }
 
+/* Forms */
+form {
+    padding-top: 20px;
+}
 
-@media (width < 768px)
-{
+.in form {
+    padding-top: 35px;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: bold;
+}
+
+.in form label {
+    margin: 15px;
+}
+
+.up form label {
+    margin: 6px;
+}
+
+/* Inputs */
+input {
+    width: 400px;
+    padding: 2px 30px;
+    font-size: 120%;
+    color: #222;
+    background-color: #fafafa;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+/* Buttons */
+button {
+    width: 125px;
+}
+
+button[type="submit"] {
+    background-color: #26a;
+    border: 2px solid #148;
+    border-radius: 5px;
+}
+
+button[type="reset"] {
+    background-color: #a4c;
+    border: 2px solid #72a;
+    border-radius: 5px;
+}
+
+/* Button containers */
+.buttonsa, .buttonsb {
+    gap: 15px;
+}
+
+.buttonsa {
+    margin-top: 16px;
+}
+
+/* Responsive */
+@media (width < 768px) {
     .in {
-        border-radius: 5px 5px 0 0; 
+        border-radius: 5px 5px 0 0;
     }
+
     .up {
         border-radius: 0 0 5px 5px;
+    }
+
+    input {
+        width: 100%;
     }
 }
