@@ -19,7 +19,7 @@ session_start();
             <span class="in">
                 <h3><b>LOGIN</b></h3>
                 <form action="login.php" method="post">
-                    <label for="usernameLogin">Username:<input id="usernameLogin" name="usernameLogin" type="text" required></label>
+                    <label for="emailLogin">Email:<input id="emailLogin" name="emailLogin" type="text" required></label>
                     <label for="passwordLogin">password:<input id="passwordLogin" name="passwordLogin" type="password" required></label>
                     <?php
                         if(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false)
