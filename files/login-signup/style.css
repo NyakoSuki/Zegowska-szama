@@ -1,11 +1,11 @@
 /* Reset / global */
 * {
-    color: #FBF6F6;
+    color: #eee;
     font-family: Courier;
 }
 
 body {
-    background-color: #FF4050;
+
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -26,25 +26,15 @@ body {
     flex-direction: column;
 }
 
-/* Background image */
-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    transform: translate(-50%, -50%);
-    filter: blur(2px);
-}
-
 
 .login {
-    background-color: rgba(106, 126, 63, 0.95);
+    background: linear-gradient(75deg, #204, #135, #146);
     border: 2px solid #6A7E3F;
     border-radius: 10px;
 }
 
 .signup {
-    background-color: rgba(223, 46, 33, 0.95);
+    background: linear-gradient(75deg, #146, #135, #204);
     border: 2px solid rgba(223, 46, 33);
     border-radius: 10px;
 }
@@ -60,9 +50,7 @@ form {
     padding-top: 10px;
 }
 
-.login form {
-    padding-top: 10px;
-}
+/* Labels */
 
 label {
     gap: 5px;
@@ -81,8 +69,7 @@ label {
 input {
     width: 400px;
     font-size: 120%;
-    color: #222;
-    background-color: #fafafa;
+    background: linear-gradient(75deg, #010101, #333);
     border: 2px solid #ddd;
     border-radius: 10px;
     outline: none;
@@ -90,22 +77,27 @@ input {
 }
 
 /* Buttons */
-button {
-    width: 125px;
-}
-
-button[type="submit"] {
-    background-color: #26a;
-    border: 2px solid #148;
+button
+{
+    border: none;
     border-radius: 5px;
+    padding: 5px;
+    width: 120px;
 }
 
-button[type="reset"] {
-    background-color: #a4c;
-    border: 2px solid #72a;
-    border-radius: 5px;
+.login button
+{
+    background: linear-gradient(75deg, #060, #020);
+}
+.signup button
+{
+    background: linear-gradient(75deg, #060, #020);
 }
 
+button[type="reset"]
+{
+    background: linear-gradient(75deg, #600, #200);
+}
 .buttons {
     margin-top: 20px;
 }

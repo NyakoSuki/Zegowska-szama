@@ -9,12 +9,11 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie/Rejestracja - Zegowska Szama</title>
-    <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="container-fluid">
-        <img class="img-fluid" src="../../images/zegowska_szama_logo.png" alt="logo">
         <div class="container-box">
 
             <!-- PRZYCISKI PRZEŁĄCZANIA -->
@@ -62,11 +61,11 @@ session_start();
                             <input name="usernameSignup" type="text" required>
                         </label>
 
-                        <label>Email:
+                        <label>Email:<br>
                             <input name="emailSignup" type="text" required>
                         </label>
 
-                        <label>Password:
+                        <label>Password:<br>
                             <input name="passwordSignup" type="password" required>
                         </label>
 
