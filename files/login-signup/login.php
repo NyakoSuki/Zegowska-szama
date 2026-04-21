@@ -23,7 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                         $row = $hashedPassword->fetch_assoc();
                         if(password_verify($password, $row["password"]))
                             {
-                                header("Location: http://localhost/Zegowska-szama/files/index/index.html");
+                                $_SESSION["loggedin"] = true;
+                                header("Location: http://localhost/Zegowska-szama/files/index/index.php");
                                 exit;
                             }
                         else

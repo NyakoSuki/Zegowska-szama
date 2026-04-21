@@ -1,6 +1,10 @@
 <?php
+/*
+require "authorization.php";
+requireLogin();
+*/
+session_start()//usunąć aby działała weryfikacja
 
-session_start();
 
 include "data_base.php";
 
