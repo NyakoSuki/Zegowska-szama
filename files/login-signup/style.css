@@ -15,7 +15,7 @@ body {
 /* MAIN WRAPPER */
 .container-box {
     position: relative;
-    width: 800px;
+    width: 650px;
     min-height: 500px; 
     height: auto;      
     margin: auto;
@@ -55,6 +55,7 @@ form {
 label {
     gap: 5px;
     font-weight: bold;
+    font-size: 120%;
 }
 
 .login form label {
@@ -83,6 +84,7 @@ button
     border-radius: 5px;
     padding: 5px;
     width: 120px;
+    font-size: 120%;
 }
 
 button[type="submit"]
@@ -111,7 +113,7 @@ button[type="reset"]
     padding: 10px;
     border-radius: 8px;
     border: none;
-    background-color: #26a;
+    background: linear-gradient(75deg, #146, #135);
     cursor: pointer;
 }
 

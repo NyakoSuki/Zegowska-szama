@@ -27,7 +27,7 @@ session_start();
 
                 <!-- LOGIN -->
                 <div class="panel login">
-                    <h3><b>LOGIN</b></h3>
+                    <h1><b>LOGIN</b></h1>
 
                     <form action="login.php" method="post">
                         <label>Email:<br>
@@ -54,7 +54,7 @@ session_start();
 
                 <!-- SIGN UP -->
                 <div class="panel signup">
-                    <h3><b>SIGN UP</b></h3>
+                    <h1><b>SIGN UP</b></h1>
 
                     <form action="signup.php" method="post">
                         <label>Username:<br>
