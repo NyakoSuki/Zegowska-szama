@@ -31,12 +31,14 @@ body {
     background: linear-gradient(75deg, #204, #135, #146);
     border: 2px solid #6A7E3F;
     border-radius: 10px;
+    height: 450px;
 }
 
 .signup {
     background: linear-gradient(75deg, #146, #135, #204);
     border: 2px solid rgba(223, 46, 33);
     border-radius: 10px;
+    height: 450px;
 }
 
 
@@ -64,6 +66,13 @@ label {
 
 .singup form label {
     margin: 6px;
+}
+
+p
+{
+    font-size: 120%;
+    color: red;
+    margin-top: 10px;
 }
 
 /* Inputs */

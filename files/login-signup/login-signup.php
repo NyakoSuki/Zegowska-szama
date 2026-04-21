@@ -14,7 +14,8 @@ session_start();
 </head>
 <body>
     <main class="container-fluid">
-        <div class="container-box">
+        <?php $active = !empty($_SESSION['userExists']) ? "signup-active" : ""; ?>
+        <div class="container-box <?= $active ?>">
 
             <!-- PRZYCISKI PRZEŁĄCZANIA -->
             <div class="switcher">
