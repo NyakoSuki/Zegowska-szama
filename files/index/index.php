@@ -1,6 +1,13 @@
 <?php
 
+session_start();
+
 include "data_base.php";
+
+if (!isset($_SESSION['cart'])) 
+    {
+        $_SESSION['cart'] = [];
+    }
 
 ?>
 <!DOCTYPE html>
@@ -17,9 +24,9 @@ include "data_base.php";
             <img src="../../images/zegowska_szama_logo.png" alt="logo">
         </section>
         <section>
-            <img src="../../images/account.png" alt="account" class="accountImg">
-            <img src="../../images/cart.png" alt="cart" class="cartImg">
-            <img src="../../images/menu.png" alt="menu" class="menuImg">
+            <img src="../../images/account.png" alt="account" class="account">
+            <img src="../../images/cart.png" alt="cart" class="cart">
+            <img src="../../images/menu.png" alt="menu" class="menu">
         </section>
 
     </header>
@@ -27,16 +34,20 @@ include "data_base.php";
         <section class="products">
             <?php
 
-                $numberOfRows = $connection->query("SELECT id FROM products");
-                $products = $connection->query("SELECT name, description, price, stock, is_available, img FROM products");
+                $products = $connection->query("SELECT id, name, description, price, stock, is_available, img FROM products");
 
-                for($i = 0; $i < $numberOfRows->num_rows; $i++)
-                    {
-                        $product = $products->fetch_assoc();
+                while($product = $products->fetch_assoc())
+                    {                      
                         echo "<div class='product'>";
                             echo "<img src='".$product["img"]."'>";
                             echo "<h2>".$product["name"]."</h2>";
-                            echo $product["price"]."zł";
+                            echo "<h4>".$product["description"]."</h4>";
+                            echo $product["price"]." zł";
+
+                            echo "<form method='POST' action='add_to_cart.php'>";
+                                echo "<input type='hidden' name='id' value='".$product["id"]."'>";
+                                echo "<button type='submit'>Dodaj do koszyka</button>";
+                            echo "</form>";
                         echo "</div>";
                     }
 
@@ -47,5 +58,6 @@ include "data_base.php";
     <footer>
 
     </footer>
+    <script src="app.js"></script>
 </body>
 </html>

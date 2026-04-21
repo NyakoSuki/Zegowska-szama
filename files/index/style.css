@@ -1,8 +1,8 @@
 header
 {
-    background-color: #ff4050;
+    background: linear-gradient(75deg, #ff4050, #173)
 }
-.accountImg, .cartImg, .menuImg
+.account, .cart, .menu
 {
     height: 70px;
     width: 70px;   
