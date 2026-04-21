@@ -1,25 +1,98 @@
+*
+{
+    color: #eee;
+    font-family: Courier;
+    padding: 0px;
+    margin: 0px;
+}
 header
 {
-    background: linear-gradient(75deg, #ff4050, #173)
+    background: linear-gradient(75deg, #aa1020 60%, #135 80%, #146 100%);
+    height: 220px;
+}
+header button
+{
+    border: none;
+}
+nav
+{
+    display: flex;
+    float: right;
+    margin-top: 130px;
+    margin-right: 10px;
+}
+nav button
+{
+    margin: 5px;
+}
+.logo
+{
+    background: url(../../images/zegowska_szama_logo.png);
+    background-size: contain;
+    width: 800px;
+    height: 200px;
+    transition: 0.4s;
 }
 .account, .cart, .menu
 {
+    width: 70px;
     height: 70px;
-    width: 70px;   
+    transition: 0.25s;
+}
+.account
+{
+    background: url(../../images/account.png);
+    background-size: contain;
+}
+.cart
+{
+    background: url(../../images/cart.png);
+    background-size: contain;
+}
+.menu
+{
+    background: url(../../images/menu.png);
+    background-size: contain;
+}
+.logo:active
+{
+    transform: scale(0.95);
+}
+.account:active, .cart:active, .menu:active
+{
+    transform: scale(0.9);
 }
 .products
 {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
 }
 .product
 {
-    width: 20%;
-    height: 20%;
+    width: 90%;
+    height: 400px;
+    text-align: center;
+    margin: 2%;
+    padding: 3%;
+    border-radius: 2px;
+    background: linear-gradient(135deg, #146 50%, #135 80%, #204 100%)
 }
 .product img
 {
-    max-width: 400px;
-    max-height: 400px;
+    width: 100%;
+    height: 100%;
+}
+.img
+{
+    width: 100%;
+    height: 200px;
+}
+.products button
+{
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px;
+    width: 150px;
+    background: linear-gradient(75deg, #060, #020);
 }

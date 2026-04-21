@@ -85,11 +85,7 @@ button
     width: 120px;
 }
 
-.login button
-{
-    background: linear-gradient(75deg, #060, #020);
-}
-.signup button
+button[type="submit"]
 {
     background: linear-gradient(75deg, #060, #020);
 }

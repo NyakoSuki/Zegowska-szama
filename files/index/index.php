@@ -20,16 +20,15 @@ if (!isset($_SESSION['cart']))
 </head>
 <body>
     <header>
-        <section>
-            <img src="../../images/zegowska_szama_logo.png" alt="logo">
-        </section>
-        <section>
-            <img src="../../images/account.png" alt="account" class="account">
-            <img src="../../images/cart.png" alt="cart" class="cart">
-            <img src="../../images/menu.png" alt="menu" class="menu">
-        </section>
+        <button class="logo"></button>
+        <nav>
+            <button class="account"></button>
+            <button class="cart"></button>
+            <button class="menu"></button>
+        </nav>
 
     </header>
+
     <main>
         <section class="products">
             <?php
@@ -39,8 +38,11 @@ if (!isset($_SESSION['cart']))
                 while($product = $products->fetch_assoc())
                     {                      
                         echo "<div class='product'>";
-                            echo "<img src='".$product["img"]."'>";
-                            echo "<h2>".$product["name"]."</h2>";
+                            echo "<div class='img'>";
+                                echo "<img src='".$product["img"]."'>";
+                            echo "</div>";
+
+                            echo "<h1>".$product["name"]."</h1>";
                             echo "<h4>".$product["description"]."</h4>";
                             echo $product["price"]." zł";
 
