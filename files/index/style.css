@@ -5,5 +5,21 @@ header
 .accountImg, .cartImg, .menuImg
 {
     height: 70px;
-    width: 70px;
+    width: 70px;   
+}
+.products
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.product
+{
+    width: 20%;
+    height: 20%;
+}
+.product img
+{
+    max-width: 400px;
+    max-height: 400px;
 }
