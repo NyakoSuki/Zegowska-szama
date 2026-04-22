@@ -41,7 +41,13 @@ session_start();
 
                         <!-- WYŚWIETLANIE POWIADOMIENIA O BŁĘDNYM WPROWADZENIU DANYCH -->
                         <?php
-                            if(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false){
+                            if(isset($_SESSION['failed']) && $_SESSION['failed'] === true)
+                            {
+                                echo "<p>Przekroczono limit 5 prób!<br>Sprubuj ponownie za 5 minut</p>";
+                                unset($_SESSION['failed']);
+                            }
+                            elseif(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false)
+                                {
                                 echo "<p>Niepoprawny login lub hasło!</p>";
                                 unset($_SESSION['correctData']);
                             }

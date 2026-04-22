@@ -15,9 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 $email = $connection->real_escape_string($_POST["emailSignup"]);
                 $password = password_hash($_POST["passwordSignup"], PASSWORD_DEFAULT);
 
-                $numberOfRows = $connection->query("SELECT id FROM users WHERE username='$username' OR email='$email'");
+                $stmt = $connection->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+                $stmt->bind_param("ss", $username, $email);
+                $stmt->execute();
+                $result = $stmt->get_result();
                 //SPRAWDZANIE CZY USERNAME LUB EMAIL SĄ ZAJĘTE
-                if($numberOfRows->num_rows > 0)
+                if($result->num_rows > 0)
                     {
                         $_SESSION['userExists'] = true;
                         header("Location: login-signup.php");
@@ -26,9 +29,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                 else
                     {
                         //JEŻELI USERNAME LUB EMAIL NIE SĄ ZAJĘTE -> REJESTRACJA
-                        $signup = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                        $signup->bind_param("sss", $username, $email, $password);
-                        if($signup->execute())
+                        $stmt = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                        $stmt->bind_param("sss", $username, $email, $password);
+                        if($stmt->execute())
                             {
                                 echo "Rejestracja zakończona sukcesem";
                             }
