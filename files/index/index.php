@@ -64,6 +64,8 @@ if (!isset($_SESSION['cart']))
     <footer>
 
     </footer>
-    <script src="app.js"></script>
+
+    
+    <script src="navi.js"></script>
 </body>
 </html>
