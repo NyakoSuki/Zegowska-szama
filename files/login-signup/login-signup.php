@@ -10,7 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie/Rejestracja - Zegowska Szama</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="container-fluid">
@@ -39,6 +39,7 @@ session_start();
                             <input name="passwordLogin" type="password" required>
                         </label>
 
+                        <!-- WYŚWIETLANIE POWIADOMIENIA O BŁĘDNYM WPROWADZENIU DANYCH -->
                         <?php
                             if(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false){
                                 echo "<p>Niepoprawny login lub hasło!</p>";
@@ -70,6 +71,7 @@ session_start();
                             <input name="passwordSignup" type="password" required>
                         </label>
 
+                        <!-- WYŚWIETLANIE POWIADOMIENIA GDY UŻYTKOWNIK JUŻ ISTNIEJE -->
                         <?php
                             if(isset($_SESSION['userExists']) && $_SESSION['userExists'] === true){
                                 echo "<p>Użytkownik już istnieje!</p>";
@@ -83,10 +85,11 @@ session_start();
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </main>
+
+    
     <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
