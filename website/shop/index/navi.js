@@ -15,13 +15,13 @@ logo.addEventListener('click', ()=>
 
 account.addEventListener("click", () =>
 {
-    window.location.href = "account/account.html";
+    window.location.href = "../account/account.html";
 });
 
 
 cart.addEventListener('click', ()=>
 {
-    window.location.href = "cart/cart.php";
+    window.location.href = "../cart/cart.php";
 })
 
 

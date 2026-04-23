@@ -5,7 +5,7 @@
     */
     session_start();//usunąć aby działała weryfikacja
 
-    include "../data-base.php";
+    include "../../data-base/data-base.php";
 
     if (!isset($_SESSION['cart'])) 
         {
@@ -49,7 +49,7 @@
                             echo "<h4>".$product["description"]."</h4>";
                             echo "<p>".$product["price"]." zł</p>";
 
-                            echo "<form method='POST' action='add_to_cart.php'>";
+                            echo "<form method='POST' action='../cart/add_to_cart.php'>";
                                 echo "<input type='hidden' name='id' value='".$product["id"]."'>";
                                 echo "<button type='submit' class='".($product["is_available"] == 0 ? "gray" : "")."'".($product["is_available"] == 0 ? "disabled" : "").">Dodaj do koszyka</button>";
                             echo "</form>";

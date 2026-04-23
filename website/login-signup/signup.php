@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../data-base.php";
+include "../data-base/data-base.php";
 
 //SPARWDZANIE METODY WYSŁANIA DANYCH
 if ($_SERVER["REQUEST_METHOD"] === "POST")

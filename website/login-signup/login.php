@@ -2,7 +2,7 @@
 
 session_start();
 
-include "../data-base.php";
+include "../data-base/data-base.php";
 
 //SPARWDZANIE METODY WYSŁANIA DANYCH
 if ($_SERVER["REQUEST_METHOD"] === "POST")
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST")
                     $_SESSION["loggedin"] = true;
                     $_SESSION["role"] = $row["role"];
 
-                    header("Location: ../index/index.php");
+                    header("Location: ../shop/index/index.php");
                     exit; 
             }
     }
