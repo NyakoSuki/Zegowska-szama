@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+    session_start();
+
+    require_once dirname(__DIR__, 3) . "/config.php";
 
 ?>
 <!DOCTYPE html>
@@ -10,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie/Rejestracja - Zegowska Szama</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
 </head>
 <body>
     <main class="container-fluid">
@@ -30,7 +32,7 @@ session_start();
                 <div class="panel login">
                     <h1><b>LOGIN</b></h1>
 
-                    <form action="login.php" method="post">
+                    <form action="<?=AUTH_B_URL?>login.php" method="post">
                         <label>Email:<br>
                             <input name="emailLogin" type="text" required>
                         </label>
@@ -64,7 +66,7 @@ session_start();
                 <div class="panel signup">
                     <h1><b>SIGN UP</b></h1>
 
-                    <form action="signup.php" method="post">
+                    <form action="<?=AUTH_B_URL?>signup.php" method="post">
                         <label>Username:<br>
                             <input name="usernameSignup" type="text" required>
                         </label>
@@ -96,7 +98,7 @@ session_start();
     </main>
 
     
-    <script src="app.js"></script>
+    <script src="<?=JS_URL?>auth-animation.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

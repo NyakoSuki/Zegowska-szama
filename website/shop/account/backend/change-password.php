@@ -1,0 +1,8 @@
+<?php
+
+    require_once dirname(__DIR__, 4) . "/config.php";
+
+    include DB_PATH;
+
+    
+?>

@@ -33,7 +33,7 @@ nav button
 }
 .logo
 {
-    background: url(../../../images/zegowska_szama_logo.png);
+    background: url(../img/zegowska_szama_logo.png);
     background-size: contain;
     width: 600px;
     height: 140px;
@@ -47,17 +47,17 @@ nav button
 }
 .account
 {
-    background: url(../../../images/account.png);
+    background: url(../img/account.png);
     background-size: contain;
 }
 .cart
 {
-    background: url(../../../images/cart.png);
+    background: url(../img/cart.png);
     background-size: contain;
 }
 .menu
 {
-    background: url(../../../images/menu.png);
+    background: url(../img/menu.png);
     background-size: contain;
 }
 .logo:active

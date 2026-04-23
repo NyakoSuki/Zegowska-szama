@@ -1,11 +1,9 @@
 <?php
-    /*
-    require "authorization.php";
-    requireLogin();
-    */
-    session_start();//usunąć aby działała weryfikacja
 
-    include "../../data-base/data-base.php";
+    require_once dirname(__DIR__, 3) . "/config.php";
+
+    include DB_PATH;
+
 
     if (!isset($_SESSION['cart'])) 
         {
@@ -18,7 +16,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="<?=CSS_URL?>home.css">
     <title>Zegowska Szama</title>
 </head>
 <body>
@@ -49,7 +47,7 @@
                             echo "<h4>".$product["description"]."</h4>";
                             echo "<p>".$product["price"]." zł</p>";
 
-                            echo "<form method='POST' action='../cart/add_to_cart.php'>";
+                            echo "<form method='POST' action='" . CART_B_URL . "add.php'>";
                                 echo "<input type='hidden' name='id' value='".$product["id"]."'>";
                                 echo "<button type='submit' class='".($product["is_available"] == 0 ? "gray" : "")."'".($product["is_available"] == 0 ? "disabled" : "").">Dodaj do koszyka</button>";
                             echo "</form>";
@@ -65,6 +63,6 @@
     </footer>
 
     
-    <script src="navi.js"></script>
+    <script src="<?=JS_URL?>home-navi.js"></script>
 </body>
 </html>

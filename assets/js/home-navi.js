@@ -9,19 +9,19 @@ const menu = document.querySelector(".menu");
 
 logo.addEventListener('click', ()=>
 {
-    window.location.href = "";
+    window.location.href = "../../shop/home/home.php";
 })
 
 
 account.addEventListener("click", () =>
 {
-    window.location.href = "../account/account.html";
+    window.location.href = "../../shop/account/frontend/account.php";
 });
 
 
 cart.addEventListener('click', ()=>
 {
-    window.location.href = "../cart/cart.php";
+    window.location.href = "../../shop/cart/frontend/cart.php";
 })
 
 

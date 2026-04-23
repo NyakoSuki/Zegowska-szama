@@ -1,5 +1,8 @@
 <?php
 
+    require_once dirname(__DIR__, 2) . "/config.php";
+
+
     $host = "localhost";
     $user = "root";//login-signup
     $password = "";//bardzo_ciezkie_haslo_do_zgadniecia_bo_tak_powiedzialem

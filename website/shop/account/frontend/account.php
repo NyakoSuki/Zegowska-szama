@@ -1,3 +1,11 @@
+<?php
+
+    require_once dirname(__DIR__, 4) . "/config.php";
+
+    include DB_PATH;
+
+
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,23 +21,23 @@
 
         <div>
 
-            <form action="change-username.php" method="post">
+            <form action="<?=ACCOUNT_B_URL?>change-username.php" method="post">
                 <input type="text">
                 <button>Zmień nazwę</button>
             </form>
 
-            <form action="change-password.php" method="post">
+            <form action="<?=ACCOUNT_B_URL?>change-password.php" method="post">
                 <input type="password">
                 <input type="password">
                 <input type="password">
                 <button>Zmień hasło</button>
             </form>
             
-            <form action="orders.html" method="post">
+            <form action="<?=ACCOUNT_F_URL?>orders.php" method="post">
                 <button>Zamówienia</button>
             </form>
 
-            <form action="logout.php" method="post">
+            <form action="<?=ACCOUNT_B_URL?>logout.php" method="post">
                 <button>Logout</button>
             </form>
         </div>

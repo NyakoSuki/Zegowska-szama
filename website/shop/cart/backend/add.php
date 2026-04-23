@@ -2,6 +2,9 @@
 
     session_start();
 
+    require_once dirname(__DIR__, 4) . "/config.php";
+
+
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
@@ -12,7 +15,7 @@
         $_SESSION['cart'][] = $id;
     }
 
-    header("Location: ../index/");
+    header("Location: " . HOME_URL ."home.php");
     exit;
 
 ?>
