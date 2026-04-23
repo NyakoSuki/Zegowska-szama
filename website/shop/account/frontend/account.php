@@ -1,6 +1,7 @@
 <?php
 
     require_once dirname(__DIR__, 4) . "/config.php";
+    require_once BASE_PATH . "/authorization.php";
 
     include DB_PATH;
 
