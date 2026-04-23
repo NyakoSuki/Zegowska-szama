@@ -1,0 +1,123 @@
+*
+{
+    color: #eee;
+    font-family: Courier;
+    padding: 0px;
+    margin: 0px;
+}
+header
+{
+    z-index: 1000;
+    top: 0;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 180px;
+    background: linear-gradient(75deg, #ff4050 0%, #aa1020 20%, #aa1020 60%, #135 80%, #146 100%);
+    padding: 0 20px;
+}
+header button
+{
+    border: none;
+}
+nav
+{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+nav button
+{
+    margin: 5px;
+}
+.logo
+{
+    background: url(../../images/zegowska_szama_logo.png);
+    background-size: contain;
+    width: 600px;
+    height: 140px;
+    transition: 0.4s;
+}
+.account, .cart, .menu
+{
+    width: 70px;
+    height: 70px;
+    transition: 0.25s;
+}
+.account
+{
+    background: url(../../images/account.png);
+    background-size: contain;
+}
+.cart
+{
+    background: url(../../images/cart.png);
+    background-size: contain;
+}
+.menu
+{
+    background: url(../../images/menu.png);
+    background-size: contain;
+}
+.logo:active
+{
+    transform: scale(0.95);
+}
+.account:active, .cart:active, .menu:active
+{
+    transform: scale(0.9);
+}
+.products
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 120%;
+}
+.product
+{
+    width: 90%;
+    height: 400px;
+    text-align: center;
+    margin: 2%;
+    padding: 3%;
+    border-radius: 2px;
+    box-shadow: 0 0 10px black;
+    background: linear-gradient(135deg, #aa1020 0%, #146 40%, #135 80%, #204 95%, #aa1020 100%)
+}
+.product p
+{
+    margin-top: 10px;
+}
+.product img
+{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px black;
+}
+.img
+{
+    width: 100%;
+    height: 200px;
+}
+.product button
+{
+    font-size: 80%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 20px;
+    width: 175px;
+    background: linear-gradient(75deg, #060, #020);
+    transition: 0.2s;
+}
+.product button:active
+{
+    transform: scale(0.9);
+}
+.gray
+{
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
