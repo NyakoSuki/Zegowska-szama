@@ -20,7 +20,7 @@
     $select->execute();
     $selected = $select->get_result();
 
-    if($selected->num_rows > 0)
+    if($selected->num_rows > 0 || $username === '')
         {
             $_SESSION["usernameChange"] = false;
 
@@ -39,6 +39,7 @@
             die("Update failed: " . $usernameChange->error);
         }
 
+    unset($_SESSION["usernameChange"]);
 
     header("Location: " . ACCOUNT_F_URL . "account.php");
     exit;

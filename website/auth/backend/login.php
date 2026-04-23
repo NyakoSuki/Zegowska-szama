@@ -14,7 +14,7 @@
             //SPRAWDZANIE CZY EMAIL I HASŁO ZOSTAŁY WPISANE
             if (isset($_POST["emailLogin"], $_POST["passwordLogin"]))
                 {
-                    $email = $_POST["emailLogin"];
+                    $email = trim($_POST["emailLogin"]);
                     $password = $_POST["passwordLogin"];
 
                     $select = $connection->prepare("SELECT id, password, role, failed_attempts, last_failed_login FROM users WHERE email = ?");
@@ -85,6 +85,7 @@
                         session_regenerate_id(true);
 
                         unset($_SESSION["failed"]);
+                        unset($_SESSION["correctData"]);
                         $_SESSION["id"] = $row["id"];
                         $_SESSION["role"] = $row["role"];
 

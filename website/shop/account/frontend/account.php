@@ -22,12 +22,42 @@
     </header>
     <main>
 
+        <section>
+            <?php
+
+                $id = $_SESSION["id"];
+
+                $select = $connection->prepare("SELECT username FROM users WHERE id = ?");
+                if (!$select) 
+                    {
+                        die("SQL error: " . $connection->error);
+                    }
+                $select->bind_param("i", $id);
+                $select->execute();
+                $selected = $select->get_result();
+
+                $row = $selected->fetch_assoc();
+
+                echo "<h1>".$row["username"]."</h1>";
+
+            ?>
+        </section>
+
         <div>
 
             <form action="<?=ACCOUNT_B_URL?>change-username.php" method="post">
                 <input type="text" name="username">
                 <button>Zmień nazwę</button>
             </form>
+
+            <?php
+
+                if(isset($_SESSION["usernameChange"]) && $_SESSION["usernameChange"] === false)
+                    {
+                        echo "<p>Ta nazwa jest już zajęta</p>";
+                        unset($_SESSION["usernameChange"]);
+                    }
+            ?>
 
             <form action="<?=ACCOUNT_B_URL?>change-password.php" method="post">
                 <input type="password">
@@ -41,7 +71,7 @@
             </form>
 
             <form action="<?=ACCOUNT_B_URL?>logout.php" method="post">
-                <button>Logout</button>
+                <button>Wyloguj się</button>
             </form>
         </div>
 

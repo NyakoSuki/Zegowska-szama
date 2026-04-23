@@ -15,8 +15,8 @@
             if (isset($_POST["usernameSignup"], $_POST["emailSignup"], $_POST["passwordSignup"]))
                 {
                     //PREPERED STATEMENT -> ZABEZPIECZA PRZED SQL INJECTION
-                    $username = $_POST["usernameSignup"];
-                    $email = $_POST["emailSignup"];
+                    $username = trim($_POST["usernameSignup"]);
+                    $email = trim($_POST["emailSignup"]);
                     $password = password_hash($_POST["passwordSignup"], PASSWORD_DEFAULT);
 
                     $select = $connection->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
@@ -40,7 +40,7 @@
                         {
                             //JEŻELI USERNAME LUB EMAIL NIE SĄ ZAJĘTE -> REJESTRACJA
                             $createUser = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                            if (!$stmt) 
+                            if (!$createUser) 
                                 {
                                     die("SQL error: " . $connection->error);
                                 }
