@@ -1,6 +1,6 @@
 <?php
 
-    require_once dirname(__DIR__, 2) . "/config.php";
+    require_once dirname(__DIR__, 1) . "/config.php";
 
 
     $host = "localhost";

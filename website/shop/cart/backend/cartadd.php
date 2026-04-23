@@ -2,7 +2,7 @@
 
     session_start();
 
-    require_once dirname(__DIR__, 4) . "/config.php";
+    require_once dirname(__DIR__, 3) . "/config.php";
 
 
     if (!isset($_SESSION['cart'])) {

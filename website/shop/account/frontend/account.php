@@ -1,7 +1,7 @@
 <?php
 
-    require_once dirname(__DIR__, 4) . "/config.php";
-    require_once BASE_PATH . "/authorization.php";
+    require_once dirname(__DIR__, 3) . "/config.php";
+    require_once BLOCKER_PATH;
 
     include DB_PATH;
 
