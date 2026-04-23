@@ -1,17 +1,16 @@
 <?php
-/*
-require "authorization.php";
-requireLogin();
-*/
-session_start();//usunąć aby działała weryfikacja
+    /*
+    require "authorization.php";
+    requireLogin();
+    */
+    session_start();//usunąć aby działała weryfikacja
 
+    include "../data-base.php";
 
-include "data_base.php";
-
-if (!isset($_SESSION['cart'])) 
-    {
-        $_SESSION['cart'] = [];
-    }
+    if (!isset($_SESSION['cart'])) 
+        {
+            $_SESSION['cart'] = [];
+        }
 
 ?>
 <!DOCTYPE html>
