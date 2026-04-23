@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logowanie/Rejestracja - Zegowska Szama</title>
+    <title>Logowanie/Rejestracja - Zegowska szama</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
 </head>
@@ -44,15 +44,15 @@
                         <!-- WYŚWIETLANIE POWIADOMIENIA O BŁĘDNYM WPROWADZENIU DANYCH -->
                         <?php
                             if(isset($_SESSION['failed']) && $_SESSION['failed'] === true)
-                            {
-                                echo "<p>Przekroczono limit 5 prób!<br>Sprubuj ponownie za 5 minut</p>";
-                                unset($_SESSION['failed']);
-                            }
+                                {
+                                    echo "<p>Przekroczono limit 5 prób!<br>Sprubuj ponownie za 5 minut</p>";
+                                    unset($_SESSION['failed']);
+                                }
                             elseif(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false)
                                 {
-                                echo "<p>Niepoprawny login lub hasło!</p>";
-                                unset($_SESSION['correctData']);
-                            }
+                                    echo "<p>Niepoprawny login lub hasło!</p>";
+                                    unset($_SESSION['correctData']);
+                                }
                         ?>
 
                         <div class="buttons">
@@ -81,10 +81,11 @@
 
                         <!-- WYŚWIETLANIE POWIADOMIENIA GDY UŻYTKOWNIK JUŻ ISTNIEJE -->
                         <?php
-                            if(isset($_SESSION['userExists']) && $_SESSION['userExists'] === true){
-                                echo "<p>Użytkownik już istnieje!</p>";
-                                unset($_SESSION['userExists']);
-                            }
+                            if(isset($_SESSION['userExists']) && $_SESSION['userExists'] === true)
+                                {
+                                    echo "<p>Użytkownik już istnieje!</p>";
+                                    unset($_SESSION['userExists']);
+                                }
                         ?>
 
                         <div class="buttons">

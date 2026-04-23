@@ -3,6 +3,7 @@
     session_start();
 
     require_once dirname(__DIR__, 2) . "/config.php";
+    require_once BLOCKER_PATH;
 
     include DB_PATH;
 
@@ -16,21 +17,23 @@
                     $email = $_POST["emailLogin"];
                     $password = $_POST["passwordLogin"];
 
-                    $stmt = $connection->prepare("SELECT password, role, failed_attempts, last_failed_login FROM users WHERE email = ?");
-                    if (!$stmt) 
+                    $select = $connection->prepare("SELECT id, password, role, failed_attempts, last_failed_login FROM users WHERE email = ?");
+                    if (!$select) 
                         {
                             die("SQL error: " . $connection->error);
                         }
-                    $stmt->bind_param("s", $email);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    $select->bind_param("s", $email);
+                    $select->execute();
+                    $selected = $select->get_result();
 
 
                     //SPRAWDZANIE CZY EMAIL ISTNIEJE
-                    if($result->num_rows === 0)
+                    if($selected->num_rows === 0)
                         {
                             //JEZELI EMAIL NIE ISTNIEJE -> PRZEKIEROWANIE NA STRONĘ LOGOWANIA
                             $_SESSION['correctData'] = false;
+                            unset($_SESSION["id"]);
+                            unset($_SESSION["role"]);
 
                             header("Location: " . AUTH_F_URL . "auth.php");
                             exit;
@@ -38,7 +41,7 @@
 
                         
                     //JEŻELI ISTNIEJE -> SPRAWDZANIE POPRAWNOŚCI HASŁA ORAZ PRÓB LOGOWANIA
-                    $row = $result->fetch_assoc();
+                    $row = $selected->fetch_assoc();
                     
                     $now = new DateTime();
                     $lastFailedLogin = $row["last_failed_login"] ? new DateTime($row["last_failed_login"]) : null;
@@ -49,6 +52,9 @@
                     if ($row['failed_attempts'] >= 5 && $lastFailedLogin !== null && $now->getTimestamp() - $lastFailedLogin->getTimestamp() < 300)
                         {
                             $_SESSION["failed"] = true;
+                            unset($_SESSION["id"]);
+                            unset($_SESSION["role"]);
+
                             header("Location: " . AUTH_F_URL . "auth.php");
                             exit;
                         }
@@ -63,6 +69,9 @@
                             $increaseFailed->execute();
                             
                             $_SESSION['correctData'] = false;
+                            unset($_SESSION["id"]);
+                            unset($_SESSION["role"]);
+
                             header("Location: " . AUTH_F_URL . "auth.php");
                             exit;
                         }
@@ -75,8 +84,8 @@
 
                         session_regenerate_id(true);
 
-                        $_SESSION["failed"] = false;
-                        $_SESSION["loggedin"] = true;
+                        unset($_SESSION["failed"]);
+                        $_SESSION["id"] = $row["id"];
                         $_SESSION["role"] = $row["role"];
 
                         header("Location: " . HOME_URL . "home.php");

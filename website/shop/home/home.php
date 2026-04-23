@@ -3,7 +3,7 @@
     require_once dirname(__DIR__, 2) . "/config.php";
     require_once BLOCKER_PATH;
 
-    include BLOCKER_PATH;
+    include DB_PATH;
 
 
     if (!isset($_SESSION['cart'])) 

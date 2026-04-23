@@ -1,18 +1,20 @@
 <?php
 
+    session_start();
+
     require_once dirname(__DIR__, 3) . "/config.php";
     require_once BLOCKER_PATH;
 
     include DB_PATH;
 
 
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konto</title>
+    <title>Konto - Zegowska szama</title>
 </head>
 <body>
     <header>
@@ -23,7 +25,7 @@
         <div>
 
             <form action="<?=ACCOUNT_B_URL?>change-username.php" method="post">
-                <input type="text">
+                <input type="text" name="username">
                 <button>Zmień nazwę</button>
             </form>
 

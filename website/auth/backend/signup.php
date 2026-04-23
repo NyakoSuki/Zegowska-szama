@@ -3,6 +3,7 @@
     session_start();
 
     require_once dirname(__DIR__, 2) . "/config.php";
+    require_once BLOCKER_PATH;
 
     include DB_PATH;
 
@@ -14,27 +15,37 @@
             if (isset($_POST["usernameSignup"], $_POST["emailSignup"], $_POST["passwordSignup"]))
                 {
                     //PREPERED STATEMENT -> ZABEZPIECZA PRZED SQL INJECTION
-                    $username = $connection->real_escape_string($_POST["usernameSignup"]);
-                    $email = $connection->real_escape_string($_POST["emailSignup"]);
+                    $username = $_POST["usernameSignup"];
+                    $email = $_POST["emailSignup"];
                     $password = password_hash($_POST["passwordSignup"], PASSWORD_DEFAULT);
 
-                    $stmt = $connection->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-                    $stmt->bind_param("ss", $username, $email);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                    $select = $connection->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
+                    if (!$select) 
+                        {
+                            die("SQL error: " . $connection->error);
+                        }
+                    $select->bind_param("ss", $username, $email);
+                    $select->execute();
+                    $selected = $select->get_result();
+
                     //SPRAWDZANIE CZY USERNAME LUB EMAIL SĄ ZAJĘTE
-                    if($result->num_rows > 0)
+                    if($selected->num_rows > 0)
                         {
                             $_SESSION['userExists'] = true;
+
                             header("Location: " . AUTH_F_URL . "auth.php");
                             exit;
                         }
                     else
                         {
                             //JEŻELI USERNAME LUB EMAIL NIE SĄ ZAJĘTE -> REJESTRACJA
-                            $stmt = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                            $stmt->bind_param("sss", $username, $email, $password);
-                            if($stmt->execute())
+                            $createUser = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+                            if (!$stmt) 
+                                {
+                                    die("SQL error: " . $connection->error);
+                                }
+                            $createUser->bind_param("sss", $username, $email, $password);
+                            if($createUser->execute())
                                 {
                                     echo "Rejestracja zakończona sukcesem";
                                 }
@@ -46,14 +57,3 @@
                 }
         }
 ?>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
