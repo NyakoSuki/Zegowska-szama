@@ -1,24 +1,27 @@
 <?php
 
-    require_once dirname(__DIR__, 3) . "/config.php";
-    require_once BLOCKER_PATH;
+require_once dirname(__DIR__, 3) . "/config.php";
+require_once BLOCKER_PATH;
 
-    include DB_PATH;
+include DB_PATH;
 
 
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konto - Zegowska szama</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="<?=CSS_URL?>variables.css">
     <link rel="stylesheet" href="<?=CSS_URL?>header.css">
     <link rel="stylesheet" href="<?=CSS_URL?>account.css">
 </head>
+
 <body>
     <header class="container-fluid fixed-top p-3">
         <div class="row align-items-center">
@@ -39,86 +42,108 @@
 
         </div>
     </header>
-    <main>
+<main class="container p-3>
 
-        <section>
-            <?php
+    <?php
+    
+    $id = $_SESSION["id"];
 
-                $id = $_SESSION["id"];
+    $stmt = $connection->prepare("SELECT username FROM users WHERE id = ?");
 
-                $select = $connection->prepare("SELECT username FROM users WHERE id = ?");
-                if (!$select) 
-                    {
-                        die("SQL error: " . $connection->error);
-                    }
-                $select->bind_param("i", $id);
-                $select->execute();
-                $selected = $select->get_result();
+    if(!$stmt) die("SQL error: " . $connection->error);
 
-                $row = $selected->fetch_assoc();
+    $stmt->bind_param("i", $id);
 
-                echo "<h1>".$row["username"]."</h1>";
+    $stmt->execute();
 
-            ?>
-        </section>
+    $result = $stmt->get_result();
 
-        <div>
+    $row = $result->fetch_assoc();
 
-            <form action="<?=ACCOUNT_B_URL?>change-username.php" method="post">
-                <input type="text" name="username">
-                <button>Zmień nazwę</button>
-            </form>
+    $username = $row["username"];
+    
+    ?>
 
-            <?php
-                if(isset($_SESSION["error"]))
-                {
-                    switch($_SESSION["error"])
-                    {
-                        case "used" : echo "<h4 class='error'>Nazwa użytkownika zajęta</h4>"; break;
-                    }
-                }
-            ?>
+    <!-- NAGŁÓWEK -->
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-center">Konto</h1>
+        <h4 class="text-center">Zalogowany jako: <?= htmlspecialchars($username) ?></h4>
+    </div>
 
+    <div class="row justify-content-center g-4">
 
-            <form action="<?=ACCOUNT_B_URL?>change-password.php" method="post">
-                <input type="password" name="current">
-                <input type="password" name="new">
-                <input type="password" name="confirm">
-                <button>Zmień hasło</button>
-            </form>
+        <!-- ZMIANA NAZWY -->
+        <div class="col-12 col-md-6 col-lg-5">
 
-            <?php
-                if(isset($_SESSION["error"]))
-                {
-                    switch($_SESSION["error"])
-                    {
-                        case "uncorrect" : echo "<h4 class='error'>Obecne hasło jest niepoprawne</h4>"; break;
-                        case "notsame" : echo "<h4 class='error'>Hasła są różne</h4>"; break;
-                        case "short" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
-                        case "old" : echo "<h4 class='error'>Nowe hasło nie może być takie samo jak stare</h4>"; break;
-                        case "none" : echo "<h4 class='success'>Pomyślnie zmieniono hasło</h4>"; break;
-                    }
-                    unset($_SESSION["error"]);
-                }
-            ?>
+            <div class="username">
+                <div class="">
 
-            
-            <form action="<?=ACCOUNT_F_URL?>orders.php" method="post">
-                <button>Zamówienia</button>
-            </form>
+                    <h5 class="card-title mb-3">Zmiana nazwy użytkownika</h5>
 
+                    <form action="<?=ACCOUNT_B_URL?>change-username.php" method="post" class="d-grid gap-2">
 
-            <form action="<?=ACCOUNT_B_URL?>logout.php" method="post">
-                <button>Wyloguj się</button>
-            </form>
+                        <input type="text" name="username" class="rounded-2 p-1" placeholder="Nowa nazwa">
+
+                        <button class="rounded-2 p-1">
+                            Zmień nazwę
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
         </div>
 
-    </main>
-    <footer>
 
-    </footer>
+        <!-- ZMIANA HASŁA -->
+        <div class="col-12 col-md-6 col-lg-5">
+
+            <div class="password">
+                <div class="">
+
+                    <h5 class="card-title mb-3">Zmiana hasła</h5>
+
+                    <form action="<?=ACCOUNT_B_URL?>change-password.php" method="post" class="d-grid gap-2">
+
+                        <input type="password" name="current" class="rounded-2 p-1" placeholder="Obecne hasło">
+                        <input type="password" name="new" class="rounded-2 p-1" placeholder="Nowe hasło">
+                        <input type="password" name="confirm" class="rounded-2 p-1" placeholder="Powtórz nowe hasło">
+
+                        <button class="rounded-2 p-1">
+                            Zmień hasło
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
 
 
-    <script src="<?=JS_URL?>navi.js"></script>
+        <!-- PRZYCISKI -->
+        <div class="col-12 col-md-10 col-lg-8">
+
+            <div class="">
+                <div class="d-flex flex-wrap gap-2 justify-content-center">
+
+                    <form action="<?=ACCOUNT_F_URL?>orders.php" method="post">
+                        <button class="rounded-2 p-2 orders">Zamówienia</button>
+                    </form>
+
+                    <form action="<?=ACCOUNT_B_URL?>logout.php" method="post">
+                        <button class="rounded-2 p-2 logout">Wyloguj się</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
 </body>
 </html>

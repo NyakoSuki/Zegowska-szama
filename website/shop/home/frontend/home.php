@@ -7,9 +7,9 @@
 
 
     if (!isset($_SESSION['cart'])) 
-        {
-            $_SESSION['cart'] = [];
-        }
+    {
+        $_SESSION['cart'] = [];
+    }
 
 ?>
 <!DOCTYPE html>
@@ -85,7 +85,7 @@
                                     <?= $product["price"] ?> zł
                                 </p>
 
-                                <form method="POST" action="<?=CART_B_URL?>cartadd.php" class="">
+                                <form method="POST" action="<?=CART_B_URL?>cartadd.php">
                                     <input type="hidden" name="id" value="<?= $product["id"] ?>">
 
                                     <button class="w-100 rounded" <?= $disabled ? 'disabled' : '' ?>>

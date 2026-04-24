@@ -17,7 +17,7 @@
             $_SESSION['cart'][] = $id;
         }
 
-    header("Location: " . HOME_URL ."home.php");
+    header("Location: " . HOME_F_URL ."home.php");
     exit;
 
 ?>

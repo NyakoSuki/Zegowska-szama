@@ -45,15 +45,16 @@ include DB_PATH;
 
         echo "<h1>Twój koszyk</h1>";
 
-        if (empty($cart)) {
+        if (empty($cart)) 
+        {
             echo "Koszyk jest pusty";
             exit;
         }
 
         $counts = array_count_values($cart);
 
-        foreach ($counts as $id => $qty) {
-
+        foreach ($counts as $id => $qty) 
+        {
             $result = $connection->query("SELECT name, price FROM products WHERE id = '$id'");
             $product = $result->fetch_assoc();
 
