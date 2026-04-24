@@ -105,5 +105,5 @@ session_regenerate_id(true);
 $_SESSION["id"] = $user["id"];
 $_SESSION["role"] = $user["role"];
 
-header("Location: " . HOME_URL . "home.php");
+header("Location: " . HOME_F_URL . "home.php");
 exit;
