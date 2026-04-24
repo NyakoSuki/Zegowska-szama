@@ -32,8 +32,7 @@ define("BASE_URL", "/Zegowska-szama/");
         define("AUTH_B_URL", AUTH_URL . "backend/");
         define("AUTH_F_URL", AUTH_URL . "frontend/");
 
-        /* ==========
-        ======= SHOP ================= */
+        /* ================= SHOP ================= */
         define("SHOP_URL", WEB_URL . "shop/");
 
 
@@ -51,6 +50,8 @@ define("BASE_URL", "/Zegowska-szama/");
 
             /* ================= HOME ================= */
             define("HOME_URL", SHOP_URL . "home/");
+            define("HOME_B_URL", HOME_URL . "backend/");
+            define("HOME_F_URL", HOME_URL . "frontend/");
 
 
     /* ================= ASSETS ================= */

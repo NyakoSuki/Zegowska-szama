@@ -13,10 +13,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konto - Zegowska szama</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?=CSS_URL?>variables.css">
+    <link rel="stylesheet" href="<?=CSS_URL?>header.css">
+    <link rel="stylesheet" href="<?=CSS_URL?>account.css">
 </head>
 <body>
-    <header>
+    <header class="container-fluid fixed-top p-3">
+        <div class="row align-items-center">
 
+            <!-- LOGO -->
+            <div class="col-md-8 col-sm-7 col-5">
+                <a href="<?=HOME_F_URL?>home.php" class="d-inline-block">
+                    <img src="<?=IMG_URL?>logo.png" class="img-fluid logo-img" alt="logo">
+                </a>
+            </div>
+
+            <!-- NAV -->
+            <div class="col-md-4 col-sm-5 col-7 text-end">
+                <a href="<?=ACCOUNT_F_URL?>account.php" class="btn btn-outline-light btn-sm">Account</a>
+                <a href="<?=CART_F_URL?>cart.php" class="btn btn-outline-light btn-sm">Cart</a>
+                <button type="button" class="btn btn-outline-light btn-sm">Menu</button>
+            </div>
+
+        </div>
     </header>
     <main>
 
@@ -96,5 +117,8 @@
     <footer>
 
     </footer>
+
+
+    <script src="<?=JS_URL?>navi.js"></script>
 </body>
 </html>

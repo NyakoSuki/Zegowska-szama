@@ -1,0 +1,15 @@
+main
+{
+    padding-top: 150px;
+}
+.logo-img {
+    max-height: 120px;
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+}
+
+header
+{
+    background: linear-gradient(75deg, var(--light-red) 0%, var(--dark-red) 50%, var(--mid-blue) 80%, var(--dark-blue) 100%);
+}
