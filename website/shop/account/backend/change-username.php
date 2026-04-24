@@ -21,24 +21,24 @@
 
     if($selected->num_rows > 0 || $username === '')
         {
-            $_SESSION["usernameChange"] = false;
+            $_SESSION["isUsed"] = false;
 
             header("Location: " . ACCOUNT_F_URL . "account.php");
             exit;
         }
     
-    $usernameChange = $connection->prepare("UPDATE users SET username = ? WHERE id = ?");
-    if (!$usernameChange) 
+    $newUsername = $connection->prepare("UPDATE users SET username = ? WHERE id = ?");
+    if (!$newUsername) 
         {
             die("SQL error: " . $connection->error);
         }
-    $usernameChange->bind_param("si", $username, $id);
-    if (!$usernameChange->execute()) 
+    $newUsername->bind_param("si", $username, $id);
+    if (!$newUsername->execute()) 
         {
-            die("Update failed: " . $usernameChange->error);
+            die("Update failed: " . $newUsername->error);
         }
 
-    unset($_SESSION["usernameChange"]);
+    unset($_SESSION["isUsed"]);
 
     header("Location: " . ACCOUNT_F_URL . "account.php");
     exit;

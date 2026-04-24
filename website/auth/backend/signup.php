@@ -1,58 +1,76 @@
 <?php
 
-    session_start();
+session_start();
 
-    require_once dirname(__DIR__, 2) . "/config.php";
+require_once dirname(__DIR__, 2) . "/config.php";
+include DB_PATH;
 
-    include DB_PATH;
 
-    
-    //SPARWDZANIE METODY WYSŁANIA DANYCH
-    if ($_SERVER["REQUEST_METHOD"] === "POST")
-        {
-            //SPRAWDZANIE CZY NAZWA, EMAIL I HASŁO ZOSTAŁY WPISANE
-            if (isset($_POST["usernameSignup"], $_POST["emailSignup"], $_POST["passwordSignup"]))
-                {
-                    //PREPERED STATEMENT -> ZABEZPIECZA PRZED SQL INJECTION
-                    $username = trim($_POST["usernameSignup"]);
-                    $email = trim($_POST["emailSignup"]);
-                    $password = password_hash($_POST["passwordSignup"], PASSWORD_DEFAULT);
 
-                    $select = $connection->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-                    if (!$select) 
-                        {
-                            die("SQL error: " . $connection->error);
-                        }
-                    $select->bind_param("ss", $username, $email);
-                    $select->execute();
-                    $selected = $select->get_result();
+function restartSession()
+{
+    $_SESSION = [];
+    session_regenerate_id(true);
+}
 
-                    //SPRAWDZANIE CZY USERNAME LUB EMAIL SĄ ZAJĘTE
-                    if($selected->num_rows > 0)
-                        {
-                            $_SESSION['userExists'] = true;
 
-                            header("Location: " . AUTH_F_URL . "auth.php");
-                            exit;
-                        }
-                    else
-                        {
-                            //JEŻELI USERNAME LUB EMAIL NIE SĄ ZAJĘTE -> REJESTRACJA
-                            $createUser = $connection->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                            if (!$createUser) 
-                                {
-                                    die("SQL error: " . $connection->error);
-                                }
-                            $createUser->bind_param("sss", $username, $email, $password);
-                            if($createUser->execute())
-                                {
-                                    echo "Rejestracja zakończona sukcesem";
-                                }
-                            else
-                                {
-                                    echo "Wystąpił błąd: ". $connection -> error;
-                                }
-                        }
-                }
-        }
-?>
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
+if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])) exit;
+
+if (mb_strlen($_POST["password"]) < 8) 
+{
+    restartSession();
+
+    $_SESSION["error"] = "short_password";
+
+    header("Location: " . AUTH_F_URL . "auth.php");
+    exit;
+}
+
+$username = trim($_POST["username"]);
+$email = strtolower(trim($_POST["email"]));
+$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+$stmt = $connection->prepare
+("
+    SELECT id FROM users 
+    WHERE username = ? OR email = ?
+");
+
+if (!$stmt) exit("SQL prepare error");
+
+$stmt->bind_param("ss", $username, $email);
+if(!$stmt->execute()) exit("SQL execute error");
+
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) 
+{
+    restartSession();
+
+    $_SESSION['error'] = "user_exists";
+
+    header("Location: " . AUTH_F_URL . "auth.php");
+    exit;
+}
+
+$stmt = $connection->prepare
+("
+    INSERT INTO users (username, email, password)
+    VALUES (?, ?, ?)
+");
+
+if (!$stmt) exit("SQL prepare error");
+
+$stmt->bind_param("sss", $username, $email, $password);
+
+if(!$stmt->execute()) exit("SQL execute error");
+
+
+restartSession();
+
+$_SESSION["error"] = "none";
+
+header("Location: " . AUTH_F_URL . "auth.php");
+exit;

@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const signinBtn = document.getElementById("signinBtn");
+    const signinBtn = document.getElementById("loginBtn");
     const signupBtn = document.getElementById("signupBtn");
     const container = document.querySelector(".container-box");
 

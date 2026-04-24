@@ -1,95 +1,118 @@
 <?php
 
-    session_start();
+session_start();
 
-    require_once dirname(__DIR__, 2) . "/config.php";
-
-    include DB_PATH;
-
-
-    //SPARWDZANIE METODY WYSŁANIA DANYCH
-    if ($_SERVER["REQUEST_METHOD"] === "POST")
-        {
-            //SPRAWDZANIE CZY EMAIL I HASŁO ZOSTAŁY WPISANE
-            if (isset($_POST["emailLogin"], $_POST["passwordLogin"]))
-                {
-                    $email = trim($_POST["emailLogin"]);
-                    $password = $_POST["passwordLogin"];
-
-                    $select = $connection->prepare("SELECT id, password, role, failed_attempts, last_failed_login FROM users WHERE email = ?");
-                    if (!$select) 
-                        {
-                            die("SQL error: " . $connection->error);
-                        }
-                    $select->bind_param("s", $email);
-                    $select->execute();
-                    $selected = $select->get_result();
+require_once dirname(__DIR__, 2) . "/config.php";
+include DB_PATH;
 
 
-                    //SPRAWDZANIE CZY EMAIL ISTNIEJE
-                    if($selected->num_rows === 0)
-                        {
-                            //JEZELI EMAIL NIE ISTNIEJE -> PRZEKIEROWANIE NA STRONĘ LOGOWANIA
-                            $_SESSION['correctData'] = false;
-                            unset($_SESSION["id"]);
-                            unset($_SESSION["role"]);
 
-                            header("Location: " . AUTH_F_URL . "auth.php");
-                            exit;
-                        }
-
-                        
-                    //JEŻELI ISTNIEJE -> SPRAWDZANIE POPRAWNOŚCI HASŁA ORAZ PRÓB LOGOWANIA
-                    $row = $selected->fetch_assoc();
-                    
-                    $now = new DateTime();
-                    $lastFailedLogin = $row["last_failed_login"] ? new DateTime($row["last_failed_login"]) : null;
-                    $failedAttempts = $row["failed_attempts"];
+function restartSession()
+{
+    $_SESSION = [];
+    session_regenerate_id(true);
+}
 
 
-                    //JEŻELI WYKORZYSTANO WSZYSTKIE -> PRZEKIEROWANIE NA STRONĘ LOGOWANIA
-                    if ($row['failed_attempts'] >= 5 && $lastFailedLogin !== null && $now->getTimestamp() - $lastFailedLogin->getTimestamp() < 300)
-                        {
-                            $_SESSION["failed"] = true;
-                            unset($_SESSION["id"]);
-                            unset($_SESSION["role"]);
 
-                            header("Location: " . AUTH_F_URL . "auth.php");
-                            exit;
-                        }
-                    
+// GUARD CLAUSES
+if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
+if (empty($_POST["email"]) || empty($_POST["password"])) exit;
 
-                    //JEŻELI NIE WYKORZYSTANO WSZYSTKICH -> SPRAWDZANIE HASŁA
-                    if(!password_verify($password, $row["password"]))
-                        {
-                            //JEŻELI NIEPOPRAWNE HASŁO -> ZWIĘKSZENIE NIEUDANYCH PRÓB I PRZEKIEROWANIE NA STRONĘ LOGOWANIA
-                            $increaseFailed = $connection->prepare("UPDATE users SET failed_attempts = failed_attempts + 1, last_failed_login = NOW() where email = ?");
-                            $increaseFailed->bind_param("s", $email);
-                            $increaseFailed->execute();
-                            
-                            $_SESSION['correctData'] = false;
-                            unset($_SESSION["id"]);
-                            unset($_SESSION["role"]);
+$email = strtolower(trim($_POST["email"]));
+$password = $_POST["password"];
 
-                            header("Location: " . AUTH_F_URL . "auth.php");
-                            exit;
-                        }
+$stmt = $connection->prepare
+("
+    SELECT id, password, role, failed_attempts, last_failed_login 
+    FROM users 
+    WHERE email = ?
+");
+
+if (!$stmt) exit("SQL prepare error");
+
+$stmt->bind_param("s", $email);
+
+if (!$stmt->execute()) exit("SQL execute error");
+
+$result = $stmt->get_result();
+
+// USER NOT FOUND
+if ($result->num_rows === 0) 
+{
+    restartSession();
+
+    $_SESSION['error'] = "invalid_credentials";
+
+    header("Location: " . AUTH_F_URL . "auth.php");
+    exit;
+}
+
+$user = $result->fetch_assoc();
+
+// LOCK CHECK
+$now = new DateTime();
+$lastFail = $user["last_failed_login"] ? new DateTime($user["last_failed_login"]) : null;
+
+if 
+(
+    $user['failed_attempts'] >= 5 &&
+    $lastFail &&
+    ($now->getTimestamp() - $lastFail->getTimestamp() < 300)
+) 
+{
+    restartSession();
+
+    $_SESSION["error"] = "locked";
+
+    header("Location: " . AUTH_F_URL . "auth.php");
+    exit;
+}
+
+// PASSWORD CHECK
+if (!password_verify($password, $user["password"])) 
+{
+
+    $stmt = $connection->prepare("
+        UPDATE users 
+        SET failed_attempts = failed_attempts + 1,
+            last_failed_login = NOW()
+        WHERE email = ?
+    ");
+
+    if (!$stmt) exit("SQL prepare error");
+
+    $stmt->bind_param("s", $email);
+
+    if (!$stmt->execute()) exit("SQL execute error");
+
+    restartSession();
+
+    $_SESSION['error'] = "invalid_credentials";
+
+    header("Location: " . AUTH_F_URL . "auth.php");
+    exit;
+}
+
+// SUCCESS LOGIN
+$stmt = $connection->prepare
+("
+    UPDATE users 
+    SET last_login = NOW(),
+        failed_attempts = 0,
+        last_failed_login = NULL
+    WHERE email = ?
+");
+
+$stmt->bind_param("s", $email);
+
+if (!$stmt->execute()) exit("SQL execute error");
 
 
-                        //JEŻELI POPRAWNE HASŁO -> PRZEKIEROWANIE NA STRONĘ SKLEPU
-                        $resetFailed = $connection->prepare("UPDATE users SET last_login = NOW(), failed_attempts = 0, last_failed_login = null where email = ?");
-                        $resetFailed->bind_param("s", $email);
-                        $resetFailed->execute();
+restartSession();
 
-                        session_regenerate_id(true);
+$_SESSION["id"] = $user["id"];
+$_SESSION["role"] = $user["role"];
 
-                        unset($_SESSION["failed"]);
-                        unset($_SESSION["correctData"]);
-                        $_SESSION["id"] = $row["id"];
-                        $_SESSION["role"] = $row["role"];
-
-                        header("Location: " . HOME_URL . "home.php");
-                        exit; 
-                }
-        }
-?>
+header("Location: " . HOME_URL . "home.php");
+exit;

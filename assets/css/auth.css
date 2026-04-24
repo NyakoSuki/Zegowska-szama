@@ -68,10 +68,16 @@ label {
     margin: 6px;
 }
 
-p
+.error
 {
     font-size: 120%;
     color: red;
+    margin-top: 10px;
+}
+.success
+{
+    font-size: 140%;
+    color: green;
     margin-top: 10px;
 }
 

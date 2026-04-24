@@ -1,7 +1,5 @@
 <?php
 
-    session_start();
-
     require_once dirname(__DIR__, 3) . "/config.php";
     require_once BLOCKER_PATH;
 
@@ -52,23 +50,48 @@
 
             <?php
 
-                if(isset($_SESSION["usernameChange"]) && $_SESSION["usernameChange"] === false)
+                if(isset($_SESSION["isUsed"]) && $_SESSION["isUsed"] === false)
                     {
                         echo "<p>Ta nazwa jest już zajęta</p>";
-                        unset($_SESSION["usernameChange"]);
+                        unset($_SESSION["isUsed"]);
                     }
             ?>
 
+
             <form action="<?=ACCOUNT_B_URL?>change-password.php" method="post">
-                <input type="password">
-                <input type="password">
-                <input type="password">
+                <input type="password" name="currentPassword">
+                <input type="password" name="newPassword">
+                <input type="password" name="confirmPassword">
                 <button>Zmień hasło</button>
             </form>
+
+            <?php
+
+                if(isset($_SESSION["isCorrect"]) && $_SESSION["isCorrect"] === false)
+                    {
+                        echo "<p>Obecne hasło jest niepoprawne</p>";
+                        unset($_SESSION["isCorrect"]);
+                    }
+
+                if(isset($_SESSION["isSame"]) && $_SESSION["isSame"] === false)
+                    {
+                        echo "<p>Nowe hasła nie są takie same</p>";
+                        unset($_SESSION["isSame"]);
+                    }
+
+                if(isset($_SESSION["isOld"]) && $_SESSION["isOld"] === false)
+                    {
+                        echo "<p>Nowe hasło nie może być takie samo jak stare</p>";
+                        unset($_SESSION["isOld"]);
+                    }
+
+            ?>
+
             
             <form action="<?=ACCOUNT_F_URL?>orders.php" method="post">
                 <button>Zamówienia</button>
             </form>
+
 
             <form action="<?=ACCOUNT_B_URL?>logout.php" method="post">
                 <button>Wyloguj się</button>

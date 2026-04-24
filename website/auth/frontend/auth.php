@@ -1,105 +1,124 @@
 <?php
 
-    session_start();
+session_start();
 
-    require_once dirname(__DIR__, 2) . "/config.php";
+require_once dirname(__DIR__, 2) . "/config.php";
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie/Rejestracja - Zegowska szama</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
 </head>
+
 <body>
-    <main class="container-fluid">
-        <?php $active = !empty($_SESSION['userExists']) ? "signup-active" : ""; ?>
-        <div class="container-box <?= $active ?>">
 
-            <!-- PRZYCISKI PRZEŁĄCZANIA -->
-            <div class="switcher">
-                <button id="signinBtn" type="button">Login</button>
-                <button id="signupBtn" type="button">Sign Up</button>
-            </div>
+<main class="container-fluid">
 
-            <!-- SLIDER -->
-            <div class="slider" id="slider">
+<?php
+$signupErrors = ["user_exists","short_password","none"];
+$active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErrors))
+    ? "signup-active"
+    : "";
+?>
 
-                <!-- LOGIN -->
-                <div class="panel login">
-                    <h1><b>LOGIN</b></h1>
+<div class="container-box <?= $active ?>">
 
-                    <form action="<?=AUTH_B_URL?>login.php" method="post">
-                        <label>Email:<br>
-                            <input name="emailLogin" type="text" required>
-                        </label>
+    <!-- PRZYCISKI PRZEŁĄCZANIA -->
+    <div class="switcher">
+        <button id="loginBtn" type="button">Login</button>
+        <button id="signupBtn" type="button">Sign Up</button>
+    </div>
 
-                        <label>Password:<br>
-                            <input name="passwordLogin" type="password" required>
-                        </label>
+    <div class="slider" id="slider">
 
-                        <!-- WYŚWIETLANIE POWIADOMIENIA O BŁĘDNYM WPROWADZENIU DANYCH -->
-                        <?php
-                            if(isset($_SESSION['failed']) && $_SESSION['failed'] === true)
-                                {
-                                    echo "<p>Przekroczono limit 5 prób!<br>Sprubuj ponownie za 5 minut</p>";
-                                    unset($_SESSION['failed']);
-                                }
-                            elseif(isset($_SESSION['correctData']) && $_SESSION['correctData'] === false)
-                                {
-                                    echo "<p>Niepoprawny login lub hasło!</p>";
-                                    unset($_SESSION['correctData']);
-                                }
-                        ?>
+        <!-- LOGIN -->
+        <div class="panel login">
+            <h1><b>LOGIN</b></h1>
 
-                        <div class="buttons">
-                            <button type="submit">Login</button>
-                            <button type="reset">Reset</button>
-                        </div>
-                    </form>
+            <form action="<?=AUTH_B_URL?>login.php" method="post">
+
+                <label>Email:<br>
+                    <input name="email" type="email" required>
+                </label>
+
+                <label>Password:<br>
+                    <input name="password" type="password" required>
+                </label>
+
+                <!-- ERROR LOGIN -->
+                <?php
+                if(isset($_SESSION["error"]))
+                {
+                    switch ($_SESSION["error"]) 
+                    {
+                        case "invalid_credentials" : echo "<h4 class='error'>Niepoprawne dane</h4>"; break;
+                        case "locked" : echo "<h4 class='error'>Zbyt wiele nieudanych prób. Sprubuj ponownie za 5 minut</h4>"; break;
+                    }
+                }
+                ?>
+
+                <div class="buttons">
+                    <button type="submit">Login</button>
+                    <button type="reset">Reset</button>
                 </div>
 
-                <!-- SIGN UP -->
-                <div class="panel signup">
-                    <h1><b>SIGN UP</b></h1>
-
-                    <form action="<?=AUTH_B_URL?>signup.php" method="post">
-                        <label>Username:<br>
-                            <input name="usernameSignup" type="text" required>
-                        </label>
-
-                        <label>Email:<br>
-                            <input name="emailSignup" type="text" required>
-                        </label>
-
-                        <label>Password:<br>
-                            <input name="passwordSignup" type="password" required>
-                        </label>
-
-                        <!-- WYŚWIETLANIE POWIADOMIENIA GDY UŻYTKOWNIK JUŻ ISTNIEJE -->
-                        <?php
-                            if(isset($_SESSION['userExists']) && $_SESSION['userExists'] === true)
-                                {
-                                    echo "<p>Użytkownik już istnieje!</p>";
-                                    unset($_SESSION['userExists']);
-                                }
-                        ?>
-
-                        <div class="buttons">
-                            <button type="submit">Sign up</button>
-                            <button type="reset">Reset</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+            </form>
         </div>
-    </main>
 
-    
-    <script src="<?=JS_URL?>auth-animation.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <!-- SIGN UP -->
+        <div class="panel signup">
+            <h1><b>SIGN UP</b></h1>
+
+            <form action="<?=AUTH_B_URL?>signup.php" method="post">
+
+                <label>Username:<br>
+                    <input name="username" type="text" required>
+                </label>
+
+                <label>Email:<br>
+                    <input name="email" type="email" required>
+                </label>
+
+                <label>Password:<br>
+                    <input name="password" type="password" required>
+                </label>
+
+                <!-- ERROR SIGNUP -->
+                <?php
+                if(isset($_SESSION["error"]))
+                {
+                    switch ($_SESSION["error"]) 
+                    {
+                        case "user_exists" : echo "<h4 class='error'>Użytkownik już istnieje</h4>"; break;
+                        case "short_password" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
+                        case "none" : echo "<h4 class='success'>Pomyślnie zalogowano</h4>"; break;
+                    }
+                    unset($_SESSION["error"]);
+                }
+                ?>
+
+                <div class="buttons">
+                    <button type="submit">Sign up</button>
+                    <button type="reset">Reset</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+
+</main>
+
+<script src="<?=JS_URL?>auth-animation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
 </body>
 </html>

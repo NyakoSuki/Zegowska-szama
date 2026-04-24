@@ -6,5 +6,10 @@
 
     include DB_PATH;
 
+
+    $id = $_SESSION["id"];
+
+    
+
     
 ?>
