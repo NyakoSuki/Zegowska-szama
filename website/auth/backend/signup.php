@@ -6,31 +6,22 @@ require_once dirname(__DIR__, 2) . "/config.php";
 include DB_PATH;
 
 
-
-function restartSession()
-{
-    $_SESSION = [];
-    session_regenerate_id(true);
-}
-
-
+$username = trim($_POST["username"] ?? '');
+$email = strtolower(trim($_POST["email"]) ?? '');
+$password = $_POST["password"] ?? '';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
 if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])) exit;
 
 if (mb_strlen($_POST["password"]) < 8) 
 {
-    restartSession();
+    session_regenerate_id(true);
 
-    $_SESSION["error"] = "short_password";
+    $_SESSION["error"] = "short";
 
     header("Location: " . AUTH_F_URL . "auth.php");
     exit;
 }
-
-$username = trim($_POST["username"]);
-$email = strtolower(trim($_POST["email"]));
-$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
 $stmt = $connection->prepare
 ("
@@ -47,13 +38,15 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) 
 {
-    restartSession();
+    session_regenerate_id(true);
 
-    $_SESSION['error'] = "user_exists";
+    $_SESSION['error'] = "exists";
 
     header("Location: " . AUTH_F_URL . "auth.php");
     exit;
 }
+
+$hashed = password_hash($current, PASSWORD_DEFAULT);
 
 $stmt = $connection->prepare
 ("
@@ -63,12 +56,12 @@ $stmt = $connection->prepare
 
 if (!$stmt) exit("SQL prepare error");
 
-$stmt->bind_param("sss", $username, $email, $password);
+$stmt->bind_param("sss", $username, $email, $hashed);
 
 if(!$stmt->execute()) exit("SQL execute error");
 
 
-restartSession();
+session_regenerate_id(true);
 
 $_SESSION["error"] = "none";
 

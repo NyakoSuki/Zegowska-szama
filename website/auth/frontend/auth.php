@@ -22,7 +22,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
 <main class="container-fluid">
 
 <?php
-$signupErrors = ["user_exists","short_password","none"];
+$signupErrors = ["exists","short","none"];
 $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErrors))
     ? "signup-active"
     : "";
@@ -45,11 +45,11 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
             <form action="<?=AUTH_B_URL?>login.php" method="post">
 
                 <label>Email:<br>
-                    <input name="email" type="email" required>
+                    <input name="email" type="email">
                 </label>
 
                 <label>Password:<br>
-                    <input name="password" type="password" required>
+                    <input name="password" type="password">
                 </label>
 
                 <!-- ERROR LOGIN -->
@@ -58,7 +58,7 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
                 {
                     switch ($_SESSION["error"]) 
                     {
-                        case "invalid_credentials" : echo "<h4 class='error'>Niepoprawne dane</h4>"; break;
+                        case "uncorrect" : echo "<h4 class='error'>Niepoprawne dane</h4>"; break;
                         case "locked" : echo "<h4 class='error'>Zbyt wiele nieudanych prób. Sprubuj ponownie za 5 minut</h4>"; break;
                     }
                 }
@@ -79,15 +79,15 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
             <form action="<?=AUTH_B_URL?>signup.php" method="post">
 
                 <label>Username:<br>
-                    <input name="username" type="text" required>
+                    <input name="username" type="text">
                 </label>
 
                 <label>Email:<br>
-                    <input name="email" type="email" required>
+                    <input name="email" type="email">
                 </label>
 
                 <label>Password:<br>
-                    <input name="password" type="password" required>
+                    <input name="password" type="password">
                 </label>
 
                 <!-- ERROR SIGNUP -->
@@ -96,8 +96,8 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
                 {
                     switch ($_SESSION["error"]) 
                     {
-                        case "user_exists" : echo "<h4 class='error'>Użytkownik już istnieje</h4>"; break;
-                        case "short_password" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
+                        case "exists" : echo "<h4 class='error'>Użytkownik już istnieje</h4>"; break;
+                        case "short" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
                         case "none" : echo "<h4 class='success'>Pomyślnie zalogowano</h4>"; break;
                     }
                     unset($_SESSION["error"]);

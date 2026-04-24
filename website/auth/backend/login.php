@@ -6,21 +6,12 @@ require_once dirname(__DIR__, 2) . "/config.php";
 include DB_PATH;
 
 
-
-function restartSession()
-{
-    $_SESSION = [];
-    session_regenerate_id(true);
-}
-
-
+$email = strtolower(trim($_POST["email"]) ?? '');
+$password = $_POST["password"] ?? '';
 
 // GUARD CLAUSES
 if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
 if (empty($_POST["email"]) || empty($_POST["password"])) exit;
-
-$email = strtolower(trim($_POST["email"]));
-$password = $_POST["password"];
 
 $stmt = $connection->prepare
 ("
@@ -40,9 +31,9 @@ $result = $stmt->get_result();
 // USER NOT FOUND
 if ($result->num_rows === 0) 
 {
-    restartSession();
+    session_regenerate_id(true);
 
-    $_SESSION['error'] = "invalid_credentials";
+    $_SESSION['error'] = "uncorrect";
 
     header("Location: " . AUTH_F_URL . "auth.php");
     exit;
@@ -61,7 +52,7 @@ if
     ($now->getTimestamp() - $lastFail->getTimestamp() < 300)
 ) 
 {
-    restartSession();
+    session_regenerate_id(true);
 
     $_SESSION["error"] = "locked";
 
@@ -86,9 +77,9 @@ if (!password_verify($password, $user["password"]))
 
     if (!$stmt->execute()) exit("SQL execute error");
 
-    restartSession();
+    session_regenerate_id(true);
 
-    $_SESSION['error'] = "invalid_credentials";
+    $_SESSION['error'] = "uncorrect";
 
     header("Location: " . AUTH_F_URL . "auth.php");
     exit;
@@ -109,7 +100,7 @@ $stmt->bind_param("s", $email);
 if (!$stmt->execute()) exit("SQL execute error");
 
 
-restartSession();
+session_regenerate_id(true);
 
 $_SESSION["id"] = $user["id"];
 $_SESSION["role"] = $user["role"];

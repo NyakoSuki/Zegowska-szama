@@ -49,42 +49,36 @@
             </form>
 
             <?php
-
-                if(isset($_SESSION["isUsed"]) && $_SESSION["isUsed"] === false)
+                if(isset($_SESSION["error"]))
+                {
+                    switch($_SESSION["error"])
                     {
-                        echo "<p>Ta nazwa jest już zajęta</p>";
-                        unset($_SESSION["isUsed"]);
+                        case "used" : echo "<h4 class='error'>Nazwa użytkownika zajęta</h4>"; break;
                     }
+                }
             ?>
 
 
             <form action="<?=ACCOUNT_B_URL?>change-password.php" method="post">
-                <input type="password" name="currentPassword">
-                <input type="password" name="newPassword">
-                <input type="password" name="confirmPassword">
+                <input type="password" name="current">
+                <input type="password" name="new">
+                <input type="password" name="confirm">
                 <button>Zmień hasło</button>
             </form>
 
             <?php
-
-                if(isset($_SESSION["isCorrect"]) && $_SESSION["isCorrect"] === false)
+                if(isset($_SESSION["error"]))
+                {
+                    switch($_SESSION["error"])
                     {
-                        echo "<p>Obecne hasło jest niepoprawne</p>";
-                        unset($_SESSION["isCorrect"]);
+                        case "uncorrect" : echo "<h4 class='error'>Obecne hasło jest niepoprawne</h4>"; break;
+                        case "notsame" : echo "<h4 class='error'>Hasła są różne</h4>"; break;
+                        case "short" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
+                        case "old" : echo "<h4 class='error'>Nowe hasło nie może być takie samo jak stare</h4>"; break;
+                        case "none" : echo "<h4 class='success'>Pomyślnie zmieniono hasło</h4>"; break;
                     }
-
-                if(isset($_SESSION["isSame"]) && $_SESSION["isSame"] === false)
-                    {
-                        echo "<p>Nowe hasła nie są takie same</p>";
-                        unset($_SESSION["isSame"]);
-                    }
-
-                if(isset($_SESSION["isOld"]) && $_SESSION["isOld"] === false)
-                    {
-                        echo "<p>Nowe hasło nie może być takie samo jak stare</p>";
-                        unset($_SESSION["isOld"]);
-                    }
-
+                    unset($_SESSION["error"]);
+                }
             ?>
 
             
