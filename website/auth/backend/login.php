@@ -6,7 +6,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
 include DB_PATH;
 
 
-$email = strtolower(trim($_POST["email"]) ?? '');
+$email = strtolower(trim($_POST["email"] ?? ''));
 $password = $_POST["password"] ?? '';
 
 // GUARD CLAUSES

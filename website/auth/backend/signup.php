@@ -7,7 +7,7 @@ include DB_PATH;
 
 
 $username = trim($_POST["username"] ?? '');
-$email = strtolower(trim($_POST["email"]) ?? '');
+$email = strtolower(trim($_POST["email"] ?? ''));
 $password = $_POST["password"] ?? '';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
@@ -46,7 +46,7 @@ if ($result->num_rows > 0)
     exit;
 }
 
-$hashed = password_hash($current, PASSWORD_DEFAULT);
+$hashed = password_hash($password, PASSWORD_DEFAULT);
 
 $stmt = $connection->prepare
 ("
