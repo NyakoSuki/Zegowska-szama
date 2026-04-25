@@ -23,18 +23,18 @@ include DB_PATH;
 </head>
 
 <body>
-    <header class="container-fluid fixed-top p-3">
-        <div class="row align-items-center">
+    <header class="container-fluid sticky-top p-3">
+        <div class="top row align-items-center">
 
             <!-- LOGO -->
-            <div class="col-md-8 col-sm-7 col-5">
+            <div class="col-md-8 col-sm-7">
                 <a href="<?=HOME_F_URL?>home.php" class="d-inline-block">
                     <img src="<?=IMG_URL?>logo.png" class="img-fluid logo-img" alt="logo">
                 </a>
             </div>
 
             <!-- NAV -->
-            <div class="col-md-4 col-sm-5 col-7 text-end">
+            <div class="nav col-md-4 col-sm-5 col-7 text-end">
                 <a href="<?=ACCOUNT_F_URL?>account.php" class="btn btn-outline-light btn-sm">Account</a>
                 <a href="<?=CART_F_URL?>cart.php" class="btn btn-outline-light btn-sm">Cart</a>
                 <button type="button" class="btn btn-outline-light btn-sm">Menu</button>

@@ -1,15 +1,66 @@
-main
+/* Styl bazowy */
+header {
+    min-height: 80px;
+    background: linear-gradient(75deg, var(--light-red) 0%, var(--dark-red) 50%, var(--mid-blue) 80%, var(--dark-blue) 100%);
+}
+.nav
 {
-    padding-top: 150px;
+    display: flex;
+    justify-content: right;
+    gap: 15px;
+}
+.nav .btn
+{
+    padding: 10px 20px;
+    font-size: 15px;
 }
 .logo-img {
-    max-height: 120px;
-    object-fit: contain;
-    width: 100%;
-    height: auto;
+    max-height: 80px;
+    display: block;
 }
 
-header
-{
-    background: linear-gradient(75deg, var(--light-red) 0%, var(--dark-red) 50%, var(--mid-blue) 80%, var(--dark-blue) 100%);
+/*Responsive*/
+
+@media (min-width: 768px) and (max-width: 1100px) {
+    .logo-img {
+        max-height: 150px !important; 
+    }
+    .nav {
+        gap: 15px; 
+        flex-wrap: nowrap !important;
+    }
+
+    .nav .btn {
+        padding: auto; 
+        font-size: auto;   
+    }
+}
+
+@media (max-width: 767px) {
+    header {
+        height: auto ; 
+        padding-bottom: 20px;
+    }
+    .top {
+        flex-direction: column; 
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo-img {
+        max-height: 80px; 
+        margin: 0 auto;
+    }
+
+    .nav {
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+    .nav .btn
+    {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
 }
