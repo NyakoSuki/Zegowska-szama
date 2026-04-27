@@ -64,7 +64,11 @@
 
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
 
-                        <div class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product">
+                        <div 
+                            class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product"
+                            data-name="<?= strtolower($product["name"]) ?>"
+                            data-price="<?= $product["price"] ?>"
+                            data-available="<?= $product["is_available"]?>">
 
                             <img 
                                 src="<?= $product["img"] ?>" 
@@ -103,7 +107,16 @@
                 <?php } ?>
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu disabled">
- 
+                    <input type="text" id="searchName" class="form-control mb-2" placeholder="Szukaj po nazwie...">
+
+                    <input type="number" id="minPrice" class="form-control mb-2" placeholder="Cena min">
+
+                    <input type="number" id="maxPrice" class="form-control mb-2" placeholder="Cena max">
+
+                    <input type="checkbox" id="available" class="form-check-input mb-2">
+                    <label>Pokaż tylko dostępne </label>
+
+                    <button id="resetFilters" class="btn btn-sm btn-secondary w-100">Reset</button>
                 </div>
 
             </div>

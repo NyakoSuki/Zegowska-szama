@@ -6,13 +6,14 @@
     right: 0;
     height: 100%;
     padding: 10px;
-    background-color: black;
+    background-color: #eee;
     transition: all 0.5s ease-out;
 }
 
 .disabled
 {
     width: 0px;
+    padding: 0px;
 }
 
 @media (max-width: 768px)
