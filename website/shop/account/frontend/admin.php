@@ -67,7 +67,24 @@ include DB_PATH;
         <button type="submit" name="action" value="delete">Delete</button>
 </form>
 
+<?php
+
+$result = $connection->query
+("
+    SELECT AUTO_INCREMENT 
+    FROM information_schema.TABLES 
+    WHERE TABLE_SCHEMA = DATABASE()
+    AND TABLE_NAME = 'products'
+");
+
+$row = $result->fetch_assoc();
+$nextId = $row['AUTO_INCREMENT'];
+
+?>
+
 <form action="<?=ACCOUNT_B_URL?>add-product.php" method="post" id="productForm">
+    <input id="id" name="id" type="text" value="<?=$nextId?>" readonly><br>
+
     <input type="text" id="name" name="name" placeholder="Name"><br>
 
     <textarea id="description" name="description" placeholder="Description"></textarea><br>
