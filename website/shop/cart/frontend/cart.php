@@ -37,7 +37,11 @@ include DB_PATH;
         </div>
     </header>
     <main>
+        <form action="<?=CART_B_URL?>order.php" method="post">
 
+            <button type="submit">Zamów</button>
+
+        </form>
         <?php
         $cart = $_SESSION['cart'] ?? [];
 
