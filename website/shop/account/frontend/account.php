@@ -37,7 +37,6 @@ include DB_PATH;
             <div class="nav col-md-4 col-sm-5 col-7 text-end">
                 <a href="<?=ACCOUNT_F_URL?>account.php" class="btn btn-outline-light btn-sm">Account</a>
                 <a href="<?=CART_F_URL?>cart.php" class="btn btn-outline-light btn-sm">Cart</a>
-                <button type="button" class="btn btn-outline-light btn-sm">Menu</button>
             </div>
 
         </div>

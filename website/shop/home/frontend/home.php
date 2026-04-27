@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?=CSS_URL?>variables.css">
     <link rel="stylesheet" href="<?=CSS_URL?>header.css">
     <link rel="stylesheet" href="<?=CSS_URL?>home.css">
+    <link rel="stylesheet" href="<?=CSS_URL?>menu.css">
 </head>
 <body>
     <header class="container-fluid sticky-top p-3">
@@ -39,13 +40,13 @@
             <div class="nav col-md-4 col-sm-5 col-7 text-end">
                 <a href="<?=ACCOUNT_F_URL?>account.php" class="btn btn-outline-light btn-sm">Account</a>
                 <a href="<?=CART_F_URL?>cart.php" class="btn btn-outline-light btn-sm">Cart</a>
-                <button type="button" class="btn btn-outline-light btn-sm">Menu</button>
+                <button type="button" class="btn btn-outline-light btn-sm menuBtn">Menu</button>
             </div>
 
         </div>
     </header>
     <main>
-        <section class="products container p-3">
+        <section class="products p-3">
 
             <div class="row g-4">
 
@@ -61,7 +62,7 @@
                     $disabled = $product["is_available"] == 0;
                 ?>
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
 
                         <div class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product">
 
@@ -101,6 +102,10 @@
 
                 <?php } ?>
 
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu disabled">
+ 
+                </div>
+
             </div>
 
         </section>
@@ -110,6 +115,6 @@
     </footer>
 
     
-    <script src="<?=JS_URL?>navi.js"></script>
+    <script src="<?=JS_URL?>menu.js"></script>
 </body>
 </html>
