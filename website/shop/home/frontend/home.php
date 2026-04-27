@@ -20,10 +20,7 @@
     <title>Zegowska Szama</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?=CSS_URL?>variables.css">
-    <link rel="stylesheet" href="<?=CSS_URL?>header.css">
     <link rel="stylesheet" href="<?=CSS_URL?>home.css">
-    <link rel="stylesheet" href="<?=CSS_URL?>menu.css">
 </head>
 <body>
     <header class="container-fluid sticky-top p-3">
@@ -106,7 +103,7 @@
 
                 <?php } ?>
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu disabled">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu menuDisabled">
                     <input type="text" id="searchName" class="form-control mb-2" placeholder="Szukaj po nazwie...">
 
                     <input type="number" id="minPrice" class="form-control mb-2" placeholder="Cena min">
@@ -114,7 +111,7 @@
                     <input type="number" id="maxPrice" class="form-control mb-2" placeholder="Cena max">
 
                     <input type="checkbox" id="available" class="form-check-input mb-2">
-                    <label>Pokaż tylko dostępne </label>
+                    <label for="available">Pokaż tylko dostępne </label><br>
 
                     <button id="resetFilters" class="btn btn-sm btn-secondary w-100">Reset</button>
                 </div>

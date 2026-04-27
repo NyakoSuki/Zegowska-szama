@@ -1,7 +1,6 @@
-*
-{
-    color: var(--white);
-}
+@import url(main.css);
+@import url(header.css);
+@import url(button-animation.css);
 button, input
 {
     border: none;
@@ -17,4 +16,31 @@ button, input
 .product img
 {
     max-height: 300px;
+}
+
+
+
+.menu
+{
+    z-index: 999;
+    position: fixed;
+    top: 108px;
+    right: 0;
+    padding: 15px 10px 15px;
+    transition: all 0.5s ease-out;
+    white-space: nowrap;
+}
+
+.menuDisabled
+{
+    width: 0px;
+    padding: 15px 0px 15px;
+}
+
+@media (max-width: 768px)
+{
+    .menu 
+    {
+        top: 134px;
+    }
 }

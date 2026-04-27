@@ -14,8 +14,6 @@ include DB_PATH;
     <title>Document</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?=CSS_URL?>variables.css">
-    <link rel="stylesheet" href="<?=CSS_URL?>header.css">
     <link rel="stylesheet" href="<?=CSS_URL?>cart.css">
 </head>
 <body>
@@ -33,6 +31,7 @@ include DB_PATH;
             <div class="nav col-md-4 col-sm-5 col-7 text-end">
                 <a href="<?=ACCOUNT_F_URL?>account.php" class="btn btn-outline-light btn-sm">Account</a>
                 <a href="<?=CART_F_URL?>cart.php" class="btn btn-outline-light btn-sm">Cart</a>
+                <a href="<?=HOME_F_URL?>home.php" class="btn btn-outline-light btn-sm">Home</a>
             </div>
 
         </div>

@@ -1,0 +1,10 @@
+@import url(variables.css);
+*
+{
+    color: var(--white);
+}
+html, body
+{
+    min-height: 100vh;
+    background: linear-gradient(0deg, var(--black) 0%, var(--light-black) 50%);
+}

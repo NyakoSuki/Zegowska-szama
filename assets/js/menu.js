@@ -5,7 +5,7 @@ const menu = document.querySelector(".menu");
 
 menuBtn.addEventListener('click', () => 
 {
-  menu.classList.toggle("disabled");
+    menu.classList.toggle("menuDisabled");
 });
 
 

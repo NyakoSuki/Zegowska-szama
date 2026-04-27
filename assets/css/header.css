@@ -1,5 +1,6 @@
 /* Styl bazowy */
 header {
+    opacity: 80%;
     min-height: 80px;
     background: linear-gradient(75deg, var(--light-red) 0%, var(--dark-red) 50%, var(--mid-blue) 80%, var(--dark-blue) 100%);
 }

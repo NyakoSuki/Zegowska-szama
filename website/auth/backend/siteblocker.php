@@ -9,4 +9,3 @@
         header("Location: " . AUTH_F_URL . "auth.php");
         exit;
     }
-
