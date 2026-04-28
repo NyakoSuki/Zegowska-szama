@@ -54,6 +54,12 @@ define("BASE_URL", "/Zegowska-szama/");
             define("HOME_F_URL", HOME_URL . "frontend/");
 
 
+            /* ================= ACCOUNT ================= */
+            define("ADMIN_URL", SHOP_URL . "admin/");
+            define("ADMIN_B_URL", ADMIN_URL . "backend/");
+            define("ADMIN_F_URL", ADMIN_URL . "frontend/");
+
+
     /* ================= ASSETS ================= */
     define("ASSETS_URL", BASE_URL . "assets/");
     define("JS_URL", ASSETS_URL . "js/");

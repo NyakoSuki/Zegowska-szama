@@ -125,7 +125,7 @@ include DB_PATH;
             <div class="">
                 <div class="d-flex flex-wrap gap-2 justify-content-center">
 
-                        <a href="<?=ACCOUNT_F_URL?>admin.php" class="rounded-2 p-2 orders">Admin panel</a>
+                        <a href="<?=ADMIN_F_URL?>admin.php" class="rounded-2 p-2 orders">Admin panel</a>
 
                     <form action="<?=ACCOUNT_F_URL?>orders.php" method="post">
                         <button class="rounded-2 p-2 orders">Zamówienia</button>
