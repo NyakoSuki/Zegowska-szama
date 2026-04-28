@@ -59,5 +59,5 @@ include DB_PATH;
 
     if (!$stmt->execute()) exit("SQL execute error");
 
-    header("Location: " . ACCOUNT_F_URL . "admin.php");
+    header("Location: " . ADMIN_F_URL . "admin.php");
     exit;

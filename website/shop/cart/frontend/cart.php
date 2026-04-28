@@ -41,7 +41,7 @@ include DB_PATH;
 
         <section class="products p-3">
 
-            <form action="<?=CART_B_URL?>order.php" method="post"  onsubmit="return confirm('Na pewno chcesz złożyć zamówinie?');>
+            <form action="<?=CART_B_URL?>order.php" method="post"  onsubmit="return confirm('Na pewno chcesz złożyć zamówinie?');">
                 <button type="submit">Zamów</button>
             </form>
 
@@ -99,7 +99,7 @@ include DB_PATH;
                             <div class="d-flex gap-2 mt-2 justify-content-center">
 
                                 <!-- MINUS -->
-                                <form method="POST" action="<?=CART_B_URL?>cart-decrease.php">
+                                <form method="POST" action="<?=CART_B_URL?>cart-remove.php">
                                     <input type="hidden" name="id" value="<?= $product["id"] ?>">
                                     <button class="btn btn-danger btn-sm">
                                         -
@@ -110,9 +110,9 @@ include DB_PATH;
                                 <span class="align-self-center"><?= $qty ?></span>
 
                                 <!-- PLUS -->
-                                <form method="POST" action="<?=CART_B_URL?>cart-increase.php">
+                                <form method="POST" action="<?=CART_B_URL?>cart-add.php">
                                     <input type="hidden" name="id" value="<?= $product["id"] ?>">
-                                    <button class="btn btn-success btn-sm">
+                                    <button class="btn btn-success btn-sm" name="add" value="cart">
                                         +
                                     </button>
                                 </form>

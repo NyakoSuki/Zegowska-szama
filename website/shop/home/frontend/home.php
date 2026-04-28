@@ -85,7 +85,7 @@
                                 <form method="POST" action="<?=CART_B_URL?>cart-add.php">
                                     <input type="hidden" name="id" value="<?= $product["id"] ?>">
 
-                                    <button class="w-100 rounded" <?= $disabled ? 'disabled' : '' ?>>
+                                    <button class="w-100 rounded" name="add" value="home" <?= $disabled ? 'disabled' : '' ?>>
                                         Dodaj do koszyka
                                     </button>
                                 </form>

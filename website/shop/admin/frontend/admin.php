@@ -45,7 +45,7 @@ include DB_PATH;
 
 <br><br>
 
-<form action="<?=ACCOUNT_B_URL?>update-product.php" method="post" id="productForm">
+<form action="<?=ADMIN_B_URL?>update-product.php" method="post" id="productForm">
     <label>id:</label>
     <input id="id" name="id" type="text" readonly><br>
 
@@ -82,7 +82,7 @@ $nextId = $row['AUTO_INCREMENT'];
 
 ?>
 
-<form action="<?=ACCOUNT_B_URL?>add-product.php" method="post" id="productForm">
+<form action="<?=ADMIN_B_URL?>add-product.php" method="post" id="productForm">
     <input id="id" name="id" type="text" value="<?=$nextId?>" readonly><br>
 
     <input type="text" id="name" name="name" placeholder="Name"><br>

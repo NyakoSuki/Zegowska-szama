@@ -66,7 +66,7 @@ if($_POST["action"] === 'update')
 
     if (!$stmt->execute()) exit("SQL execute error");
 
-    header("Location: " . ACCOUNT_F_URL . "admin.php");
+    header("Location: " . ADMIN_F_URL . "admin.php");
     exit;
 }
 
@@ -80,6 +80,6 @@ if($_POST["action"] === 'delete')
 
     if (!$stmt->execute()) exit("SQL execute error");
 
-    header("Location: " . ACCOUNT_F_URL . "admin.php");
+    header("Location: " . ADMIN_F_URL . "admin.php");
     exit;
 }
