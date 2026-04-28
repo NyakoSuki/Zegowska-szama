@@ -98,7 +98,7 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
                     {
                         case "exists" : echo "<h4 class='error'>Użytkownik już istnieje</h4>"; break;
                         case "short" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
-                        case "none" : echo "<h4 class='success'>Pomyślnie zalogowano</h4>"; break;
+                        case "none" : echo "<h4 class='success'>Pomyślnie zarejestrowano</h4>"; break;
                     }
                     unset($_SESSION["error"]);
                 }

@@ -67,7 +67,7 @@ if (!password_verify($password, $user["password"]))
     $stmt = $connection->prepare("
         UPDATE users 
         SET failed_attempts = failed_attempts + 1,
-            last_failed_login = NOW()
+        last_failed_login = NOW()
         WHERE email = ?
     ");
 
@@ -90,8 +90,8 @@ $stmt = $connection->prepare
 ("
     UPDATE users 
     SET last_login = NOW(),
-        failed_attempts = 0,
-        last_failed_login = NULL
+    failed_attempts = 0,
+    last_failed_login = NULL
     WHERE email = ?
 ");
 
