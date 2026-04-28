@@ -117,42 +117,53 @@ include DB_PATH;
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu menuDisabled">
 
-                    <input
-                        type="text"
-                        id="searchName"
-                        class="form-control mb-2"
-                        placeholder="Szukaj po nazwie..."
-                    >
+                    <div class="card bg-dark text-light border-secondary shadow-sm">
+                        <div class="card-body">
 
-                    <input
-                        type="number"
-                        id="minPrice"
-                        class="form-control mb-2"
-                        placeholder="Cena min"
-                    >
+                            <h6 class="mb-3">
+                                Filtry
+                            </h6>
 
-                    <input
-                        type="number"
-                        id="maxPrice"
-                        class="form-control mb-2"
-                        placeholder="Cena max"
-                    >
+                            <input
+                                type="text"
+                                id="searchName"
+                                class="form-control bg-dark text-light border-secondary mb-2"
+                                placeholder="Szukaj po nazwie..."
+                            >
 
-                    <input
-                        type="checkbox"
-                        id="available"
-                        class="form-check-input mb-2"
-                    >
-                    <label 
-                        for="available">
-                        Pokaż tylko dostępne
-                    </label><br>
+                            <input
+                                type="number"
+                                id="minPrice"
+                                class="form-control bg-dark text-light border-secondary mb-2"
+                                placeholder="Cena min"
+                            >
 
-                    <button
-                        id="resetFilters"
-                        class="btn btn-sm btn-secondary w-100">
-                        Reset
-                    </button>
+                            <input
+                                type="number"
+                                id="maxPrice"
+                                class="form-control bg-dark text-light border-secondary mb-3"
+                                placeholder="Cena max"
+                            >
+
+                            <div class="form-check mb-3">
+                                <input
+                                    type="checkbox"
+                                    id="available"
+                                    class="form-check-input"
+                                >
+                                <label class="form-check-label" for="available">
+                                    Pokaż tylko dostępne
+                                </label>
+                            </div>
+
+                            <button
+                                id="resetFilters"
+                                class="btn btn-outline-light w-100">
+                                Reset
+                            </button>
+
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -62,26 +62,35 @@ $cart = $_SESSION["cart"] ?? [];
     <main>
         <section class="products p-3">
 
-            <!-- ZAMÓWIENIE -->
-            <form 
-                action="<?=CART_B_URL?>order.php" 
-                method="post"
-                onsubmit="return confirm(\"Na pewno chcesz złożyć zamówienie?\");">
-                    <button type="submit">
+            <div class="d-flex flex-column flex-sm-row gap-2 mb-3 col-12 col-lg-6 offset-lg-3">
+
+                <!-- ZAMÓWIENIE -->
+                <form 
+                    action="<?=CART_B_URL?>order.php" 
+                    method="post"
+                    onsubmit="return confirm('Na pewno chcesz złożyć zamówienie?');"
+                    class="flex-fill col-3 m-1">
+
+                    <button type="submit"
+                        class="btn btn-outline-success w-100">
                         Zamów
                     </button>
-            </form>
+                </form>
 
-            <!-- CZYSZCZENIE KOSZYKA -->
-            <form 
-                action="<?=CART_B_URL?>cart-clear.php" 
-                method="post"
-                onsubmit="return confirm(\"Na pewno chcesz wyczyścić koszyk?\");">
-                    <button type="submit">
+                <!-- CZYSZCZENIE -->
+                <form 
+                    action="<?=CART_B_URL?>cart-clear.php" 
+                    method="post"
+                    onsubmit="return confirm('Na pewno chcesz wyczyścić koszyk?');"
+                    class="flex-fill col-3 m-1">
+
+                    <button type="submit"
+                        class="btn btn-outline-danger w-100">
                         Wyczyść koszyk
                     </button>
-            </form>
+                </form>
 
+            </div>
 
             <div class="row g-4">
 
