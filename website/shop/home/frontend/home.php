@@ -6,11 +6,6 @@
     include DB_PATH;
 
 
-    if (!isset($_SESSION['cart'])) 
-    {
-        $_SESSION['cart'] = [];
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -87,7 +82,7 @@
                                     <?= $product["price"] ?> zł
                                 </p>
 
-                                <form method="POST" action="<?=CART_B_URL?>cartadd.php">
+                                <form method="POST" action="<?=CART_B_URL?>cart-add.php">
                                     <input type="hidden" name="id" value="<?= $product["id"] ?>">
 
                                     <button class="w-100 rounded" <?= $disabled ? 'disabled' : '' ?>>

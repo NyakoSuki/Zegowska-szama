@@ -5,9 +5,10 @@ require_once BLOCKER_PATH;
 
 include DB_PATH;
 
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,36 +38,101 @@ include DB_PATH;
         </div>
     </header>
     <main>
-        <form action="<?=CART_B_URL?>order.php" method="post">
 
-            <button type="submit">Zamów</button>
+        <section class="products p-3">
 
-        </form>
-        <?php
-        $cart = $_SESSION['cart'] ?? [];
+            <form action="<?=CART_B_URL?>order.php" method="post"  onsubmit="return confirm('Na pewno chcesz złożyć zamówinie?');>
+                <button type="submit">Zamów</button>
+            </form>
 
-        echo "<h1>Twój koszyk</h1>";
+            <form action="<?=CART_B_URL?>cart-clear.php" method="post" onsubmit="return confirm('Na pewno chcesz wyczyścić koszyk?');">
+                <button type="submit">Wyczyść koszyk</button>
+            </form>
 
-        if (empty($cart)) 
-        {
-            echo "Koszyk jest pusty";
-            exit;
-        }
+            <div class="row g-4">
 
-        $counts = array_count_values($cart);
+                <?php
+                $cart = $_SESSION['cart'] ?? [];
 
-        foreach ($counts as $id => $qty) 
-        {
-            $result = $connection->query("SELECT name, price FROM products WHERE id = '$id'");
-            $product = $result->fetch_assoc();
+                $products = $connection->query
+                ("
+                    SELECT id, name, description, price, stock, img 
+                    FROM products
+                ");
 
-            echo "<div>";
-                echo "<h3>".$product['name']."</h3>";
-                echo "Cena: ".$product['price']." zł<br>";
-                echo "Ilość: ".$qty;
-            echo "</div><hr>";
-        }
-        ?>
+                while ($product = $products->fetch_assoc())
+                {
+
+                    $id = $product["id"];
+
+                    if (!isset($cart[$id])) continue;
+
+                    $qty = $cart[$id];
+                ?>
+
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+
+                    <div 
+                        class="rounded-2 h-100 d-flex flex-column product">
+
+                        <img 
+                            src="<?= $product["img"] ?>" 
+                            class="rounded-top-1 card-img-top"
+                            alt="<?= $product["name"] ?>"
+                        >
+
+                        <div class="p-2 d-flex flex-column flex-grow-1">
+
+                            <h5 class="text-center">
+                                <?= $product["name"] ?>
+                            </h5>
+
+                            <p class="small">
+                                <?= $product["description"] ?>
+                            </p>
+
+                            <p class="text-center fw-bold">
+                                Suma: <?= $product["price"] * $qty ?> zł
+                            </p>
+
+                            <!-- PRZYCISKI -->
+                            <div class="d-flex gap-2 mt-2 justify-content-center">
+
+                                <!-- MINUS -->
+                                <form method="POST" action="<?=CART_B_URL?>cart-decrease.php">
+                                    <input type="hidden" name="id" value="<?= $product["id"] ?>">
+                                    <button class="btn btn-danger btn-sm">
+                                        -
+                                    </button>
+                                </form>
+
+                                <!-- ILOŚĆ -->
+                                <span class="align-self-center"><?= $qty ?></span>
+
+                                <!-- PLUS -->
+                                <form method="POST" action="<?=CART_B_URL?>cart-increase.php">
+                                    <input type="hidden" name="id" value="<?= $product["id"] ?>">
+                                    <button class="btn btn-success btn-sm">
+                                        +
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <?php } ?>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
 
     </main>
 
