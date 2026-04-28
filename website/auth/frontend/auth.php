@@ -1,11 +1,8 @@
 <?php
-
 session_start();
 
 require_once dirname(__DIR__, 2) . "/config.php";
-
 ?>
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -18,104 +15,152 @@ require_once dirname(__DIR__, 2) . "/config.php";
 </head>
 
 <body>
+    <main class="container-fluid">
 
-<main class="container-fluid">
+    <?php
+    $signupErrors = ["exists","short","none"];
+    $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErrors))
+        ? "signup-active" : "";
+    ?>
 
-<?php
-$signupErrors = ["exists","short","none"];
-$active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErrors))
-    ? "signup-active"
-    : "";
-?>
+        <div class="container-box <?= $active ?>">
 
-<div class="container-box <?= $active ?>">
+            <!-- PRZYCISKI PRZEŁĄCZANIA -->
+            <div class="switcher">
+                <button
+                    id="loginBtn"
+                    type="button">
+                    Login
+                </button>
+                <button
+                    id="signupBtn"
+                    type="button">
+                    Signup
+                </button>
+            </div>
 
-    <!-- PRZYCISKI PRZEŁĄCZANIA -->
-    <div class="switcher">
-        <button id="loginBtn" type="button">Login</button>
-        <button id="signupBtn" type="button">Signup</button>
-    </div>
+            <div class="slider" id="slider">
 
-    <div class="slider" id="slider">
+                <!-- LOGIN -->
+                <div class="panel login">
+                    <h1><b>LOGIN</b></h1>
 
-        <!-- LOGIN -->
-        <div class="panel login">
-            <h1><b>LOGIN</b></h1>
+                    <form action="<?=AUTH_B_URL?>login.php" method="post">
 
-            <form action="<?=AUTH_B_URL?>login.php" method="post">
+                        <label>Email:<br>
+                            <input
+                                name="email"
+                                type="email"
+                            >
+                        </label>
 
-                <label>Email:<br>
-                    <input name="email" type="email">
-                </label>
+                        <label>Password:<br>
+                            <input
+                                name="password"
+                                type="password"
+                            >
+                        </label>
 
-                <label>Password:<br>
-                    <input name="password" type="password">
-                </label>
+                        <!-- ERROR LOGIN -->
+                        <?php
+                        if(isset($_SESSION["error"]))
+                        {
+                            switch ($_SESSION["error"]) 
+                            {
+                                case "uncorrect":
+                                    echo "<h4 class='error'>Niepoprawne dane</h4>";
+                                    break;
 
-                <!-- ERROR LOGIN -->
-                <?php
-                if(isset($_SESSION["error"]))
-                {
-                    switch ($_SESSION["error"]) 
-                    {
-                        case "uncorrect" : echo "<h4 class='error'>Niepoprawne dane</h4>"; break;
-                        case "locked" : echo "<h4 class='error'>Zbyt wiele nieudanych prób. Sprubuj ponownie za 5 minut</h4>"; break;
-                    }
-                }
-                ?>
+                                case "locked":
+                                    echo "<h4 class='error'>Zbyt wiele nieudanych prób. Sprubuj ponownie za 5 minut</h4>";
+                                    break;
+                            }
+                        }
+                        ?>
 
-                <div class="buttons">
-                    <button type="submit">Login</button>
-                    <button type="reset">Reset</button>
+                        <div class="buttons">
+                            <button
+                                type="submit">
+                                Login
+                            </button>
+
+                            <button
+                                type="reset">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
 
-            </form>
-        </div>
+                <!-- SIGNUP -->
+                <div class="panel signup">
+                    <h1><b>SIGNUP</b></h1>
 
-        <!-- SIGNUP -->
-        <div class="panel signup">
-            <h1><b>SIGNUP</b></h1>
+                    <form action="<?=AUTH_B_URL?>signup.php" method="post">
 
-            <form action="<?=AUTH_B_URL?>signup.php" method="post">
+                        <label>Username:<br>
+                            <input
+                                name="username"
+                                type="text"
+                            >
+                        </label>
 
-                <label>Username:<br>
-                    <input name="username" type="text">
-                </label>
+                        <label>Email:<br>
+                            <input
+                                name="email"
+                                type="email"
+                            >
+                        </label>
 
-                <label>Email:<br>
-                    <input name="email" type="email">
-                </label>
+                        <label>Password:<br>
+                            <input
+                                name="password"
+                                type="password"
+                            >
+                        </label>
 
-                <label>Password:<br>
-                    <input name="password" type="password">
-                </label>
+                        <!-- ERROR SIGNUP -->
+                        <?php
+                        if(isset($_SESSION["error"]))
+                        {
+                            switch ($_SESSION["error"]) 
+                            {
+                                case "exists":
+                                    echo "<h4 class='error'>Użytkownik już istnieje</h4>";
+                                    break;
+                                    
+                                case "short":
+                                    echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>";
+                                    break;
 
-                <!-- ERROR SIGNUP -->
-                <?php
-                if(isset($_SESSION["error"]))
-                {
-                    switch ($_SESSION["error"]) 
-                    {
-                        case "exists" : echo "<h4 class='error'>Użytkownik już istnieje</h4>"; break;
-                        case "short" : echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>"; break;
-                        case "none" : echo "<h4 class='success'>Pomyślnie zarejestrowano</h4>"; break;
-                    }
-                    unset($_SESSION["error"]);
-                }
-                ?>
+                                case "none":
+                                    echo "<h4 class='success'>Pomyślnie zarejestrowano</h4>";
+                                    break;
+                            }
+                            unset($_SESSION["error"]);
+                        }
+                        ?>
 
-                <div class="buttons">
-                    <button type="submit">Sign up</button>
-                    <button type="reset">Reset</button>
+                        <div class="buttons">
+                            <button
+                                type="submit">
+                                Sign up
+                            </button>
+
+                            <button
+                                type="reset">
+                                Reset
+                            </button>
+                        </div>
+
+                    </form>
                 </div>
 
-            </form>
+            </div>
         </div>
+    </main>
 
-    </div>
-</div>
-
-</main>
 
 <script src="<?=JS_URL?>auth-animation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>

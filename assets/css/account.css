@@ -1,20 +1,2 @@
 @import url(main.css);
 @import url(header.css);
-@import url(button-animation.css);
-
-.username input, .password input
-{
-    background: linear-gradient(75deg, var(--black), var(--gray));
-}
-.username button, .password button
-{
-    background: linear-gradient(75deg, var(--light-green-btn), var(--dark-green-btn));
-}
-.orders
-{
-    background: linear-gradient(75deg, var(--light-green-btn), var(--dark-green-btn));
-}
-.logout
-{
-    background: linear-gradient(75deg, var(--light-red-btn), var(--dark-red-btn));
-}

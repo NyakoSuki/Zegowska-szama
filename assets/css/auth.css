@@ -1,6 +1,5 @@
 /* Reset / global */
 @import url(main.css);
-@import url(button-animation.css);
 
 body {
     height: 100vh;

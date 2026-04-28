@@ -6,10 +6,6 @@
 {
     background: linear-gradient(0deg, var(--light-blue) 20%, var(--mid-blue) 60%, var(--dark-blue) 80%);
 }
-.product button
-{
-    background: linear-gradient(75deg, var(--black), var(--gray));
-}
 .product img
 {
     max-height: 300px;

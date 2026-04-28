@@ -1,7 +1,6 @@
 <?php
 require_once dirname(__DIR__, 3) . "/config.php";
 require_once BLOCKER_PATH;
-
 include DB_PATH;
 ?>
 <!DOCTYPE html>
@@ -22,16 +21,33 @@ include DB_PATH;
 
             <!-- LOGO -->
             <div class="col-md-8 col-sm-7">
-                <a href="<?=HOME_F_URL?>home.php" class="d-inline-block">
-                    <img src="<?=IMG_URL?>logo.png" class="img-fluid logo-img" alt="logo">
+                <a 
+                    href="<?=HOME_F_URL?>home.php"
+                    class="d-inline-block">
+                        <img 
+                            src="<?=IMG_URL?>logo.png"
+                            class="img-fluid logo-img" alt="logo"
+                        >
                 </a>
             </div>
 
             <!-- NAV -->
             <div class="nav col-md-4 col-sm-5 col-7 text-end">
-                <a href="<?=ACCOUNT_F_URL?>account.php" class="btn btn-outline-light btn-sm">Account</a>
-                <a href="<?=CART_F_URL?>cart.php" class="btn btn-outline-light btn-sm">Cart</a>
-                <button type="button" class="btn btn-outline-light btn-sm menuBtn">Menu</button>
+                <a
+                    href="<?=ACCOUNT_F_URL?>account.php"
+                    class="btn btn-outline-light btn-sm">
+                    Account
+                    </a>
+                <a
+                    href="<?=CART_F_URL?>cart.php"
+                    class="btn btn-outline-light btn-sm">
+                    Cart
+                </a>
+                <button
+                    type="button" 
+                    class="btn btn-outline-light btn-sm menuBtn">
+                    Menu
+                </button>
             </div>
 
         </div>
@@ -53,12 +69,12 @@ include DB_PATH;
                 {
                     $disabled = $product["is_available"] == 0;
                 ?>
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
-                        <div 
-                            class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product"
-                            data-name="<?= strtolower($product["name"]) ?>"
-                            data-price="<?= $product["price"] ?>"
-                            data-available="<?= $product["is_available"]?>">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                    <div 
+                        class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product"
+                        data-name="<?= strtolower($product["name"]) ?>"
+                        data-price="<?= $product["price"] ?>"
+                        data-available="<?= $product["is_available"]?>">
 
                             <img 
                                 src="<?= $product["img"] ?>" 
@@ -81,37 +97,65 @@ include DB_PATH;
                                 </p>
 
                                 <form method="POST" action="<?=CART_B_URL?>cart-add.php">
-                                    <input type="hidden" name="id" value="<?= $product["id"] ?>">
-                                    <button class="w-100 rounded" name="add" value="home" <?= $disabled ? 'disabled' : '' ?>>
-                                        Dodaj do koszyka
+                                    <input 
+                                        type="hidden"
+                                        name="id"
+                                        value="<?= $product["id"] ?>"
+                                    >
+                                    <button class="btn btn-outline-success w-100 mt-2 fw-semibold shadow-sm cart-btn"
+                                        name="add"
+                                        value="home"
+                                        <?= $disabled ? 'disabled' : '' ?>>
+                                        🛒 Dodaj do koszyka
                                     </button>
                                 </form>
 
                             </div>
-
                         </div>
-
                     </div>
-
                 <?php } ?>
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu menuDisabled">
 
-                    <input type="text" id="searchName" class="form-control mb-2" placeholder="Szukaj po nazwie...">
+                    <input
+                        type="text"
+                        id="searchName"
+                        class="form-control mb-2"
+                        placeholder="Szukaj po nazwie..."
+                    >
 
-                    <input type="number" id="minPrice" class="form-control mb-2" placeholder="Cena min">
+                    <input
+                        type="number"
+                        id="minPrice"
+                        class="form-control mb-2"
+                        placeholder="Cena min"
+                    >
 
-                    <input type="number" id="maxPrice" class="form-control mb-2" placeholder="Cena max">
+                    <input
+                        type="number"
+                        id="maxPrice"
+                        class="form-control mb-2"
+                        placeholder="Cena max"
+                    >
 
-                    <input type="checkbox" id="available" class="form-check-input mb-2">
-                    <label for="available">Pokaż tylko dostępne </label><br>
+                    <input
+                        type="checkbox"
+                        id="available"
+                        class="form-check-input mb-2"
+                    >
+                    <label 
+                        for="available">
+                        Pokaż tylko dostępne
+                    </label><br>
 
-                    <button id="resetFilters" class="btn btn-sm btn-secondary w-100">Reset</button>
+                    <button
+                        id="resetFilters"
+                        class="btn btn-sm btn-secondary w-100">
+                        Reset
+                    </button>
 
                 </div>
-
             </div>
-
         </section>
     </main>
 
@@ -119,6 +163,7 @@ include DB_PATH;
     <footer>
 
     </footer>
+
 
     
     <script src="<?=JS_URL?>menu.js"></script>

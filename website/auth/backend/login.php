@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 require_once dirname(__DIR__, 2) . "/config.php";
@@ -19,25 +18,21 @@ $stmt = $connection->prepare
     FROM users 
     WHERE email = ?
 ");
-
-if (!$stmt) exit("SQL prepare error");
-
+    if (!$stmt) exit("SQL prepare error");
 $stmt->bind_param("s", $email);
-
-if (!$stmt->execute()) exit("SQL execute error");
-
+    if (!$stmt->execute()) exit("SQL execute error");
 $result = $stmt->get_result();
 
 // USER NOT FOUND
 if ($result->num_rows === 0) 
 {
     session_regenerate_id(true);
-
     $_SESSION['error'] = "uncorrect";
 
     header("Location: " . AUTH_F_URL . "auth.php");
     exit;
 }
+
 
 $user = $result->fetch_assoc();
 
@@ -53,7 +48,6 @@ if
 ) 
 {
     session_regenerate_id(true);
-
     $_SESSION["error"] = "locked";
 
     header("Location: " . AUTH_F_URL . "auth.php");
@@ -63,27 +57,24 @@ if
 // PASSWORD CHECK
 if (!password_verify($password, $user["password"])) 
 {
-
-    $stmt = $connection->prepare("
+    $stmt = $connection->prepare
+    ("
         UPDATE users 
         SET failed_attempts = failed_attempts + 1,
         last_failed_login = NOW()
         WHERE email = ?
     ");
-
-    if (!$stmt) exit("SQL prepare error");
-
+        if (!$stmt) exit("SQL prepare error");
     $stmt->bind_param("s", $email);
-
-    if (!$stmt->execute()) exit("SQL execute error");
+        if (!$stmt->execute()) exit("SQL execute error");
 
     session_regenerate_id(true);
-
     $_SESSION['error'] = "uncorrect";
 
     header("Location: " . AUTH_F_URL . "auth.php");
     exit;
 }
+
 
 // SUCCESS LOGIN
 $stmt = $connection->prepare
@@ -94,14 +85,12 @@ $stmt = $connection->prepare
     last_failed_login = NULL
     WHERE email = ?
 ");
-
+    if (!$stmt) exit("SQL prepare error");
 $stmt->bind_param("s", $email);
+    if (!$stmt->execute()) exit("SQL execute error");
 
-if (!$stmt->execute()) exit("SQL execute error");
-
-
+    
 session_regenerate_id(true);
-
 $_SESSION["id"] = $user["id"];
 $_SESSION["role"] = $user["role"];
 

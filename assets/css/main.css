@@ -3,19 +3,22 @@
 /*---MAIN---*/
 *
 {
-    color: var(--white);
-    font-family: Courier;
+    color: var(--white) !important;
+    font-family: Courier !important;
 }
 html, body
 {
-    min-height: 100vh;
-    background: linear-gradient(0deg, var(--black) 0%, var(--light-black) 50%);
+    min-height: 100vh !important;
+    background: linear-gradient(0deg, var(--black) 0%, var(--light-black) 50%) !important;
 }
 button, input
 {
     border: none;
 }
-
+::placeholder 
+{
+    color: #aaa !important;
+}
 
 /*--BUTTON ANIMATIONS---*/
 button, a
@@ -31,11 +34,11 @@ button:hover, a:hover
 /*---NOTIFICATIONS---*/
 .error
 {
-    font-size: 120%;
-    color: red;
+    font-size: 120% !important;
+    color: red !important;
 }
 .success
 {
-    font-size: 120%;
-    color: green;
+    font-size: 120% !important;
+    color: green !important;
 }
