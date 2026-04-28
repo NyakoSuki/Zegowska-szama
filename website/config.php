@@ -11,11 +11,13 @@ define("BASE_PATH",  __DIR__ . "/");
     /* ================= SITE BLOCKER ================= */
     define("BLOCKER_PATH", BASE_PATH . "auth/backend/siteblocker.php");
 
-
     /* ================= DATA BASE ================= */
     define("DB_PATH", BASE_PATH . "database/database.php");
 
 
+
+
+    
 /* ================= URLS ================= */
 
 

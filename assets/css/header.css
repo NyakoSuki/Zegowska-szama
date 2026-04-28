@@ -1,5 +1,6 @@
-/* Styl bazowy */
-header {
+/*---DEFAULT STYLE---*/
+header
+{
     opacity: 80%;
     min-height: 80px;
     background: linear-gradient(75deg, var(--light-red) 0%, var(--dark-red) 50%, var(--mid-blue) 80%, var(--dark-blue) 100%);
@@ -15,41 +16,53 @@ header {
     padding: 10px 20px;
     font-size: 15px;
 }
-.logo-img {
+.logo-img
+{
     max-height: 80px;
     display: block;
 }
 
-/*Responsive*/
 
-@media (min-width: 769px) and (max-width: 991px) {
-    .nav {
+/*---RESPONSIVE STYLE---*/
+
+/*MEDIUM*/
+@media (min-width: 769px) and (max-width: 991px)
+{
+    .nav
+    {
         gap: 15px; 
         flex-wrap: nowrap !important;
     }
 
-    .nav .btn {
+    .nav .btn
+    {
         padding: auto; 
         font-size: auto;   
     }
 }
 
-@media (max-width: 768px) {
-    header {
+/*SMALL*/
+@media (max-width: 768px)
+{
+    header
+    {
         height: auto ; 
         padding-bottom: 20px;
     }
-    .top {
+    .top
+    {
         flex-direction: column; 
         align-items: center;
         text-align: center;
     }
 
-    .logo-img {
+    .logo-img
+    {
         margin: 0 auto;
     }
 
-    .nav {
+    .nav
+    {
         justify-content: center;
         width: 100%;
         flex-wrap: wrap;

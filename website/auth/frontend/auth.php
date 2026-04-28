@@ -33,7 +33,7 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
     <!-- PRZYCISKI PRZEŁĄCZANIA -->
     <div class="switcher">
         <button id="loginBtn" type="button">Login</button>
-        <button id="signupBtn" type="button">Sign Up</button>
+        <button id="signupBtn" type="button">Signup</button>
     </div>
 
     <div class="slider" id="slider">
@@ -72,9 +72,9 @@ $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErr
             </form>
         </div>
 
-        <!-- SIGN UP -->
+        <!-- SIGNUP -->
         <div class="panel signup">
-            <h1><b>SIGN UP</b></h1>
+            <h1><b>SIGNUP</b></h1>
 
             <form action="<?=AUTH_B_URL?>signup.php" method="post">
 

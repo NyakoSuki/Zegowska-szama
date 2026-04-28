@@ -1,14 +1,7 @@
 @import url(main.css);
 @import url(header.css);
 @import url(button-animation.css);
-*
-{
-    color: var(--white);
-}
-input, button
-{
-    border: none;
-}
+
 .username input, .password input
 {
     background: linear-gradient(75deg, var(--black), var(--gray));

@@ -1,11 +1,8 @@
 /* Reset / global */
-* {
-    color: #eee;
-    font-family: Courier;
-}
+@import url(main.css);
+@import url(button-animation.css);
 
 body {
-    background: radial-gradient(#000, #777);
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -29,16 +26,16 @@ body {
 
 .login {
     background: linear-gradient(75deg, #204, #135, #146);
-    border: 2px solid #6A7E3F;
     border-radius: 10px;
     height: 450px;
+    margin: 10px;
 }
 
 .signup {
     background: linear-gradient(75deg, #146, #135, #204);
-    border: 2px solid rgba(223, 46, 33);
     border-radius: 10px;
     height: 450px;
+    margin: 10px;
 }
 
 
@@ -68,19 +65,6 @@ label {
     margin: 6px;
 }
 
-.error
-{
-    font-size: 120%;
-    color: red;
-    margin-top: 10px;
-}
-.success
-{
-    font-size: 140%;
-    color: green;
-    margin-top: 10px;
-}
-
 /* Inputs */
 input {
     width: 400px;
@@ -95,7 +79,6 @@ input {
 /* Buttons */
 button
 {
-    border: none;
     border-radius: 5px;
     padding: 5px;
     width: 120px;

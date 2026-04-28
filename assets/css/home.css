@@ -1,10 +1,7 @@
 @import url(main.css);
 @import url(header.css);
-@import url(button-animation.css);
-button, input
-{
-    border: none;
-}
+
+/*---PRODUCTS---*/
 .product
 {
     background: linear-gradient(0deg, var(--light-blue) 20%, var(--mid-blue) 60%, var(--dark-blue) 80%);
@@ -20,6 +17,7 @@ button, input
 
 
 
+/*---MENU---*/
 .menu
 {
     z-index: 999;

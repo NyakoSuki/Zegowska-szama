@@ -1,8 +1,0 @@
-button, a
-{
-    transition: transform 0.25s ease !important;
-}
-button:hover, a:hover
-{
-    transform: scale(0.9) !important;
-}

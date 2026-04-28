@@ -1,10 +1,41 @@
 @import url(variables.css);
+
+/*---MAIN---*/
 *
 {
     color: var(--white);
+    font-family: Courier;
 }
 html, body
 {
     min-height: 100vh;
     background: linear-gradient(0deg, var(--black) 0%, var(--light-black) 50%);
+}
+button, input
+{
+    border: none;
+}
+
+
+/*--BUTTON ANIMATIONS---*/
+button, a
+{
+    transition: transform 0.25s ease !important;
+}
+button:hover, a:hover
+{
+    transform: scale(0.9) !important;
+}
+
+
+/*---NOTIFICATIONS---*/
+.error
+{
+    font-size: 120%;
+    color: red;
+}
+.success
+{
+    font-size: 120%;
+    color: green;
 }

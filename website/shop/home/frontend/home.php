@@ -1,11 +1,8 @@
 <?php
+require_once dirname(__DIR__, 3) . "/config.php";
+require_once BLOCKER_PATH;
 
-    require_once dirname(__DIR__, 3) . "/config.php";
-    require_once BLOCKER_PATH;
-
-    include DB_PATH;
-
-
+include DB_PATH;
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -17,6 +14,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="<?=CSS_URL?>home.css">
 </head>
+
+
 <body>
     <header class="container-fluid sticky-top p-3">
         <div class="top row align-items-center">
@@ -37,9 +36,10 @@
 
         </div>
     </header>
+
+
     <main>
         <section class="products p-3">
-
             <div class="row g-4">
 
                 <?php
@@ -53,9 +53,7 @@
                 {
                     $disabled = $product["is_available"] == 0;
                 ?>
-
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
-
                         <div 
                             class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product"
                             data-name="<?= strtolower($product["name"]) ?>"
@@ -84,7 +82,6 @@
 
                                 <form method="POST" action="<?=CART_B_URL?>cart-add.php">
                                     <input type="hidden" name="id" value="<?= $product["id"] ?>">
-
                                     <button class="w-100 rounded" name="add" value="home" <?= $disabled ? 'disabled' : '' ?>>
                                         Dodaj do koszyka
                                     </button>
@@ -99,6 +96,7 @@
                 <?php } ?>
 
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu menuDisabled">
+
                     <input type="text" id="searchName" class="form-control mb-2" placeholder="Szukaj po nazwie...">
 
                     <input type="number" id="minPrice" class="form-control mb-2" placeholder="Cena min">
@@ -109,12 +107,15 @@
                     <label for="available">Pokaż tylko dostępne </label><br>
 
                     <button id="resetFilters" class="btn btn-sm btn-secondary w-100">Reset</button>
+
                 </div>
 
             </div>
 
         </section>
     </main>
+
+    
     <footer>
 
     </footer>
