@@ -3,13 +3,14 @@
 /*---MAIN---*/
 *
 {
-    color: var(--white) !important;
-    font-family: Courier !important;
+    color: var(--black);
+    font-family: Courier;
+    margin: 0;
+    padding: 0;
 }
 html, body
 {
-    min-height: 100vh !important;
-    background: linear-gradient(0deg, var(--black) 0%, var(--light-black) 50%) !important;
+    background: #f7f2e4;
 }
 button, input
 {
@@ -17,20 +18,24 @@ button, input
 }
 ::placeholder 
 {
-    color: #aaa !important;
+    color: var(--black);
 }
 
 /*--BUTTON ANIMATIONS---*/
 button, a
 {
-    transition: transform 0.15s ease !important;
+    transition: transform 0.35s ease !important;
+    box-shadow: 1px 1px 2px var(--dark-gray) !important;
 }
 button:hover, a:hover
 {
+    transition: transform 0.35s ease !important;
     transform: rotateZ(-2deg) !important;
+    color: var(--white);
 }
 button:active, a:active
 {
+    transition: transform 0.15s ease !important;
     transform: rotateZ(-2deg) scale(0.90) !important;
 }
 
@@ -38,11 +43,23 @@ button:active, a:active
 /*---NOTIFICATIONS---*/
 .error
 {
-    font-size: 120% !important;
     color: red !important;
 }
 .success
 {
-    font-size: 120% !important;
     color: green !important;
+}
+
+
+/*---PRODUCTS---*/
+.product
+{
+    background: linear-gradient(60deg, var(--white) 50%, var(--blue) 90%);
+    border-radius: 10px;
+    box-shadow: 7px 7px 10px var(--dark-gray);
+}
+.product img
+{
+    max-height: 250px;
+    border-radius: 8px 8px 0 0;
 }

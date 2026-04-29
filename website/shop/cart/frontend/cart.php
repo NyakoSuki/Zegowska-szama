@@ -124,20 +124,20 @@ $cart = $_SESSION["cart"] ?? [];
 
                         <div class="p-2 d-flex flex-column flex-grow-1">
 
-                            <h5 class="text-center">
+                            <h4 class="text-center">
                                 <?= $product["name"] ?>
-                            </h5>
+                            </h4>
 
                             <p class="small">
                                 <?= $product["description"] ?>
                             </p>
 
-                            <p class="text-center m-0 fw-bold">
+                            <p class="text-center m-0 fw-bold mt-auto">
                                 Suma: <?= $product["price"] * $qty ?> zł
                             </p>
 
                             <!-- PRZYCISKI -->
-                            <div class="d-flex gap-2 mt-2 justify-content-center">
+                            <div class="d-flex gap-2 m-0 justify-content-center">
 
                                 <!-- MINUS -->
                                 <form class="cartRemove w-25">
@@ -152,7 +152,7 @@ $cart = $_SESSION["cart"] ?? [];
                                 </form>
 
                                 <!-- ILOŚĆ -->
-                                <span class="align-self-center h4">
+                                <span class="align-self-center h5">
                                     <?= $qty ?>
                                 </span>
 

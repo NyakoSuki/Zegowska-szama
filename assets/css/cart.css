@@ -1,11 +1,2 @@
 @import url(main.css);
 @import url(header.css);
-
-.product
-{
-    background: linear-gradient(0deg, var(--light-blue) 20%, var(--mid-blue) 60%, var(--dark-blue) 80%);
-}
-.product img
-{
-    max-height: 300px;
-}

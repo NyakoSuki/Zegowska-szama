@@ -1,24 +1,12 @@
 @import url(main.css);
 @import url(header.css);
 
-/*---PRODUCTS---*/
-.product
-{
-    background: linear-gradient(0deg, var(--light-blue) 20%, var(--mid-blue) 60%, var(--dark-blue) 80%);
-}
-.product img
-{
-    max-height: 300px;
-}
-
-
 
 /*---MENU---*/
 .menu
 {
     z-index: 999;
     position: fixed;
-    top: 108px;
     right: 0;
     padding: 15px 10px 15px;
     transition: all 0.5s ease-out;
@@ -29,12 +17,4 @@
 {
     width: 0px;
     padding: 15px 0px 15px;
-}
-
-@media (max-width: 768px)
-{
-    .menu 
-    {
-        top: 134px;
-    }
 }

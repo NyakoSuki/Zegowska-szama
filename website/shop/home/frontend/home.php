@@ -21,33 +21,44 @@ include BASE_PATH . "config.js.php";
         <div class="top row align-items-center">
 
             <!-- LOGO -->
-            <div class="col-md-8 col-sm-7">
+            <div class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start">
+                <a 
+                    href="https://www.zs4.oswiata.tychy.pl/"
+                    class="d-inline-block shadow-none">
+                        <img 
+                            src="<?=IMG_URL?>logo.svg"
+                            class="img-fluid img-logo" alt="logo"
+                        >
+                </a>
+            </div>
+
+            <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
                 <a 
                     href="<?=HOME_F_URL?>home.php"
-                    class="d-inline-block">
+                    class="d-inline-block shadow-none">
                         <img 
-                            src="<?=IMG_URL?>logo.png"
-                            class="img-fluid logo-img" alt="logo"
+                            src="<?=IMG_URL?>zegowska-szama2.png"
+                            class="img-fluid img-logo" alt="zegowska-szama"
                         >
                 </a>
             </div>
 
             <!-- NAV -->
-            <div class="nav col-md-4 col-sm-5 col-7 text-end">
+            <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
                 <a
                     href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-outline-light btn-sm">
-                    Account
+                    class="btn btn-outline-dark">
+                    Konto
                     </a>
                 <a
                     href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-outline-light btn-sm">
-                    Cart
+                    class="btn btn-outline-dark">
+                    Koszyk
                 </a>
                 <button
                     type="button" 
-                    class="btn btn-outline-light btn-sm menuBtn">
-                    Menu
+                    class="btn btn-outline-dark menuBtn">
+                    Filtry
                 </button>
             </div>
 
@@ -72,40 +83,42 @@ include BASE_PATH . "config.js.php";
                 ?>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
                     <div 
-                        class="rounded-2 h-100 d-flex flex-column pb-0 p-3 <?= $disabled ? 'opacity-50' : '' ?> product"
+                        class="h-100 d-flex flex-column p-1 <?= $disabled ? 'opacity-50' : '' ?> product"
                         data-name="<?= strtolower($product["name"]) ?>"
                         data-price="<?= $product["price"] ?>"
                         data-available="<?= $product["is_available"]?>">
 
                             <img 
                                 src="<?= $product["img"] ?>" 
-                                class="rounded-1 card-img-top"
+                                class="card-img-top"
                                 alt="<?= $product["name"] ?>"
                             >
 
                             <div class="p-2 d-flex flex-column flex-grow-1">
 
-                                <h4 class="text-center m-0">
+                                <h2 class="fw-bold">
                                     <?= $product["name"] ?>
-                                </h4>
+                                </h2>
 
-                                <p class="">
+                                <small>
                                     <?= $product["description"] ?>
-                                </p>
+                                </small>
 
-                                <p class="fw-bold mt-auto mb-0">
+                                <p class="fw-bold mt-auto p-0 m-0">
                                     <?= $product["price"] ?> zł
                                 </p>
 
-                                <form class="cartAdd mb-2 m-0">
+                                <form class="cartAdd">
                                     <input 
                                         type="hidden"
                                         name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button class="btn btn-outline-success w-100 mt-2 fw-semibold shadow-sm cart-btn"
+                                    <button class="btn cart-btn btn-outline-success w-100 fw-semibold shadow-sm p-1 m-0"
                                         <?= $disabled ? 'disabled' : '' ?>>
-                                        Dodaj do koszyka
+                                        <span class="small">
+                                            🛒 Dodaj do koszyka
+                                        </span>
                                     </button>
                                 </form>
 
@@ -114,9 +127,9 @@ include BASE_PATH . "config.js.php";
                     </div>
                 <?php } ?>
 
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu menuDisabled">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-4 mt-2 menu menuDisabled">
 
-                    <div class="card bg-dark text-light border-secondary shadow-sm">
+                    <div class="card bg-light border-dark shadow-sm">
                         <div class="card-body">
 
                             <h6 class="mb-3">
@@ -126,21 +139,21 @@ include BASE_PATH . "config.js.php";
                             <input
                                 type="text"
                                 id="searchName"
-                                class="form-control bg-dark text-light border-secondary mb-2"
+                                class="form-control outline-dark border-secondary mb-2"
                                 placeholder="Szukaj po nazwie..."
                             >
 
                             <input
                                 type="number"
                                 id="minPrice"
-                                class="form-control bg-dark text-light border-secondary mb-2"
+                                class="form-control outline-dark border-secondary mb-2"
                                 placeholder="Cena min"
                             >
 
                             <input
                                 type="number"
                                 id="maxPrice"
-                                class="form-control bg-dark text-light border-secondary mb-3"
+                                class="form-control outline-dark border-secondary mb-3"
                                 placeholder="Cena max"
                             >
 
@@ -157,7 +170,7 @@ include BASE_PATH . "config.js.php";
 
                             <button
                                 id="resetFilters"
-                                class="btn btn-outline-light w-100">
+                                class="btn btn-outline-dark w-100">
                                 Reset
                             </button>
 
