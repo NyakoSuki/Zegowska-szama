@@ -36,38 +36,48 @@ $username = $row["username"];
 
 
 <body>
-    <header class="container-fluid sticky-top p-3">
+     <header class="container-fluid sticky-top p-3">
         <div class="top row align-items-center">
 
             <!-- LOGO -->
-            <div class="col-md-8 col-sm-7">
+            <div class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start">
+                <a 
+                    href="https://www.zs4.oswiata.tychy.pl/"
+                    class="d-inline-block shadow-none">
+                        <img 
+                            src="<?=IMG_URL?>logo.svg"
+                            class="img-fluid img-logo" alt="logo"
+                        >
+                </a>
+            </div>
+
+            <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
                 <a 
                     href="<?=HOME_F_URL?>home.php"
-                    class="d-inline-block">
+                    class="d-inline-block shadow-none">
                         <img 
-                            src="<?=IMG_URL?>logo.png" 
-                            class="img-fluid logo-img" 
-                            alt="logo"
+                            src="<?=IMG_URL?>zegowska-szama2.png"
+                            class="img-fluid img-logo" alt="zegowska-szama"
                         >
                 </a>
             </div>
 
             <!-- NAV -->
-            <div class="nav col-md-4 col-sm-5 col-7 text-end">
+            <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
                 <a
                     href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-outline-light btn-sm">
-                    Account
-                </a>
+                    class="btn btn-dark">
+                    Konto
+                    </a>
                 <a
                     href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-outline-light btn-sm">
-                    Cart
+                    class="btn btn-dark">
+                    Koszyk
                 </a>
                 <a
                     href="<?=HOME_F_URL?>home.php"
-                    class="btn btn-outline-light btn-sm">
-                    Home
+                    class="btn btn-dark">
+                    Sklep
                 </a>
             </div>
 
@@ -92,7 +102,7 @@ $username = $row["username"];
 
             <!-- USERNAME -->
             <div class="col-12 col-lg-5">
-                <div class="username card bg-dark text-light border-secondary">
+                <div class="username card bg-light border-dark">
 
                     <div class="card-body">
 
@@ -106,13 +116,9 @@ $username = $row["username"];
                             <input
                                 type="text"
                                 name="username"
-                                class="form-control bg-dark text-light border-secondary"
+                                class="form-control bg-light border-dark mb-1"
                                 placeholder="Nowa nazwa"
                             >
-
-                            <button class="btn btn-outline-light">
-                                Zmień nazwę
-                            </button>
 
                             <?php
                             if(isset($_SESSION["error"]))
@@ -127,9 +133,12 @@ $username = $row["username"];
                                         echo "<h6 class='text-success mt-2'>Pomyślnie zmieniono nazwę</h6>";
                                         break;
                                 }
-                                unset($_SESSION["error"]);
                             }
                             ?>
+
+                            <button class="btn btn-dark">
+                                Zmień nazwę
+                            </button>
 
                         </form>
 
@@ -141,7 +150,7 @@ $username = $row["username"];
 
             <!-- PASSWORD -->
             <div class="col-12 col-lg-5">
-                <div class="password card bg-dark text-light border-secondary">
+                <div class="password card bg-light border-dark">
                     <div class="card-body">
 
                         <h5 class="card-title mb-3">
@@ -153,28 +162,23 @@ $username = $row["username"];
                             <input
                                 type="password"
                                 name="current"
-                                class="form-control bg-dark text-light border-secondary"
+                                class="form-control bg-light border-dark"
                                 placeholder="Obecne hasło"
                             >
 
                             <input
                                 type="password" 
                                 name="new"
-                                class="form-control bg-dark text-light border-secondary"
+                                class="form-control bg-light border-dark"
                                 placeholder="Nowe hasło"
                             >
 
                             <input
                                 type="password"
                                 name="confirm"
-                                class="form-control bg-dark text-light border-secondary"
+                                class="form-control bg-light border-dark"
                                 placeholder="Powtórz nowe hasło"
                             >
-
-                            <button
-                                class="btn btn-outline-light">
-                                Zmień hasło
-                            </button>
                             
                             <?php
                             if(isset($_SESSION["error"]))
@@ -205,6 +209,11 @@ $username = $row["username"];
                             }
                             ?>
 
+                            <button
+                                class="btn btn-dark">
+                                Zmień hasło
+                            </button>
+
                         </form>
 
                     </div>
@@ -215,27 +224,27 @@ $username = $row["username"];
 
             <!-- ACTIONS -->
         <div class="col-12 col-lg-6 offset-lg-3 mt-5">
-            <div class="actions card bg-dark text-light border-secondary">
+            <div class="actions card bg-light border-dark">
                 <div class="card-body">
                     <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
 
                         <a
                             href="<?=ADMIN_F_URL?>admin.php"
-                            class="btn btn-outline-info w-100 w-sm-auto
+                            class="btn btn-info w-100 w-sm-auto
                             <?=$_SESSION['role'] == 'admin' ? '' : 'd-none'?>">
                             Admin panel
                         </a>
 
                         <form action="<?=ACCOUNT_F_URL?>orders.php" method="post" class="w-100 w-sm-auto">
                             <button
-                                class="btn btn-outline-light w-100">
+                                class="btn btn-dark w-100">
                                 Zamówienia
                             </button>
                         </form>
 
                         <form action="<?=ACCOUNT_B_URL?>logout.php" method="post" class="w-100 w-sm-auto">
                             <button 
-                                class="btn btn-outline-danger w-100">
+                                class="btn btn-danger w-100">
                                 Wyloguj się
                             </button>
                         </form>

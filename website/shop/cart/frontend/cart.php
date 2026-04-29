@@ -24,34 +24,44 @@ $cart = $_SESSION["cart"] ?? [];
         <div class="top row align-items-center">
 
             <!-- LOGO -->
-            <div class="col-md-8 col-sm-7">
+            <div class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start">
+                <a 
+                    href="https://www.zs4.oswiata.tychy.pl/"
+                    class="d-inline-block shadow-none">
+                        <img 
+                            src="<?=IMG_URL?>logo.svg"
+                            class="img-fluid img-logo" alt="logo"
+                        >
+                </a>
+            </div>
+
+            <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
                 <a 
                     href="<?=HOME_F_URL?>home.php"
-                    class="d-inline-block">
+                    class="d-inline-block shadow-none">
                         <img 
-                            src="<?=IMG_URL?>logo.png"
-                            class="img-fluid logo-img" 
-                            alt="logo"
+                            src="<?=IMG_URL?>zegowska-szama2.png"
+                            class="img-fluid img-logo" alt="zegowska-szama"
                         >
                 </a>
             </div>
 
             <!-- NAV -->
-            <div class="nav col-md-4 col-sm-5 col-7 text-end">
+            <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
                 <a
                     href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-outline-light btn-sm">
-                    Account
-                </a>
+                    class="btn btn-dark">
+                    Konto
+                    </a>
                 <a
                     href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-outline-light btn-sm">
-                    Cart
+                    class="btn btn-dark">
+                    Koszyk
                 </a>
                 <a
                     href="<?=HOME_F_URL?>home.php"
-                    class="btn btn-outline-light btn-sm">
-                    Home
+                    class="btn btn-dark">
+                    Sklep
                 </a>
             </div>
 
@@ -64,15 +74,16 @@ $cart = $_SESSION["cart"] ?? [];
 
             <div class="d-flex flex-column flex-sm-row gap-2 mb-3 col-12 col-lg-6 offset-lg-3">
 
+                okienko cena koncowa i zaplac i wtedy wyslij zamoweinie do bazy
+
                 <!-- ZAMÓWIENIE -->
                 <form 
                     action="<?=CART_B_URL?>order.php" 
                     method="post"
-                    onsubmit="return confirm('Na pewno chcesz złożyć zamówienie?');"
                     class="flex-fill col-lg-3 col-md-6 col-12 m-1">
 
                     <button type="submit"
-                        class="btn btn-outline-success w-100">
+                        class="btn btn-success w-100">
                         Zamów
                     </button>
                 </form>
@@ -85,7 +96,7 @@ $cart = $_SESSION["cart"] ?? [];
                     class="flex-fill col-lg-3 col-md-6 col-12 m-1">
 
                     <button type="submit"
-                        class="btn btn-outline-danger w-100">
+                        class="btn btn-danger w-100">
                         Wyczyść koszyk
                     </button>
                 </form>
@@ -138,6 +149,16 @@ $cart = $_SESSION["cart"] ?? [];
 
                             <!-- PRZYCISKI -->
                             <div class="d-flex gap-2 m-0 justify-content-center">
+                                 <form class="cartTrash w-25">
+                                    <input
+                                        type="hidden"
+                                        name="id"
+                                        value="<?= $product["id"] ?>"
+                                    >
+                                    <button class="btn btn-outline-danger btn-sm w-75">
+                                        🗑️
+                                    </button>
+                                </form>
 
                                 <!-- MINUS -->
                                 <form class="cartRemove w-25">
@@ -146,7 +167,7 @@ $cart = $_SESSION["cart"] ?? [];
                                         name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button class="btn btn-outline-danger btn-sm w-100">
+                                    <button class="btn btn-danger btn-sm w-100">
                                         -
                                     </button>
                                 </form>
@@ -163,7 +184,7 @@ $cart = $_SESSION["cart"] ?? [];
                                         name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button class="btn btn-outline-success btn-sm w-100">
+                                    <button class="btn btn-success btn-sm w-100">
                                         +
                                     </button>
                                 </form>

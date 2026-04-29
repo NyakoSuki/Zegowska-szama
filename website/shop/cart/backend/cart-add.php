@@ -20,8 +20,3 @@ if (isset($_POST["id"]) && $id)
 {
     $_SESSION["cart"][$id] = ($_SESSION["cart"][$id] ?? 0) + 1;
 }
-
-echo json_encode([
-    "status" => "ok",
-    "cart" => $_SESSION["cart"]
-]);

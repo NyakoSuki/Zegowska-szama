@@ -10,7 +10,7 @@
 }
 html, body
 {
-    background: #f7f2e4;
+    background: #f8f5ec;
 }
 button, input
 {
@@ -37,17 +37,6 @@ button:active, a:active
 {
     transition: transform 0.15s ease !important;
     transform: rotateZ(-2deg) scale(0.90) !important;
-}
-
-
-/*---NOTIFICATIONS---*/
-.error
-{
-    color: red !important;
-}
-.success
-{
-    color: green !important;
 }
 
 

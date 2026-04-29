@@ -14,7 +14,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
     <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
 </head>
 
-<body>
+<body class="d-flex align-items-center justify-content-center vh-100">
     <main class="container-fluid">
 
     <?php
@@ -29,12 +29,14 @@ require_once dirname(__DIR__, 2) . "/config.php";
             <div class="switcher">
                 <button
                     id="loginBtn"
-                    type="button">
+                    type="button"
+                    class="btn btn-info">
                     Login
                 </button>
                 <button
                     id="signupBtn"
-                    type="button">
+                    type="button"
+                    class="btn btn-info">
                     Signup
                 </button>
             </div>
@@ -42,24 +44,26 @@ require_once dirname(__DIR__, 2) . "/config.php";
             <div class="slider" id="slider">
 
                 <!-- LOGIN -->
-                <div class="panel login">
-                    <h1><b>LOGIN</b></h1>
+                <div class="panel login card bg-light border-dark p-5 m-2">
+                    <h1 class="m-0 mb-5 p-0"><b>REJESTRACJA</b></h1>
 
                     <form action="<?=AUTH_B_URL?>login.php" method="post">
 
-                        <label>Email:<br>
+                        <label class="m-0">Email:<br></label>
                             <input
                                 name="email"
                                 type="email"
+                                class="form-control bg-light border-dark mb-2"
+                                placeholder="Email"
                             >
-                        </label>
 
-                        <label>Password:<br>
+                        <label class="m-0">Hasło:</label>
                             <input
                                 name="password"
                                 type="password"
+                                class="form-control bg-light border-dark mb-2"
+                                placeholder="Hasło"
                             >
-                        </label>
 
                         <!-- ERROR LOGIN -->
                         <?php
@@ -68,11 +72,11 @@ require_once dirname(__DIR__, 2) . "/config.php";
                             switch ($_SESSION["error"]) 
                             {
                                 case "uncorrect":
-                                    echo "<h4 class='error'>Niepoprawne dane</h4>";
+                                    echo "<h4 class='text-danger mt-2'>Niepoprawne dane</h4>";
                                     break;
 
                                 case "locked":
-                                    echo "<h4 class='error'>Zbyt wiele nieudanych prób. Sprubuj ponownie za 5 minut</h4>";
+                                    echo "<h4 class='text-danger mt-2'>Zbyt wiele nieudanych prób. Sprubuj ponownie za 5 minut</h4>";
                                     break;
                             }
                         }
@@ -80,12 +84,14 @@ require_once dirname(__DIR__, 2) . "/config.php";
 
                         <div class="buttons">
                             <button
-                                type="submit">
+                                type="submit"
+                                class="btn btn-success">
                                 Login
                             </button>
 
                             <button
-                                type="reset">
+                                type="reset"
+                                class="btn btn-danger">
                                 Reset
                             </button>
                         </div>
@@ -94,31 +100,34 @@ require_once dirname(__DIR__, 2) . "/config.php";
                 </div>
 
                 <!-- SIGNUP -->
-                <div class="panel signup">
-                    <h1><b>SIGNUP</b></h1>
+                <div class="panel signup card bg-light border-dark p-5 m-2">
+                    <h1 class="m-0 mb-2 p-0"><b>SIGNUP</b></h1>
 
                     <form action="<?=AUTH_B_URL?>signup.php" method="post">
 
-                        <label>Username:<br>
+                        <label class="m-0">Nazwa:<br></label>
                             <input
                                 name="username"
                                 type="text"
+                                class="form-control bg-light border-dark mb-2"
+                                placeholder="Nazwa"
                             >
-                        </label>
 
-                        <label>Email:<br>
+                        <label class="m-0">Email:<br></label>
                             <input
                                 name="email"
                                 type="email"
+                                class="form-control bg-light border-dark mb-2"
+                                placeholder="Email"
                             >
-                        </label>
 
-                        <label>Password:<br>
+                        <label class="m-0">Hasło:</label><br>
                             <input
                                 name="password"
                                 type="password"
+                                class="form-control bg-light border-dark mb-2"
+                                placeholder="Hasło"
                             >
-                        </label>
 
                         <!-- ERROR SIGNUP -->
                         <?php
@@ -127,15 +136,15 @@ require_once dirname(__DIR__, 2) . "/config.php";
                             switch ($_SESSION["error"]) 
                             {
                                 case "exists":
-                                    echo "<h4 class='error'>Użytkownik już istnieje</h4>";
+                                    echo "<h4 class='text-danger mt-2'>Użytkownik już istnieje</h4>";
                                     break;
                                     
                                 case "short":
-                                    echo "<h4 class='error'>Hasło jest zbyt krótkie</h4>";
+                                    echo "<h4 class='text-danger mt-2'>Hasło jest zbyt krótkie</h4>";
                                     break;
 
                                 case "none":
-                                    echo "<h4 class='success'>Pomyślnie zarejestrowano</h4>";
+                                    echo "<h4 class='text-success mt-2'>Pomyślnie zarejestrowano</h4>";
                                     break;
                             }
                             unset($_SESSION["error"]);
@@ -144,12 +153,14 @@ require_once dirname(__DIR__, 2) . "/config.php";
 
                         <div class="buttons">
                             <button
-                                type="submit">
+                                type="submit"
+                                class="btn btn-success">
                                 Sign up
                             </button>
 
                             <button
-                                type="reset">
+                                type="reset"
+                                class="btn btn-danger">
                                 Reset
                             </button>
                         </div>
@@ -162,7 +173,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
     </main>
 
 
-<script src="<?=JS_URL?>auth-animation.js"></script>
+<script src="<?=JS_URL?>auth.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>

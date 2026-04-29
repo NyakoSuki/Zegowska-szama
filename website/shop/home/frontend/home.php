@@ -47,17 +47,17 @@ include BASE_PATH . "config.js.php";
             <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
                 <a
                     href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-outline-dark">
+                    class="btn btn-dark">
                     Konto
                     </a>
                 <a
                     href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-outline-dark">
+                    class="btn btn-dark">
                     Koszyk
                 </a>
                 <button
                     type="button" 
-                    class="btn btn-outline-dark menuBtn">
+                    class="btn btn-dark menuBtn">
                     Filtry
                 </button>
             </div>
@@ -114,7 +114,7 @@ include BASE_PATH . "config.js.php";
                                         name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button class="btn cart-btn btn-outline-success w-100 fw-semibold shadow-sm p-1 m-0"
+                                    <button class="btn cart-btn btn-success w-100 fw-semibold shadow-sm p-1 m-0"
                                         <?= $disabled ? 'disabled' : '' ?>>
                                         <span class="small">
                                             🛒 Dodaj do koszyka
@@ -170,7 +170,7 @@ include BASE_PATH . "config.js.php";
 
                             <button
                                 id="resetFilters"
-                                class="btn btn-outline-dark w-100">
+                                class="btn btn-dark w-100">
                                 Reset
                             </button>
 

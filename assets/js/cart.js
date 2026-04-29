@@ -2,6 +2,7 @@
 
 const cartAdd = document.querySelectorAll(".cartAdd");
 const cartRemove = document.querySelectorAll(".cartRemove");
+const cartTrash = document.querySelectorAll(".cartTrash");
 
 cartAdd.forEach(add =>
 {
@@ -37,6 +38,25 @@ cartRemove.forEach(remove =>
         let formData = new FormData(this);
 
         fetch(window.CONFIG.CART_B_URL + "cart-remove.php",
+        {
+            method: "POST",
+            body: formData
+        })
+        .then(() => location.reload())
+        .catch(error=>console.log(error));
+    });
+});
+
+
+cartTrash.forEach(trash =>
+{
+    trash.addEventListener("submit", function(e)
+    {
+        e.preventDefault();
+
+        let formData = new FormData(this);
+
+        fetch(window.CONFIG.CART_B_URL + "cart-trash.php",
         {
             method: "POST",
             body: formData
