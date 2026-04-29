@@ -23,11 +23,15 @@ button, input
 /*--BUTTON ANIMATIONS---*/
 button, a
 {
-    transition: transform 0.25s ease !important;
+    transition: transform 0.15s ease !important;
 }
 button:hover, a:hover
 {
-    transform: scale(0.9) !important;
+    transform: rotateZ(-2deg) !important;
+}
+button:active, a:active
+{
+    transform: rotateZ(-2deg) scale(0.90) !important;
 }
 
 

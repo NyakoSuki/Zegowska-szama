@@ -9,7 +9,7 @@ $id = (int)($_POST["id"] ?? 0);
 
 
 // DECREASE PRODUCT QUANTITY IN CART
-if (isset($_SESSION["cart"][$id]))
+if ($id && isset($_SESSION["cart"][$id]))
 {
     $_SESSION["cart"][$id]--;
 
@@ -22,5 +22,3 @@ if (isset($_SESSION["cart"][$id]))
 
 
 // REDIRECT TO CART
-header("Location: " . CART_F_URL . "cart.php");
-exit;

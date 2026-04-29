@@ -55,5 +55,6 @@ resetBtn.addEventListener("click", () =>
     searchName.value = "";
     minPrice.value = "";
     maxPrice.value = "";
+    available.checked = false;
     filterProducts();
 });

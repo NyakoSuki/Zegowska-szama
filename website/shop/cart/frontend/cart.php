@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 3) . "/config.php";
 require_once BLOCKER_PATH;
 include DB_PATH;
+include BASE_PATH . "config.js.php";
 
 
 // CREATING CART
@@ -68,7 +69,7 @@ $cart = $_SESSION["cart"] ?? [];
                     action="<?=CART_B_URL?>order.php" 
                     method="post"
                     onsubmit="return confirm('Na pewno chcesz złożyć zamówienie?');"
-                    class="flex-fill col-3 m-1">
+                    class="flex-fill col-lg-3 col-md-6 col-12 m-1">
 
                     <button type="submit"
                         class="btn btn-outline-success w-100">
@@ -81,7 +82,7 @@ $cart = $_SESSION["cart"] ?? [];
                     action="<?=CART_B_URL?>cart-clear.php" 
                     method="post"
                     onsubmit="return confirm('Na pewno chcesz wyczyścić koszyk?');"
-                    class="flex-fill col-3 m-1">
+                    class="flex-fill col-lg-3 col-md-6 col-12 m-1">
 
                     <button type="submit"
                         class="btn btn-outline-danger w-100">
@@ -139,13 +140,13 @@ $cart = $_SESSION["cart"] ?? [];
                             <div class="d-flex gap-2 mt-2 justify-content-center">
 
                                 <!-- MINUS -->
-                                <form method="POST" action="<?=CART_B_URL?>cart-remove.php">
-                                    <input 
-                                        type="hidden" 
-                                        name="id" 
+                                <form class="cartRemove w-25">
+                                    <input
+                                        type="hidden"
+                                        name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button class="btn btn-outline-danger btn-sm">
+                                    <button class="btn btn-outline-danger btn-sm w-100">
                                         -
                                     </button>
                                 </form>
@@ -156,16 +157,13 @@ $cart = $_SESSION["cart"] ?? [];
                                 </span>
 
                                 <!-- PLUS -->
-                                <form method="POST" action="<?=CART_B_URL?>cart-add.php">
+                                <form class="cartAdd w-25">
                                     <input 
-                                        type="hidden" 
-                                        name="id" 
+                                        type="hidden"
+                                        name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button 
-                                        class="btn btn-outline-success btn-sm"
-                                        name="add"
-                                        value="cart">
+                                    <button class="btn btn-outline-success btn-sm w-100">
                                         +
                                     </button>
                                 </form>
@@ -184,6 +182,6 @@ $cart = $_SESSION["cart"] ?? [];
     </main>
 
 
-    <script src="<?=JS_URL?>navi.js"></script>
+    <script src="<?=JS_URL?>cart.js"></script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 require_once dirname(__DIR__, 3) . "/config.php";
 require_once BLOCKER_PATH;
 include DB_PATH;
+include BASE_PATH . "config.js.php";
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -71,42 +72,40 @@ include DB_PATH;
                 ?>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
                     <div 
-                        class="rounded-2 h-100 d-flex flex-column <?= $disabled ? 'opacity-50' : '' ?> product"
+                        class="rounded-2 h-100 d-flex flex-column pb-0 p-3 <?= $disabled ? 'opacity-50' : '' ?> product"
                         data-name="<?= strtolower($product["name"]) ?>"
                         data-price="<?= $product["price"] ?>"
                         data-available="<?= $product["is_available"]?>">
 
                             <img 
                                 src="<?= $product["img"] ?>" 
-                                class="rounded-top-1 card-img-top"
+                                class="rounded-1 card-img-top"
                                 alt="<?= $product["name"] ?>"
                             >
 
                             <div class="p-2 d-flex flex-column flex-grow-1">
 
-                                <h5 class="text-center">
+                                <h4 class="text-center m-0">
                                     <?= $product["name"] ?>
-                                </h5>
+                                </h4>
 
-                                <p class="small">
+                                <p class="">
                                     <?= $product["description"] ?>
                                 </p>
 
-                                <p class="fw-bold mt-auto">
+                                <p class="fw-bold mt-auto mb-0">
                                     <?= $product["price"] ?> zł
                                 </p>
 
-                                <form method="POST" action="<?=CART_B_URL?>cart-add.php">
+                                <form class="cartAdd mb-2 m-0">
                                     <input 
                                         type="hidden"
                                         name="id"
                                         value="<?= $product["id"] ?>"
                                     >
                                     <button class="btn btn-outline-success w-100 mt-2 fw-semibold shadow-sm cart-btn"
-                                        name="add"
-                                        value="home"
                                         <?= $disabled ? 'disabled' : '' ?>>
-                                        🛒 Dodaj do koszyka
+                                        Dodaj do koszyka
                                     </button>
                                 </form>
 
@@ -175,8 +174,8 @@ include DB_PATH;
 
     </footer>
 
-
     
     <script src="<?=JS_URL?>menu.js"></script>
+    <script src="<?=JS_URL?>cart.js"></script>
 </body>
 </html>

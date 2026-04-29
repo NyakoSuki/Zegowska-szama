@@ -17,7 +17,7 @@ define("BASE_PATH",  __DIR__ . "/");
 
 
 
-    
+
 /* ================= URLS ================= */
 
 
@@ -67,6 +67,3 @@ define("BASE_URL", "/Zegowska-szama/");
     define("JS_URL", ASSETS_URL . "js/");
     define("CSS_URL", ASSETS_URL . "css/");
     define("IMG_URL", ASSETS_URL . "img/");
-
-    
-?>
