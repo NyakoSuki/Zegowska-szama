@@ -1,11 +1,15 @@
 "use strict";
 
-const menuBtn = document.querySelector(".menuBtn");
-const menu = document.querySelector(".menu");
-
-menuBtn.addEventListener('click', () => 
+document.addEventListener("DOMContentLoaded", () => 
 {
-    menu.classList.toggle("menuDisabled");
+    const menuBtn = document.querySelector(".menuBtn");
+    const menu = document.querySelector(".menu");
+
+    if (!menuBtn || !menu) return;
+
+    menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("menuDisabled");
+    });
 });
 
 

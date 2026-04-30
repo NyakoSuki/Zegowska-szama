@@ -9,6 +9,9 @@ define("BASE_PATH", __DIR__ . "/");
 
 
     /* ================= SITE BLOCKER ================= */
+    define("JS_PATH", BASE_PATH . "config.js.php");
+
+    /* ================= SITE BLOCKER ================= */
     define("BLOCKER_PATH", BASE_PATH . "auth/backend/siteblocker.php");
 
     /* ================= DATA BASE ================= */

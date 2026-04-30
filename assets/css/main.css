@@ -27,6 +27,7 @@ header
     background: linear-gradient(60deg, var(--black) 0%, var(--white) 20%, var(--white) 80%, var(--black) 100%);
     box-shadow: 0 0 10px var(--dark-gray);
     min-height: 120px;
+    opacity: 80%;
 }
 .img-logo
 {
@@ -68,18 +69,16 @@ button:active, a:active
 
 
 /*---MENU---*/
-.menu
-{
-    z-index: 999;
+.menu {
     position: fixed;
     right: 0;
-    padding: 15px 10px 15px;
-    transition: all 0.5s ease-out;
+    top: 165px;
+    padding: 0 5px 0;
     white-space: nowrap;
+    transition: transform 0.4s ease;
+    z-index: 999;
 }
 
-.menuDisabled
-{
-    width: 0px;
-    padding: 15px 0px 15px;
+.menuDisabled {
+    transform: translateX(100%);
 }

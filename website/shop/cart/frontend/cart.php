@@ -4,10 +4,6 @@ require_once BLOCKER_PATH;
 include DB_PATH;
 include BASE_PATH . "config.js.php";
 
-$_SESSION["site"] = "cart";
-include HEADER_PATH;
-
-// CREATING CART
 $cart = $_SESSION["cart"] ?? [];
 ?>
 <!DOCTYPE html>
@@ -19,6 +15,11 @@ $cart = $_SESSION["cart"] ?? [];
 </head>
 
 <body>
+    <?php
+    //---HEADER---
+    $_SESSION["site"] = "cart";
+    include HEADER_PATH;
+    ?>
     <main>
         <section class="d-flex flex-column flex-sm-row gap-2 mb-3 col-12 col-lg-6 offset-lg-3 p-3">
 
@@ -39,21 +40,34 @@ $cart = $_SESSION["cart"] ?? [];
                 <?php
                 $products = $connection->query
                 ("
-                    SELECT
-                        products.id, 
-                        products.name, 
-                        products.description, 
-                        products.price, 
-                        products.stock, 
-                        products.is_available, 
-                        products.img, 
-                        discounts.procent, 
-                        discounts.start_date, 
-                        discounts.end_date
-                    FROM products
-                    LEFT JOIN discounts
-                    ON products.id = discounts.product_id
-                    order by products.id
+                SELECT
+                p.id,
+                p.name,
+                p.description,
+                p.price,
+                p.stock,
+                p.is_available,
+                p.img,
+                d.procent,
+                d.start_date,
+                d.end_date
+                FROM products p
+                LEFT JOIN (
+                    SELECT *
+                    FROM (
+                        SELECT *,
+                            ROW_NUMBER() OVER (
+                                PARTITION BY product_id
+                                ORDER BY procent DESC
+                            ) AS rn
+                        FROM discounts
+                        WHERE start_date <= NOW()
+                        AND end_date >= NOW()
+                    ) x
+                    WHERE x.rn = 1
+                ) d
+                ON p.id = d.product_id
+                ORDER BY p.id;
                 ");
 
                 $totalPrice = 0;
@@ -97,11 +111,23 @@ $cart = $_SESSION["cart"] ?? [];
                                     <?= $product["description"] ?>
                                 </small>
 
-                                <p
+                                <div class="d-flex justify-content-end mt-auto p-0 m-0 gap-2">
+                                    <?php
+                                    if(!$noDiscount)
+                                    {
+                                    ?>
+                                    <small
+                                        class="fw-bold p-0 m-0 mt-auto text-decoration-line-through">
+                                        <?= $product["price"] * $qty ?> zł
+                                    </small>
+                                    <?php } ?>
+                                    <p
                                     class="text-end m-0 fw-bold mt-auto
                                     <?= $noDiscount ? '' : 'h4 text-warning' ?>">
                                     <?= $price * $qty ?> zł
                                 </p>
+                                </div>
+                                
 
                             <!-- PRZYCISKI -->
                             <div class="d-flex gap-2 m-0 justify-content-center">
