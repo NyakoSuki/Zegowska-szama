@@ -1,6 +1,6 @@
 header
 {
-    background: linear-gradient(60deg, var(--blue) 0%, var(--white) 20%, var(--white) 80%, var(--blue) 100%);
+    background: linear-gradient(60deg, var(--black) 0%, var(--white) 20%, var(--white) 80%, var(--black) 100%);
     box-shadow: 0 0 10px var(--dark-gray);
     min-height: 120px;
 }

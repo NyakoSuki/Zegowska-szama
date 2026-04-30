@@ -3,8 +3,7 @@
 /*---MAIN---*/
 *
 {
-    color: var(--black);
-    font-family: Courier;
+    color: var(--dark-gray);
     margin: 0;
     padding: 0;
 }
@@ -43,9 +42,8 @@ button:active, a:active
 /*---PRODUCTS---*/
 .product
 {
-    background: linear-gradient(60deg, var(--white) 50%, var(--blue) 90%);
+    background: var(--white);
     border-radius: 10px;
-    box-shadow: 7px 7px 10px var(--dark-gray);
 }
 .product img
 {

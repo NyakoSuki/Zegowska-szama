@@ -136,7 +136,7 @@ $username = $row["username"];
                             }
                             ?>
 
-                            <button class="btn btn-dark">
+                            <button class="btn btn-dark col-8 offset-2">
                                 Zmień nazwę
                             </button>
 
@@ -210,7 +210,7 @@ $username = $row["username"];
                             ?>
 
                             <button
-                                class="btn btn-dark">
+                                class="btn btn-dark col-8 offset-2">
                                 Zmień hasło
                             </button>
 

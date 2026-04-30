@@ -73,24 +73,40 @@ include BASE_PATH . "config.js.php";
                 <?php
                 $products = $connection->query
                 ("
-                    SELECT id, name, description, price, stock, is_available, img 
+                    SELECT
+                        products.id, 
+                        products.name, 
+                        products.description, 
+                        products.price, 
+                        products.stock, 
+                        products.is_available, 
+                        products.img, 
+                        discounts.procent, 
+                        discounts.start_date, 
+                        discounts.end_date
                     FROM products
+                    LEFT JOIN discounts
+                    ON products.id = discounts.product_id
+                    order by products.id
                 ");
 
-                while ($product = $products->fetch_assoc()) 
+                while ($product = $products->fetch_assoc())
                 {
                     $disabled = $product["is_available"] == 0;
+                    $noDiscount = $product["procent"] === null;
+                    $price = floor($product["price"] * (1 - ($product["procent"] ?? 0) / 100) * 100) / 100;
                 ?>
                 <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
                     <div 
-                        class="h-100 d-flex flex-column p-1 <?= $disabled ? 'opacity-50' : '' ?> product"
+                        class="h-100 d-flex flex-column border p-1 <?= $disabled ? 'opacity-50' : '' ?> <?= $noDiscount ? 'border-dark' : 'border-3 border-warning' ?> product"
                         data-name="<?= strtolower($product["name"]) ?>"
-                        data-price="<?= $product["price"] ?>"
-                        data-available="<?= $product["is_available"]?>">
+                        data-price="<?= $price ?>"
+                        data-available="<?= $product["is_available"]?>"
+                        data-discount="<?= $product["procent"]?>">
 
                             <img 
                                 src="<?= $product["img"] ?>" 
-                                class="card-img-top"
+                                class="card-img-top h2 text-center p-0 m-0"
                                 alt="<?= $product["name"] ?>"
                             >
 
@@ -104,8 +120,9 @@ include BASE_PATH . "config.js.php";
                                     <?= $product["description"] ?>
                                 </small>
 
-                                <p class="fw-bold mt-auto p-0 m-0">
-                                    <?= $product["price"] ?> zł
+                                <p class="fw-bold mt-auto p-0 m-0
+                                    <?= $noDiscount ? '' : 'h3 text-warning' ?>">
+                                    <?= $price ?> zł
                                 </p>
 
                                 <form class="cartAdd">
@@ -114,7 +131,8 @@ include BASE_PATH . "config.js.php";
                                         name="id"
                                         value="<?= $product["id"] ?>"
                                     >
-                                    <button class="btn cart-btn btn-success w-100 fw-semibold shadow-sm p-1 m-0"
+                                    <button class="btn cart-bt w-100 fw-semibold shadow-sm p-1 m-0
+                                        <?= $noDiscount ? 'btn-warning' : 'btn-light border border-dark' ?>"
                                         <?= $disabled ? 'disabled' : '' ?>>
                                         <span class="small">
                                             🛒 Dodaj do koszyka
@@ -157,27 +175,31 @@ include BASE_PATH . "config.js.php";
                                 placeholder="Cena max"
                             >
 
-                            <div class="form-check mb-3">
-                                <input
-                                    type="checkbox"
+                            <div class="mb-3">
+                                <button
                                     id="available"
-                                    class="form-check-input"
-                                >
-                                <label class="form-check-label" for="available">
+                                    class="btn btn-secondary opacity-50 w-50">
                                     Pokaż tylko dostępne
-                                </label>
+                                </button>
+                    
+                                <button
+                                    id="discount"
+                                    class="btn btn-secondary opacity-50 w-50">
+                                    Pokaż tylko promocje
+                                </button>
                             </div>
 
                             <button
-                                id="resetFilters"
-                                class="btn btn-dark w-100">
-                                Reset
-                            </button>
+                                    id="resetFilters"
+                                    class="btn btn-dark col-8 offset-2">
+                                    Reset
+                                </button>
 
                         </div>
                     </div>
 
                 </div>
+
             </div>
         </section>
     </main>
