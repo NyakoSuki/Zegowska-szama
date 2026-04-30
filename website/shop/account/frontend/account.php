@@ -123,15 +123,24 @@ $username = $row["username"];
                         <button type="button" class="btn btn-danger w-100 mb-3 m-1" data-bs-toggle="modal" data-bs-target="#logoutModal">
                             Wyloguj się
                         </button>
+
+                    </div>
+
                 </div>
             </div>
         </div>
-
-        </div>
+        <button
+            id="themeButton"
+            type="button"
+            class="btn btn-dark m-1"
+        >
+            Motyw: ciemny
+        </button>
     </main>
 
     
     <?php include "popups.php";?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=JS_URL?>theme.js"></script>
 </body>
 </html>
