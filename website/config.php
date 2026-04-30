@@ -5,7 +5,7 @@
 
 
 /* ================= BASE ================= */
-define("BASE_PATH",  __DIR__ . "/");
+define("BASE_PATH", __DIR__ . "/");
 
 
     /* ================= SITE BLOCKER ================= */
@@ -13,6 +13,9 @@ define("BASE_PATH",  __DIR__ . "/");
 
     /* ================= DATA BASE ================= */
     define("DB_PATH", BASE_PATH . "database/database.php");
+
+    /* ================= DATA BASE ================= */
+    define("HEADER_PATH", BASE_PATH . "php/header.php");
 
 
 

@@ -3,6 +3,9 @@ require_once dirname(__DIR__, 3) . "/config.php";
 require_once BLOCKER_PATH;
 include DB_PATH;
 include BASE_PATH . "config.js.php";
+
+$_SESSION["site"] = "home";
+include HEADER_PATH;
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -11,59 +14,11 @@ include BASE_PATH . "config.js.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zegowska Szama</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?=CSS_URL?>home.css">
 </head>
 
 
 <body>
-    <header class="container-fluid sticky-top p-3">
-        <div class="top row align-items-center">
-
-            <!-- LOGO -->
-            <div class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start">
-                <a 
-                    href="https://www.zs4.oswiata.tychy.pl/"
-                    class="d-inline-block shadow-none">
-                        <img 
-                            src="<?=IMG_URL?>logo.svg"
-                            class="img-fluid img-logo" alt="logo"
-                        >
-                </a>
-            </div>
-
-            <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
-                <a 
-                    href="<?=HOME_F_URL?>home.php"
-                    class="d-inline-block shadow-none">
-                        <img 
-                            src="<?=IMG_URL?>zegowska-szama2.png"
-                            class="img-fluid img-logo" alt="zegowska-szama"
-                        >
-                </a>
-            </div>
-
-            <!-- NAV -->
-            <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
-                <a
-                    href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-dark">
-                    Konto
-                    </a>
-                <a
-                    href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-dark">
-                    Koszyk
-                </a>
-                <button
-                    type="button" 
-                    class="btn btn-dark menuBtn">
-                    Filtry
-                </button>
-            </div>
-
-        </div>
-    </header>
+   
 
 
     <main>
@@ -121,7 +76,7 @@ include BASE_PATH . "config.js.php";
                                 </small>
 
                                 <p class="fw-bold mt-auto p-0 m-0
-                                    <?= $noDiscount ? '' : 'h3 text-warning' ?>">
+                                    <?= $noDiscount ? '' : 'h4 text-warning' ?>">
                                     <?= $price ?> zł
                                 </p>
 

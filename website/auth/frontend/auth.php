@@ -10,7 +10,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logowanie/Rejestracja - Zegowska szama</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
 </head>
 
@@ -31,13 +31,13 @@ require_once dirname(__DIR__, 2) . "/config.php";
                     id="loginBtn"
                     type="button"
                     class="btn btn-info">
-                    Login
+                    Logowanie
                 </button>
                 <button
                     id="signupBtn"
                     type="button"
                     class="btn btn-info">
-                    Signup
+                    Rejestracja
                 </button>
             </div>
 
@@ -45,7 +45,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
 
                 <!-- LOGIN -->
                 <div class="panel login card bg-light border-dark p-5 m-2">
-                    <h1 class="m-0 mb-5 p-0"><b>REJESTRACJA</b></h1>
+                    <h1 class="m-0 mb-5 p-0"><b>Logowanie</b></h1>
 
                     <form action="<?=AUTH_B_URL?>login.php" method="post">
 
@@ -86,13 +86,13 @@ require_once dirname(__DIR__, 2) . "/config.php";
                             <button
                                 type="submit"
                                 class="btn btn-success">
-                                Login
+                                Zaloguj
                             </button>
 
                             <button
                                 type="reset"
                                 class="btn btn-danger">
-                                Reset
+                                Wyczyść
                             </button>
                         </div>
 
@@ -101,7 +101,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
 
                 <!-- SIGNUP -->
                 <div class="panel signup card bg-light border-dark p-5 m-2">
-                    <h1 class="m-0 mb-2 p-0"><b>SIGNUP</b></h1>
+                    <h1 class="m-0 mb-2 p-0"><b>Rejestracja</b></h1>
 
                     <form action="<?=AUTH_B_URL?>signup.php" method="post">
 
@@ -155,13 +155,13 @@ require_once dirname(__DIR__, 2) . "/config.php";
                             <button
                                 type="submit"
                                 class="btn btn-success">
-                                Sign up
+                                Zarejestruj
                             </button>
 
                             <button
                                 type="reset"
                                 class="btn btn-danger">
-                                Reset
+                                Wyczyść
                             </button>
                         </div>
 

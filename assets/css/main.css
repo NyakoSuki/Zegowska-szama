@@ -20,6 +20,21 @@ button, input
     color: var(--black);
 }
 
+
+/*---HEADER---*/
+header
+{
+    background: linear-gradient(60deg, var(--black) 0%, var(--white) 20%, var(--white) 80%, var(--black) 100%);
+    box-shadow: 0 0 10px var(--dark-gray);
+    min-height: 120px;
+}
+.img-logo
+{
+    max-height: 120px;
+    box-shadow: none !important;
+}
+
+
 /*--BUTTON ANIMATIONS---*/
 button, a
 {
@@ -49,4 +64,22 @@ button:active, a:active
 {
     max-height: 250px;
     border-radius: 8px 8px 0 0;
+}
+
+
+/*---MENU---*/
+.menu
+{
+    z-index: 999;
+    position: fixed;
+    right: 0;
+    padding: 15px 10px 15px;
+    transition: all 0.5s ease-out;
+    white-space: nowrap;
+}
+
+.menuDisabled
+{
+    width: 0px;
+    padding: 15px 0px 15px;
 }

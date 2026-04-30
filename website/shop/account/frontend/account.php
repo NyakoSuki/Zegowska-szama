@@ -3,6 +3,8 @@ require_once dirname(__DIR__, 3) . "/config.php";
 require_once BLOCKER_PATH;
 include DB_PATH;
 
+$_SESSION["site"] = "account";
+include HEADER_PATH;
 
 // GET USER DATA
 $id = $_SESSION["id"];
@@ -30,59 +32,11 @@ $username = $row["username"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konto - Zegowska Szama</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?=CSS_URL?>account.css">
 </head>
 
 
 <body>
-     <header class="container-fluid sticky-top p-3">
-        <div class="top row align-items-center">
-
-            <!-- LOGO -->
-            <div class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start">
-                <a 
-                    href="https://www.zs4.oswiata.tychy.pl/"
-                    class="d-inline-block shadow-none">
-                        <img 
-                            src="<?=IMG_URL?>logo.svg"
-                            class="img-fluid img-logo" alt="logo"
-                        >
-                </a>
-            </div>
-
-            <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
-                <a 
-                    href="<?=HOME_F_URL?>home.php"
-                    class="d-inline-block shadow-none">
-                        <img 
-                            src="<?=IMG_URL?>zegowska-szama2.png"
-                            class="img-fluid img-logo" alt="zegowska-szama"
-                        >
-                </a>
-            </div>
-
-            <!-- NAV -->
-            <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
-                <a
-                    href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-dark">
-                    Konto
-                    </a>
-                <a
-                    href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-dark">
-                    Koszyk
-                </a>
-                <a
-                    href="<?=HOME_F_URL?>home.php"
-                    class="btn btn-dark">
-                    Sklep
-                </a>
-            </div>
-
-        </div>
-    </header>
+     
 
 
     <main class="container p-3">
@@ -113,12 +67,6 @@ $username = $row["username"];
                         <form action="<?=ACCOUNT_B_URL?>change-username.php" method="post"
                             class="d-grid gap-2">
 
-                            <input
-                                type="text"
-                                name="username"
-                                class="form-control bg-light border-dark mb-1"
-                                placeholder="Nowa nazwa"
-                            >
 
                             <?php
                             if(isset($_SESSION["error"]))
@@ -136,9 +84,9 @@ $username = $row["username"];
                             }
                             ?>
 
-                            <button class="btn btn-dark col-8 offset-2">
-                                Zmień nazwę
-                            </button>
+                        <button type="button" class="btn btn-success flex-fill col-lg-3 col-md-6 col-12 m-1" data-bs-toggle="modal" data-bs-target="#orderModal">
+                            Zmień nazwę
+                        </button>
 
                         </form>
 
@@ -164,6 +112,7 @@ $username = $row["username"];
                                 name="current"
                                 class="form-control bg-light border-dark"
                                 placeholder="Obecne hasło"
+                                require
                             >
 
                             <input
@@ -171,6 +120,7 @@ $username = $row["username"];
                                 name="new"
                                 class="form-control bg-light border-dark"
                                 placeholder="Nowe hasło"
+                                require
                             >
 
                             <input
@@ -178,6 +128,7 @@ $username = $row["username"];
                                 name="confirm"
                                 class="form-control bg-light border-dark"
                                 placeholder="Powtórz nowe hasło"
+                                require
                             >
                             
                             <?php
@@ -258,5 +209,7 @@ $username = $row["username"];
     </main>
 
     
+    <?php include "popups.php";?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
