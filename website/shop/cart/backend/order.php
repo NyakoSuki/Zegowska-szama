@@ -36,11 +36,11 @@ try
         if (!$stmt->execute()) throw new Exception("SQL execute error");
 
         $result = $stmt->get_result();
-        $product = $result->fetch_assoc();
+        $row = $result->fetch_assoc();
 
-        if (!$product) throw new Exception("Product not found");
+        if (!$row) throw new Exception("Product not found");
 
-        $totalPrice += $product["price"] * $qty;
+        $totalPrice += $row["price"] * $qty;
     }
 
 
