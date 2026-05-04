@@ -13,7 +13,7 @@ include HEADER_PATH;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zanówienia - Zegowska szama</title>
 </head>
-<body>
+<body class="<?=$_SESSION["theme"]?>">
 
      <section class="products p-3">
             <div class="row g-4">

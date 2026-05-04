@@ -1,19 +1,18 @@
 @import url(variables.css);
+@import url(dark-theme.css);
 
 /*---MAIN---*/
-*
+body
 {
+    background: #f8f5ec;
     color: var(--dark-gray);
     margin: 0;
     padding: 0;
 }
-html, body
-{
-    background: #f8f5ec;
-}
 button, input
 {
     border: none;
+    outline: none;
 }
 ::placeholder 
 {

@@ -33,7 +33,7 @@ $username = $row["username"];
 </head>
 
 
-<body>
+<body class="<?=$_SESSION['theme']?>">
     <?php
     //---HEADER---
     $_SESSION["site"] = "account";
@@ -129,13 +129,17 @@ $username = $row["username"];
                 </div>
             </div>
         </div>
-        <button
-            id="themeButton"
-            type="button"
-            class="btn btn-dark m-1"
+        <form
+            action="<?=ACCOUNT_B_URL?>theme.php"
+            methode="post"
         >
-            Motyw: ciemny
-        </button>
+            <button
+                type="submit"
+                class="btn btn-dark m-1"
+            >
+                Motyw: <?=$_SESSION["theme"] === "dark" ? "Jasny" : "Ciemy";?>
+            </button>
+        </form>
     </main>
 
     

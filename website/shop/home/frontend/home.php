@@ -11,7 +11,7 @@ include JS_PATH;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zegowska Szama - sklep</title>
 </head>
-<body>
+<body class="<?=$_SESSION['theme']?>">
     <?php
     //---HEADER---
     $_SESSION["site"] = "home";
@@ -98,7 +98,7 @@ include JS_PATH;
                                     <?= $price ?> zł
                                 </p>
                             </div>
-                            <form class="cartAdd">
+                            <form class="cartAdd m-0">
                                 <input 
                                     type="hidden"
                                     name="id"
@@ -131,19 +131,19 @@ include JS_PATH;
                         <input
                             type="text"
                             id="searchName"
-                            class="form-control outline-dark border-secondary mb-2"
+                            class="form-control border-secondary mb-2"
                             placeholder="Szukaj po nazwie..."
                         >
                         <input
                             type="number"
                             id="minPrice"
-                            class="form-control outline-dark border-secondary mb-2"
+                            class="form-control border-secondary mb-2"
                             placeholder="Cena min"
                         >
                         <input
                             type="number"
                             id="maxPrice"
-                            class="form-control outline-dark border-secondary mb-3"
+                            class="form-control border-secondary mb-3"
                             placeholder="Cena max"
                         >
                         <div class="row justify-content-center mb-4">

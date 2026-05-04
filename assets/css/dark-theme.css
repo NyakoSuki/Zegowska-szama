@@ -1,0 +1,57 @@
+/*---MAIN---*/
+body.dark
+{
+    background: #212529;
+    color: var(--white);
+}
+.dark ::placeholder 
+{
+    color: var(--light-gray);
+}
+
+
+/*---HEADER---*/
+.dark header
+{
+    background: linear-gradient(60deg, var(--white) 0%, var(--dark-gray) 20%, var(--dark-gray) 80%, var(--white) 100%);
+    box-shadow: 0 0 10px var(--dark-gray);
+    min-height: 120px;
+    opacity: 80%;
+}
+
+
+/*---PRODUCTS---*/
+.dark .product
+{
+    background: var(--dark-gray);
+}
+
+
+/*---BOOTSRTAP---*/
+.dark .btn-dark
+{
+    background-color: var(--white);
+    color: var(--black);
+}
+.dark .bg-light
+{
+    background-color: var(--dark-gray) !important;
+    color: var(--white);
+}
+.dark .modal-title
+{
+    color: var(--white);
+}
+.dark .modal-content
+{
+    background-color: var(--gray);
+}
+.dark .btn-secondary
+{
+    background-color: var(--white);
+    color: var(--black);
+}
+.dark .border-secondary
+{
+    background-color: var(--gray);
+}

@@ -2,6 +2,8 @@
 session_start();
 
 require_once dirname(__DIR__, 2) . "/config.php";
+
+if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -14,7 +16,7 @@ require_once dirname(__DIR__, 2) . "/config.php";
     <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
 </head>
 
-<body class="d-flex align-items-center justify-content-center vh-100">
+<body class="d-flex align-items-center justify-content-center vh-100 <?=$_SESSION['theme']?>">
     <main class="container-fluid">
 
     <?php

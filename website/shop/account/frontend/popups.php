@@ -11,7 +11,7 @@ include DB_PATH;
 
             <div class="modal-header">
 
-                <h5 class="card-title mb-3">Zmiana nazwy użytkownika</h5>
+                <h5 class="modal-title">Zmiana nazwy użytkownika</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 
             </div>
@@ -26,7 +26,7 @@ include DB_PATH;
                     <input
                         type="text"
                         name="username"
-                        class="form-control bg-light border-dark mb-1"
+                        class="form-control bg-light mb-1"
                         placeholder="Nowa nazwa"
                     >
                     <button class="btn btn-dark">
@@ -48,7 +48,7 @@ include DB_PATH;
 
             <div class="modal-header">
 
-                <h5 class="card-title mb-3">Zmiana hasła</h5>
+                <h5 class="modal-title">Zmiana hasła</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 
             </div>
@@ -63,19 +63,19 @@ include DB_PATH;
                     <input
                         type="password"
                         name="current"
-                        class="form-control bg-light border-dark"
+                        class="form-control bg-light"
                         placeholder="Obecne hasło"
                     >
                     <input
                         type="password" 
                         name="new"
-                        class="form-control bg-light border-dark"
+                        class="form-control bg-light"
                         placeholder="Nowe hasło"
                     >
                     <input
                         type="password"
                         name="confirm"
-                        class="form-control bg-light border-dark"
+                        class="form-control bg-light"
                         placeholder="Powtórz nowe hasło"
                     >
                     <button

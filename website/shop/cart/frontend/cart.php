@@ -14,7 +14,7 @@ $cart = $_SESSION["cart"] ?? [];
     <title>Koszyk - Zegowska Szama</title>
 </head>
 
-<body>
+<body class="<?=$_SESSION['theme']?>">
     <?php
     //---HEADER---
     $_SESSION["site"] = "cart";
@@ -131,7 +131,7 @@ $cart = $_SESSION["cart"] ?? [];
 
                             <!-- PRZYCISKI -->
                             <div class="d-flex gap-2 m-0 justify-content-center">
-                                 <form class="cartTrash w-25">
+                                 <form class="cartTrash w-25 m-0">
                                     <input
                                         type="hidden"
                                         name="id"
@@ -143,7 +143,7 @@ $cart = $_SESSION["cart"] ?? [];
                                 </form>
 
                                 <!-- MINUS -->
-                                <form class="cartRemove w-25">
+                                <form class="cartRemove w-25 m-0">
                                     <input
                                         type="hidden"
                                         name="id"
@@ -155,12 +155,12 @@ $cart = $_SESSION["cart"] ?? [];
                                 </form>
 
                                 <!-- QTY -->
-                                <span class="align-self-center h5">
+                                <span class="align-self-center h5 m-0">
                                     <?= $qty ?>
                                 </span>
 
                                 <!-- PLUS -->
-                                <form class="cartAdd w-25">
+                                <form class="cartAdd w-25 m-0">
                                     <input 
                                         type="hidden"
                                         name="id"
