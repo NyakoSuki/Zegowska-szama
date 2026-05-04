@@ -19,7 +19,7 @@ switch (state)
 function showAll()
 {
     userActive.textContent = "Wyświetla wszystkich";
-    userActive.classList.add("btn-secondary");
+    userActive.classList.add("btn-info");
     userActive.classList.remove("btn-success");
     userActive.classList.remove("btn-danger");
 }
@@ -35,7 +35,7 @@ function showUnactive()
 {
     userActive.textContent = "Wyświetla nieaktywnych";
     userActive.classList.add("btn-danger");
-    userActive.classList.remove("btn-secondary");
+    userActive.classList.remove("btn-info");
 }
 
 

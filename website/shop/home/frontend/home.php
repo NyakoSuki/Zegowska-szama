@@ -149,12 +149,12 @@ include JS_PATH;
                         <div class="row justify-content-center mb-4">
                             <button
                                 id="available"
-                                class="btn btn-secondary opacity-50 w-75 h-100 mb-2">
+                                class="btn btn-info opacity-50 w-75 h-100 mb-2">
                                 Pokaż tylko dostępne
                             </button>
                             <button
                                 id="discount"
-                                class="btn btn-secondary opacity-50 w-75 h-100">
+                                class="btn btn-info opacity-50 w-75 h-100">
                                 Pokaż tylko promocje
                             </button>
                         </div>
