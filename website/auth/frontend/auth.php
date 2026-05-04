@@ -73,6 +73,10 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                         {
                             switch ($_SESSION["error"]) 
                             {
+                                case "unactive":
+                                    echo "<h4 class='text-danger mt-2'>Konto jest nieaktywne</h4>";
+                                    break;
+
                                 case "uncorrect":
                                     echo "<h4 class='text-danger mt-2'>Niepoprawne dane</h4>";
                                     break;

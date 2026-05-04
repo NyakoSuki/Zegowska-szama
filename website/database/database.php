@@ -4,8 +4,8 @@
 
 
     $host = "localhost";
-    $user = "root";//login-signup
-    $password = "";//bardzo_ciezkie_haslo_do_zgadniecia_bo_tak_powiedzialem
+    $user = "root";
+    $password = "";
     $dataBase = "zegowskaszama";
 
     $connection = new mysqli($host,$user,$password,$dataBase);

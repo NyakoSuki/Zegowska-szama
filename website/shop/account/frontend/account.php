@@ -51,83 +51,86 @@ $username = $row["username"];
 
 
         <div class="row justify-content-center g-4">
-            <div class="col-10 col-md-6 col-lg-4 col-xl-3">
-                <div class="mb-3">
-                    <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#usernameModal">
-                        Zmień nazwę
-                    </button>
+    <div class="col-10 col-md-8 col-lg-6">
 
-                    <?php
-                    if(isset($_SESSION["error"]))
-                    {
-                        switch ($_SESSION["error"])
-                        {
-                            case "used":
-                                echo "<h6 class='text-danger mt-2'>Ta nazwa jest już zajęta</h6>";
-                                break;
+        <div class="row g-3">
 
-                            case "unone":
-                                echo "<h6 class='text-success mt-2'>Pomyślnie zmieniono nazwę</h6>";
-                                break;
-                        }
-                    }
-                    ?>
-                </div>
-                <div class="mb-3">
-                    <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#passwordModal">
-                        Zmiana hasła
-                    </button>
+            <!-- Zmień nazwę -->
+            <div class="col-12 col-md-6">
+                <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#usernameModal">
+                    Zmień nazwę
+                </button>
 
-                    <?php
-                    if(isset($_SESSION["error"]))
-                    {
-                        switch ($_SESSION["error"])
-                        {
-                            case "short":
-                                echo "<h6 class='text-danger mt-2'>Min. 8 znaków</h6>";
-                                break;
-
-                            case "notsame":
-                                echo "<h6 class='text-danger mt-2'>Hasła nie są takie same</h6>";
-                                break;
-
-                            case "old":
-                                echo "<h6 class='text-danger mt-2'>Nowe hasło nie może być takie samo</h6>";
-                                break;
-
-                            case "uncorrect":
-                                echo "<h6 class='text-danger mt-2'>Złe aktualne hasło</h6>";
-                                break;
-
-                            case "pnone":
-                                echo "<h6 class='text-success mt-2'>Hasło zmienione</h6>";
-                                break;
-                        }
-                        unset($_SESSION["error"]);
-                    }
-                    ?>
-                    </div>
-                        <a
-                            href="<?=ACCOUNT_F_URL?>orders.php"
-                            class="btn btn-dark w-100 mb-3 m-1 w-sm-auto">
-                            Zamówienia
-                        </a>
-                        <a
-                            href="<?=ADMIN_F_URL?>admin.php"
-                            class="btn btn-info w-100 mb-3 m-1 w-sm-auto
-                            <?=$_SESSION['role'] == 'admin' ? '' : 'd-none'?>">
-                            Admin panel
-                        </a>
-
-                        <button type="button" class="btn btn-danger w-100 mb-3 m-1" data-bs-toggle="modal" data-bs-target="#logoutModal">
-                            Wyloguj się
-                        </button>
-
-                    </div>
-
-                </div>
+                <?php
+                if(isset($_SESSION["error"]))
+                {
+                    if($_SESSION["error"] == "used")
+                        echo "<h6 class='text-danger mt-2'>Ta nazwa jest już zajęta</h6>";
+                    if($_SESSION["error"] == "unone")
+                        echo "<h6 class='text-success mt-2'>Pomyślnie zmieniono nazwę</h6>";
+                }
+                ?>
             </div>
+
+            <!-- Hasło -->
+            <div class="col-12 col-md-6">
+                <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#passwordModal">
+                    Zmiana hasła
+                </button>
+
+                <?php
+                if(isset($_SESSION["error"]))
+                {
+                    switch ($_SESSION["error"])
+                    {
+                        case "short":
+                            echo "<h6 class='text-danger mt-2'>Min. 8 znaków</h6>";
+                            break;
+                        case "notsame":
+                            echo "<h6 class='text-danger mt-2'>Hasła nie są takie same</h6>";
+                            break;
+                        case "old":
+                            echo "<h6 class='text-danger mt-2'>Nowe hasło nie może być takie samo</h6>";
+                            break;
+                        case "uncorrect":
+                            echo "<h6 class='text-danger mt-2'>Złe aktualne hasło</h6>";
+                            break;
+                        case "pnone":
+                            echo "<h6 class='text-success mt-2'>Hasło zmienione</h6>";
+                            break;
+                    }
+                    unset($_SESSION["error"]);
+                }
+                ?>
+            </div>
+
+            <!-- Zamówienia -->
+            <div class="col-12 <?=$_SESSION['role'] == 'admin' ? 'col-md-6' : ''?>">
+                <a href="<?=ACCOUNT_F_URL?>orders.php" class="btn btn-dark w-100">
+                    Zamówienia
+                </a>
+            </div>
+
+            <!-- Admin -->
+            <div class="col-12 col-md-6 <?=$_SESSION['role'] == 'admin' ? '' : 'd-none'?>">
+                <a
+                    href="<?=ADMIN_F_URL?>admin.php"
+                    class="btn btn-info w-100">
+                    Admin panel
+                </a>
+            </div>
+
+            <!-- LOGOUT (zawsze osobno) -->
+            <div class="col-12">
+                <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                    Wyloguj się
+                </button>
+            </div>
+
         </div>
+
+    </div>
+</div>
         <form
             action="<?=ACCOUNT_B_URL?>theme.php"
             methode="post"

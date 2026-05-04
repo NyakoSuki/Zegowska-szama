@@ -14,7 +14,7 @@ if (empty($_POST["email"]) || empty($_POST["password"])) exit;
 
 $stmt = $connection->prepare
 ("
-    SELECT id, password, role, failed_attempts, last_failed_login 
+    SELECT id, password, role, failed_attempts, is_active, last_failed_login
     FROM users 
     WHERE email = ?
 ");
@@ -35,6 +35,16 @@ if ($result->num_rows === 0)
 
 
 $user = $result->fetch_assoc();
+
+
+if($user['is_active'] === 0;) 
+{
+    session_regenerate_id(true);
+    $_SESSION["error"] = "unactive";
+
+    header("Location: " . AUTH_F_URL . "auth.php");
+    exit;
+}
 
 // LOCK CHECK
 $now = new DateTime();
