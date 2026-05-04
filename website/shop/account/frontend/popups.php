@@ -141,9 +141,9 @@ include DB_PATH;
             </div>
 
             <input type="hidden" id="orderIdInput">
-            <div class="modal-body">
+            <div class="modal-body" id="modal-body">
 
-            
+                
 
             </div>
 

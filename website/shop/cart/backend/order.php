@@ -19,10 +19,6 @@ try
     if (empty($cart)) throw new Exception("Cart is empty");
 
 
-    // COUNT PRODUCTS
-    $counts = array_count_values($cart);
-
-
     // GET PRODUCT PRICES
     $stmt = $connection->prepare
     ("
@@ -33,7 +29,7 @@ try
         if (!$stmt) throw new Exception("SQL prepare error");
 
 
-    foreach ($counts as $id => $qty)
+    foreach ($cart as $id => $qty)
     {
         $stmt->bind_param("i", $id);
 
@@ -72,7 +68,7 @@ try
         if (!$stmt) throw new Exception("SQL prepare error");
 
 
-    foreach ($counts as $id => $qty)
+    foreach ($cart as $id => $qty)
     {
         $stmt->bind_param("iii", $orderId, $id, $qty);
 
@@ -94,5 +90,5 @@ catch (Exception $e)
 {
     // ROLLBACK ON ERROR
     $connection->rollback();
-    exit("Transaction failed");
+    exit("Transaction failed " . $e->getMessage());
 }

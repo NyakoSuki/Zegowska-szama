@@ -35,7 +35,7 @@ $cart = $_SESSION["cart"] ?? [];
 
         </section>
 
-        <section class="p3">
+        <section class="p-3">
             <div class="row g-4">
                 <?php
                 $products = $connection->query
@@ -188,6 +188,5 @@ $cart = $_SESSION["cart"] ?? [];
     <?php include "popups.php";?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?=JS_URL?>cart.js"></script>
-    <script src="<?=JS_URL?>order.js"></script>
 </body>
 </html>
