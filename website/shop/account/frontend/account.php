@@ -4,7 +4,6 @@ require_once BLOCKER_PATH;
 include DB_PATH;
 
 
-
 // GET USER DATA
 $id = $_SESSION["id"];
 

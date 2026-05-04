@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () =>
 
     if (!menuBtn || !menu) return;
 
-    menuBtn.addEventListener("click", () => {
+    menuBtn.addEventListener("click", () => 
+    {
         menu.classList.toggle("menuDisabled");
     });
 });

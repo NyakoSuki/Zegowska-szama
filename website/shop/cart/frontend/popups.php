@@ -1,5 +1,9 @@
 <!-- ORDERING -->
-<div class="modal fade" id="orderModal" tabindex="-1">
+<div
+    class="modal fade"
+    id="orderModal"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 shadow">
 

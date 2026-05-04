@@ -5,7 +5,11 @@ include DB_PATH;
 ?>
 
 <!-- USERNAME CHAHGE -->
-<div class="modal fade" id="usernameModal" tabindex="-1">
+<div
+    class="modal fade"
+    id="usernameModal"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 shadow">
 
@@ -42,7 +46,11 @@ include DB_PATH;
 
 
 <!-- PASSWORD CHAHGE -->
-<div class="modal fade" id="passwordModal" tabindex="-1">
+<div
+    class="modal fade"
+    id="passwordModal"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 shadow">
 
@@ -92,7 +100,11 @@ include DB_PATH;
 
 
 <!-- LOGOUT -->
-<div class="modal fade" id="logoutModal" tabindex="-1">
+<div
+    class="modal fade"
+    id="logoutModal"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 shadow">
 
@@ -131,7 +143,11 @@ include DB_PATH;
 
 
 <!-- ORDER DETAILS -->
-<div class="modal fade" id="detailsModal" tabindex="-1">
+<div
+    class="modal fade"
+    id="detailsModal"
+    tabindex="-1"
+>
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-4 shadow">
 
