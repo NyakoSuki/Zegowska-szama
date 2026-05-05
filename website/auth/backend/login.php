@@ -37,7 +37,7 @@ if ($result->num_rows === 0)
 $user = $result->fetch_assoc();
 
 
-if($user['is_active'] === 0;) 
+if($user['is_active'] === 0)
 {
     session_regenerate_id(true);
     $_SESSION["error"] = "unactive";

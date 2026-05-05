@@ -92,7 +92,7 @@
                 </div>
 
                 <!-- FORMULARZ -->
-                <form action="<?=ADMIN_B_URL?>update-users.php" method="post" id="userForm">
+                <form action="<?=ADMIN_B_URL?>update-user.php" method="post" id="userForm">
 
                     <div class="row g-3">
 
@@ -101,7 +101,7 @@
                             <input
                                 id="userChangeId"
                                 name="id"
-                                type="text"
+                                type="number"
                                 class="form-control"
                                 readonly
                             >
@@ -112,7 +112,7 @@
                             <input
                                 type="text"
                                 id="userChangeName"
-                                name="name"
+                                name="username"
                                 class="form-control"
                                 placeholder="Nazwa"
                             >

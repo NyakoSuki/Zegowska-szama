@@ -38,6 +38,14 @@ include DB_PATH;
                     <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#userModal">
                         Zarządzanie Urzytkownikami
                     </button>
+                      <?php
+                        if(isset($_SESSION["error"]))
+                        {
+                            if($_SESSION["error"] == "used")
+                                echo "<h6 class='text-danger mt-2'>Nazwa lub email w użyciu</h6>";
+                        }
+                        unset($_SESSION["error"]);
+                        ?>
                 </div>
 
                 <div class="mb-3">
