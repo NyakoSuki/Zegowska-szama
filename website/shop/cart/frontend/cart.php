@@ -99,7 +99,7 @@ $cart = $_SESSION["cart"] ?? [];
                         data-discount="<?= $product["procent"]?>">
 
                             <img 
-                                src="<?= $product["img"] ?>" 
+                                src="<?=IMG_P_URL . $product["img"] ?>"
                                 class="card-img-top h2 text-center p-0 m-0"
                                 alt="<?= $product["name"] ?>"
                             >
