@@ -55,7 +55,7 @@ include JS_PATH;
                 ");
                 while ($product = $products->fetch_assoc())
                 {
-                    $disabled = $product["is_available"] === 0;
+                    $disabled = (int)($product["is_available"]) === 0;
                     $noDiscount = $product["procent"] === null;
                     $price = round($product["price"] * (1 - $product["procent"] / 100), 2);
                 ?>
@@ -105,7 +105,7 @@ include JS_PATH;
                                     value="<?= $product["id"] ?>"
                                 >
                                 <button class="btn cart-bt w-100 fw-semibold shadow-sm p-1 m-0
-                                    <?= $noDiscount ? 'btn-warning' : 'btn-light border border-dark' ?>"
+                                    <?= $noDiscount ? 'btn-light border border-dark' : 'btn-warning' ?>"
                                     <?= $disabled ? 'disabled' : '' ?>>
                                     <span class="small">
                                         🛒 Dodaj do koszyka

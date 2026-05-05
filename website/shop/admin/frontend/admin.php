@@ -71,17 +71,10 @@ include DB_PATH;
     </main>
 
 
-
-
-
-dodawanie/edycja disc<br>
-
-obsluga order
-
-
-
     <?php include "popup-user.php"?>
+    <?php include "popup-order.php"?>
     <?php include "popup-product.php"?>
+    <?php include "popup-discount.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
