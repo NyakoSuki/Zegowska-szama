@@ -72,18 +72,16 @@ include DB_PATH;
 
 
 
-dodawanie prod
-usuwanie/edycja prod
 
-dodawanie disc
-usuwanie/edycja disc
+
+dodawanie/edycja disc<br>
 
 obsluga order
 
 
 
-    <?php include "popups.php"?>
+    <?php include "popup-user.php"?>
+    <?php include "popup-product.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=JS_URL?>admin.js"></script>
 </body>
 </html>

@@ -52,7 +52,7 @@
 
                         <div class="d-flex justify-content-between mt-3">
                             <button
-                                id="userActive"
+                                id="userSearchActive"
                                 class="btn btn-info">
                                 Wyświetla wszystkich
                             </button>
@@ -99,7 +99,7 @@
                         <div class="col-md-2">
                             <label class="form-label">ID</label>
                             <input
-                                id="userChangeId"
+                                id="userId"
                                 name="id"
                                 type="number"
                                 class="form-control"
@@ -111,7 +111,7 @@
                             <label class="form-label">Nazwa</label>
                             <input
                                 type="text"
-                                id="userChangeName"
+                                id="userName"
                                 name="username"
                                 class="form-control"
                                 placeholder="Nazwa"
@@ -122,7 +122,7 @@
                             <label class="form-label">Email</label>
                             <input
                                 type="text"
-                                id="userChangeEmail"
+                                id="userEmail"
                                 name="email"
                                 class="form-control"
                                 placeholder="Email"
@@ -131,7 +131,7 @@
 
                         <div class="col-md-6">
                             <label class="form-label">Rola</label>
-                            <select id="userChangeRole" class="form-select" name="role">
+                            <select id="userRole" class="form-select" name="role">
                                 <option value="">-- wybierz --</option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
@@ -139,10 +139,10 @@
                         </div>
 
                         <div class="col-md-6 d-flex align-items-end">
-                            <div class="form-check">
+                            <div class="form-check form-switch">
                                 <input
                                     type="checkbox"
-                                    id="userChangeActive"
+                                    id="userActive"
                                     name="active"
                                     class="form-check-input"
                                 >
@@ -167,6 +167,9 @@
         </div>
     </div>
 </div>
+
+<script src="<?=JS_URL?>admin-filter-users.js"></script>
+
 
 
 
@@ -199,39 +202,6 @@
 </div>
 
 
-
-
-
-<!-- PRODUCT -->
-<div
-    class="modal fade"
-    id="productModal"
-    tabindex="-1"
->
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 shadow">
-
-            <div class="modal-header">
-                <h5 class="modal-title">Zarządzanie Produktami</h5>
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal">
-                </button>
-            </div>
-
-            <div class="modal-body">
-                
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
-
-
 <!-- DISCOUNT -->
 <div
     class="modal fade"
@@ -257,79 +227,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-<?php
-$result = $connection->query
-("
-    SELECT AUTO_INCREMENT 
-    FROM information_schema.TABLES 
-    WHERE TABLE_SCHEMA = DATABASE()
-    AND TABLE_NAME = 'products'
-");
-
-$row = $result->fetch_assoc();
-$nextId = $row['AUTO_INCREMENT'];
-?>
-
-    <form action="<?=ADMIN_B_URL?>add-product.php" method="post" id="productForm">
-
-        <label for="id">id:</label>
-        <input
-            id="id"
-            name="id"
-            type="text"
-            value="<?=$nextId?>"
-            readonly
-        ><br>
-
-        <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
-        ><br>
-
-        <textarea
-            id="description"
-            name="description"
-            placeholder="Description">
-        </textarea><br>
-
-        <input
-            type="number"
-            id="price"
-            name="price"
-            step="0.01"
-            placeholder="price"
-        ><br>
-
-        <input
-            type="number"
-            id="stock"
-            name="stock"
-            placeholder="stock"
-        ><br>
-
-        <input
-            type="text"
-            id="img"
-            name="img"
-            placeholder="img"
-        ><br>
-
-        <label for="is_available">Available:</label>
-        <input
-            type="checkbox"
-            id="is_available"
-            name="is_available"
-        ><br>
-
-        <button
-            type="submit">
-            add
-        </button>
-
-    </form>

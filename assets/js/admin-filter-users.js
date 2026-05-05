@@ -1,10 +1,10 @@
 "use strict";
 
-const userActive = document.getElementById("userActive");
+const userSearchActive = document.getElementById("userSearchActive");
 let state = 2;
 
 
-userActive.addEventListener("click", ()=>
+userSearchActive.addEventListener("click", ()=>
 {
     state = (state + 1) % 3;
 
@@ -18,24 +18,24 @@ switch (state)
 
 function showAll()
 {
-    userActive.textContent = "Wyświetla wszystkich";
-    userActive.classList.add("btn-info");
-    userActive.classList.remove("btn-success");
-    userActive.classList.remove("btn-danger");
+    userSearchActive.textContent = "Wyświetla wszystkich";
+    userSearchActive.classList.add("btn-info");
+    userSearchActive.classList.remove("btn-success");
+    userSearchActive.classList.remove("btn-danger");
 }
 
 function showActive()
 {
-    userActive.textContent = "Wyświetla aktywnych";
-    userActive.classList.add("btn-success");
-    userActive.classList.remove("btn-danger");
+    userSearchActive.textContent = "Wyświetla aktywnych";
+    userSearchActive.classList.add("btn-success");
+    userSearchActive.classList.remove("btn-danger");
 }
 
 function showUnactive()
 {
-    userActive.textContent = "Wyświetla nieaktywnych";
-    userActive.classList.add("btn-danger");
-    userActive.classList.remove("btn-info");
+    userSearchActive.textContent = "Wyświetla nieaktywnych";
+    userSearchActive.classList.add("btn-danger");
+    userSearchActive.classList.remove("btn-info");
 }
 
 
@@ -82,7 +82,7 @@ searchName.addEventListener("input", filterUsers);
 searchEmail.addEventListener("input", filterUsers);
 searchRole.addEventListener("input", filterUsers);
 
-userActive.addEventListener("click", filterUsers);
+userSearchActive.addEventListener("click", filterUsers);
 
 resetBtn.addEventListener("click", () => 
 {
@@ -106,9 +106,9 @@ userSelect.addEventListener("change", () =>
 
     if (!selected.value) return;
 
-    document.getElementById("userChangeId").value = selected.dataset.id || "";
-    document.getElementById("userChangeName").value = selected.dataset.username || "";
-    document.getElementById("userChangeEmail").value = selected.dataset.email || "";
-    document.getElementById("userChangeRole").value = selected.dataset.role || "none";
-    document.getElementById("userChangeActive").checked = selected.dataset.active == 1;
+    document.getElementById("userId").value = selected.dataset.id || "";
+    document.getElementById("userName").value = selected.dataset.username || "";
+    document.getElementById("userEmail").value = selected.dataset.email || "";
+    document.getElementById("userRole").value = selected.dataset.role || "none";
+    document.getElementById("userActive").checked = selected.dataset.active == 1;
 });

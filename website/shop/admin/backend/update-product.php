@@ -7,27 +7,26 @@ include DB_PATH;
 
 // INPUT DATA
 $id = (int)($_POST["id"] ?? 0);
-$action = $_POST["action"] ?? "";
+$action = $_POST["addSwitchValue"] ?? "";
 
+$name = $_POST["name"] ?? "";
+$description = $_POST["description"] ?? "";
+$price = (float)($_POST["price"] ?? 0);
+$stock = $_POST["stock"];
+$is_available = isset($_POST["available"]) ? 1 : 0;
+$img = $_POST["img"] ?? "";
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
 
 // UPDATE PRODUCT
 if ($action === "update")
 {
-    $name = $_POST["name"] ?? "";
-    $description = $_POST["description"] ?? "";
-    $price = (float)($_POST["price"] ?? 0);
-    $stock = (int)($_POST["stock"] ?? -1);
-    $is_available = isset($_POST["is_available"]) ? 1 : 0;
-    $img = $_POST["img"] ?? "";
-
-
     // GUARD CLAUSES
-    if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
     if (empty($id) || empty($name) || empty($price)) exit;
 
 
     // UPDATE WITH NULL STOCK
-    if ($stock === -1)
+    if ($stock === "")
     {
         $stmt = $connection->prepare
         ("
@@ -81,17 +80,56 @@ if ($action === "update")
 
 
 // DELETE PRODUCT
-if ($action === "delete")
+if ($action === "add")
 {
-    $stmt = $connection->prepare
-    ("
-        DELETE FROM products 
-        WHERE id = ?
-    ");
-        if (!$stmt) exit("SQL prepare error");
+    // GUARD CLAUSES
+    if (empty($id) || empty($name) || empty($price)) exit;
 
-    $stmt->bind_param("i", $id);
-        if (!$stmt->execute()) exit("SQL execute error");
+    // UPDATE WITH NULL STOCK
+    if ($stock === "")
+    {
+        $stmt = $connection->prepare
+        ("
+            INSERT INTO products 
+            (name, description, price, stock, is_available, img)
+            VALUES (?, ?, ?, NULL, ?, ?)
+        ");
+            if (!$stmt) exit("SQL prepare error");
+
+        $stmt->bind_param
+        (
+            "ssdis",
+            $name,
+            $description,
+            $price,
+            $is_available,
+            $img,
+        );
+    }
+    else
+    {
+        $stmt = $connection->prepare
+        ("
+            INSERT INTO products 
+            (name, description, price, stock, is_available, img)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ");
+            if (!$stmt) exit("SQL prepare error");
+
+        $stmt->bind_param
+        (
+            "ssdiis",
+            $name,
+            $description,
+            $price,
+            $stock,
+            $is_available,
+            $img,
+        );
+    }
+
+    // EXECUTE UPDATE
+    if (!$stmt->execute()) exit("SQL execute error");
 
     header("Location: " . ADMIN_F_URL . "admin.php");
     exit;
