@@ -41,32 +41,35 @@ $cart = $_SESSION["cart"] ?? [];
                 $products = $connection->query
                 ("
                 SELECT
-                p.id,
-                p.name,
-                p.description,
-                p.price,
-                p.stock,
-                p.is_available,
-                p.img,
-                d.procent,
-                d.start_date,
-                d.end_date
+                    p.id,
+                    p.name,
+                    p.description,
+                    p.price,
+                    p.stock,
+                    p.is_available,
+                    p.img,
+                    d.procent,
+                    d.start_date,
+                    d.end_date
                 FROM products p
                 LEFT JOIN (
                     SELECT *
                     FROM (
-                        SELECT *,
+                        SELECT 
+                            d.*,
+                            dp.product_id,
                             ROW_NUMBER() OVER (
-                                PARTITION BY product_id
-                                ORDER BY procent DESC
+                                PARTITION BY dp.product_id
+                                ORDER BY d.procent DESC
                             ) AS rn
-                        FROM discounts
-                        WHERE start_date <= NOW()
-                        AND end_date >= NOW()
+                        FROM discounts d
+                        JOIN discounted_products dp 
+                            ON d.id = dp.discount_id
+                        WHERE d.start_date <= NOW()
+                        AND d.end_date >= NOW()
                     ) x
-                    WHERE x.rn = 1
-                ) d
-                ON p.id = d.product_id
+                    WHERE rn = 1
+                ) d ON p.id = d.product_id
                 ORDER BY p.id;
                 ");
 

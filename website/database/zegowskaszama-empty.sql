@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 05, 2026 at 03:38 PM
+-- Generation Time: Maj 05, 2026 at 02:35 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -33,17 +33,6 @@ CREATE TABLE `discounted_products` (
   `product_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `discounted_products`
---
-
-INSERT INTO `discounted_products` (`id`, `discount_id`, `product_id`) VALUES
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 3),
-(4, 4, 4),
-(5, 1, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -56,16 +45,6 @@ CREATE TABLE `discounts` (
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `discounts`
---
-
-INSERT INTO `discounts` (`id`, `procent`, `start_date`, `end_date`) VALUES
-(1, 20, '2020-01-01 00:00:00', '2030-01-01 00:00:00'),
-(2, 50, '2020-01-01 00:00:00', '2030-01-01 00:00:00'),
-(3, 50, '2020-01-01 00:00:00', '2024-01-01 00:00:00'),
-(4, 20, '2028-01-01 00:00:00', '2030-01-01 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -112,16 +91,6 @@ CREATE TABLE `products` (
   `img` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `created_at`, `updated_at`, `stock`, `is_available`, `img`) VALUES
-(1, 'Bułka z szynką', 'Bułka z szynką i masłem', 2.99, '2026-05-05 12:49:54', '2026-05-05 13:07:23', NULL, 1, 'Bułka z szynką.png'),
-(2, 'Bułka z serem', 'Bułka z serem i masłem', 2.99, '2026-05-05 13:22:03', '2026-05-05 13:22:03', NULL, 1, 'Bułka z serem.png'),
-(3, 'Bułka z szynką i serem', 'Bułka z szynką, serem i masłem', 3.99, '2026-05-05 13:22:36', '2026-05-05 13:22:36', NULL, 1, 'Bułka z szynką i serem.png'),
-(4, 'Bułka Gołosza', 'Bułka z szynką, serem, sałatą i ogórkiem', 4.99, '2026-05-05 13:23:15', '2026-05-05 13:23:15', NULL, 1, 'Bułka Gołosza.png');
-
 -- --------------------------------------------------------
 
 --
@@ -141,13 +110,6 @@ CREATE TABLE `users` (
   `failed_attempts` tinyint(1) NOT NULL DEFAULT 0,
   `last_failed_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`, `updated_at`, `last_login`, `is_active`, `failed_attempts`, `last_failed_login`) VALUES
-(1, '2', '2@2', '$2y$10$rrWRVX//ZWv4Lfv2C1DWuubpChOsX2nNof2cADp.6g9pJgBGrNsaK', 'admin', '2026-05-05 12:36:28', '2026-05-05 12:36:43', '2026-05-05 14:36:43', 1, 0, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -204,13 +166,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `discounted_products`
 --
 ALTER TABLE `discounted_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `discounts`
 --
 ALTER TABLE `discounts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ordered_products`
@@ -228,13 +190,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

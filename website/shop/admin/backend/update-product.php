@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
 if ($action === "update")
 {
     // GUARD CLAUSES
-    if (empty($id) || empty($name) || empty($price)) exit;
+    if (empty($id) || empty($name) || empty($price)) exit("empty");
 
 
     // UPDATE WITH NULL STOCK
@@ -83,7 +83,7 @@ if ($action === "update")
 if ($action === "add")
 {
     // GUARD CLAUSES
-    if (empty($id) || empty($name) || empty($price)) exit;
+    if (empty($name) || empty($price)) exit("empty");
 
     // UPDATE WITH NULL STOCK
     if ($stock === "")
