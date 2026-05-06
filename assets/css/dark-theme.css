@@ -1,8 +1,11 @@
 /*---MAIN---*/
+.dark *
+{
+    color: var(--white);
+}
 body.dark
 {
-    background: #212529;
-    color: var(--white);
+    background: #f8f5ec;
 }
 .dark ::placeholder 
 {
@@ -21,37 +24,7 @@ body.dark
 
 
 /*---PRODUCTS---*/
-.dark .product
-{
-    background: var(--dark-gray);
-}
+
 
 
 /*---BOOTSRTAP---*/
-.dark .btn-dark
-{
-    background-color: var(--white);
-    color: var(--black);
-}
-.dark .bg-light
-{
-    background-color: var(--dark-gray) !important;
-    color: var(--white);
-}
-.dark .modal-title
-{
-    color: var(--white);
-}
-.dark .modal-content
-{
-    background-color: var(--gray);
-}
-.dark .btn-secondary
-{
-    background-color: var(--white);
-    color: var(--black);
-}
-.dark .border-secondary
-{
-    background-color: var(--gray);
-}

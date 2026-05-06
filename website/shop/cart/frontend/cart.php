@@ -60,7 +60,7 @@ $cart = $_SESSION["cart"] ?? [];
                             break;
 
                         case "none" :
-                            echo "<h4 class='text-danger mb-0'>Pomyślnie złożono zamówienie</h4>";
+                            echo "<h4 class='text-success mb-0'>Pomyślnie złożono zamówienie</h4>";
                             break;
                     }
                     unset($_SESSION["error"]);
@@ -159,7 +159,7 @@ $cart = $_SESSION["cart"] ?? [];
                     <div 
                         class="product
                         h-100 d-flex flex-column border p-1
-                        <?= $isDiscounted ? 'border-3 border-warning' : 'border-dark'?>"
+                        <?= $isDiscounted ? 'border-3 border-warning' : ''?>"
                     >
                         <img 
                             src="<?=IMG_P_URL . $productImg ?>"

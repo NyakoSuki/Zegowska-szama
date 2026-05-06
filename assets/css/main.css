@@ -2,10 +2,13 @@
 @import url(dark-theme.css);
 
 /*---MAIN---*/
+*
+{
+    color: var(--dark-gray);
+}
 body
 {
     background: #f8f5ec;
-    color: var(--dark-gray);
     margin: 0;
     padding: 0;
 }

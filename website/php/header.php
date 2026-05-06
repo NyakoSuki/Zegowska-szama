@@ -35,7 +35,7 @@
                     <img
                         class="naviImg"
                         src="<?=IMG_URL?>.svg"
-                        alt='Konto'    
+                        alt="Konto"
                     >
                 </a>
 
@@ -45,7 +45,7 @@
                     <img
                         class="naviImg"
                         src="<?=IMG_URL?>.svg"
-                        alt='Koszyk'    
+                        alt="Koszyk"
                     >
                 </a>
 
@@ -60,7 +60,7 @@
                     <img
                         class='naviImg'
                         src='" . IMG_URL . "menu.svg'
-                        alt='Filtry'    
+                        alt='Filtry'
                     >
                 </button>";
                 }

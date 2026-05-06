@@ -89,7 +89,7 @@ include JS_PATH;
                         class="product
                         h-100 d-flex flex-column border p-1
                         <?= $isAvailable ? '' : 'opacity-50'?>
-                        <?= $isDiscounted ? 'border-3 border-warning' : 'border-dark'?>"
+                        <?= $isDiscounted ? 'border-3 border-warning' : ''?>"
 
                         data-name="<?= $productName?>"
                         data-price="<?= $truePrice?>"
@@ -169,7 +169,7 @@ include JS_PATH;
                 col-12 col-sm-6 col-md-4 col-lg-6 col-xxl-4 mt-2"
             >
                 <div
-                    class="card bg-light border-dark shadow-sm"
+                    class="card"
                 >
                     <div
                         class="card-body"

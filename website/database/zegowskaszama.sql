@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 06, 2026 at 02:39 PM
+-- Generation Time: Maj 06, 2026 at 03:16 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -129,7 +129,13 @@ INSERT INTO `products` (`id`, `name`, `description`, `type`, `price`, `created_a
 (6, 'DoubleDog', 'Hotdog z dwiema parówkami i dowolnym sosem', 'food', 6.99, '2026-05-06 07:49:26', '2026-05-06 11:23:26', -1, 1, 1, 'DoubleDog.png'),
 (7, 'Tymbark jabłko wiśnia 0,25l', 'Tymbark jabłko wiśnia 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 07:50:58', '2026-05-06 08:50:48', 20, 1, 1, 'JABWIS025l.png'),
 (8, 'Tymbark jabłko wiśnia 0,5l', 'Tymbark jabłko wiśnia 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 08:45:21', '2026-05-06 09:15:42', 1, 1, 1, 'JABWIS05l.png'),
-(9, 'Tymbark jabłko wiśnia 2l', 'Tymbark jabłko wiśnia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 08:46:10', '2026-05-06 08:51:01', 0, 1, 1, 'JABWIS2l.png');
+(9, 'Tymbark jabłko wiśnia 2l', 'Tymbark jabłko wiśnia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 08:46:10', '2026-05-06 08:51:01', 0, 1, 1, 'JABWIS2l.png'),
+(10, 'Tymbark jabłko mięta 0,25l', 'Tymbark jabłko mięta 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 13:07:42', '2026-05-06 13:07:42', 20, 1, 1, 'JABMIE025l.png'),
+(11, 'Tymbark jabłko mięta 0,5l', 'Tymbark jabłko mięta 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 13:13:29', '2026-05-06 13:13:29', 1, 1, 1, 'JABMIE05l.png'),
+(12, 'Tymbark jabłko mięta 2l', 'Tymbark jabłko mięta 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 13:13:57', '2026-05-06 13:13:57', 0, 1, 1, 'JABMIE2l.png'),
+(13, 'Tymbark jabłko brzoskwinia 0,25l', 'Tymbark jabłko brzoskwinia 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 13:14:46', '2026-05-06 13:14:46', 20, 1, 1, 'JABBRZ025l.png'),
+(14, 'Tymbark jabłko brzoskwinia 0,5l', 'Tymbark jabłko brzoskwinia 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 13:15:25', '2026-05-06 13:15:25', 1, 1, 1, 'JABBRZ05l.png'),
+(15, 'Tymbark jabłko brzoskwinia 2l', 'Tymbark jabłko brzoskwinia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 13:15:46', '2026-05-06 13:15:46', 0, 1, 1, 'JABBRZ2l.png');
 
 -- --------------------------------------------------------
 
@@ -237,7 +243,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -114,7 +114,7 @@ try
 
     // CLEAR CART
     $_SESSION["cart"] = [];
-    $_SESSION["error"] = "none"
+    $_SESSION["error"] = "none";
 
     header("Location: " . CART_F_URL . "cart.php");
     exit;
