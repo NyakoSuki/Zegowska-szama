@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 05, 2026 at 03:38 PM
+-- Generation Time: Maj 06, 2026 at 02:39 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -89,6 +89,8 @@ CREATE TABLE `ordered_products` (
 CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
   `status` enum('pending','ready','claimed','canceled') NOT NULL DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -104,11 +106,13 @@ CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
-  `price` decimal(10,2) UNSIGNED DEFAULT NULL,
+  `type` enum('food','drink','school') DEFAULT NULL,
+  `price` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0.00,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `stock` int(10) UNSIGNED DEFAULT NULL,
-  `is_available` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `stock` int(10) NOT NULL DEFAULT -1,
+  `is_available` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
   `img` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -116,11 +120,16 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `created_at`, `updated_at`, `stock`, `is_available`, `img`) VALUES
-(1, 'Bułka z szynką', 'Bułka z szynką i masłem', 2.99, '2026-05-05 12:49:54', '2026-05-05 13:07:23', NULL, 1, 'Bułka z szynką.png'),
-(2, 'Bułka z serem', 'Bułka z serem i masłem', 2.99, '2026-05-05 13:22:03', '2026-05-05 13:22:03', NULL, 1, 'Bułka z serem.png'),
-(3, 'Bułka z szynką i serem', 'Bułka z szynką, serem i masłem', 3.99, '2026-05-05 13:22:36', '2026-05-05 13:22:36', NULL, 1, 'Bułka z szynką i serem.png'),
-(4, 'Bułka Gołosza', 'Bułka z szynką, serem, sałatą i ogórkiem', 4.99, '2026-05-05 13:23:15', '2026-05-05 13:23:15', NULL, 1, 'Bułka Gołosza.png');
+INSERT INTO `products` (`id`, `name`, `description`, `type`, `price`, `created_at`, `updated_at`, `stock`, `is_available`, `is_active`, `img`) VALUES
+(1, 'Bułka z szynką', 'Bułka z szynką i masłem', 'food', 2.99, '2026-05-05 12:49:54', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka z szynką.png'),
+(2, 'Bułka z serem', 'Bułka z serem i masłem', 'food', 2.99, '2026-05-05 13:22:03', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka z serem.png'),
+(3, 'Bułka z szynką i serem', 'Bułka z szynką, serem i masłem', 'food', 3.99, '2026-05-05 13:22:36', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka z szynką i serem.png'),
+(4, 'Bułka Gołosza', 'Bułka z szynką, serem, sałatą i ogórkiem', 'food', 4.99, '2026-05-05 13:23:15', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka Gołosza.png'),
+(5, 'HotDog', 'Hotdog z dowolnym sosem', 'food', 4.99, '2026-05-06 07:48:47', '2026-05-06 11:23:26', -1, 1, 1, 'HotDog.png'),
+(6, 'DoubleDog', 'Hotdog z dwiema parówkami i dowolnym sosem', 'food', 6.99, '2026-05-06 07:49:26', '2026-05-06 11:23:26', -1, 1, 1, 'DoubleDog.png'),
+(7, 'Tymbark jabłko wiśnia 0,25l', 'Tymbark jabłko wiśnia 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 07:50:58', '2026-05-06 08:50:48', 20, 1, 1, 'JABWIS025l.png'),
+(8, 'Tymbark jabłko wiśnia 0,5l', 'Tymbark jabłko wiśnia 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 08:45:21', '2026-05-06 09:15:42', 1, 1, 1, 'JABWIS05l.png'),
+(9, 'Tymbark jabłko wiśnia 2l', 'Tymbark jabłko wiśnia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 08:46:10', '2026-05-06 08:51:01', 0, 1, 1, 'JABWIS2l.png');
 
 -- --------------------------------------------------------
 
@@ -147,7 +156,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`, `updated_at`, `last_login`, `is_active`, `failed_attempts`, `last_failed_login`) VALUES
-(1, '2', '2@2', '$2y$10$rrWRVX//ZWv4Lfv2C1DWuubpChOsX2nNof2cADp.6g9pJgBGrNsaK', 'admin', '2026-05-05 12:36:28', '2026-05-05 12:36:43', '2026-05-05 14:36:43', 1, 0, NULL);
+(1, '2', '2@2', '$2y$10$rrWRVX//ZWv4Lfv2C1DWuubpChOsX2nNof2cADp.6g9pJgBGrNsaK', 'admin', '2026-05-05 12:36:28', '2026-05-06 06:57:24', '2026-05-06 08:57:24', 1, 0, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -228,7 +237,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -13,36 +13,39 @@ include JS_PATH;
 </head>
 <body class="<?=$_SESSION['theme']?>">
     <?php
-    //---HEADER---
     $_SESSION["site"] = "home";
     include HEADER_PATH;
     ?>
     <main>
-        <!-- PRODUCTS -->
         <section class="products p-3">
             <div class="row g-4">
                 <?php
-                $products = $connection->query
+                $query = $connection->query
                 ("
                 SELECT
                     p.id,
                     p.name,
                     p.description,
+                    p.type,
                     p.price,
                     p.stock,
                     p.is_available,
+                    p.is_active,
                     p.img,
                     d.procent,
                     d.start_date,
                     d.end_date
                 FROM products p
-                LEFT JOIN (
+                LEFT JOIN
+                (
                     SELECT *
-                    FROM (
+                    FROM
+                    (
                         SELECT 
                             d.*,
                             dp.product_id,
-                            ROW_NUMBER() OVER (
+                            ROW_NUMBER() OVER
+                            (
                                 PARTITION BY dp.product_id
                                 ORDER BY d.procent DESC
                             ) AS rn
@@ -54,67 +57,102 @@ include JS_PATH;
                     ) x
                     WHERE rn = 1
                 ) d ON p.id = d.product_id
-                ORDER BY p.id;
+                ORDER BY p.type;
                 ");
-                while ($product = $products->fetch_assoc())
+                while ($row = $query->fetch_assoc())
                 {
-                    $disabled = (int)($product["is_available"]) === 0;
-                    $noDiscount = $product["procent"] === null;
-                    $price = round($product["price"] * (1 - $product["procent"] / 100), 2);
+                    $productId = (int)($row["id"]);
+                    $productName = $row["name"];
+                    $productDescription = $row["description"];
+                    $productType = $row["type"];
+                    $productPrice = (float)($row["price"]);
+                    $productStock = (int)($row["stock"]);
+                    $productIsAvailable = (int)($row["is_available"]);
+                    $productIsActive = (int)($row["is_active"]);
+                    $productImg = $row["img"];
+
+                    $discountProcent = (int)($row["procent"]);
+                    $discountStartDate = $row["start_date"];
+                    $discountEndDate = $row["end_date"];
+
+                    $isAvailable = ($productIsAvailable === 1 && ($productStock === -1 || $productStock > 0));
+                    $isActive = ($productIsActive === 1);
+                    if(!$isActive) continue;
+                    $isDiscounted = $discountProcent !== 0;
+                    if($isDiscounted)
+                        $truePrice = round($productPrice * (1 - $discountProcent / 100), 2);
                 ?>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2">
+                <div
+                    class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2"
+                >
                     <div 
-                        class="product h-100 d-flex flex-column border p-1
-                        <?= $disabled ? 'opacity-50' : '' ?>
-                        <?= $noDiscount ? 'border-dark' : 'border-3 border-warning' ?>"
-                        data-name="<?= strtolower($product["name"]) ?>"
-                        data-price="<?= $price ?>"
-                        data-available="<?= $product["is_available"]?>"
-                        data-discount="<?= $product["procent"]?>"
+                        class="product
+                        h-100 d-flex flex-column border p-1
+                        <?= $isAvailable ? '' : 'opacity-50'?>
+                        <?= $isDiscounted ? 'border-3 border-warning' : 'border-dark'?>"
+
+                        data-name="<?= $productName?>"
+                        data-price="<?= $truePrice?>"
+                        data-type="<?= $productType?>"
+                        data-stock="<?= $productStock?>"
+                        data-available="<?= $productIsAvailable?>"
+                        data-discount="<?= $discountProcent?>"
                     >
                         <img 
-                            src="<?=IMG_P_URL . $product["img"] ?>" 
-                            class="card-img-top h2 text-center p-0 m-0"
-                            alt="<?= $product["name"] ?>"
+                            src="<?=IMG_P_URL . $productImg ?>"
+                            alt="<?= $productName ?>"
+                            class="card-img-top h2 text-center p-0 m-0 align-self-center
+                            <?php echo ($productType === 'drink') ? 'w-25' : ''?>"
                         >
-                        <div class="p-2 d-flex flex-column flex-grow-1">
-                            <h2 
-                                class="fw-bold">
-                                <?= $product["name"] ?>
-                            </h2>
+                        <div
+                            class="p-2 d-flex flex-column flex-grow-1"
+                        >
+                            <h3
+                                class="fw-bold"
+                            >
+                                <?= $productName ?>
+                            </h3>
                             <small>
-                                <?= $product["description"] ?>
+                                <?= $productDescription ?>
                             </small>
-                            <div class="d-flex mt-auto p-0 m-0 gap-2">
-                                <?php
-                                if(!$noDiscount)
-                                {
-                                ?>
-                                <small
-                                    class="fw-bold p-0 m-0 mt-auto text-decoration-line-through">
-                                    <?= $product["price"] ?> zł
-                                </small>
-                                <?php } ?>
+
+                            <div
+                                class="d-flex mt-auto p-0 m-0 gap-2"
+                            >
                                 <p
-                                    class="fw-bold p-0 m-0
-                                    <?= $noDiscount ? '' : 'h4 text-warning' ?>">
-                                    <?= $price ?> zł
+                                    class="fw-bold p-0 m-0 mt-auto
+                                    <?= $isDiscounted ? 'text-decoration-line-through' : ''?>
+                                ">
+                                    <?= $productPrice?> zł
+                                </p>
+                                <p
+                                    class="fw-bold p-0 m-0 h4 text-warning"
+                                >
+                                    <?= $isDiscounted ? $truePrice : ''?>
                                 </p>
                             </div>
-                            <form class="cartAdd m-0">
+
+                            <form
+                                class="cartAdd m-0"
+                            >
                                 <input 
                                     type="hidden"
                                     name="id"
-                                    value="<?= $product["id"] ?>"
+                                    value="<?= $productId ?>"
                                 >
-                                <button class="btn cart-bt w-100 fw-semibold shadow-sm p-1 m-0
-                                    <?= $noDiscount ? 'btn-light border border-dark' : 'btn-warning' ?>"
-                                    <?= $disabled ? 'disabled' : '' ?>>
-                                    <span class="small">
+                                <button
+                                    class="btn cart-bt w-100 fw-semibold shadow-sm p-1 m-0
+                                    <?= $isDiscounted ? 'btn-warning' : 'btn-light border border-dark' ?>"
+                                    <?= $isAvailable ? '' : 'disabled' ?>
+                                >
+                                    <span
+                                        class="small"
+                                    >
                                         🛒 Dodaj do koszyka
                                     </span>
                                 </button>
                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -125,45 +163,92 @@ include JS_PATH;
 
         <!-- MENU -->
         <section>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-4 mt-2 menu menuDisabled">
-                <div class="card bg-light border-dark shadow-sm">
-                    <div class="card-body">
-                        <h6 class="mb-3">
+            <div
+                id="filters"
+                class="filterDisabled
+                col-12 col-sm-6 col-md-4 col-lg-6 col-xxl-4 mt-2"
+            >
+                <div
+                    class="card bg-light border-dark shadow-sm"
+                >
+                    <div
+                        class="card-body"
+                    >
+                        <h6
+                            class="mb-3 fw-bold"
+                        >
                             Filtry
                         </h6>
                         <input
                             type="text"
-                            id="searchName"
+                            id="filterName"
                             class="form-control border-secondary mb-2"
                             placeholder="Szukaj po nazwie..."
                         >
                         <input
                             type="number"
-                            id="minPrice"
+                            id="filterMin"
                             class="form-control border-secondary mb-2"
+                            step=0.01
                             placeholder="Cena min"
                         >
                         <input
                             type="number"
-                            id="maxPrice"
+                            id="filterMax"
                             class="form-control border-secondary mb-3"
+                            step=0.01
                             placeholder="Cena max"
                         >
-                        <div class="row justify-content-center mb-4">
+                        <hr>
+                        <h6
+                            class="mb-3 fw-bold"
+                        >
+                            Zaznacz kategorie
+                        </h6>
+
+                        <div
+                            class="row justify-content-center mb-1 gap-4"
+                        >
                             <button
-                                id="available"
-                                class="btn btn-info opacity-50 w-75 h-100 mb-2">
-                                Pokaż tylko dostępne
+                                id="filterIsAvailable"
+                                class="btn btn-info opacity-50 col-5 h-100 mb-2"
+                            >
+                                Dostępne
                             </button>
-                            <button
-                                id="discount"
-                                class="btn btn-info opacity-50 w-75 h-100">
-                                Pokaż tylko promocje
+                            <button 
+                                id="filterIsDiscounted"
+                                class="btn btn-info opacity-50 col-5 h-100"
+                            >
+                                Promocje
                             </button>
                         </div>
+                        <div
+                            class="row justify-content-center mb-4 gap-lg-4"
+                        >
+                            <button
+                                id="filterFood"
+                                class="btn btn-info opacity-50 col-lg-3 h-100 mb-2"
+                            >
+                                Jedzenie
+                            </button>
+                            <button
+                                id="filterDrink"
+                                class="btn btn-info opacity-50 col-lg-3 h-100 mb-2"
+                            >
+                                Napoje
+                            </button>
+                            <button
+                                id="filterSchool"
+                                class="btn btn-info opacity-50 col-lg-3 h-100 mb-2"
+                            >
+                                Szkoła
+                            </button>
+                        </div>
+
                         <button
-                                id="resetFilters"
-                                class="btn btn-danger col-8 offset-2">
+                                id="resetFiltersBtn"
+                                class="btn btn-danger col-8 offset-2"
+                            >
                                 Reset
                         </button>
 
@@ -180,7 +265,7 @@ include JS_PATH;
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=JS_URL?>menu.js"></script>
+    <script src="<?=JS_URL?>home-filter.js"></script>
     <script src="<?=JS_URL?>cart.js"></script>
 </body>
 </html>

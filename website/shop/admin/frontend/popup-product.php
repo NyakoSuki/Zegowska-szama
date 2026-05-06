@@ -84,6 +84,7 @@
                                 data-id="<?=$row["id"] ?>"
                                 data-name="<?=$row["name"] ?>"
                                 data-description="<?=$row["description"] ?>"
+                                data-type="<?=$row["type"] ?>"
                                 data-price="<?=$row["price"] ?>"
                                 data-stock="<?=$row["stock"] ?>"
                                 data-img="<?=$row["img"] ?>"
@@ -126,48 +127,60 @@
                 <form action="<?=ADMIN_B_URL?>update-product.php" method="post" id="productForm">
 
                     <div class="row g-3">
-
-                        <div class="col-md-2">
-                            <label class="form-label">ID</label>
-                            <input
-                                id="productId"
-                                name="id"
-                                type="number"
-                                class="form-control"
-                                readonly
-                            >
-                            <input
-                                id="productIdNext"
-                                name="idNext"
-                                type="number"
-                                class="form-control d-none"
-                                value="<?=$nextId?>"
-                                readonly
-                            >
-                        </div>
-
-                        <div class="col-md-5">
-                            <label class="form-label">Nazwa</label>
-                            <input
-                                type="text"
-                                id="productName"
-                                name="name"
-                                class="form-control"
-                                placeholder="Nazwa"
-                            >
-                        </div>
-
-                        <div class="col-md-5 d-flex align-items-end">
-                            <div class="form-check form-switch">
+                        <div class="col-lg-6 row">
+                            <div class="col-md-4">
+                                <label class="form-label">ID</label>
                                 <input
-                                    type="checkbox"
-                                    id="productAvailable"
-                                    name="available"
-                                    class="form-check-input"
+                                    id="productId"
+                                    name="id"
+                                    type="number"
+                                    class="form-control"
+                                    readonly
                                 >
-                                <label class="form-check-label">
-                                    Dostępny
-                                </label>
+                                <input
+                                    id="productIdNext"
+                                    name="idNext"
+                                    type="number"
+                                    class="form-control d-none"
+                                    value="<?=$nextId?>"
+                                    readonly
+                                >
+                            </div>
+
+                            <div class="col-md-8">
+                                <label class="form-label">Nazwa</label>
+                                <input
+                                    type="text"
+                                    id="productName"
+                                    name="name"
+                                    class="form-control"
+                                    placeholder="Nazwa"
+                                >
+                            </div>
+                        </div>
+                        <div class="col-lg-6 row">
+                            <div class="col-md-6">
+                                <label class="form-label">Typ</label>
+                                <select id="productType" class="form-select" name="type">
+                                    <option value="">-- wybierz --</option>
+                                    <option value="food">Jedzenie</option>
+                                    <option value="drink">Napój</option>
+                                    <option value="school">Szkoła</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 d-flex align-items-end">
+                                <div class="form-check form-switch">
+                                    <input
+                                        type="checkbox"
+                                        id="productAvailable"
+                                        name="available"
+                                        class="form-check-input"
+                                    >
+                                    <label class="form-check-label">
+                                        Dostępny
+                                    </label>
+                                </div>
                             </div>
                         </div>
 

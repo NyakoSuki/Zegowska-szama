@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 05, 2026 at 02:35 PM
+-- Generation Time: Maj 06, 2026 at 02:39 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -33,6 +33,12 @@ CREATE TABLE `discounted_products` (
   `product_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `discounted_products`
+--
+
+
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +51,12 @@ CREATE TABLE `discounts` (
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `discounts`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -68,6 +80,8 @@ CREATE TABLE `ordered_products` (
 CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
   `user_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `total_price` decimal(10,2) DEFAULT NULL,
   `status` enum('pending','ready','claimed','canceled') NOT NULL DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -83,13 +97,21 @@ CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) NOT NULL,
   `description` text DEFAULT NULL,
-  `price` decimal(10,2) UNSIGNED DEFAULT NULL,
+  `type` enum('food','drink','school') DEFAULT NULL,
+  `price` decimal(10,2) UNSIGNED NOT NULL DEFAULT 0.00,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `stock` int(10) UNSIGNED DEFAULT NULL,
-  `is_available` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
+  `stock` int(10) NOT NULL DEFAULT -1,
+  `is_available` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+  `is_active` tinyint(1) UNSIGNED NOT NULL DEFAULT 1,
   `img` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -110,6 +132,12 @@ CREATE TABLE `users` (
   `failed_attempts` tinyint(1) NOT NULL DEFAULT 0,
   `last_failed_login` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+
 
 --
 -- Indeksy dla zrzutów tabel
@@ -166,13 +194,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `discounted_products`
 --
 ALTER TABLE `discounted_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `discounts`
 --
 ALTER TABLE `discounts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ordered_products`
@@ -190,13 +218,13 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

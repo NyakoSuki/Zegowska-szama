@@ -107,6 +107,7 @@ productSelect.addEventListener("change", () =>
     document.getElementById("productId").value = selected.dataset.id || "";
     document.getElementById("productName").value = selected.dataset.name || "";
     document.getElementById("productPrice").value = selected.dataset.price || null;
+    document.getElementById("productType").value = selected.dataset.type || "none";
     document.getElementById("productStock").value = selected.dataset.stock || null;
     document.getElementById("productDescription").value = selected.dataset.description || "";
     document.getElementById("productImg").value = selected.dataset.img || "";

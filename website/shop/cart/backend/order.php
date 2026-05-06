@@ -4,6 +4,39 @@ require_once BLOCKER_PATH;
 include DB_PATH;
 
 
+$cart = $_SESSION["cart"] ?? [];
+if (empty($cart)) {
+    $_SESSION["producterror"] = "Koszyk jest pusty";
+    header("Location: " . CART_F_URL . "cart.php");
+    exit;
+}
+
+// Pobierz tylko produkty które są w koszyku
+$ids = implode(",", array_map('intval', array_keys($cart)));
+
+$products = $connection->query("
+    SELECT id, name, stock, is_available, price
+    FROM products
+    WHERE id IN ($ids)
+");
+
+$removedProducts = [];
+
+while ($product = $products->fetch_assoc()) {
+    $id = $product["id"];
+    $qty = $cart[$id];
+
+    if (!$product["is_available"] || $product["stock"] < $qty) {
+        $removedProducts[] = $product["name"];
+        unset($_SESSION["cart"][$id]);
+    }
+}
+
+if (!empty($removedProducts)) {
+    $_SESSION["producterror"] = implode(", ", $removedProducts);
+    header("Location: " . CART_F_URL . "cart.php");
+    exit;
+}
 // START TRANSACTION
 $connection->begin_transaction();
 
@@ -11,7 +44,6 @@ try
 {
     // INPUT DATA
     $userId = $_SESSION["id"];
-    $cart = $_SESSION["cart"] ?? [];
     $totalPrice = 0;
 
 
@@ -82,6 +114,7 @@ try
 
     // CLEAR CART
     $_SESSION["cart"] = [];
+    $_SESSION["error"] = "none"
 
     header("Location: " . CART_F_URL . "cart.php");
     exit;

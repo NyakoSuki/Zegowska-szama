@@ -31,14 +31,22 @@
             <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
                 <a
                     href="<?=ACCOUNT_F_URL?>account.php"
-                    class="btn btn-dark">
-                    Konto
+                    class="btn btn-secondary">
+                    <img
+                        class="naviImg"
+                        src="<?=IMG_URL?>.svg"
+                        alt='Konto'    
+                    >
                 </a>
 
                 <a
                     href="<?=CART_F_URL?>cart.php"
-                    class="btn btn-dark">
-                    Koszyk
+                    class="btn btn-secondary">
+                    <img
+                        class="naviImg"
+                        src="<?=IMG_URL?>.svg"
+                        alt='Koszyk'    
+                    >
                 </a>
 
                 <?php if($_SESSION["site"] === "home")
@@ -46,8 +54,14 @@
                 echo 
                 "<button
                     type='button'
-                    class='btn btn-dark menuBtn'>
-                    Filtry
+                    id='filterBtn'
+                    class='btn btn-secondary'
+                >
+                    <img
+                        class='naviImg'
+                        src='" . IMG_URL . "menu.svg'
+                        alt='Filtry'    
+                    >
                 </button>";
                 }
                 else
@@ -55,8 +69,13 @@
                 echo 
                 "<a
                     href='" . HOME_F_URL . "home.php'
-                    class='btn btn-dark'>
-                    Sklep
+                    class='btn btn-secondary'
+                >
+                    <img
+                        class='naviImg'
+                        src='" . IMG_URL . "home.svg'
+                        alt='Sklep'
+                    >
                 </a>";
                 }
                 ?>

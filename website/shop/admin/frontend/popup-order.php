@@ -4,7 +4,7 @@
     id="orderModal"
     tabindex="-1"
 >
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content rounded-4 shadow">
 
             <div class="modal-header">

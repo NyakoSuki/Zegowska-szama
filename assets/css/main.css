@@ -62,13 +62,21 @@ button:active, a:active
 }
 .product img
 {
-    max-height: 250px;
+    max-height: 450px;
     border-radius: 8px 8px 0 0;
 }
 
 
 /*---MENU---*/
-.menu {
+.naviImg
+{
+    max-width: 50px;
+    max-height: 50px;
+}
+
+
+/*---MENU---*/
+#filters {
     position: fixed;
     right: 0;
     top: 165px;
@@ -78,6 +86,6 @@ button:active, a:active
     z-index: 999;
 }
 
-.menuDisabled {
+.filterDisabled {
     transform: translateX(100%);
 }
