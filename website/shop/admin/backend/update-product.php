@@ -13,8 +13,9 @@ $name = $_POST["name"] ?? "";
 $description = $_POST["description"] ?? "";
 $type = $_POST["type"] ?? "";
 $price = (float)($_POST["price"] ?? 0);
-$stock = $_POST["stock"];
-$is_available = isset($_POST["available"]) ? 1 : 0;
+$stock = (int)($_POST["stock"]);
+$isAvailable = isset($_POST["available"]) ? 1 : 0;
+$isActive = isset($_POST["active"]) ? 1 : 0;
 $img = $_POST["img"] ?? "";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
@@ -32,19 +33,20 @@ if ($action === "update")
         $stmt = $connection->prepare
         ("
             UPDATE products 
-            SET name = ?, description = ?, type = ?, price = ?, stock = NULL, is_available = ?, img = ?
+            SET name = ?, description = ?, type = ?, price = ?, stock = NULL, is_available = ?, is_active - ?, img = ?
             WHERE id = ?
         ");
             if (!$stmt) exit("SQL prepare error");
 
         $stmt->bind_param
         (
-            "sssdiss",
+            "sssdiiss",
             $name,
             $description,
             $type,
             $price,
-            $is_available,
+            $isAvailable,
+            $isActive,
             $img,
             $id
         );
@@ -54,20 +56,21 @@ if ($action === "update")
         $stmt = $connection->prepare
         ("
             UPDATE products 
-            SET name = ?, description = ?, type = ?, price = ?, stock = ?, is_available = ?, img = ?
+            SET name = ?, description = ?, type = ?, price = ?, stock = ?, is_available = ?, is_active = ?, img = ?
             WHERE id = ?
         ");
             if (!$stmt) exit("SQL prepare error");
 
         $stmt->bind_param
         (
-            "sssdiisi",
+            "sssdiiisi",
             $name,
             $description,
             $type,
             $price,
             $stock,
-            $is_available,
+            $isAvailable,
+            $isActive,
             $img,
             $id
         );
@@ -93,29 +96,8 @@ if ($action === "add")
         $stmt = $connection->prepare
         ("
             INSERT INTO products 
-            (name, description, type, price, stock, is_available, img)
-            VALUES (?, ?, ?, ?, NULL, ?, ?)
-        ");
-            if (!$stmt) exit("SQL prepare error");
-
-        $stmt->bind_param
-        (
-            "sssdis",
-            $name,
-            $description,
-            $type,
-            $price,
-            $is_available,
-            $img,
-        );
-    }
-    else
-    {
-        $stmt = $connection->prepare
-        ("
-            INSERT INTO products 
-            (name, description, type, price, stock, is_available, img)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            (name, description, type, price, stock, is_available, is_active, img)
+            VALUES (?, ?, ?, ?, NULL, ?, ?, ?)
         ");
             if (!$stmt) exit("SQL prepare error");
 
@@ -126,8 +108,31 @@ if ($action === "add")
             $description,
             $type,
             $price,
+            $isAvailable,
+            $isActive,
+            $img,
+        );
+    }
+    else
+    {
+        $stmt = $connection->prepare
+        ("
+            INSERT INTO products 
+            (name, description, type, price, stock, is_available, is_active_ img)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+            if (!$stmt) exit("SQL prepare error");
+
+        $stmt->bind_param
+        (
+            "sssdiiis",
+            $name,
+            $description,
+            $type,
+            $price,
             $stock,
-            $is_available,
+            $isAvailable,
+            $isActive,
             $img,
         );
     }

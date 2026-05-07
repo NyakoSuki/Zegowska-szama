@@ -24,6 +24,8 @@ $removedProducts = [];
 
 while ($product = $products->fetch_assoc()) {
     $id = $product["id"];
+    $name = $product["name"];
+    $price = $product["price"];
     $qty = $cart[$id];
 
     if (!$product["is_available"] || $product["stock"] < $qty) {
@@ -94,19 +96,37 @@ try
     // INSERT ORDERED PRODUCTS
     $stmt = $connection->prepare
     ("
-        INSERT INTO ordered_products (order_id, product_id, quantity)
-        VALUES (?, ?, ?)
+        INSERT INTO ordered_products
+        (order_id, product_id, name, price, quantity)
+        VALUES (?, ?, ?, ?, ?)
     ");
         if (!$stmt) throw new Exception("SQL prepare error");
 
 
     foreach ($cart as $id => $qty)
     {
-        $stmt->bind_param("iii", $orderId, $id, $qty);
+        $stmt->bind_param("iisdi", $orderId, $id, $name, $price, $qty);
 
         if (!$stmt->execute()) throw new Exception("SQL execute error");
     }
 
+
+    // REMOVE FROM STOCK
+    $stmt = $connection->prepare
+    ("
+        UPDATE products SET stock = stock - ?
+        WHERE id = ?
+        AND stock >= ?
+    ");
+        if(!$stmt) throw new Exception("SQL prepare error");
+
+    foreach ($cart as $id => $qty)
+    {
+        $stmt->bind_param("iii", $qty, $id, $qty);
+
+        if (!$stmt->execute()) throw new Exception("SQL execute error");
+        if($stmt->affected_rows === 0) throw new Exception("Not enought products");
+    }
 
     // COMMIT TRANSACTION
     $connection->commit();

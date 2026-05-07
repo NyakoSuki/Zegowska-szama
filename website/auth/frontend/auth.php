@@ -46,7 +46,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
             <div class="slider" id="slider">
 
                 <!-- LOGIN -->
-                <div class="panel login card bg-light border-dark p-5 m-2">
+                <div class="panel login card bg-white p-5 m-2">
                     <h1 class="m-0 mb-5 p-0"><b>Logowanie</b></h1>
 
                     <form action="<?=AUTH_B_URL?>login.php" method="post">
@@ -55,7 +55,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             <input
                                 name="email"
                                 type="email"
-                                class="form-control bg-light border-dark mb-2"
+                                class="form-control bg-light mb-2"
                                 placeholder="Email"
                             >
 
@@ -63,7 +63,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             <input
                                 name="password"
                                 type="password"
-                                class="form-control bg-light border-dark mb-2"
+                                class="form-control bg-light mb-2"
                                 placeholder="Hasło"
                             >
 
@@ -106,7 +106,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                 </div>
 
                 <!-- SIGNUP -->
-                <div class="panel signup card bg-light border-dark p-5 m-2">
+                <div class="panel signup card bg-white p-5 m-2">
                     <h1 class="m-0 mb-2 p-0"><b>Rejestracja</b></h1>
 
                     <form action="<?=AUTH_B_URL?>signup.php" method="post">
@@ -115,7 +115,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             <input
                                 name="username"
                                 type="text"
-                                class="form-control bg-light border-dark mb-2"
+                                class="form-control bg-light mb-2"
                                 placeholder="Nazwa"
                             >
 
@@ -123,7 +123,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             <input
                                 name="email"
                                 type="email"
-                                class="form-control bg-light border-dark mb-2"
+                                class="form-control bg-light mb-2"
                                 placeholder="Email"
                             >
 
@@ -131,7 +131,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             <input
                                 name="password"
                                 type="password"
-                                class="form-control bg-light border-dark mb-2"
+                                class="form-control bg-light mb-2"
                                 placeholder="Hasło"
                             >
 

@@ -9,7 +9,7 @@ cartAdd.forEach(add =>
     add.addEventListener("submit", function(e)
     {
         e.preventDefault();
-
+        
         let formData = new FormData(this);
 
         fetch(window.CONFIG.CART_B_URL + "cart-add.php",
@@ -19,7 +19,7 @@ cartAdd.forEach(add =>
         })
         .then(() =>
         {
-            if (window.location.pathname.includes("/cart"))
+            if (window.location.pathname.includes("/frontend"))
             {
                 window.location.reload();
             }

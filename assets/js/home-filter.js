@@ -5,7 +5,6 @@
 const filterBtn = document.getElementById("filterBtn");
 const filters = document.getElementById("filters");
 
-
 filterBtn.addEventListener("click", () => 
 {
     filters.classList.toggle("filterDisabled");
@@ -69,7 +68,6 @@ function filterProducts()
     const trueName = filterName.value.toLowerCase() || "";
     const trueMin = parseFloat(filterMin.value) || 0;
     const trueMax = parseFloat(filterMax.value) || Infinity;
-    console.log("e");
 
     products.forEach(product => 
     {
@@ -78,7 +76,7 @@ function filterProducts()
         const productType = product.dataset.type;
         const productStock = Number(product.dataset.stock);
         const isAvailable = Number(product.dataset.available) === 1 && (productStock === -1 || productStock > 0);
-        const isDiscounted = product.dataset.discount;
+        const isDiscounted = Number(product.dataset.discount);
 
         const matchName = productName.includes(trueName);
         const matchPrice = productPrice >= trueMin && productPrice <= trueMax;

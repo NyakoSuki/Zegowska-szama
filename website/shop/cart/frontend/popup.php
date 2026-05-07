@@ -79,7 +79,7 @@
     tabindex="-1"
 >
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 shadow">
+        <div class="modal-content bg-light rounded-4 shadow">
 
             <div class="modal-header">
                 <h5 class="modal-title">Czy napewno chcesz wyczyścić koszyk?</h5>

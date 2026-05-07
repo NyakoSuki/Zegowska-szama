@@ -2,19 +2,18 @@
 
 const productSearchAvailable = document.getElementById("productSearchAvailable");
 let productState = 2;
-console.log("e");
 
 
 productSearchAvailable.addEventListener("click", ()=>
 {
     productState = (productState + 1) % 3;
 
-switch (productState)
-{
-    case 0 : showUnactive(); break;
-    case 1 : showActive(); break;
-    case 2 : showAll(); break;
-}
+    switch (productState)
+    {
+        case 0 : showUnactive(); break;
+        case 1 : showActive(); break;
+        case 2 : showAll(); break;
+    }
 });
 
 function showAll()
@@ -27,14 +26,14 @@ function showAll()
 
 function showActive()
 {
-    productSearchAvailable.textContent = "Wyświetla aktywne";
+    productSearchAvailable.textContent = "Wyświetla dostępne";
     productSearchAvailable.classList.add("btn-success");
     productSearchAvailable.classList.remove("btn-danger");
 }
 
 function showUnactive()
 {
-    productSearchAvailable.textContent = "Wyświetla nieaktywne";
+    productSearchAvailable.textContent = "Wyświetla niedostępne";
     productSearchAvailable.classList.add("btn-danger");
     productSearchAvailable.classList.remove("btn-info");
 }
@@ -67,11 +66,11 @@ function filterProducts()
 
         if (matchName && matchPrice && matchAvailable)
         {
-            product.hidden = false;
+            product.style.display = "block";
         }
         else
         {
-            product.hidden = true;
+            product.style.display = "none";
         }
     });
 }
@@ -112,6 +111,7 @@ productSelect.addEventListener("change", () =>
     document.getElementById("productDescription").value = selected.dataset.description || "";
     document.getElementById("productImg").value = selected.dataset.img || "";
     document.getElementById("productAvailable").checked = selected.dataset.available === "1";
+    document.getElementById("productActive").checked = selected.dataset.active === "1";
 });
 
 

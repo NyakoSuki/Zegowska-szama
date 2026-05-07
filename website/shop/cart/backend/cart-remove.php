@@ -9,13 +9,10 @@ $id = (int)($_POST["id"] ?? 0);
 
 
 // DECREASE PRODUCT QUANTITY IN CART
-if ($id && isset($_SESSION["cart"][$id]))
+if ($_SESSION["cart"][$id] > 1)
 {
-    $_SESSION["cart"][$id]--;
-
-    // REMOVE PRODUCT IF QUANTITY IS ZERO OR LESS
-    if ($_SESSION["cart"][$id] <= 0)
+    if ($id && isset($_SESSION["cart"][$id]))
     {
-        unset($_SESSION["cart"][$id]);
+        $_SESSION["cart"][$id]--;
     }
 }

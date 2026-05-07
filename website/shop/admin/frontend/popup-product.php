@@ -5,7 +5,7 @@
     tabindex="-1"
 >
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content rounded-4 shadow">
+        <div class="modal-content bg-white rounded-4 shadow">
 
             <div class="modal-header">
                 <h5 class="modal-title">Zarządzanie produktami</h5>
@@ -28,24 +28,24 @@
                                 <input
                                     type="text"
                                     id="productSearchName"
-                                    class="form-control"
-                                    placeholder="Nazwa..."
+                                    class="form-control bg-white"
+                                    placeholder="Szukaj po nazwie..."
                                 >
                             </div>
                             <div class="col-md-4">
                                 <input
                                     type="number"
                                     id="productSearchMin"
-                                    class="form-control"
-                                    placeholder="Cena min..."
+                                    class="form-control bg-white"
+                                    placeholder="Cena minimalna"
                                 >
                             </div>
                             <div class="col-md-4">
                                 <input
                                     type="number"
                                     id="productSearchMax"
-                                    class="form-control"
-                                    placeholder="Cena max..."
+                                    class="form-control bg-white"
+                                    placeholder="Cena maksymalna"
                                 >
                             </div>
                         </div>
@@ -71,10 +71,10 @@
                 ?>
 
                 <!-- SELECT -->
-                <div class="mb-4 row">
+                <div class="mb-4 row bg-whte">
                     <label class="form-label fw-semibold">Wybierz produkt</label>
                     <div class="col-md-8 col-12">
-                        <select id="productSelect" class="form-select">
+                        <select id="productSelect" class="form-select bg-light">
                             <option>-- wybierz --</option>
 
                             <?php while($row = $result->fetch_assoc()): ?>
@@ -89,6 +89,7 @@
                                 data-stock="<?=$row["stock"] ?>"
                                 data-img="<?=$row["img"] ?>"
                                 data-available="<?=$row["is_available"] ?>"
+                                data-active="<?=$row["is_active"] ?>"
                             >
                                 <?= "Nazwa: " . $row["name"] . ", Cena: " . $row["price"] ?>
                             </option>
@@ -134,14 +135,14 @@
                                     id="productId"
                                     name="id"
                                     type="number"
-                                    class="form-control"
+                                    class="form-control bg-light"
                                     readonly
                                 >
                                 <input
                                     id="productIdNext"
                                     name="idNext"
                                     type="number"
-                                    class="form-control d-none"
+                                    class="form-control bg-light d-none"
                                     value="<?=$nextId?>"
                                     readonly
                                 >
@@ -153,7 +154,7 @@
                                     type="text"
                                     id="productName"
                                     name="name"
-                                    class="form-control"
+                                    class="form-control bg-light"
                                     placeholder="Nazwa"
                                 >
                             </div>
@@ -161,7 +162,7 @@
                         <div class="col-lg-6 row">
                             <div class="col-md-6">
                                 <label class="form-label">Typ</label>
-                                <select id="productType" class="form-select" name="type">
+                                <select id="productType" class="form-select bg-light" name="type">
                                     <option value="">-- wybierz --</option>
                                     <option value="food">Jedzenie</option>
                                     <option value="drink">Napój</option>
@@ -190,7 +191,7 @@
                                 type="number"
                                 id="productPrice"
                                 name="price"
-                                class="form-control"
+                                class="form-control bg-light"
                                 step=0.01
                                 placeholder="Cena"
                             >
@@ -202,8 +203,8 @@
                                 type="number"
                                 id="productStock"
                                 name="stock"
-                                class="form-control"
-                                placeholder="Ilość"
+                                class="form-control bg-light"
+                                placeholder="-1 -> nieskończona"
                             >
                         </div>
 
@@ -212,18 +213,18 @@
                             <textarea
                                 id="productDescription"
                                 name="description"
-                                class="form-control"
+                                class="form-control bg-light"
                                 placeholder="Opis"
                             ></textarea>
                         </div>
 
                         <div class="col-12">
-                            <label class="form-label">Link do zdjęcia</label>
+                            <label class="form-label">Zdjęcie</label>
                             <textarea
                                 id="productImg"
                                 name="img"
-                                class="form-control"
-                                placeholder="Link"
+                                class="form-control bg-light"
+                                placeholder="np. bułka.png"
                             ></textarea>
                         </div>
 
@@ -231,11 +232,26 @@
 
                     <input type="hidden" id="addSwitchValue" name="addSwitchValue" value="update">
 
-                    <div class="mt-4 text-end">
-                        <button type="submit" class="btn btn-success px-4" id="productSaveBtn">
+                    <div class="mt-4 d-flex text-start">
+
+                        <div class="col-md-6 mb-2 d-flex align-items-end">
+                            <div class="form-check form-switch">
+                                <input
+                                    type="checkbox"
+                                    id="productActive"
+                                    name="active"
+                                    class="form-check-input"
+                                >
+                                <label class="form-check-label">
+                                    Aktywny
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success px-4 ms-auto" id="productSaveBtn">
                             Zapisz zmiany
                         </button>
-                        <button type="submit" class="btn btn-success px-4 d-none" id="productAddBtn">
+                        <button type="submit" class="btn btn-success px-4 ms-auto d-none" id="productAddBtn">
                             Dodaj produkt
                         </button>
                     </div>
@@ -248,4 +264,3 @@
     </div>
 </div>
 
-<script src="<?=JS_URL?>admin-filter-products.js"></script>

@@ -34,7 +34,7 @@
                     class="btn btn-secondary">
                     <img
                         class="naviImg"
-                        src="<?=IMG_URL?>.svg"
+                        src="<?=IMG_URL?>account.svg"
                         alt="Konto"
                     >
                 </a>
@@ -44,12 +44,12 @@
                     class="btn btn-secondary">
                     <img
                         class="naviImg"
-                        src="<?=IMG_URL?>.svg"
+                        src="<?=IMG_URL?>cart.svg"
                         alt="Koszyk"
                     >
                 </a>
 
-                <?php if($_SESSION["site"] === "home")
+                <?php if($site === "home")
                 {
                 echo 
                 "<button

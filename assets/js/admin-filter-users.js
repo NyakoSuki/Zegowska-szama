@@ -1,59 +1,61 @@
 "use strict";
 
 const userSearchActive = document.getElementById("userSearchActive");
-let state = 2;
+let userState = 2;
 
 
 userSearchActive.addEventListener("click", ()=>
 {
-    state = (state + 1) % 3;
+    userState = (userState + 1) % 3;
+    userSearchActive.classList.remove
+    (
+        "btn-info",
+        "btn-success",
+        "btn-danger"
+    );
 
-switch (state)
-{
-    case 0 : showUnactive(); break;
-    case 1 : showActive(); break;
-    case 2 : showAll(); break;
-}
+    switch (userState)
+    {
+        case 0 : showUnactive(); break;
+        case 1 : showActive(); break;
+        case 2 : showAll(); break;
+    }
 });
 
 function showAll()
 {
     userSearchActive.textContent = "Wyświetla wszystkich";
     userSearchActive.classList.add("btn-info");
-    userSearchActive.classList.remove("btn-success");
-    userSearchActive.classList.remove("btn-danger");
 }
 
 function showActive()
 {
     userSearchActive.textContent = "Wyświetla aktywnych";
     userSearchActive.classList.add("btn-success");
-    userSearchActive.classList.remove("btn-danger");
 }
 
 function showUnactive()
 {
     userSearchActive.textContent = "Wyświetla nieaktywnych";
     userSearchActive.classList.add("btn-danger");
-    userSearchActive.classList.remove("btn-info");
 }
 
 
 
 const users = document.querySelectorAll(".user");
-const resetBtn = document.getElementById("resetBtn");
+const userResetBtn = document.getElementById("userResetBtn");
 
-const searchName = document.getElementById("searchName");
-const searchEmail = document.getElementById("searchEmail");
-const searchRole = document.getElementById("searchRole");
+const userSearchName = document.getElementById("userSearchName");
+const userSearchEmail = document.getElementById("userSearchEmail");
+const userSearchRole = document.getElementById("userSearchRole");
 
 
 function filterUsers()
 {
-    const nameValue = searchName.value.toLowerCase();
-    const emailValue = searchEmail.value.toLowerCase();
-    const roleValue = searchRole.value.toLowerCase();
-    const activeValue = state;
+    const nameValue = userSearchName.value.toLowerCase();
+    const emailValue = userSearchEmail.value.toLowerCase();
+    const roleValue = userSearchRole.value.toLowerCase();
+    const activeValue = userState;
 
     users.forEach(user => 
     {
@@ -65,7 +67,7 @@ function filterUsers()
         const matchName = userName.includes(nameValue);
         const matchEmail = userEmail.includes(emailValue);
         const matchRole = userRole.includes(roleValue);
-        const matchActive = (Number(userActive) === state || state == 2);
+        const matchActive = (Number(userActive) === userState || userState == 2);
 
         if (matchName && matchEmail && matchRole && matchActive)
         {
@@ -78,18 +80,18 @@ function filterUsers()
     });
 }
 
-searchName.addEventListener("input", filterUsers);
-searchEmail.addEventListener("input", filterUsers);
-searchRole.addEventListener("input", filterUsers);
+userSearchName.addEventListener("input", filterUsers);
+userSearchEmail.addEventListener("input", filterUsers);
+userSearchRole.addEventListener("input", filterUsers);
 
 userSearchActive.addEventListener("click", filterUsers);
 
-resetBtn.addEventListener("click", () => 
+userResetBtn.addEventListener("click", () => 
 {
-    searchName.value = "";
-    searchEmail.value = "";
-    searchRole.value = "";
-    state = 2;
+    userSearchName.value = "";
+    userSearchEmail.value = "";
+    userSearchRole.value = "";
+    userState = 2;
     showAll();
     filterUsers();
 });

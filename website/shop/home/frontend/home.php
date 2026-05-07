@@ -13,7 +13,7 @@ include JS_PATH;
 </head>
 <body class="<?=$_SESSION['theme']?>">
     <?php
-    $_SESSION["site"] = "home";
+    $site = "home";
     include HEADER_PATH;
     ?>
     <main>
@@ -121,37 +121,34 @@ include JS_PATH;
                             >
                                 <p
                                     class="fw-bold p-0 m-0 mt-auto
-                                    <?= $isDiscounted ? 'text-decoration-line-through' : ''?>
-                                ">
+                                    <?= $isDiscounted ? 'text-decoration-line-through' : ''?>"
+                                >
                                     <?= $productPrice?> zł
                                 </p>
                                 <p
-                                    class="fw-bold p-0 m-0 h4 text-warning"
+                                    class="fw-bold p-0 m-0 h4 text-warning align-self-end"
                                 >
                                     <?= $isDiscounted ? $truePrice : ''?>
                                 </p>
+                                <p
+                                    class="fw-bold p-0 m-0 h5 bg-danger text-light ms-auto rounded-5 p-1 m-1
+                                    <?= $isDiscounted ?  '' : 'd-none'?>"
+                                >
+                                    -<?= $discountProcent?>%
+                                </p>
                             </div>
 
-                            <form
-                                class="cartAdd m-0"
-                            >
-                                <input 
-                                    type="hidden"
-                                    name="id"
-                                    value="<?= $productId ?>"
-                                >
                                 <button
-                                    class="btn cart-bt w-100 fw-semibold shadow-sm p-1 m-0
+                                    type="button"
+                                    class="btn w-100 fw-semibold shadow-sm p-1 m-0
                                     <?= $isDiscounted ? 'btn-warning' : 'btn-light border border-dark' ?>"
                                     <?= $isAvailable ? '' : 'disabled' ?>
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#addToCartModal"
+                                    data-bs-product-id="<?= $productId ?>"
                                 >
-                                    <span
-                                        class="small"
-                                    >
-                                        🛒 Dodaj do koszyka
-                                    </span>
+                                    🛒 Dodaj do koszyka
                                 </button>
-                            </form>
 
                         </div>
                     </div>
@@ -169,7 +166,7 @@ include JS_PATH;
                 col-12 col-sm-6 col-md-4 col-lg-6 col-xxl-4 mt-2"
             >
                 <div
-                    class="card"
+                    class="card bg-white"
                 >
                     <div
                         class="card-body"
@@ -182,22 +179,22 @@ include JS_PATH;
                         <input
                             type="text"
                             id="filterName"
-                            class="form-control border-secondary mb-2"
+                            class="form-control bg-light mb-2"
                             placeholder="Szukaj po nazwie..."
                         >
                         <input
                             type="number"
                             id="filterMin"
-                            class="form-control border-secondary mb-2"
+                            class="form-control bg-light mb-2"
                             step=0.01
-                            placeholder="Cena min"
+                            placeholder="Cena minimalna"
                         >
                         <input
                             type="number"
                             id="filterMax"
-                            class="form-control border-secondary mb-3"
+                            class="form-control bg-light mb-3"
                             step=0.01
-                            placeholder="Cena max"
+                            placeholder="Cena maksymalna"
                         >
                         <hr>
                         <h6
@@ -258,13 +255,9 @@ include JS_PATH;
         </section>
     </main>
 
-    
-    <footer>
 
-    </footer>
-
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <?php include"popup.php";?>
     <script src="<?=JS_URL?>home-filter.js"></script>
     <script src="<?=JS_URL?>cart.js"></script>
 </body>

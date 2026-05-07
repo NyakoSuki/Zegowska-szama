@@ -76,5 +76,7 @@ include DB_PATH;
     <?php include "popup-product.php"?>
     <?php include "popup-discount.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=JS_URL?>admin-filter-products.js"></script>
+    <script src="<?=JS_URL?>admin-filter-users.js"></script>
 </body>
 </html>

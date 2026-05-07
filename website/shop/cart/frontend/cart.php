@@ -16,8 +16,7 @@ $cart = $_SESSION["cart"] ?? [];
 
 <body class="<?=$_SESSION['theme']?>">
     <?php
-    //---HEADER---
-    $_SESSION["site"] = "cart";
+    $site = "cart";
     include HEADER_PATH;
     ?>
     <main>
@@ -196,20 +195,20 @@ $cart = $_SESSION["cart"] ?? [];
                             </div>
                             
                         <!-- PRZYCISKI -->
-                        <div class="d-flex gap-2 m-0 justify-content-center">
-                             <form class="cartTrash w-25 m-0">
+                        <div class="d-flex row m-0 justify-content-center">
+                             <form class="cartTrash col-4 m-0">
                                 <input
                                     type="hidden"
                                     name="id"
                                     value="<?= $productId?>"
                                 >
-                                <button class="btn btn-outline-danger btn-sm w-75">
+                                <button class="btn btn-outline-danger btn-sm w-100">
                                     🗑️
                                 </button>
                             </form>
                             <!-- MINUS -->
                             <form
-                                class="cartRemove w-25 m-0"
+                                class="cartRemove col-3 m-0"
                             >
                                 <input
                                     type="hidden"
@@ -223,14 +222,14 @@ $cart = $_SESSION["cart"] ?? [];
                                 </button>
                             </form>
                             <!-- QTY -->
-                            <span 
-                                class="align-self-center h5 m-0"
+                            <span
+                                class="align-self-center col-2 h5 m-0"
                             >
                                 <?= $quantity?>
                             </span>
                             <!-- PLUS -->
                             <form
-                                class="cartAdd w-25 m-0"
+                                class="cartAdd col-3 m-0"
                             >
                                 <input 
                                     type="hidden"
@@ -257,7 +256,7 @@ $cart = $_SESSION["cart"] ?? [];
     </main>
 
 
-    <?php include "popups.php";?>
+    <?php include "popup.php";?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?=JS_URL?>cart.js"></script>
 </body>

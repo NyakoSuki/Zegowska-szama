@@ -5,7 +5,7 @@
     tabindex="-1"
 >
     <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content rounded-4 shadow">
+        <div class="modal-content bg-white rounded-4 shadow">
 
             <div class="modal-header">
                 <h5 class="modal-title">Zarządzanie użytkownikami</h5>
@@ -27,24 +27,24 @@
                             <div class="col-md-4">
                                 <input
                                     type="text"
-                                    id="searchName"
-                                    class="form-control"
+                                    id="userSearchName"
+                                    class="form-control bg-white"
                                     placeholder="Nazwa..."
                                 >
                             </div>
                             <div class="col-md-4">
                                 <input
                                     type="text"
-                                    id="searchEmail"
-                                    class="form-control"
+                                    id="userSearchEmail"
+                                    class="form-control bg-white"
                                     placeholder="Email..."
                                 >
                             </div>
                             <div class="col-md-4">
                                 <input
                                     type="text"
-                                    id="searchRole"
-                                    class="form-control"
+                                    id="userSearchRole"
+                                    class="form-control bg-white"
                                     placeholder="Rola..."
                                 >
                             </div>
@@ -58,7 +58,7 @@
                             </button>
 
                             <button
-                                id="resetBtn"
+                                id="userResetBtn"
                                 class="btn btn-danger">
                                 Reset
                             </button>
@@ -71,9 +71,9 @@
                 ?>
 
                 <!-- SELECT -->
-                <div class="mb-4">
+                <div class="mb-4 bg-white">
                     <label class="form-label fw-semibold">Wybierz użytkownika</label>
-                    <select id="userSelect" class="form-select">
+                    <select id="userSelect" class="form-select bg-light">
                         <option>-- wybierz --</option>
                         <?php while($row = $result->fetch_assoc()): ?>
                         <option
@@ -102,7 +102,7 @@
                                 id="userId"
                                 name="id"
                                 type="number"
-                                class="form-control"
+                                class="form-control bg-light"
                                 readonly
                             >
                         </div>
@@ -113,7 +113,7 @@
                                 type="text"
                                 id="userName"
                                 name="username"
-                                class="form-control"
+                                class="form-control bg-light"
                                 placeholder="Nazwa"
                             >
                         </div>
@@ -124,14 +124,14 @@
                                 type="text"
                                 id="userEmail"
                                 name="email"
-                                class="form-control"
+                                class="form-control bg-light"
                                 placeholder="Email"
                             >
                         </div>
 
                         <div class="col-md-6">
                             <label class="form-label">Rola</label>
-                            <select id="userRole" class="form-select" name="role">
+                            <select id="userRole" class="form-select bg-light" name="role">
                                 <option value="">-- wybierz --</option>
                                 <option value="user">User</option>
                                 <option value="admin">Admin</option>
@@ -168,4 +168,3 @@
     </div>
 </div>
 
-<script src="<?=JS_URL?>admin-filter-users.js"></script>
