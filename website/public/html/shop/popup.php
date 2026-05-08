@@ -29,12 +29,18 @@
                         value="1"
                         type="number"
                         placeholder=""
-                        max=10
-                        min=1
                     >
                     <input
                         id="addToCartId"
                         name="id"
+                        class=""
+                        value=""
+                        type="hidden"
+                        placeholder=""
+                    >
+                    <input
+                        id="addToCartName"
+                        name="name"
                         class=""
                         value=""
                         type="hidden"
@@ -79,11 +85,11 @@
                 name=""
                 class="h6"
             >
-            
+
             </p>
         </div>
 
     </div>
 </div>
 
-<script src="<?= JS_URL ?>homeAddToCart.js"></script>
+<script src="<?= JS_URL ?>addToCart.js"></script>

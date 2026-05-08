@@ -113,3 +113,35 @@
         </div>
     </div>
 </div>
+
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div
+        id="addToCartToast"
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+    >
+
+        <div class="toast-header">
+
+            <img src="" class="rounded me-2" alt="">
+            <strong class="me-auto h4">Koszyk</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+
+        </div>
+
+        <div class="toast-body">
+            <p
+                id="addToCartResult"
+                name=""
+                class="h6"
+            >
+
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script src="<?= JS_URL ?>addToCart.js"></script>

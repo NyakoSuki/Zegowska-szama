@@ -17,8 +17,12 @@ include JS_PATH;
     include HEADER_PATH;
     ?>
     <main>
-        <section class="products p-3">
-            <div class="row g-4">
+        <section
+            class="products p-3"
+        >
+            <div
+                class="row -g4"
+            >
                 <?php
                 $query = $connection->query
                 ("
@@ -76,9 +80,12 @@ include JS_PATH;
                     $discountEndDate = $row["end_date"];
 
                     $isAvailable = ($productIsAvailable === 1 && ($productStock === -1 || $productStock > 0));
+
                     $isActive = ($productIsActive === 1);
                     if(!$isActive) continue;
+
                     $isDiscounted = $discountProcent !== 0;
+
                     if($isDiscounted)
                         $truePrice = round($productPrice * (1 - $discountProcent / 100), 2);
                 ?>
@@ -128,7 +135,7 @@ include JS_PATH;
                                 <p
                                     class="fw-bold p-0 m-0 h4 text-warning align-self-end"
                                 >
-                                    <?= $isDiscounted ? $truePrice : ''?>
+                                    <?= $isDiscounted ? number_format($truePrice, 2) . ' zł' : ''?>
                                 </p>
                                 <p
                                     class="fw-bold p-0 m-0 h5 bg-danger text-light ms-auto rounded-5 p-1 m-1
@@ -146,6 +153,7 @@ include JS_PATH;
                                     data-bs-toggle="modal"
                                     data-bs-target="#addToCartModal"
                                     data-bs-product-id="<?= $productId ?>"
+                                    data-bs-product-name="<?= $productName ?>"
                                 >
                                     🛒 Dodaj do koszyka
                                 </button>

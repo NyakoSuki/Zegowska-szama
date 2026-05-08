@@ -26,6 +26,7 @@ $cart = $_SESSION["cart"] ?? [];
 
                 <div class="col-12 col-md-6 col-lg-3">
                     <button
+                        id="cartOrderBtn"
                         type="button"
                         class="btn btn-success w-100"
                         data-bs-toggle="modal"
@@ -196,52 +197,27 @@ $cart = $_SESSION["cart"] ?? [];
                             
                         <!-- PRZYCISKI -->
                         <div class="d-flex row m-0 justify-content-center">
-                             <form class="cartTrash col-4 m-0">
+                             <form class="cartTrash col-6 m-0">
                                 <input
                                     type="hidden"
                                     name="id"
                                     value="<?= $productId?>"
                                 >
-                                <button class="btn btn-outline-danger btn-sm w-100">
+                                <button class="btn btn-outline-danger btn-sm w-50">
                                     🗑️
                                 </button>
                             </form>
-                            <!-- MINUS -->
-                            <form
-                                class="cartRemove col-3 m-0"
-                            >
-                                <input
-                                    type="hidden"
-                                    name="id"
-                                    value="<?= $productId?>"
-                                >
-                                <button
-                                    class="btn btn-danger btn-sm w-100"
-                                >
-                                    -
-                                </button>
-                            </form>
+
                             <!-- QTY -->
-                            <span
-                                class="align-self-center col-2 h5 m-0"
+                            <input
+                                id="cartQuantityInp"
+                                name="quantity"
+                                class="col-6"
+                                value="<?= $quantity?>"
+                                type="number"
+                                placeholder=""
                             >
-                                <?= $quantity?>
-                            </span>
-                            <!-- PLUS -->
-                            <form
-                                class="cartAdd col-3 m-0"
-                            >
-                                <input 
-                                    type="hidden"
-                                    name="id"
-                                    value="<?= $productId?>"
-                                >
-                                <button
-                                    class="btn btn-success btn-sm w-100"
-                                >
-                                    +
-                                </button>
-                            </form>
+                        
                         </div>
 
                         </div>
