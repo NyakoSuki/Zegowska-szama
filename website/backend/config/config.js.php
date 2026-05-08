@@ -1,46 +1,39 @@
-<script>
+<?php
+$protocol = (!empty($_SERVER['HTTPS']) ? "https" : "http");
+$host = $_SERVER['HTTP_HOST'];
 
+$base = ($protocol . "://" . $host . "/Zegowska-szama/");
+$website = $base . "website/";
+?>
+
+<script>
 window.CONFIG =
 {
     /* ================= BASE ================= */
-    BASE_URL: "/Zegowska-szama/",
+    PROTOCOL: "<?= $protocol ?>",
+    HOST: "<?= $host ?>",
 
-        /* ================= WEB ================= */
-        WEB_URL: "/Zegowska-szama/website/",
+    BASE_URL: "<?= $base ?>",
 
-            /* ================= AUTH ================= */
-            AUTH_URL: "/Zegowska-szama/website/auth/",
-            AUTH_B_URL: "/Zegowska-szama/website/auth/backend/",
-            AUTH_F_URL: "/Zegowska-szama/website/auth/frontend/",
+    /* ================= BACKEND ================= */
+    BACKEND_URL: "<?= $website ?>backend/",
 
-            /* ================= SHOP ================= */
-            SHOP_URL: "/Zegowska-szama/website/shop/",
+    ACCOUNT_URL: "<?= $website ?>backend/account/",
+    ADMIN_URL: "<?= $website ?>backend/admin/",
+    AUTH_URL: "<?= $website ?>backend/auth/",
+    CART_URL: "<?= $website ?>backend/cart/",
+    CONFIG_URL: "<?= $website ?>backend/config/",
+    DATABASE_URL: "<?= $website ?>backend/database/",
+    SHARED_URL: "<?= $website ?>backend/shared/",
+    SHOP_URL: "<?= $website ?>backend/shop/",
 
-            /* ================= CART ================= */
-            CART_URL: "/Zegowska-szama/website/shop/cart/",
-            CART_B_URL: "/Zegowska-szama/website/shop/cart/backend/",
-            CART_F_URL: "/Zegowska-szama/website/shop/cart/frontend/",
+    /* ================= PUBLIC ================= */
+    PUBLIC_URL: "<?= $website ?>public/",
 
-            /* ================= ACCOUNT ================= */
-            ACCOUNT_URL: "/Zegowska-szama/website/shop/account/",
-            ACCOUNT_B_URL: "/Zegowska-szama/website/shop/account/backend/",
-            ACCOUNT_F_URL: "/Zegowska-szama/website/shop/account/frontend/",
-
-            /* ================= HOME ================= */
-            HOME_URL: "/Zegowska-szama/website/shop/home/",
-            HOME_B_URL: "/Zegowska-szama/website/shop/home/backend/",
-            HOME_F_URL: "/Zegowska-szama/website/shop/home/frontend/",
-
-            /* ================= ADMIN ================= */
-            ADMIN_URL: "/Zegowska-szama/website/shop/admin/",
-            ADMIN_B_URL: "/Zegowska-szama/website/shop/admin/backend/",
-            ADMIN_F_URL: "/Zegowska-szama/website/shop/admin/frontend/",
-
-        /* ================= ASSETS ================= */
-        ASSETS_URL: "/Zegowska-szama/assets/",
-        JS_URL: "/Zegowska-szama/assets/js/",
-        CSS_URL: "/Zegowska-szama/assets/css/",
-        IMG_URL: "/Zegowska-szama/assets/img/"
+    CSS_URL: "<?= $website ?>public/css/",
+    IMG_URL: "<?= $website ?>public/img/",
+    PRODUCT_URL: "<?= $website ?>public/img/product/",
+    HTML_URL: "<?= $website ?>public/html/",
+    JS_URL: "<?= $website ?>public/js/",
 };
-
 </script>

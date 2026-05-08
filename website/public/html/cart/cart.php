@@ -1,8 +1,7 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";
-require_once BLOCKER_PATH;
-include DB_PATH;
-include BASE_PATH . "config.js.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+require_once SITE_BLOCKER;
+include DATABASE_FILE;
 
 $cart = $_SESSION["cart"] ?? [];
 ?>
@@ -12,12 +11,15 @@ $cart = $_SESSION["cart"] ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Koszyk - Zegowska Szama</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=CSS_URL?>main.css">
 </head>
 
 <body class="<?=$_SESSION['theme']?>">
     <?php
     $site = "cart";
-    include HEADER_PATH;
+    include HTML_PATH . "/shared/header.php";
     ?>
     <main>
         <section class="p-3 mb-3">
@@ -70,54 +72,23 @@ $cart = $_SESSION["cart"] ?? [];
 
         </section>
 
+        <!--
+        * ====================PRODUCTS====================
+         * generated in productCreate.php
+        * ==================================================
+        -->
+        <?php include SHARED_B . "productCreate.php"?>
+
+        
         <section class="p-3">
             <div class="row g-4">
                 <?php
-                $query = $connection->query
-                ("
-                SELECT
-                    p.id,
-                    p.name,
-                    p.description,
-                    p.type,
-                    p.price,
-                    p.stock,
-                    p.is_available,
-                    p.is_active,
-                    p.img,
-                    d.procent,
-                    d.start_date,
-                    d.end_date
-                FROM products p
-                LEFT JOIN
-                (
-                    SELECT *
-                    FROM
-                    (
-                        SELECT 
-                            d.*,
-                            dp.product_id,
-                            ROW_NUMBER() OVER
-                            (
-                                PARTITION BY dp.product_id
-                                ORDER BY d.procent DESC
-                            ) AS rn
-                        FROM discounts d
-                        JOIN discounted_products dp 
-                            ON d.id = dp.discount_id
-                        WHERE d.start_date <= NOW()
-                        AND d.end_date >= NOW()
-                    ) x
-                    WHERE rn = 1
-                ) d ON p.id = d.product_id
-                ORDER BY p.type;
-                ");
-
-                $totalPrice = 0;
+                
+                
                 while ($row = $query->fetch_assoc())
                 {
                     $productId = (int)($row["id"]);
-                    if (!isset($cart[$productId])) continue;
+                    
 
                     $productName = $row["name"];
                     $productDescription = $row["description"];

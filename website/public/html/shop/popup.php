@@ -1,6 +1,6 @@
 <div
     class="modal fade"
-    id="addToCartModal"
+    id="cartAddModal"
     tabindex="-1"
 >
     <div class="modal-dialog modal-dialog-centered">
@@ -64,7 +64,7 @@
 
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div
-        id="addToCartToast"
+        id="cartAddToast"
         class="toast"
         role="alert"
         aria-live="assertive"
@@ -92,4 +92,4 @@
     </div>
 </div>
 
-<script src="<?= JS_URL ?>addToCart.js"></script>
+<script src="<?=JS_SHARED?>cartAdd.js"></script>

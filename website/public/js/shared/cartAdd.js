@@ -8,12 +8,12 @@
  * sgow toast
 * ==================================================
 */
-const addToCartModal = document.getElementById("addToCartModal");
-const modal = new bootstrap.Modal(addToCartModal);
+const cartAddModal = document.getElementById("cartAddModal");
+const modal = new bootstrap.Modal(cartAddModal);
 
-if (addToCartModal)
+if (cartAddModal)
 {
-    addToCartModal.addEventListener('show.bs.modal', event =>
+    cartAddModal.addEventListener('show.bs.modal', event =>
     {
         const addToCartBtn = event.relatedTarget;
 
@@ -35,8 +35,8 @@ if (addToCartModal)
 const form = document.getElementById("addToCartForm");
 const result = document.getElementById("addToCartResult");
 
-const addToCartToast = document.getElementById('addToCartToast');
-const toast = bootstrap.Toast.getOrCreateInstance(addToCartToast);
+const cartAddToast = document.getElementById('cartAddToast');
+const toast = bootstrap.Toast.getOrCreateInstance(cartAddToast);
 
 form.addEventListener("submit", function(e)
 {
@@ -44,7 +44,7 @@ form.addEventListener("submit", function(e)
 
     let formData = new FormData(this);
 
-    fetch(window.CONFIG.CART_B_URL + "cartAdd.php",
+    fetch(window.CONFIG.SHARED_URL + "cartAdd.php",
     {
         method: "POST",
         body: formData
@@ -80,35 +80,3 @@ form.addEventListener("submit", function(e)
  * 
 * ==================================================
 */
-
-const cartQuantityInp = document.getElementById("cartQuantityInp");
-
-cartQuantityInp.addEventListener("input", updateQuantity);
-
-
-function updateQuantity()
-{
-    let formData = new FormData(this);
-
-    fetch(window.CONFIG.CART_B_URL + "cartAdd.php",
-    {
-        method: "POST",
-        body: formData
-    })
-    .then(async response =>
-    {
-        const text = await response.text();
-
-        if (!response.ok)
-        {
-            throw new Error(text);
-        }
-
-        return text;
-    })
-    .catch(error =>
-    {
-        result.innerHTML = error.message;
-        toast.show();
-    });
-};
