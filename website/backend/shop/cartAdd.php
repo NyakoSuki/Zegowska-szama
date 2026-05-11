@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
 
 
@@ -25,7 +26,7 @@ if(($_SESSION["cart"][$id] ?? 0) + $quantity > 10)
 {
     http_response_code(409);
     exit("Nie możesz mieć więcej niż 10 takich samych produktów w koszyku naraz! Posiadasz: " . ($_SESSION['cart'][$id] ?? 0));
-}
 
+}
 $_SESSION["cart"][$id] = ($_SESSION["cart"][$id] ?? 0) + $quantity;
 exit("Pomyślnie dodano \"" . $name . "\"\n w ilości: " . $quantity);

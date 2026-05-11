@@ -14,7 +14,7 @@
 
             <div class="modal-body">
                 <form
-                    action="<?=CART_B_URL?>order.php"
+                    action="<?=BACKEND_URL?>cart/order.php"
                     method="post"
                 >
                     <input
@@ -33,7 +33,7 @@
                     >
                     <p
                         class="h6">
-                        Całkowita cena do zapłaty: <?=$totalPrice?> zł
+                        Całkowita cena do zapłaty: <?=$totalPrice ?? '0';?> zł
                     </p>
 
                     <label class="fw-bold mb-1">Metoda płatności</label>
@@ -92,7 +92,7 @@
 
             <div class="modal-body">
                 <form
-                    action="<?=CART_B_URL?>cart-clear.php"
+                    action="<?=BACKEND_URL?>cart/cartClear.php"
                     method="post"
                     class="w-100 h-75 d-flex gap-2"
                 >
@@ -134,7 +134,6 @@
         <div class="toast-body">
             <p
                 id="addToCartResult"
-                name=""
                 class="h6"
             >
 
@@ -143,5 +142,3 @@
 
     </div>
 </div>
-
-<script src="<?= JS_URL ?>addToCart.js"></script>

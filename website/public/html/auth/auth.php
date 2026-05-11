@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once dirname(__DIR__, 2) . "/config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
 
 if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
 ?>
@@ -13,7 +13,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
     <title>Logowanie/Rejestracja - Zegowska szama</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?=CSS_URL?>auth.css">
+    <link rel="stylesheet" href="<?=PUBLIC_URL?>css/auth.css">
 </head>
 
 <body class="d-flex align-items-center justify-content-center vh-100 <?=$_SESSION['theme']?>">
@@ -49,7 +49,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                 <div class="panel login card bg-white p-5 m-2">
                     <h1 class="m-0 mb-5 p-0"><b>Logowanie</b></h1>
 
-                    <form action="<?=AUTH_B_URL?>login.php" method="post">
+                    <form action="<?=BACKEND_URL?>auth/login.php" method="post">
 
                         <label class="m-0">Email:<br></label>
                             <input
@@ -109,7 +109,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                 <div class="panel signup card bg-white p-5 m-2">
                     <h1 class="m-0 mb-2 p-0"><b>Rejestracja</b></h1>
 
-                    <form action="<?=AUTH_B_URL?>signup.php" method="post">
+                    <form action="<?=BACKEND_URL?>auth/signup.php" method="post">
 
                         <label class="m-0">Nazwa:<br></label>
                             <input
@@ -179,7 +179,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
     </main>
 
 
-<script src="<?=JS_URL?>auth.js"></script>
+<script src="<?=PUBLIC_URL?>js/auth/animation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>

@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once dirname(__DIR__, 2) . "/config.php";
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+include BACKEND_PATH . "database/database.php";
 
 
 $email = strtolower(trim($_POST["email"] ?? ''));
@@ -29,7 +29,7 @@ if ($result->num_rows === 0)
     session_regenerate_id(true);
     $_SESSION['error'] = "uncorrect";
 
-    header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
     exit;
 }
 
@@ -42,7 +42,7 @@ if($user['is_active'] === 0)
     session_regenerate_id(true);
     $_SESSION["error"] = "unactive";
 
-    header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
     exit;
 }
 
@@ -60,7 +60,7 @@ if
     session_regenerate_id(true);
     $_SESSION["error"] = "locked";
 
-    header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");;
     exit;
 }
 
@@ -81,7 +81,7 @@ if (!password_verify($password, $user["password"]))
     session_regenerate_id(true);
     $_SESSION['error'] = "uncorrect";
 
-    header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
     exit;
 }
 
@@ -104,5 +104,5 @@ session_regenerate_id(true);
 $_SESSION["id"] = $user["id"];
 $_SESSION["role"] = $user["role"];
 
-header("Location: " . HOME_F_URL . "home.php");
+header("Location: " . PUBLIC_URL . "html/shop/shop.php");
 exit;

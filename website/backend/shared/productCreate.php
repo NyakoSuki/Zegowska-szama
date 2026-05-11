@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
-include DATABASE_FILE;
+include BACKEND_PATH . "database/database.php";
 
 $site = basename($_SERVER['PHP_SELF']);
 ?>
@@ -51,6 +51,9 @@ $site = basename($_SERVER['PHP_SELF']);
         ) d ON p.id = d.product_id
         ORDER BY p.type;
         ");
+
+        $totalPrice = 0;
+
         while ($row = $query->fetch_assoc())
         {
             $productId = (int)($row["id"]);
@@ -72,10 +75,7 @@ $site = basename($_SERVER['PHP_SELF']);
             $discountStartDate = $row["start_date"];
             $discountEndDate = $row["end_date"];
 
-            if($site === "cart.php")
-            {
-                $quantity = $cart[$productId];
-            }
+            $quantity = $cart[$productId] ?? 1;
 
             $isAvailable = ($productIsAvailable === 1 && ($productStock === -1 || $productStock > 0));
 
@@ -84,9 +84,11 @@ $site = basename($_SERVER['PHP_SELF']);
 
             $isDiscounted = $discountProcent !== 0;
             if($isDiscounted)
-                $truePrice = round($productPrice * (1 - $discountProcent / 100), 2);
+                $truePrice = round(($productPrice * $quantity ?? 1) * (1 - $discountProcent / 100), 2);
             else
-                $truePrice = $productPrice;
+                $truePrice = ($productPrice * $quantity ?? 1);
+
+            $totalPrice += $truePrice;
         ?>
         <div
             class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2"
@@ -105,7 +107,7 @@ $site = basename($_SERVER['PHP_SELF']);
                 data-discount="<?= $discountProcent?>"
             >
                 <img 
-                    src="<?=IMG_PRODUCTS.$productImg?>"
+                    src="<?=PUBLIC_URL . "img/products/" . $productImg?>"
                     alt="<?= $productName ?>"
                     class="card-img-top h2 text-center p-0 m-0 align-self-center
                     <?= ($productType === 'drink') ? 'w-25' : ''?>"
@@ -129,12 +131,12 @@ $site = basename($_SERVER['PHP_SELF']);
                             class="fw-bold p-0 m-0 mt-auto
                             <?= $isDiscounted ? 'text-decoration-line-through' : ''?>"
                         >
-                            <?= $productPrice * ($quantity ?? 1)?> zł
+                            <?= number_format($productPrice * ($quantity ?? 1), 2)?> zł
                         </p>
                         <p
                             class="fw-bold p-0 m-0 h4 text-warning align-self-end"
                         >
-                            <?= $isDiscounted ? number_format($truePrice * ($quantity ?? 1), 2) . ' zł' : ''?>
+                            <?= $isDiscounted ? number_format($truePrice, 2) . ' zł' : ''?>
                         </p>
 
 
@@ -163,17 +165,83 @@ $site = basename($_SERVER['PHP_SELF']);
 
                     <?php if($site === "cart.php") { ?>
                         </div>
-                            <p
-                                class="fw-bold p-0 m-0 h5 bg-danger text-light ms-auto rounded-5 p-1 m-1"
+                            <div
+                                class="d-flex justify-content-evenly mb-3"
                             >
-                                <?= $quantity?>
-                            </p>
+                                <form
+
+                                    class="decForm w-25 d-flex justify-content-center"
+                                >
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="<?= $productId?>"
+                                >
+                                <input
+                                    type="hidden"
+                                    name="quantity"
+                                    value="<?= $quantity?>"
+                                >
+                                    <button
+                                        name="incBtn"
+                                        class="w-50"
+                                        type="submit"
+                                    >
+                                        -
+                                    </button>
+                                </form>
+                                <input
+                                    data-product-id="<?=$productId?>"
+                                    class="qtyInp w-25 text-center"
+                                    value="<?=$quantity?>"
+                                    type="number"
+                                    placeholder=""
+                                    min=1
+                                    max=10
+                                >
+
+                                <form
+
+                                    class="incForm w-25 d-flex justify-content-center"
+                                >
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="<?= $productId?>"
+                                >
+                                <input
+                                    type="hidden"
+                                    name="quantity"
+                                    value="<?= $quantity?>"
+                                >
+                                    <button
+                                        name="incBtn"
+                                        class="w-50"
+                                        type="submit"
+                                    >
+                                        +
+                                    </button>
+                                </form>
+                            </div>
+
+                            <form 
+                                class="removeForm m-0">
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="<?= $productId?>"
+                                >
+                                <button class="btn btn-outline-danger btn-sm w-100">
+                                    🗑️ Usuń z koszyka
+                                </button>
+                            </form>
+
                         </div>
                     <?php } ?>
 
-
+                    
             </div>
         </div>
-        <?php } ?>
+        <?php }  ?>
     </div>
 </section>

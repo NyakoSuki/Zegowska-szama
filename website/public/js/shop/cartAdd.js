@@ -17,17 +17,17 @@ if (cartAddModal)
     {
         const addToCartBtn = event.relatedTarget;
 
-        const addToCartQuantity = document.getElementById('addToCartQuantity');
+        const homeCartQtyInp = document.getElementById('homeCartQtyInp');
 
         const productId = addToCartBtn.dataset.bsProductId;
-        const productIdInput = document.getElementById('addToCartId');
+        const homeCartIdInp = document.getElementById('homeCartIdInp');
 
         const productName = addToCartBtn.dataset.bsProductName;
-        const productNameInput = document.getElementById('addToCartName');
+        const homeCartNameInp = document.getElementById('homeCartNameInp');
 
-        addToCartQuantity.value = 1;
-        productIdInput.value = productId;
-        productNameInput.value = productName;
+        homeCartQtyInp.value = 1;
+        homeCartIdInp.value = productId;
+        homeCartNameInp.value = productName;
     })
 }
 
@@ -44,7 +44,7 @@ form.addEventListener("submit", function(e)
 
     let formData = new FormData(this);
 
-    fetch(window.CONFIG.SHARED_URL + "cartAdd.php",
+    fetch(window.CONFIG.BACKEND_URL + "shop/cartAdd.php",
     {
         method: "POST",
         body: formData
@@ -73,10 +73,3 @@ form.addEventListener("submit", function(e)
         toast.show();
     });
 });
-
-
-/**
-* ====================CART====================
- * 
-* ==================================================
-*/

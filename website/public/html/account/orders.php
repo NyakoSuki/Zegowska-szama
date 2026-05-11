@@ -1,8 +1,7 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";
-require_once BLOCKER_PATH;
-include DB_PATH;
-include BASE_PATH . "config.js.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+require_once BACKEND_PATH . "shared/siteblocker.php";
+include BACKEND_PATH . "database/database.php";
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -10,11 +9,14 @@ include BASE_PATH . "config.js.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zanówienia - Zegowska szama</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?=PUBLIC_URL?>css/main.css">
 </head>
 <body class="<?=$_SESSION["theme"]?>">
 <?php
-$_SESSION["site"] = "orders";
-include HEADER_PATH;
+$site = "orders";
+include PUBLIC_PATH . "html/shared/header.php";
 ?>
 <main>
 
@@ -67,6 +69,6 @@ include HEADER_PATH;
     
     <?php include "popups.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?=JS_URL?>details.js"></script>
+    <script src="<?=PUBLIC_URL?>js/account/details.js"></script>
 </body>
 </html>

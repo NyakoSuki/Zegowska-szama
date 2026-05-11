@@ -7,7 +7,7 @@
                     href="https://www.zs4.oswiata.tychy.pl/"
                     class="d-inline-block shadow-none">
                         <img 
-                            src="<?=IMG_URL?>logo.svg"
+                            src="<?=PUBLIC_URL?>img/logo.svg"
                             class="img-fluid img-logo" alt="logo"
                         >
                 </a>
@@ -15,10 +15,10 @@
 
             <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
                 <a 
-                    href="<?=HTML_SHOP?>home.php"
+                    href="<?=PUBLIC_URL?>html/home/home.php"
                     class="d-inline-block shadow-none">
                         <img 
-                            src="<?=IMG_URL?>zegowska-szama.svg"
+                            src="<?=PUBLIC_URL?>img/zegowska-szama.svg"
                             class="img-fluid img-logo" alt="zegowska-szama"
                         >
                 </a>
@@ -27,21 +27,21 @@
             <!-- NAV -->
             <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
                 <a
-                    href="<?=HTML_ACCOUNT?>account.php"
+                    href="<?=PUBLIC_URL?>html/account/account.php"
                     class="btn btn-secondary">
                     <img
                         class="naviImg"
-                        src="<?=IMG_URL?>account.svg"
+                        src="<?=PUBLIC_URL?>img/account.svg"
                         alt="Konto"
                     >
                 </a>
 
                 <a
-                    href="<?=HTML_CART?>cart.php"
+                    href="<?=PUBLIC_URL?>html/cart/cart.php"
                     class="btn btn-secondary">
                     <img
                         class="naviImg"
-                        src="<?=IMG_URL?>cart.svg"
+                        src="<?=PUBLIC_URL?>img/cart.svg"
                         alt="Koszyk"
                     >
                 </a>
@@ -56,7 +56,7 @@
                 >
                     <img
                         class='naviImg'
-                        src='" . IMG_URL . "menu.svg'
+                        src='" . PUBLIC_URL . "img/menu.svg'
                         alt='Filtry'
                     >
                 </button>";
@@ -65,12 +65,12 @@
                 {
                 echo 
                 "<a
-                    href='" . HTML_SHOP . "shop.php'
+                    href='" . PUBLIC_URL . "html/shop/shop.php'
                     class='btn btn-secondary'
                 >
                     <img
                         class='naviImg'
-                        src='" . IMG_URL . "home.svg'
+                        src='" . PUBLIC_URL . "img/home.svg'
                         alt='Sklep'
                     >
                 </a>";

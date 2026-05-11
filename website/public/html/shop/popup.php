@@ -23,7 +23,7 @@
                     action=""
                 >
                     <input
-                        id="addToCartQuantity"
+                        id="homeCartQtyInp"
                         name="quantity"
                         class=""
                         value="1"
@@ -31,7 +31,7 @@
                         placeholder=""
                     >
                     <input
-                        id="addToCartId"
+                        id="homeCartIdInp"
                         name="id"
                         class=""
                         value=""
@@ -39,7 +39,7 @@
                         placeholder=""
                     >
                     <input
-                        id="addToCartName"
+                        id="homeCartNameInp"
                         name="name"
                         class=""
                         value=""
@@ -47,7 +47,7 @@
                         placeholder=""
                     >
                     <button
-                        id="addToCartBtn"
+                        id="homeCartAddBtn"
                         class=""
                         type="submit"
                     >
@@ -91,5 +91,3 @@
 
     </div>
 </div>
-
-<script src="<?=JS_SHARED?>cartAdd.js"></script>

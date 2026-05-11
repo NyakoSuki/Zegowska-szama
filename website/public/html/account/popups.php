@@ -1,7 +1,7 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";
-require_once BLOCKER_PATH;
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+require_once BACKEND_PATH . "shared/siteblocker.php";
+include BACKEND_PATH . "database/database.php";
 ?>
 
 <!-- USERNAME CHAHGE -->
@@ -23,7 +23,7 @@ include DB_PATH;
             <div class="modal-body">
 
                 <form
-                    action="<?=ACCOUNT_B_URL?>change-username.php"
+                    action="<?=BACKEND_URL?>account/usernameUpdate.php.php"
                     method="post"
                     class="d-grid gap-2"
                 >
@@ -64,7 +64,7 @@ include DB_PATH;
             <div class="modal-body">
 
                 <form
-                    action="<?=ACCOUNT_B_URL?>change-password.php"
+                    action="<?=BACKEND_URL?>account/passwordUpdate.php"
                     method="post"
                     class="d-grid gap-2"
                 >
@@ -116,7 +116,7 @@ include DB_PATH;
             <div class="modal-body">
 
                 <form
-                    action="<?=ACCOUNT_B_URL?>logout.php"
+                    action="<?=BACKEND_PATH?>account/logout.php"
                     method="post"
                     class="w-100 h-75 d-flex gap-2"
                 >

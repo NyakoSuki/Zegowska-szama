@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once dirname(__DIR__, 2) . "/config.php";
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+include BACKEND_PATH . "database/database.php";
 
 
 // INPUT DATA
@@ -22,7 +22,7 @@ if (mb_strlen($password) < 8)
     session_regenerate_id(true);
     $_SESSION["error"] = "short";
 
-    header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
     exit;
 }
 
@@ -46,7 +46,7 @@ if ($result->num_rows > 0)
     session_regenerate_id(true);
     $_SESSION["error"] = "exists";
 
-    header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
     exit;
 }
 
@@ -71,5 +71,5 @@ $stmt->bind_param("sss", $username, $email, $hashed);
 session_regenerate_id(true);
 $_SESSION["error"] = "none";
 
-header("Location: " . AUTH_F_URL . "auth.php");
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
 exit;

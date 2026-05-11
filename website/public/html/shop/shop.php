@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
-require_once SITE_BLOCKER;
-include DATABASE_FILE;
+require_once BACKEND_PATH . "shared/siteblocker.php";
+include BACKEND_PATH . "database/database.php";
 ?>
 <!DOCTYPE html>
 <html lang="pl">
@@ -11,12 +11,12 @@ include DATABASE_FILE;
     <title>Zegowska Szama - sklep</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?=CSS_URL?>main.css">
+    <link rel="stylesheet" href="<?=PUBLIC_URL?>css/main.css">
 </head>
 <body class="<?=$_SESSION['theme']?>">
     <?php
     $site = "shop";
-    include HTML_PATH . "/shared/header.php";
+    include PUBLIC_PATH . "html/shared/header.php";
     ?>
     <main>
         <!--
@@ -24,7 +24,7 @@ include DATABASE_FILE;
          * generated in productCreate.php
         * ==================================================
         -->
-            <?php include SHARED_B . "productCreate.php"?>
+            <?php include BACKEND_PATH . "shared/productCreate.php"?>
 
         <!--
         * ====================MENU====================
@@ -128,8 +128,9 @@ include DATABASE_FILE;
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <?php include JS_CONFIG?>
-    <?php include HTML_PATH . "shop/popup.php"?>
-    <script src="<?=JS_SHOP?>filter.js"></script>
+    <?php include BACKEND_PATH . "config/config.js.php"?>
+    <?php include PUBLIC_PATH . "html/shop/popup.php"?>
+    <script src="<?=PUBLIC_URL?>js/shop/cartAdd.js"></script>
+    <script src="<?=PUBLIC_URL?>js/shop/filter.js"></script>
 </body>
 </html>
