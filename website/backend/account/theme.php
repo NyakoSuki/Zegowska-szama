@@ -1,9 +1,9 @@
 <?php
 require_once dirname(__DIR__, 3) . "/config.php";
-require_once BLOCKER_PATH;
-include DB_PATH;
+require_once BACKEND_PATH . "shared/siteblocker.php";
+include BACKEND_PATH . "database/database.php";
 
 $_SESSION["theme"] = $_SESSION["theme"] === "dark" ? "light" : "dark";
 
-header("Location: " . ACCOUNT_F_URL . "account.php");
+    header("Location: " . PUBLIC_PATH . "html/account/account.php");
 exit;

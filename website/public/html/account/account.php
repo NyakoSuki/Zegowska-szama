@@ -53,26 +53,55 @@ $username = $row["username"];
         </div>
 
 
-        <div class="row justify-content-center g-4">
+    <div class="row justify-content-center g-4">
     <div class="col-10 col-md-8 col-lg-6">
 
         <div class="row g-3">
+            <div
+                class="col-12 d-flex justify-content-center"
+            >
+                <?php
+                if(isset($_SESSION["error"]))
+                {
+                    switch ($_SESSION["error"])
+                    {
+                        case "used":
+                            echo "<h4 class='text-danger mt-2'>Ta nazwa jest już zajęta</h4>";
+                            break;
 
+                        case "unone":
+                            echo "<h4 class='text-success mt-2'>Pomyślnie zmieniono nazwę</h4>";
+                            break;
+
+                        case "short":
+                            echo "<h4 class='text-danger mt-2'>Min. 8 znaków</h4>";
+                            break;
+
+                        case "notsame":
+                            echo "<h4 class='text-danger mt-2'>Hasła nie są takie same</h4>";
+                            break;
+
+                        case "old":
+                            echo "<h4 class='text-danger mt-2'>Nowe hasło nie może być takie samo</h4>";
+                            break;
+
+                        case "uncorrect":
+                            echo "<h4 class='text-danger mt-2'>Złe aktualne hasło</h4>";
+                            break;
+
+                        case "pnone":
+                            echo "<h4 class='text-success mt-2'>Hasło zmienione</h4>";
+                            break;
+                    }
+                    unset($_SESSION["error"]);
+                }
+                ?>
+                </div>
             <!-- Zmień nazwę -->
             <div class="col-12 col-md-6">
                 <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#usernameModal">
                     Zmień nazwę
                 </button>
-
-                <?php
-                if(isset($_SESSION["error"]))
-                {
-                    if($_SESSION["error"] == "used")
-                        echo "<h6 class='text-danger mt-2'>Ta nazwa jest już zajęta</h6>";
-                    if($_SESSION["error"] == "unone")
-                        echo "<h6 class='text-success mt-2'>Pomyślnie zmieniono nazwę</h6>";
-                }
-                ?>
             </div>
 
             <!-- Hasło -->
@@ -80,31 +109,6 @@ $username = $row["username"];
                 <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal" data-bs-target="#passwordModal">
                     Zmiana hasła
                 </button>
-
-                <?php
-                if(isset($_SESSION["error"]))
-                {
-                    switch ($_SESSION["error"])
-                    {
-                        case "short":
-                            echo "<h6 class='text-danger mt-2'>Min. 8 znaków</h6>";
-                            break;
-                        case "notsame":
-                            echo "<h6 class='text-danger mt-2'>Hasła nie są takie same</h6>";
-                            break;
-                        case "old":
-                            echo "<h6 class='text-danger mt-2'>Nowe hasło nie może być takie samo</h6>";
-                            break;
-                        case "uncorrect":
-                            echo "<h6 class='text-danger mt-2'>Złe aktualne hasło</h6>";
-                            break;
-                        case "pnone":
-                            echo "<h6 class='text-success mt-2'>Hasło zmienione</h6>";
-                            break;
-                    }
-                    unset($_SESSION["error"]);
-                }
-                ?>
             </div>
 
             <!-- Zamówienia -->

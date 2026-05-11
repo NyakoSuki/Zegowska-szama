@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once dirname(__DIR__, 3) . "/config.php";
+
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
 
 $theme = $_SESSION["theme"];
 
@@ -10,5 +11,5 @@ session_unset();
 session_start();
 $_SESSION["theme"] = $theme;
 
-header("Location: " . AUTH_F_URL . "auth.php");
+header("Location: " . PUBLIC_PATH . "html/auth/auth.php");
 exit;

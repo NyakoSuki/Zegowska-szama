@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once dirname(__DIR__, 3) . "/config.php";
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+include BACKEND_PATH . "database/database.php";
 
 
 // INPUT DATA
@@ -34,7 +34,7 @@ if ($result->num_rows > 0)
     session_regenerate_id(true);
     $_SESSION["error"] = "used";
 
-    header("Location: " . ACCOUNT_F_URL . "account.php");
+    header("Location: " . PUBLIC_PATH . "html/account/account.php");
     exit;
 }
 
@@ -56,5 +56,5 @@ $stmt->bind_param("si", $username, $id);
 session_regenerate_id(true);
 $_SESSION["error"] = "unone";
 
-header("Location: " . ACCOUNT_F_URL . "account.php");
+header("Location: " . PUBLIC_PATH . "html/account/account.php");
 exit;

@@ -1,6 +1,6 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";
-include DB_PATH;
+require_once dirname(__DIR__, 3) . "/config.php";require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+include BACKEND_PATH . "database/database.php";
 
 if (!isset($_POST['order_id'])) exit;
 

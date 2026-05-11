@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once dirname(__DIR__, 3) . "/config.php";
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+include BACKEND_PATH . "database/database.php";
 
 
 // INPUT DATA
@@ -23,7 +23,7 @@ if (mb_strlen($new) < 8)
     session_regenerate_id(true);
     $_SESSION["error"] = "short";
 
-    header("Location: " . ACCOUNT_F_URL . "account.php");
+    header("Location: " . PUBLIC_PATH . "html/account/account.php");
     exit;
 }
 
@@ -34,7 +34,7 @@ if ($new !== $confirm)
     session_regenerate_id(true);
     $_SESSION["error"] = "notsame";
 
-    header("Location: " . ACCOUNT_F_URL . "account.php");
+    header("Location: " . PUBLIC_PATH . "html/account/account.php");
     exit;
 }
 
@@ -61,7 +61,7 @@ if (password_verify($new, $row["password"]))
     session_regenerate_id(true);
     $_SESSION["error"] = "old";
 
-    header("Location: " . ACCOUNT_F_URL . "account.php");
+    header("Location: " . PUBLIC_PATH . "html/account/account.php");
     exit;
 }
 
@@ -72,7 +72,7 @@ if (!password_verify($current, $row["password"]))
     session_regenerate_id(true);
     $_SESSION["error"] = "uncorrect";
 
-    header("Location: " . ACCOUNT_F_URL . "account.php");
+    header("Location: " . PUBLIC_PATH . "html/account/account.php");
     exit;
 }
 
@@ -98,5 +98,5 @@ $stmt->bind_param("si", $hashed, $id);
 session_regenerate_id(true);
 $_SESSION["error"] = "pnone";
 
-header("Location: " . ACCOUNT_F_URL . "account.php");
+header("Location: " . PUBLIC_PATH . "html/account/account.php");
 exit;

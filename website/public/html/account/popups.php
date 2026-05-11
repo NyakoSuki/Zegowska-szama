@@ -23,7 +23,7 @@ include BACKEND_PATH . "database/database.php";
             <div class="modal-body">
 
                 <form
-                    action="<?=BACKEND_URL?>account/usernameUpdate.php.php"
+                    action="<?=BACKEND_URL?>account/usernameUpdate.php"
                     method="post"
                     class="d-grid gap-2"
                 >
