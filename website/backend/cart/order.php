@@ -1,13 +1,13 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";
-require_once BLOCKER_PATH;
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+require_once BACKEND_PATH . "shared/siteblocker.php";
+include BACKEND_PATH . "database/database.php";
 
 
 $cart = $_SESSION["cart"] ?? [];
 if (empty($cart)) {
-    $_SESSION["producterror"] = "Koszyk jest pusty";
-    header("Location: " . CART_F_URL . "cart.php");
+    $_SESSION["error"] = "empty";
+    header("Location: " . PUBLIC_URL . "html/cart/cart.php");
     exit;
 }
 
@@ -23,20 +23,22 @@ $products = $connection->query("
 $removedProducts = [];
 
 while ($product = $products->fetch_assoc()) {
-    $id = $product["id"];
+    $id = (int)($product["id"]);
     $name = $product["name"];
     $price = $product["price"];
-    $qty = $cart[$id];
+    $stock = (int)($product["stock"]);
+    $qty = (int)($cart[$id]);
 
-    if (!$product["is_available"] || $product["stock"] < $qty) {
+    if (!$product["is_available"] || ($qty > $stock && $stock !== -1)) {
         $removedProducts[] = $product["name"];
         unset($_SESSION["cart"][$id]);
     }
 }
 
 if (!empty($removedProducts)) {
+    $_SESSION["error"] = "unavailable";
     $_SESSION["producterror"] = implode(", ", $removedProducts);
-    header("Location: " . CART_F_URL . "cart.php");
+    header("Location: " . PUBLIC_URL . "html/cart/cart.php");
     exit;
 }
 // START TRANSACTION
@@ -111,23 +113,23 @@ try
     }
 
 
-    // REMOVE FROM STOCK
     $stmt = $connection->prepare
     ("
-        UPDATE products SET stock = stock - ?
-        WHERE id = ?
-        AND stock >= ?
+    UPDATE products
+    SET stock = CASE
+        WHEN stock = -1 THEN -1
+        ELSE stock - ?
+    END
+    WHERE id = ?
+    AND (stock >= ? OR stock = -1)
     ");
-        if(!$stmt) throw new Exception("SQL prepare error");
-
+    if(!$stmt) throw new Exception("SQL prepare error");
     foreach ($cart as $id => $qty)
     {
         $stmt->bind_param("iii", $qty, $id, $qty);
 
         if (!$stmt->execute()) throw new Exception("SQL execute error");
-        if($stmt->affected_rows === 0) throw new Exception("Not enought products");
     }
-
     // COMMIT TRANSACTION
     $connection->commit();
 
@@ -136,7 +138,7 @@ try
     $_SESSION["cart"] = [];
     $_SESSION["error"] = "none";
 
-    header("Location: " . CART_F_URL . "cart.php");
+    header("Location: " . PUBLIC_URL . "html/cart/cart.php");
     exit;
 }
 catch (Exception $e)

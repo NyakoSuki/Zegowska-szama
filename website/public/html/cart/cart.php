@@ -51,14 +51,18 @@ $cart = $_SESSION["cart"] ?? [];
 
             </div>
 
-            <div class="mt-3 col-12">
+            <div class="mt-3 col-12 d-flex justify-content-center">
                 <?php
                 if(isset($_SESSION["error"]))
                 {
                     switch ($_SESSION["error"])
                     {
-                        case "" :
-                            echo "<h4 class='text-danger mb-0'>Przepraszamy, ale" . $_SESSION["error"] . " nie jest już dostępny</h4>";
+                        case "empty" :
+                            echo "<h4 class='text-danger mb-0'>Koszyk jest pusty</h4>";
+                            break;
+
+                        case "unavailable" :
+                            echo "<h4 class='text-danger mb-0'>Przepraszamy, ale \"" . $_SESSION["producterror"] . "\" nie jest już dostępny</h4>";
                             break;
 
                         case "none" :

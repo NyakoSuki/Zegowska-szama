@@ -116,29 +116,10 @@ qtyInp.forEach(qty =>
             method: "POST",
             body: formData
         })
-        .then(async response =>
-        {
-        const text = await response.text();
-
-        if (!response.ok)
-        {
-            throw new Error(text);
-        }
-
-        return text;
-        })
         .then((text) =>
         {
-            sessionStorage.setItem("toastMessage", text);
-
             window.location.reload();
         })
-        .catch(error =>
-        {
-            sessionStorage.setItem("toastMessage", error.message);
-
-            window.location.reload();
-        });
     });
 });
 

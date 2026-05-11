@@ -165,13 +165,10 @@ $site = basename($_SERVER['PHP_SELF']);
 
                     <?php if($site === "cart.php") { ?>
                         </div>
-                            <div
-                                class="d-flex justify-content-evenly mb-3"
-                            >
-                                <form
 
-                                    class="decForm w-25 d-flex justify-content-center"
-                                >
+                        <div class="input-group mb-3">
+
+                            <form class="decForm input-group-text p-0 border-0 bg-transparent">
                                 <input
                                     type="hidden"
                                     name="id"
@@ -182,59 +179,57 @@ $site = basename($_SERVER['PHP_SELF']);
                                     name="quantity"
                                     value="<?= $quantity?>"
                                 >
-                                    <button
-                                        name="incBtn"
-                                        class="w-50"
-                                        type="submit"
-                                    >
-                                        -
-                                    </button>
-                                </form>
-                                <input
-                                    data-product-id="<?=$productId?>"
-                                    class="qtyInp w-25 text-center"
-                                    value="<?=$quantity?>"
-                                    type="number"
-                                    placeholder=""
-                                    min=1
-                                    max=10
+                                <button
+                                    name="incBtn"
+                                    class="btn btn-outline-secondary rounded-0 rounded-start"
+                                    type="submit"
                                 >
-
-                                <form
-
-                                    class="incForm w-25 d-flex justify-content-center"
-                                >
-                                <input
-                                    type="hidden"
-                                    name="id"
-                                    value="<?= $productId?>"
-                                >
-                                <input
-                                    type="hidden"
-                                    name="quantity"
-                                    value="<?= $quantity?>"
-                                >
-                                    <button
-                                        name="incBtn"
-                                        class="w-50"
-                                        type="submit"
-                                    >
-                                        +
-                                    </button>
-                                </form>
-                            </div>
-
-                            <form 
-                                class="removeForm m-0">
-                                <input
-                                    type="hidden"
-                                    name="id"
-                                    value="<?= $productId?>"
-                                >
-                                <button class="btn btn-outline-danger btn-sm w-100">
-                                    🗑️ Usuń z koszyka
+                                    −
                                 </button>
                             </form>
+
+                            <input
+                                data-product-id="<?=$productId?>"
+                                class="qtyInp form-control text-center fw-bold"
+                                value="<?=$quantity?>"
+                                type="number"
+                                min="1"
+                                max="10"
+                            >
+
+                            <form class="incForm input-group-text p-0 border-0 bg-transparent">
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="<?= $productId?>"
+                                >
+                                <input
+                                    type="hidden"
+                                    name="quantity"
+                                    value="<?= $quantity?>"
+                                >
+                                <button
+                                    name="incBtn"
+                                    class="btn btn-outline-secondary rounded-0 rounded-end"
+                                    type="submit"
+                                >
+                                    +
+                                </button>
+                            </form>
+
+                        </div>
+
+                        <form class="removeForm m-0">
+                            <input
+                                type="hidden"
+                                name="id"
+                                value="<?= $productId?>"
+                            >
+
+                            <button class="btn btn-outline-danger btn-sm w-100">
+                                🗑️ Usuń z koszyka
+                            </button>
+                        </form>
 
                         </div>
                     <?php } ?>
