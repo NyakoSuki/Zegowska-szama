@@ -234,19 +234,7 @@
 
                     <div class="mt-4 d-flex text-start">
 
-                        <div class="col-md-6 mb-2 d-flex align-items-end">
-                            <div class="form-check form-switch">
-                                <input
-                                    type="checkbox"
-                                    id="productActive"
-                                    name="active"
-                                    class="form-check-input"
-                                >
-                                <label class="form-check-label">
-                                    Aktywny
-                                </label>
-                            </div>
-                        </div>
+                        
 
                         <button type="submit" class="btn btn-success px-4 ms-auto" id="productSaveBtn">
                             Zapisz zmiany

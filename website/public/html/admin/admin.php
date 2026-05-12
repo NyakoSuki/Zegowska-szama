@@ -22,7 +22,7 @@ include BACKEND_PATH . "database/database.php";
 <body class="<?=$_SESSION['theme']?>">
     <?php
     //---HEADER---
-    $site = "account";
+    $site = basename($_SERVER['PHP_SELF']);
     include PUBLIC_PATH . "html/shared/header.php";
     ?>
 

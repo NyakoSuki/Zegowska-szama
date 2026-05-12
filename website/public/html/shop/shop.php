@@ -15,7 +15,7 @@ include BACKEND_PATH . "database/database.php";
 </head>
 <body class="<?=$_SESSION['theme']?>">
     <?php
-    $site = "shop";
+    $site = basename($_SERVER['PHP_SELF']);
     include PUBLIC_PATH . "html/shared/header.php";
     ?>
     <main>

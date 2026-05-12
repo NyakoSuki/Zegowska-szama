@@ -1,13 +1,12 @@
 <?php
 session_start();
 
-require_once dirname(__DIR__, 3) . "/config.php";
-include DB_PATH;
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+include BACKEND_PATH . "database/database.php";
 
 
 // INPUT DATA
 $id = (int)($_POST["id"] ?? 0);
-$action = $_POST["addSwitchValue"] ?? "";
 
 $name = $_POST["name"] ?? "";
 $description = $_POST["description"] ?? "";
@@ -19,40 +18,15 @@ $isActive = isset($_POST["active"]) ? 1 : 0;
 $img = $_POST["img"] ?? "";
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
+if(empty($name) || empty($price))exit;
 
 // UPDATE PRODUCT
 if ($action === "update")
 {
     // GUARD CLAUSES
-    if (empty($id) || empty($name) || empty($price)) exit("empty");
+    if (empty($id)) exit("empty");
 
 
-    // UPDATE WITH NULL STOCK
-    if ($stock === "")
-    {
-        $stmt = $connection->prepare
-        ("
-            UPDATE products 
-            SET name = ?, description = ?, type = ?, price = ?, stock = NULL, is_available = ?, is_active - ?, img = ?
-            WHERE id = ?
-        ");
-            if (!$stmt) exit("SQL prepare error");
-
-        $stmt->bind_param
-        (
-            "sssdiiss",
-            $name,
-            $description,
-            $type,
-            $price,
-            $isAvailable,
-            $isActive,
-            $img,
-            $id
-        );
-    }
-    else
-    {
         $stmt = $connection->prepare
         ("
             UPDATE products 
@@ -63,18 +37,22 @@ if ($action === "update")
 
         $stmt->bind_param
         (
-            "sssdiiisi",
+            "s s s d i i i s i",
             $name,
             $description,
             $type,
+
             $price,
+
             $stock,
             $isAvailable,
             $isActive,
+
             $img,
+            
             $id
         );
-    }
+
 
 
     // EXECUTE UPDATE
@@ -88,33 +66,9 @@ if ($action === "update")
 if ($action === "add")
 {
     // GUARD CLAUSES
-    if (empty($name) || empty($price)) exit("empty");
 
     // UPDATE WITH NULL STOCK
-    if ($stock === "")
-    {
-        $stmt = $connection->prepare
-        ("
-            INSERT INTO products 
-            (name, description, type, price, stock, is_available, is_active, img)
-            VALUES (?, ?, ?, ?, NULL, ?, ?, ?)
-        ");
-            if (!$stmt) exit("SQL prepare error");
-
-        $stmt->bind_param
-        (
-            "sssdiis",
-            $name,
-            $description,
-            $type,
-            $price,
-            $isAvailable,
-            $isActive,
-            $img,
-        );
-    }
-    else
-    {
+   
         $stmt = $connection->prepare
         ("
             INSERT INTO products 
@@ -135,7 +89,6 @@ if ($action === "add")
             $isActive,
             $img,
         );
-    }
 
     // EXECUTE UPDATE
     if (!$stmt->execute()) exit("SQL execute error");

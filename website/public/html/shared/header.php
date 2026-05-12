@@ -15,7 +15,7 @@
 
             <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
                 <a 
-                    href="<?=PUBLIC_URL?>html/home/home.php"
+                    href="<?=PUBLIC_URL?>html/shop/shop.php"
                     class="d-inline-block shadow-none">
                         <img 
                             src="<?=PUBLIC_URL?>img/zegowska-szama.svg"
@@ -26,6 +26,17 @@
 
             <!-- NAV -->
             <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
+                <?php if(isset($folder) && $folder === "admin") { ?>
+                <a
+                    href="<?=PUBLIC_URL?>html/admin/admin.php"
+                    class="btn btn-secondary">
+                    <img
+                        class="naviImg"
+                        src="<?=PUBLIC_URL?>img/panel.svg"
+                        alt="admin panel"
+                    >
+                </a>
+                <?php } else { ?>
                 <a
                     href="<?=PUBLIC_URL?>html/account/account.php"
                     class="btn btn-secondary">
@@ -35,6 +46,7 @@
                         alt="Konto"
                     >
                 </a>
+                <?php } ?>
 
                 <a
                     href="<?=PUBLIC_URL?>html/cart/cart.php"
@@ -46,7 +58,7 @@
                     >
                 </a>
 
-                <?php if($site === "shop")
+                <?php if($site === "shop.php" || (isset($folder) && $folder === "admin"))
                 {
                 echo 
                 "<button
