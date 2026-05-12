@@ -11,6 +11,7 @@ if (!isset($_SESSION["cart"]))
 $id = (int)($_POST["id"] ?? '');
 $name = $_POST["name"] ?? '';
 $quantity = (int)($_POST["quantity"] ?? '');
+$left = (int)($_POST["left"] ?? 1);
 
 if(empty($id))
 {
@@ -27,6 +28,11 @@ if(($_SESSION["cart"][$id] ?? 0) + $quantity > 10)
     http_response_code(409);
     exit("Nie możesz mieć więcej niż 10 takich samych produktów w koszyku naraz! Posiadasz: " . ($_SESSION['cart'][$id] ?? 0));
 
+}
+if(($_SESSION["cart"][$id] ?? 0) + $quantity > $left && $left !== -1)
+{
+    http_response_code(409);
+    exit("Przepraszamy ale ten produkt nie jest dostępny w większej ilości");
 }
 $_SESSION["cart"][$id] = ($_SESSION["cart"][$id] ?? 0) + $quantity;
 exit("Pomyślnie dodano \"" . $name . "\"\n w ilości: " . $quantity);

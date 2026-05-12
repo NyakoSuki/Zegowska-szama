@@ -157,6 +157,7 @@ $site = basename($_SERVER['PHP_SELF']);
                                 data-bs-target="#cartAddModal"
                                 data-bs-product-id="<?= $productId ?>"
                                 data-bs-product-name="<?= $productName ?>"
+                                data-bs-product-stock="<?= $productStock ?>"
                             >
                                 🛒 Dodaj do koszyka
                             </button>
@@ -179,6 +180,11 @@ $site = basename($_SERVER['PHP_SELF']);
                                     name="quantity"
                                     value="<?= $quantity?>"
                                 >
+                                <input
+                                    type="hidden"
+                                    name="left"
+                                    value="<?= $productStock?>"
+                                >
                                 <button
                                     name="incBtn"
                                     class="btn btn-outline-secondary rounded-0 rounded-start"
@@ -190,6 +196,7 @@ $site = basename($_SERVER['PHP_SELF']);
 
                             <input
                                 data-product-id="<?=$productId?>"
+                                data-product-left="<?=$productStock?>"
                                 class="qtyInp form-control text-center fw-bold"
                                 value="<?=$quantity?>"
                                 type="number"
@@ -207,6 +214,11 @@ $site = basename($_SERVER['PHP_SELF']);
                                     type="hidden"
                                     name="quantity"
                                     value="<?= $quantity?>"
+                                >
+                                <input
+                                    type="hidden"
+                                    name="left"
+                                    value="<?= $productStock?>"
                                 >
                                 <button
                                     name="incBtn"

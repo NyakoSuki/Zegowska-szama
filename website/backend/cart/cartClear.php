@@ -6,5 +6,5 @@ require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config
 
 $_SESSION["cart"] = [];
 
-header("Location: " . PUBLIC_PATH . "html/cart/cart.php");
+header("Location: " . PUBLIC_URL . "html/cart/cart.php");
 exit;

@@ -42,7 +42,8 @@
                             class="form-check-input"
                             type="radio"
                             name="payment"
-                            value="online" checked
+                            value="online"
+                            disabled
                         >
                         <label class="form-check-label">💳 Online</label>
                     </div>
@@ -52,6 +53,7 @@
                             type="radio"
                             name="payment"
                             value="cod"
+                            checked
                         >
                         <label class="form-check-label">📦 Przy odbiorze</label>
                     </div>

@@ -25,9 +25,13 @@ if (cartAddModal)
         const productName = addToCartBtn.dataset.bsProductName;
         const homeCartNameInp = document.getElementById('homeCartNameInp');
 
+        const productStock = addToCartBtn.dataset.bsProductStock;
+        const homeCartLeftInp = document.getElementById('homeCartLeftInp');
+
         homeCartQtyInp.value = 1;
         homeCartIdInp.value = productId;
         homeCartNameInp.value = productName;
+        homeCartLeftInp.value = productStock
     })
 }
 

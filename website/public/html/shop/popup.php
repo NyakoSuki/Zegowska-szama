@@ -67,6 +67,15 @@
                     >
 
                     <input
+                        id="homeCartLeftInp"
+                        name="left"
+                        class=""
+                        value=""
+                        type="hidden"
+                        placeholder=""
+                    >
+
+                    <input
                         id="homeCartNameInp"
                         name="name"
                         class=""

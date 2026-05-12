@@ -83,12 +83,12 @@ try
     // CREATE ORDER
     $stmt = $connection->prepare
     ("
-        INSERT INTO orders (user_id, total_price)
-        VALUES (?, ?)
+        INSERT INTO orders (user_id, name, email, total_price)
+        VALUES (?, ?, ?, ?)
     ");
         if (!$stmt) throw new Exception("SQL prepare error");
 
-    $stmt->bind_param("id", $userId, $totalPrice);
+    $stmt->bind_param("issd", $userId, $_POST["name"], $_POST["email"], $totalPrice);
 
     if (!$stmt->execute()) throw new Exception("SQL execute error");
 

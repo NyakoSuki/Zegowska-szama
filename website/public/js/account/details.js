@@ -11,7 +11,7 @@ detailsBtn.forEach(btn =>
         const modal = document.querySelector("#detailsModal .modal-body");
         modal.innerHTML = "Ładowanie...";
 
-        fetch(window.CONFIG.ACCOUNT_B_URL + "details.php",
+        fetch(window.CONFIG.BACKEND_URL + "account/details.php",
         {
             method: "POST",
             headers:

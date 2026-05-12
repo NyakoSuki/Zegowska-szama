@@ -43,7 +43,7 @@ $username = $row["username"];
     ?>
     
     <main class="container p-3">
-        <div class="text-center mb-5">
+        <div class="text-center mb-3">
             <h1 class="fw-bold text-center">
                 Konto
             </h1>

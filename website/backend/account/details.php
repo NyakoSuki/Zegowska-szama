@@ -1,5 +1,5 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
 include BACKEND_PATH . "database/database.php";
 
 if (!isset($_POST['order_id'])) exit;
@@ -9,6 +9,7 @@ $order_id = $_POST['order_id'];
 $stmt = $connection->prepare("
     SELECT
         products.name,
+        products.price,
         ordered_products.quantity
     FROM ordered_products
     JOIN products
@@ -23,6 +24,6 @@ $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
     echo "<div class='border-bottom p-2'>";
-    echo "<b>{$row['name']}</b> x {$row['quantity']}";
+    echo "<b>{$row['name']}</b> ➡️ {$row['quantity']} x {$row['price']}zł";
     echo "</div>";
 }
