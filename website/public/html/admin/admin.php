@@ -38,35 +38,27 @@ include BACKEND_PATH . "database/database.php";
             <div class="col-10 col-md-6 col-lg-4 col-xl-3">
 
                 <div class="mb-3">
-                    <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#userModal">
+                    <a href="user.php" class="btn btn-dark w-100 m-1">
                         Zarządzanie Urzytkownikami
-                    </button>
-                      <?php
-                        if(isset($_SESSION["error"]))
-                        {
-                            if($_SESSION["error"] == "used")
-                                echo "<h6 class='text-danger mt-2'>Nazwa lub email w użyciu</h6>";
-                        }
-                        unset($_SESSION["error"]);
-                        ?>
+                    </a>
                 </div>
 
                 <div class="mb-3">
-                    <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#orderModal">
+                    <a href="order.php" class="btn btn-dark w-100 m-1">
                         Zarządzanie Zamówieniami
-                    </button>
+                    </a>
                 </div>
 
                 <div class="mb-3">
-                    <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#productModal">
+                    <a href="product.php" class="btn btn-dark w-100 m-1">
                         Zarządzanie Produkami
-                    </button>
+                    </a>
                 </div>
 
                 <div class="mb-3">
-                    <button type="button" class="btn btn-dark w-100 m-1" data-bs-toggle="modal" data-bs-target="#discountModal">
+                    <a href="discount.php" class="btn btn-dark w-100 m-1">
                         Zarządzanie Promocjami
-                    </button>
+                    </a>
                 </div>
 
             </div>
@@ -74,10 +66,6 @@ include BACKEND_PATH . "database/database.php";
     </main>
 
 
-    <?php include "popup-user.php"?>
-    <?php include "popup-order.php"?>
-    <?php include "popup-product.php"?>
-    <?php include "popup-discount.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?=JS_URL?>admin-filter-products.js"></script>
     <script src="<?=JS_URL?>admin-filter-users.js"></script>
