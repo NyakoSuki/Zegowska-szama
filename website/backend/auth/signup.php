@@ -16,17 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
 if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])) exit;
 
 
-// PASSWORD LENGTH CHECK
-if (mb_strlen($password) < 8) 
-{
-    session_regenerate_id(true);
-    $_SESSION["error"] = "short";
-
-    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
-    exit;
-}
-
-
 // CHECK IF USER EXISTS
 $stmt = $connection->prepare
 ("
@@ -45,6 +34,16 @@ if ($result->num_rows > 0)
 {
     session_regenerate_id(true);
     $_SESSION["error"] = "exists";
+
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php");
+    exit;
+}
+
+// PASSWORD LENGTH CHECK
+if (mb_strlen($password) < 8) 
+{
+    session_regenerate_id(true);
+    $_SESSION["error"] = "short";
 
     header("Location: " . PUBLIC_URL . "html/auth/auth.php");
     exit;

@@ -5,5 +5,5 @@ include BACKEND_PATH . "database/database.php";
 
 $_SESSION["theme"] = $_SESSION["theme"] === "dark" ? "light" : "dark";
 
-    header("Location: " . PUBLIC_PATH . "html/account/account.php");
+    header("Location: " . PUBLIC_URL . "html/account/account.php");
 exit;

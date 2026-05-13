@@ -11,5 +11,5 @@ session_unset();
 session_start();
 $_SESSION["theme"] = $theme;
 
-header("Location: " . PUBLIC_PATH . "html/auth/auth.php");
+header("Location: " . PUBLIC_URL . "html/auth/auth.php");
 exit;

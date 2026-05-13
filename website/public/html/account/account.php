@@ -155,5 +155,6 @@ $username = $row["username"];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <?php include "popups.php"?>
     <script src="<?=PUBLIC_URL?>js/account/theme.js"></script>
+    <script src="<?=PUBLIC_URL?>js/shared/showPassword.js"></script>
 </body>
 </html>

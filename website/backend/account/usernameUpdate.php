@@ -34,7 +34,7 @@ if ($result->num_rows > 0)
     session_regenerate_id(true);
     $_SESSION["error"] = "used";
 
-    header("Location: " . PUBLIC_PATH . "html/account/account.php");
+    header("Location: " . PUBLIC_URL . "html/account/account.php");
     exit;
 }
 
@@ -56,5 +56,5 @@ $stmt->bind_param("si", $username, $id);
 session_regenerate_id(true);
 $_SESSION["error"] = "unone";
 
-header("Location: " . PUBLIC_PATH . "html/account/account.php");
+header("Location: " . PUBLIC_URL . "html/account/account.php");
 exit;

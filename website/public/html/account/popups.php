@@ -68,24 +68,55 @@ include BACKEND_PATH . "database/database.php";
                     method="post"
                     class="d-grid gap-2"
                 >
-                    <input
-                        type="password"
-                        name="current"
-                        class="form-control bg-light"
-                        placeholder="Obecne hasło"
-                    >
-                    <input
-                        type="password" 
-                        name="new"
-                        class="form-control bg-light"
-                        placeholder="Nowe hasło"
-                    >
-                    <input
-                        type="password"
-                        name="confirm"
-                        class="form-control bg-light"
-                        placeholder="Powtórz nowe hasło"
-                    >
+                    <div class="input-group mb-2">
+                        <input
+                            id="currentPasswordInp"
+                            type="password"
+                            name="current"
+                            class="form-control bg-light"
+                            placeholder="Obecne hasło"
+                        >
+                        <button
+                            id="currentPasswordBtn"
+                            class="btn btn-light"
+                            type="button"
+                        >
+                        Pokaż
+                        </button>
+                    </div>
+                    <div class="input-group mb-2">
+                        <input
+                            id="newPasswordInp"
+                            type="password" 
+                            name="new"
+                            class="form-control bg-light"
+                            placeholder="Nowe hasło"
+                        >
+                        <button
+                            id="newPasswordBtn"
+                            class="btn btn-light"
+                            type="button"
+                        >
+                        Pokaż
+                        </button>
+                    </div>
+                    <div class="input-group mb-2">
+                        <input
+                            id="confirmPasswordInp"
+                            type="password"
+                            name="confirm"
+                            class="form-control bg-light"
+                            placeholder="Powtórz nowe hasło"
+                        >
+                        <button
+                            id="confirmPasswordBtn"
+                            class="btn btn-light"
+                            type="button"
+                        >
+                        Pokaż
+                        </button>
+                    </div>
+
                     <button
                         class="btn btn-dark">
                         Zmień hasło
@@ -116,7 +147,7 @@ include BACKEND_PATH . "database/database.php";
             <div class="modal-body">
 
                 <form
-                    action="<?=BACKEND_PATH?>account/logout.php"
+                    action="<?=BACKEND_URL?>account/logout.php"
                     method="post"
                     class="w-100 h-75 d-flex gap-2"
                 >

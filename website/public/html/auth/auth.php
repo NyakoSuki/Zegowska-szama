@@ -60,12 +60,23 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             >
 
                         <label class="m-0">Hasło:</label>
+                        <div class="input-group mb-2">
                             <input
+                                id="loginPasswordInp"
                                 name="password"
                                 type="password"
                                 class="form-control bg-light mb-2"
                                 placeholder="Hasło"
+                                
                             >
+                            <button
+                                id="loginPasswordBtn"
+                                class="btn btn-light mb-2"
+                                type="button"
+                            >
+                            Pokaż
+                            </button>
+                        </div>
 
                         <!-- ERROR LOGIN -->
                         <?php
@@ -128,12 +139,23 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             >
 
                         <label class="m-0">Hasło:</label><br>
+                        <div class="input-group mb-2">
                             <input
+                                id="signupPasswordInp"
                                 name="password"
                                 type="password"
                                 class="form-control bg-light mb-2"
                                 placeholder="Hasło"
+                                
                             >
+                            <button
+                                id="signupPasswordBtn"
+                                class="btn btn-light mb-2"
+                                type="button"
+                            >
+                            Pokaż
+                            </button>
+                        </div>
 
                         <!-- ERROR SIGNUP -->
                         <?php
@@ -180,6 +202,7 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
 
 
 <script src="<?=PUBLIC_URL?>js/auth/animation.js"></script>
+<script src="<?=PUBLIC_URL?>js/shared/showPassword.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>
