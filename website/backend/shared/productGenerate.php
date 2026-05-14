@@ -1,7 +1,4 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
-include BACKEND_PATH . "database/database.php";
-
 $site = basename($_SERVER['PHP_SELF']);
 ?>
 
@@ -94,8 +91,7 @@ $site = basename($_SERVER['PHP_SELF']);
             class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2"
         >
             <div 
-                class="product
-                h-100 d-flex flex-column border p-1
+                class="product h-100 d-flex flex-column border p-1
                 <?= $isAvailable ? '' : 'opacity-50'?>
                 <?= $isDiscounted ? 'border-3 border-warning' : ''?>"
 
@@ -106,7 +102,7 @@ $site = basename($_SERVER['PHP_SELF']);
                 data-available="<?= $productIsAvailable?>"
                 data-discount="<?= $discountProcent?>"
             >
-                <img 
+                <img
                     src="<?=PUBLIC_URL . "img/products/" . $productImg?>"
                     alt="<?= $productName ?>"
                     class="card-img-top h2 text-center p-0 m-0 align-self-center
@@ -115,11 +111,11 @@ $site = basename($_SERVER['PHP_SELF']);
                 <div
                     class="p-2 d-flex flex-column flex-grow-1"
                 >
-                    <h3
-                        class="fw-bold"
+                    <p
+                        class="fw-bold h3"
                     >
                         <?= $productName ?>
-                    </h3>
+                    </p>
                     <small>
                         <?= $productDescription ?>
                     </small>
@@ -129,7 +125,7 @@ $site = basename($_SERVER['PHP_SELF']);
                     >
                         <p
                             class="fw-bold p-0 m-0 mt-auto
-                            <?= $isDiscounted ? 'text-decoration-line-through' : ''?>"
+                            <?= $isDiscounted ? 'text-decoration-line-through small' : ''?>"
                         >
                             <?= number_format($productPrice * ($quantity ?? 1), 2)?> zł
                         </p>
@@ -139,15 +135,15 @@ $site = basename($_SERVER['PHP_SELF']);
                             <?= $isDiscounted ? number_format($truePrice, 2) . ' zł' : ''?>
                         </p>
 
+                        <?php if($site === "shop.php") { ?>
 
-                    <?php if($site === "shop.php") { ?>
                             <p
                                 class="fw-bold p-0 m-0 h5 bg-danger text-light ms-auto rounded-5 p-1 m-1
                                 <?= $isDiscounted ?  '' : 'd-none'?>"
                             >
                                 -<?= $discountProcent?>%
                             </p>
-                        </div>
+                    </div>
                             <button
                                 type="button"
                                 class="btn w-100 fw-semibold shadow-sm p-1 m-0
@@ -161,15 +157,16 @@ $site = basename($_SERVER['PHP_SELF']);
                             >
                                 🛒 Dodaj do koszyka
                             </button>
-                        </div>
-                    <?php } ?>
 
-                    <?php if($site === "cart.php") { ?>
-                        </div>
-
-                        <div class="input-group mb-3">
-
-                            <form class="decForm input-group-text p-0 border-0 bg-transparent">
+                        <?php } elseif($site === "cart.php") { ?>
+                        
+                    </div>
+                        <div
+                            class="input-group mb-3"
+                        >
+                            <form
+                                class="decForm input-group-text p-0 border-0 bg-transparent"
+                            >
                                 <input
                                     type="hidden"
                                     name="id"
@@ -228,27 +225,30 @@ $site = basename($_SERVER['PHP_SELF']);
                                     +
                                 </button>
                             </form>
-
                         </div>
 
-                        <form class="removeForm m-0">
+                        <form
+                            class="removeForm m-0"
+                        >
                             <input
                                 type="hidden"
                                 name="id"
                                 value="<?= $productId?>"
                             >
-
-                            <button class="btn btn-outline-danger btn-sm w-100">
+                            <button
+                                class="btn btn-outline-danger btn-sm w-100"
+                            >
                                 🗑️ Usuń z koszyka
                             </button>
                         </form>
 
-                        </div>
-                    <?php } ?>
+                        <?php }//if ?>
 
-                    
+                </div>
             </div>
         </div>
-        <?php }  ?>
+
+        <?php }//while ?>
+
     </div>
 </section>

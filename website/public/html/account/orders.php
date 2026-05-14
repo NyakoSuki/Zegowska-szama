@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+session_start();
+require_once dirname(__DIR__, 3) . "/backend/config/config.php";
 require_once BACKEND_PATH . "shared/siteblocker.php";
 include BACKEND_PATH . "database/database.php";
 ?>

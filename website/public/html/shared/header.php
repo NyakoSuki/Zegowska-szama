@@ -1,94 +1,109 @@
-<header class="container-fluid sticky-top p-3">
-        <div class="top row align-items-center">
-
-            <!-- LOGO -->
-            <div class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start">
-                <a 
-                    href="https://www.zs4.oswiata.tychy.pl/"
-                    class="d-inline-block shadow-none">
-                        <img 
-                            src="<?=PUBLIC_URL?>img/logo.svg"
-                            class="img-fluid img-logo" alt="logo"
-                        >
-                </a>
-            </div>
-
-            <div class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start">
-                <a 
-                    href="<?=PUBLIC_URL?>html/shop/shop.php"
-                    class="d-inline-block shadow-none">
-                        <img 
-                            src="<?=PUBLIC_URL?>img/zegowska-szama.svg"
-                            class="img-fluid img-logo" alt="zegowska-szama"
-                        >
-                </a>
-            </div>
-
-            <!-- NAV -->
-            <div class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2">
-                <?php if(isset($folder) && $folder === "admin") { ?>
-                <a
-                    href="<?=PUBLIC_URL?>html/admin/admin.php"
-                    class="btn btn-secondary">
-                    <img
-                        class="naviImg"
-                        src="<?=PUBLIC_URL?>img/panel.svg"
-                        alt="admin panel"
-                    >
-                </a>
-                <?php } else { ?>
-                <a
-                    href="<?=PUBLIC_URL?>html/account/account.php"
-                    class="btn btn-secondary">
-                    <img
-                        class="naviImg"
-                        src="<?=PUBLIC_URL?>img/account.svg"
-                        alt="Konto"
-                    >
-                </a>
-                <?php } ?>
-
-                <a
-                    href="<?=PUBLIC_URL?>html/cart/cart.php"
-                    class="btn btn-secondary">
-                    <img
-                        class="naviImg"
-                        src="<?=PUBLIC_URL?>img/cart.svg"
-                        alt="Koszyk"
-                    >
-                </a>
-
-                <?php if($site === "shop.php" || (isset($folder) && $folder === "admin"))
-                {
-                echo 
-                "<button
-                    type='button'
-                    id='filterBtn'
-                    class='btn btn-secondary'
+<header
+    class="container-fluid sticky-top p-3"
+>
+    <div
+        class="top row align-items-center"
+    >
+        <div
+            class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start"
+        >
+            <a 
+                href="https://www.zs4.oswiata.tychy.pl/"
+                class="d-inline-block shadow-none"
+            >
+                <img 
+                    src="<?=PUBLIC_URL?>img/logo.svg"
+                    class="img-fluid img-logo" alt="logo"
                 >
-                    <img
-                        class='naviImg'
-                        src='" . PUBLIC_URL . "img/menu.svg'
-                        alt='Filtry'
-                    >
-                </button>";
-                }
-                else
-                {
-                echo 
-                "<a
-                    href='" . PUBLIC_URL . "html/shop/shop.php'
-                    class='btn btn-secondary'
-                >
-                    <img
-                        class='naviImg'
-                        src='" . PUBLIC_URL . "img/home.svg'
-                        alt='Sklep'
-                    >
-                </a>";
-                }
-                ?>
-            </div>
-
+            </a>
         </div>
-    </header>
+
+        <div
+            class="col-lg-5 col-0 mb-2 d-lg-flex d-none justify-content-md-start"
+        >
+            <a 
+                href="<?=PUBLIC_URL?>html/shop/shop.php"
+                class="d-inline-block shadow-none"
+            >
+                <img 
+                    src="<?=PUBLIC_URL?>img/zegowska-szama.svg"
+                    class="img-fluid img-logo" alt="zegowska-szama"
+                >
+            </a>
+        </div>
+
+        <div
+            class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2"
+        >
+
+            <?php if(isset($folder) && $folder === "admin") { ?>
+
+            <a
+                href="<?=PUBLIC_URL?>html/admin/admin.php"
+                class="btn btn-secondary"
+            >
+                <img
+                    class="naviImg"
+                    src="<?=PUBLIC_URL?>img/panel.svg"
+                    alt="admin panel"
+                >
+            </a>
+
+            <?php } else { ?>
+
+            <a
+                href="<?=PUBLIC_URL?>html/account/account.php"
+                class="btn btn-secondary"
+            >
+                <img
+                    class="naviImg"
+                    src="<?=PUBLIC_URL?>img/account.svg"
+                    alt="Konto"
+                >
+            </a>
+
+            <?php } ?>
+
+            <a
+                href="<?=PUBLIC_URL?>html/cart/cart.php"
+                class="btn btn-secondary"
+            >
+                <img
+                    class="naviImg"
+                    src="<?=PUBLIC_URL?>img/cart.svg"
+                    alt="Koszyk"
+                >
+            </a>
+
+            <?php if($site === "shop.php" || (isset($folder) && $folder === "admin")) { ?>
+
+            <button
+                type="button"
+                id="filterBtn"
+                class="btn btn-secondary"
+            >
+                <img
+                    class="naviImg"
+                    src="<?=PUBLIC_URL?>img/menu.svg"
+                    alt="Filtry"
+                >
+            </button>
+
+            <?php } else { ?>
+
+            <a
+                href="<?=PUBLIC_URL?>html/shop/shop.php"
+                class="btn btn-secondary"
+            >
+                <img
+                    class="naviImg"
+                    src="<?=PUBLIC_URL?>img/home.svg"
+                    alt="Sklep"
+                >
+            </a>
+
+            <?php } ?>
+            
+        </div>
+    </div>
+</header>

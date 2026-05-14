@@ -1,5 +1,6 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
+session_start();
+require_once dirname(__DIR__, 3) . "/backend/config/config.php";
 require_once BACKEND_PATH . "shared/siteblocker.php";
 include BACKEND_PATH . "database/database.php";
 
@@ -10,7 +11,7 @@ $cart = $_SESSION["cart"] ?? [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koszyk - Zegowska Szama</title>
+    <title>Zegowska Szama - koszyk</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?=PUBLIC_URL?>css/main.css">
@@ -22,11 +23,15 @@ $cart = $_SESSION["cart"] ?? [];
     include PUBLIC_PATH . "html/shared/header.php";
     ?>
     <main>
-        <section class="p-3 mb-3">
-
-            <div class="row g-2 d-flex justify-content-center">
-
-                <div class="col-12 col-md-6 col-lg-3">
+        <section
+            class="p-3 mb-3"
+        >
+            <div
+                class="row g-2 d-flex justify-content-center"
+            >
+                <div
+                    class="col-12 col-md-6 col-lg-3"
+                >
                     <button
                         id="cartOrderBtn"
                         type="button"
@@ -38,7 +43,9 @@ $cart = $_SESSION["cart"] ?? [];
                     </button>
                 </div>
 
-                <div class="col-12 col-md-6 col-lg-3">
+                <div
+                    class="col-12 col-md-6 col-lg-3"
+                >
                     <button
                         type="button"
                         class="btn btn-danger w-100"
@@ -48,10 +55,11 @@ $cart = $_SESSION["cart"] ?? [];
                         Wyczyść koszyk
                     </button>
                 </div>
-
             </div>
 
-            <div class="mt-3 col-12 d-flex justify-content-center">
+            <div
+                class="mt-3 col-12 d-flex justify-content-center"
+            >
                 <?php
                 if(isset($_SESSION["error"]))
                 {
@@ -73,23 +81,22 @@ $cart = $_SESSION["cart"] ?? [];
                 }
                 ?>
             </div>
-
         </section>
 
-        <!--
-        * ====================PRODUCTS====================
-         * generated in productCreate.php
-        * ==================================================
-        -->
-        <?php include BACKEND_PATH . "shared/productCreate.php"?>
 
-        
+        <!--
+        < ====================PRODUCT LIST====================
+         -> gets generated in productGenerate.php
+        < ==================================================
+        -->
+        <?php include BACKEND_PATH . "shared/productGenerate.php"?>
     </main>
 
 
-    <?php include "popup.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <?php include BACKEND_PATH . "config/config.js.php"?>
+    <?php include "popup.php"?>
+    <?php include PUBLIC_PATH . "html/shared/popup.php"?>
     <script src="<?= PUBLIC_URL ?>js/cart/cartUpdate.js"></script>
 </body>
 </html>

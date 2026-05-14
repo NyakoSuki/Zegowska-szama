@@ -1,9 +1,3 @@
-<?php
-require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
-require_once BACKEND_PATH . "shared/siteblocker.php";
-include BACKEND_PATH . "database/database.php";
-?>
-
 <!-- USERNAME CHAHGE -->
 <div
     class="modal fade"

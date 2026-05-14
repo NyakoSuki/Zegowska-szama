@@ -1,6 +1,6 @@
 <?php
-require_once dirname(__DIR__, 3) . "/config.php";
-require_once BACKEND_PATH . "shared/siteblocker.php";
+session_start();
+require_once dirname(__DIR__, 2) . "/backend/config/config.php";
 include BACKEND_PATH . "database/database.php";
 
 $_SESSION["theme"] = $_SESSION["theme"] === "dark" ? "light" : "dark";
