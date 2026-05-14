@@ -9,17 +9,24 @@
                 data-stock="<?=$productStock?>"
                 data-available="<?=$productIsAvailable?>"
                 data-discount="<?=$discountProcent?>"
+                data-action="<?=$action?>"
             >
 
-                <div class="bg-light d-flex justify-content-center align-items-center p-3 border-bottom">
+                <div class="bg-light d-flex flex-column justify-content-center align-items-center p-3 border-bottom">
                     <img
+                        <?=$img === "add" ? 'id="productImg"' : ""?>
                         src="<?=PUBLIC_URL . "img/products/" . $productImg?>"
                         alt="<?=$productName?>"
                         class="img-fluid product-img <?=($productType === 'drink') ? 'w-25' : 'w-75'?>"
                     >
                 </div>
 
-
+                <form
+                    name=""
+                    class="createForm d-flex h-100"
+                    method=""
+                    action=""
+                >
                 <div class="p-3 d-flex flex-column flex-grow-1 gap-3">
 
                     <div>
@@ -28,6 +35,7 @@
                         </label>
 
                         <input
+                            <?=$img === "add" ? 'id="productImgInput"' : ""?>
                             type="text"
                             name="imgInp"
                             value="<?=$productImg?>"
@@ -54,7 +62,7 @@
                         </label>
 
                         <textarea
-                            name="descInp"
+                            name="descriptionInp"
                             rows="3"
                             class="form-control"
                         ><?=$productDescription?></textarea>
@@ -98,7 +106,7 @@
 
                         <select
                             class="form-select"
-                            name="type"
+                            name="typeSel"
                         >
                             <option value="food" <?=$productType === 'food' ? 'selected' : ''?>>
                                 Jedzenie
@@ -121,7 +129,7 @@
 
                                 <input
                                     type="checkbox"
-                                    name="available"
+                                    name="availableInp"
                                     class="form-check-input"
                                     <?=$productIsAvailable ? 'checked' : ''?>
                                 >
@@ -138,7 +146,7 @@
 
                                 <input
                                     type="checkbox"
-                                    name="active"
+                                    name="activeInp"
                                     class="form-check-input"
                                     <?=$productIsActive ? 'checked' : ''?>
                                 >
@@ -149,23 +157,46 @@
 
                             </div>
                         </div>
-
                     </div>
+
                     <?php if($button === "add") { ?>
-                    <button
-                        type="button"
-                        class="btn btn-secondary mt-auto fw-semibold"
-                    >
-                        Dodaj produkt
-                    </button>
+
+                        <button
+                            type="submit"
+                            name="actionBtn"
+                            value="add"
+                            class="btn btn-secondary fw-semibold mt-auto"
+                        >
+                            Dodaj produkt
+                        </button>
+
                     <?php } else {?>
-                    <button
-                        type="button"
-                        class="btn btn-dark mt-auto fw-semibold"
+                    <div
+                        class="d-flex mt-auto"
                     >
-                        Zapisz zmiany
-                    </button>
+                        <input
+                            name="idInp"
+                            class=" col-3 border rounded-2"
+                            value="<?=$productId?>"
+                            type="number"
+                            placeholder=""
+                            readonly
+                        >
+
+                        <button
+                            type="submit"
+                            name="actionBtn"
+                            value="update"
+                            class="btn btn-dark fw-semibold col-8 ms-auto"
+                        >
+                            Zapisz zmiany
+                        </button>
+                    </div>
                     <?php } ?>
+
                 </div>
+                </form>
+
             </div>
-        </div>
+        
+</div>
