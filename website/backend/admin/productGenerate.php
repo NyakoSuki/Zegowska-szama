@@ -8,6 +8,7 @@
                 data-type="<?=$productType?>"
                 data-stock="<?=$productStock?>"
                 data-available="<?=$productIsAvailable?>"
+                data-active="<?=$productIsActive?>"
                 data-discount="<?=$discountProcent?>"
                 data-action="<?=$action?>"
             >
@@ -160,23 +161,34 @@
                     </div>
 
                     <?php if($button === "add") { ?>
-
+                    <div
+                        class="mt-auto d-flex"
+                    >
                         <button
                             type="submit"
                             name="actionBtn"
                             value="add"
-                            class="btn btn-secondary fw-semibold mt-auto"
+                            class="btn btn-dark fw-semibold col-6"
                         >
                             Dodaj produkt
                         </button>
-
+                        <button
+                            type="reset"
+                            class="btn btn-danger fw-semibold ms-1 col-6"
+                        >
+                            Wyczyść
+                        </button>
+                    </div>
                     <?php } else {?>
                     <div
-                        class="d-flex mt-auto"
+                        class="d-flex mt-auto align-items-center"
                     >
+                        <label class="form-check-label p-1 me-2">
+                            ID
+                        </label>
                         <input
                             name="idInp"
-                            class=" col-3 border rounded-2"
+                            class=" col-2 border rounded-2 h-100 p-2"
                             value="<?=$productId?>"
                             type="number"
                             placeholder=""

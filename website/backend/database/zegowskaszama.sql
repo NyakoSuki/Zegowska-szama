@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Maj 06, 2026 at 03:16 PM
+-- Generation Time: Maj 15, 2026 at 01:46 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -52,7 +52,7 @@ INSERT INTO `discounted_products` (`id`, `discount_id`, `product_id`) VALUES
 
 CREATE TABLE `discounts` (
   `id` int(10) UNSIGNED NOT NULL,
-  `procent` tinyint(3) DEFAULT NULL,
+  `procent` tinyint(3) NOT NULL,
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -77,6 +77,8 @@ CREATE TABLE `ordered_products` (
   `id` int(10) UNSIGNED NOT NULL,
   `order_id` int(10) UNSIGNED NOT NULL,
   `product_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `quantity` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -121,21 +123,21 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `type`, `price`, `created_at`, `updated_at`, `stock`, `is_available`, `is_active`, `img`) VALUES
-(1, 'Bułka z szynką', 'Bułka z szynką i masłem', 'food', 2.99, '2026-05-05 12:49:54', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka z szynką.png'),
-(2, 'Bułka z serem', 'Bułka z serem i masłem', 'food', 2.99, '2026-05-05 13:22:03', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka z serem.png'),
-(3, 'Bułka z szynką i serem', 'Bułka z szynką, serem i masłem', 'food', 3.99, '2026-05-05 13:22:36', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka z szynką i serem.png'),
-(4, 'Bułka Gołosza', 'Bułka z szynką, serem, sałatą i ogórkiem', 'food', 4.99, '2026-05-05 13:23:15', '2026-05-06 11:23:26', -1, 1, 1, 'Bułka Gołosza.png'),
-(5, 'HotDog', 'Hotdog z dowolnym sosem', 'food', 4.99, '2026-05-06 07:48:47', '2026-05-06 11:23:26', -1, 1, 1, 'HotDog.png'),
-(6, 'DoubleDog', 'Hotdog z dwiema parówkami i dowolnym sosem', 'food', 6.99, '2026-05-06 07:49:26', '2026-05-06 11:23:26', -1, 1, 1, 'DoubleDog.png'),
+(1, 'Bułka z szynką', 'Bułka z szynką i masłem', 'food', 2.99, '2026-05-05 12:49:54', '2026-05-15 08:20:18', -1, 1, 0, 'Bułka z szynką.png'),
+(2, 'Bułka z serem', 'Bułka z serem i masłem', 'food', 2.99, '2026-05-05 13:22:03', '2026-05-15 08:20:18', -1, 1, 0, 'Bułka z serem.png'),
+(3, 'Bułka z szynką i serem', 'Bułka z szynką, serem i masłem', 'food', 3.99, '2026-05-05 13:22:36', '2026-05-15 08:20:17', -1, 1, 0, 'Bułka z szynką i serem.png'),
+(4, 'Bułka Gołosza', 'Bułka z szynką, serem, sałatą i ogórkiem', 'food', 4.99, '2026-05-05 13:23:15', '2026-05-15 08:20:23', -1, 0, 1, 'Bułka Gołosza.png'),
+(5, 'HotDog', 'Hotdog z dowolnym sosem', 'food', 4.99, '2026-05-06 07:48:47', '2026-05-15 08:20:23', -1, 0, 1, 'HotDog.png'),
+(6, 'DoubleDog', 'Hotdog z dwiema parówkami i dowolnym sosem', 'food', 6.99, '2026-05-06 07:49:26', '2026-05-15 08:20:22', -1, 0, 1, 'DoubleDog.png'),
 (7, 'Tymbark jabłko wiśnia 0,25l', 'Tymbark jabłko wiśnia 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 07:50:58', '2026-05-06 08:50:48', 20, 1, 1, 'JABWIS025l.png'),
-(8, 'Tymbark jabłko wiśnia 0,5l', 'Tymbark jabłko wiśnia 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 08:45:21', '2026-05-06 09:15:42', 1, 1, 1, 'JABWIS05l.png'),
-(9, 'Tymbark jabłko wiśnia 2l', 'Tymbark jabłko wiśnia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 08:46:10', '2026-05-06 08:51:01', 0, 1, 1, 'JABWIS2l.png'),
-(10, 'Tymbark jabłko mięta 0,25l', 'Tymbark jabłko mięta 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 13:07:42', '2026-05-06 13:07:42', 20, 1, 1, 'JABMIE025l.png'),
+(8, 'Tymbark jabłko wiśnia 0,5l', 'Tymbark jabłko wiśnia 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 08:45:21', '2026-05-15 08:26:37', 0, 1, 1, 'JABWIS05l.png'),
+(9, 'Tymbark jabłko wiśnia 2l', 'Tymbark jabłko wiśnia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 08:46:10', '2026-05-15 07:24:45', 5, 1, 1, 'JABWIS2l.png'),
+(10, 'Tymbark jabłko mięta 0,25l', 'Tymbark jabłko mięta 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 13:07:42', '2026-05-11 12:42:30', 19, 1, 1, 'JABMIE025l.png'),
 (11, 'Tymbark jabłko mięta 0,5l', 'Tymbark jabłko mięta 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 13:13:29', '2026-05-06 13:13:29', 1, 1, 1, 'JABMIE05l.png'),
-(12, 'Tymbark jabłko mięta 2l', 'Tymbark jabłko mięta 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 13:13:57', '2026-05-06 13:13:57', 0, 1, 1, 'JABMIE2l.png'),
+(12, 'Tymbark jabłko mięta 2l', 'Tymbark jabłko mięta 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 13:13:57', '2026-05-15 07:24:43', 5, 1, 1, 'JABMIE2l.png'),
 (13, 'Tymbark jabłko brzoskwinia 0,25l', 'Tymbark jabłko brzoskwinia 250ml w szklanej butelce', 'drink', 2.99, '2026-05-06 13:14:46', '2026-05-06 13:14:46', 20, 1, 1, 'JABBRZ025l.png'),
 (14, 'Tymbark jabłko brzoskwinia 0,5l', 'Tymbark jabłko brzoskwinia 500ml w małej plastikowej butelce', 'drink', 3.99, '2026-05-06 13:15:25', '2026-05-06 13:15:25', 1, 1, 1, 'JABBRZ05l.png'),
-(15, 'Tymbark jabłko brzoskwinia 2l', 'Tymbark jabłko brzoskwinia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 13:15:46', '2026-05-06 13:15:46', 0, 1, 1, 'JABBRZ2l.png');
+(15, 'Tymbark jabłko brzoskwinia 2l', 'Tymbark jabłko brzoskwinia 2litry w dużej plastikowej butelce', 'drink', 4.99, '2026-05-06 13:15:46', '2026-05-15 07:24:42', 5, 1, 1, 'JABBRZ2l.png');
 
 -- --------------------------------------------------------
 
@@ -162,7 +164,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`, `updated_at`, `last_login`, `is_active`, `failed_attempts`, `last_failed_login`) VALUES
-(1, '2', '2@2', '$2y$10$rrWRVX//ZWv4Lfv2C1DWuubpChOsX2nNof2cADp.6g9pJgBGrNsaK', 'admin', '2026-05-05 12:36:28', '2026-05-06 06:57:24', '2026-05-06 08:57:24', 1, 0, NULL);
+(1, '2', '2@2', '$2y$10$Jt/wE47F9ZUwXFlX3MLvneLvhSAYrkIkL2H4dHIK4D14S/eh.lRGO', 'admin', '2026-05-05 12:36:28', '2026-05-15 07:42:14', '2026-05-15 09:42:14', 1, 0, NULL);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -231,13 +233,13 @@ ALTER TABLE `discounts`
 -- AUTO_INCREMENT for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `products`

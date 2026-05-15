@@ -19,48 +19,18 @@ const filterMin = document.getElementById("filterMin");
 const filterMax = document.getElementById("filterMax");
 
 const filterIsAvailable = document.getElementById("filterIsAvailable");
+const filterIsActive = document.getElementById("filterIsActive");
 const filterIsDiscounted = document.getElementById("filterIsDiscounted");
-let includeAvailable = false;
-let includeDiscounted = false;
+
+const filterIsUnavailable = document.getElementById("filterIsUnavailable");
+const filterIsUnactive = document.getElementById("filterIsUnactive");
+const filterIsUndiscounted = document.getElementById("filterIsUndiscounted");
 
 const filterFood = document.getElementById("filterFood");
 const filterDrink = document.getElementById("filterDrink");
 const filterSchool = document.getElementById("filterSchool");
-let includeFood = false;
-let includeDrink = false;
-let includeSchool = false;
 
 const resetFiltersBtn = document.getElementById("resetFiltersBtn");
-
-
-filterIsAvailable.addEventListener("click", ()=>
-{
-    filterIsAvailable.classList.toggle("opacity-50");
-    includeAvailable = !includeAvailable;
-})
-filterIsDiscounted.addEventListener("click", ()=>
-{
-    filterIsDiscounted.classList.toggle("opacity-50");
-    includeDiscounted = !includeDiscounted;
-})
-
-
-filterFood.addEventListener("click", ()=>
-{
-    filterFood.classList.toggle("opacity-50");
-    includeFood = !includeFood;
-})
-filterDrink.addEventListener("click", ()=>
-{
-    filterDrink.classList.toggle("opacity-50");
-    includeDrink = !includeDrink;
-})
-filterSchool.addEventListener("click", ()=>
-{
-    filterSchool.classList.toggle("opacity-50");
-    includeSchool = !includeSchool;
-})
-
 
 
 function filterProducts()
@@ -76,22 +46,26 @@ function filterProducts()
         const productType = product.dataset.type;
         const productStock = Number(product.dataset.stock);
         const isAvailable = Number(product.dataset.available) === 1 && (productStock === -1 || productStock > 0);
+        const isActive = Number(product.dataset.active);
         const isDiscounted = Number(product.dataset.discount);
 
         const matchName = productName.includes(trueName);
         const matchPrice = productPrice >= trueMin && productPrice <= trueMax;
 
-        const typesSelected = [];
-        if (includeFood) typesSelected.push("food");
-        if (includeDrink) typesSelected.push("drink");
-        if (includeSchool) typesSelected.push("school");
+        const matchAvailable = (filterIsAvailable.checked && isAvailable) || (filterIsUnavailable.checked && !isAvailable);
+        const matchActive = (filterIsActive.checked && isActive) || (filterIsUnactive.checked && !isActive);
+        const matchDiscounted = (filterIsDiscounted.checked && isDiscounted) || (filterIsUndiscounted.checked && !isDiscounted);
 
-        const matchType = typesSelected.length === 0 || typesSelected.includes(productType);
+        const types =
+        [
+            filterFood.checked && "food",
+            filterDrink.checked && "drink",
+            filterSchool.checked && "school"
+        ]
 
-        const matchAvailable = !includeAvailable || isAvailable;
-        const matchDiscount = !includeDiscounted || isDiscounted;
+        const matchType = types.includes(productType);
 
-        if ((matchName && matchPrice && matchType && matchAvailable && matchDiscount) || product.dataset.action === "add")
+        if ((matchName && matchPrice && matchAvailable && matchActive && matchDiscounted && matchType) || product.dataset.action === "add")
         {
             product.parentElement.style.display = "block";
         } 
@@ -106,12 +80,17 @@ filterName.addEventListener("input", filterProducts);
 filterMin.addEventListener("input", filterProducts);
 filterMax.addEventListener("input", filterProducts);
 
-filterIsAvailable.addEventListener("click", filterProducts);
-filterIsDiscounted.addEventListener("click", filterProducts);
+filterIsAvailable.addEventListener("change", filterProducts);
+filterIsActive.addEventListener("change", filterProducts);
+filterIsDiscounted.addEventListener("change", filterProducts);
 
-filterFood.addEventListener("click", filterProducts);
-filterDrink.addEventListener("click", filterProducts);
-filterSchool.addEventListener("click", filterProducts);
+filterIsUnavailable.addEventListener("change", filterProducts);
+filterIsUnactive.addEventListener("change", filterProducts);
+filterIsUndiscounted.addEventListener("change", filterProducts);
+
+filterFood.addEventListener("change", filterProducts);
+filterDrink.addEventListener("change", filterProducts);
+filterSchool.addEventListener("change", filterProducts);
 
 resetFiltersBtn.addEventListener("click", () => 
 {
@@ -125,15 +104,15 @@ function resetFilters()
     filterMin.value = "";
     filterMax.value = "";
 
-    includeAvailable = false;
-    includeDiscounted = false;
-    includeFood = false;
-    includeDrink = false;
-    includeSchool = false;
+    filterIsAvailable.checked = true;
+    filterIsActive.checked = true;
+    filterIsDiscounted.checked = true;
 
-    filterIsAvailable.classList.add("opacity-50");
-    filterIsDiscounted.classList.add("opacity-50");
-    filterFood.classList.add("opacity-50");
-    filterDrink.classList.add("opacity-50");
-    filterSchool.classList.add("opacity-50");
+    filterIsUnavailable.checked = true;
+    filterIsUnactive.checked = true;
+    filterIsUndiscounted.checked = true;
+
+    filterFood.checked = true;
+    filterDrink.checked = true;
+    filterSchool.checked = true;
 }

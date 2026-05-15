@@ -106,7 +106,8 @@ exit;
 
     header('Content-Type: application/json');
 echo json_encode([
-    "success" => true
+    "success" => true,
+    "message" => "Pomyślnie zapisano zmiany"
 ]);
 exit;
 }
@@ -162,7 +163,8 @@ exit;
 
     header('Content-Type: application/json');
 echo json_encode([
-    "success" => true
+    "success" => true,
+    "message" => "Pomyślnie dodano nowy produkt"
 ]);
 exit;
 }

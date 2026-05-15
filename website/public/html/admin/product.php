@@ -92,7 +92,7 @@ include BACKEND_PATH . "database/database.php";
 
                 $button = "add";
                 $img = "add";
-                include BACKEND_PATH . 'admin/productCreate.php';
+                include BACKEND_PATH . 'admin/productGenerate.php';
             ?>
 
             <?php while ($row = $query->fetch_assoc()):
@@ -111,7 +111,7 @@ include BACKEND_PATH . "database/database.php";
                 
                 $button = "update";
                 $img = "update";
-                include BACKEND_PATH . 'admin/productCreate.php';
+                include BACKEND_PATH . 'admin/productGenerate.php';
 
             endwhile;
             ?>
@@ -122,7 +122,7 @@ include BACKEND_PATH . "database/database.php";
             <div
                 id="filters"
                 class="filterDisabled
-                col-12 col-sm-6 col-md-4 col-lg-6 col-xxl-4 mt-2"
+                col-12 col-sm-6 col-lg-4 col-xxl-4 h-75 overflow-auto"
             >
                 <div
                     class="card bg-white"
@@ -162,43 +162,147 @@ include BACKEND_PATH . "database/database.php";
                             Zaznacz kategorie
                         </h6>
 
-                        <div
-                            class="row justify-content-center mb-1 gap-4"
+                        <div 
+                            class="row g-2 mb-2"
                         >
-                            <button
-                                id="filterIsAvailable"
-                                class="btn btn-info opacity-50 col-5 h-100 mb-2"
+                            <div
+                                class="col g-2"
                             >
-                                Dostępne
-                            </button>
-                            <button 
-                                id="filterIsDiscounted"
-                                class="btn btn-info opacity-50 col-5 h-100"
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterIsAvailable"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Dostępny
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterIsActive"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Aktywny
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterIsDiscounted"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Promocja
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                class="col g-2"
                             >
-                                Promocje
-                            </button>
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterIsUnavailable"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Niedostępny
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterIsUnactive"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Nieaktywny
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterIsUndiscounted"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Brak promocji
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
+
                         <div
-                            class="row justify-content-center mb-4 gap-lg-4"
-                        >
-                            <button
-                                id="filterFood"
-                                class="btn btn-info opacity-50 col-lg-3 h-100 mb-2"
+                                class="col g-2"
                             >
-                                Jedzenie
-                            </button>
-                            <button
-                                id="filterDrink"
-                                class="btn btn-info opacity-50 col-lg-3 h-100 mb-2"
-                            >
-                                Napoje
-                            </button>
-                            <button
-                                id="filterSchool"
-                                class="btn btn-info opacity-50 col-lg-3 h-100 mb-2"
-                            >
-                                Szkoła
-                            </button>
+                                <div class="col-12">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterFood"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Jedzenie
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterDrink"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Napoje
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-check form-switch">
+                                        <input
+                                            id="filterSchool"
+                                            type="checkbox"
+                                            class="form-check-input"
+                                            checked
+                                        >
+                                        <label class="form-check-label">
+                                            Przybory szkolne
+                                        </label>
+                                    </div>
+                                </div>
                         </div>
 
                         <button
@@ -215,6 +319,7 @@ include BACKEND_PATH . "database/database.php";
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <?php include BACKEND_PATH . "config/config.js.php"?>
+    <?php include "popup.php"?>
     <script src="<?=PUBLIC_URL?>js/admin/productFetch.js"></script>
     <script src="<?=PUBLIC_URL?>js/admin/productFilter.js"></script>
 </body>

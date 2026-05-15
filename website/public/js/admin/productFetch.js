@@ -2,46 +2,47 @@
 
 const createForm = document.querySelectorAll(".createForm");
 
-createForm.forEach(form => {
-    
+const adminUpdateToast = document.getElementById('adminUpdateToast');
+const toast = bootstrap.Toast.getOrCreateInstance(adminUpdateToast);
+const result = document.getElementById("adminUpdateResult");
 
-form.addEventListener("submit", (e)=>
+
+createForm.forEach(form =>
 {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget, e.submitter);
+    form.addEventListener("submit", (e)=>
+    {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget, e.submitter);
 
-    fetch(window.CONFIG.BACKEND_URL + "admin/productUpdate.php",
-    {
-        method: "POST",
-        body: formData
-    })
-    .then(async (response) =>
-    {
-        const data = await response.json();
-    
-        if (!response.ok)
+        fetch(window.CONFIG.BACKEND_URL + "admin/productUpdate.php",
         {
-            throw new Error(data);
-        }
-    
-        return data;
-    })
-    .then((data) =>
-    {
-        // success
-        console.log(data);
-    })
-    .catch((error) =>
-    {
-        // error
-        console.log(error);
-    })
-    .finally(() =>
-    {
-        // cleanup
-        window.location.reload();
+            method: "POST",
+            body: formData
+        })
+        .then(async (response) =>
+        {
+            const data = await response.json();
+        
+            if (!response.ok)
+            {
+                throw new Error(data.message);
+            }
+        
+            return data;
+        })
+        .then((data) =>
+        {
+            result.innerHTML = data.message;
+        })
+        .catch((error) =>
+        {
+            result.innerHTML = error;
+        })
+        .finally(() =>
+        {
+            toast.show();
+        });
     });
-});
 });
 
 

@@ -5,7 +5,7 @@
         class="top row align-items-center"
     >
         <div
-            class="col-sm-3 col-9 mb-2 d-flex justify-content-sm-end justify-content-start"
+            class="col-sm-3 col-9 mb-2 d-sm-flex d-none justify-content-sm-end justify-content-start"
         >
             <a 
                 href="https://www.zs4.oswiata.tychy.pl/"
@@ -33,7 +33,7 @@
         </div>
 
         <div
-            class="nav col-lg-4 col-sm-9 col-3 d-flex justify-content-end gap-2"
+            class="nav col-lg-4 col-sm-9 col-12 d-flex justify-content-sm-end justify-content-center gap-2"
         >
 
             <?php if(isset($folder) && $folder === "admin") { ?>
