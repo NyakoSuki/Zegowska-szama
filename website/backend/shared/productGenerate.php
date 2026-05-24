@@ -183,7 +183,7 @@ $site = basename($_SERVER['PHP_SELF']);
                                 data-bs-product-name="<?= $productName ?>"
                                 data-bs-product-stock="<?= $productStock ?>"
                             >
-                                🛒 Add to cart
+                                🛒 Dodaj do koszyka
                             </button>
 
                         <?php } elseif($site === "cart.php") { ?>
@@ -283,7 +283,7 @@ $site = basename($_SERVER['PHP_SELF']);
                             <button
                                 class="btn btn-outline-danger btn-sm w-100"
                             >
-                                🗑️ Remove from cart
+                                🗑️ Usuń z koszyka
                             </button>
                         </form>
 

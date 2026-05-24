@@ -14,7 +14,7 @@
         data-action="<?=$action?>"
     >
 
-        <!-- Product image preview -->
+         <!-- Product image preview -->
         <div class="bg-light d-flex flex-column justify-content-center align-items-center p-3 border-bottom">
 
             <img
@@ -26,7 +26,8 @@
 
         </div>
 
-        <!-- Product add/edit form -->
+        <!-- Product add / edit form -->
+
         <form
             name=""
             class="createForm d-flex h-100"
@@ -36,11 +37,11 @@
 
         <div class="p-3 d-flex flex-column flex-grow-1 gap-3">
 
-            <!-- Image input -->
+             <!-- Image field -->
             <div>
 
                 <label class="form-label fw-semibold small mb-1">
-                    Image
+                    Zdjęcie
                 </label>
 
                 <input
@@ -53,11 +54,11 @@
 
             </div>
 
-            <!-- Product name -->
+             <!-- Product name field -->
             <div>
 
                 <label class="form-label fw-semibold small mb-1">
-                    Name
+                    Nazwa
                 </label>
 
                 <input
@@ -69,11 +70,11 @@
 
             </div>
 
-            <!-- Product description -->
+             <!-- Product description field -->
             <div>
 
                 <label class="form-label fw-semibold small mb-1">
-                    Description
+                    Opis
                 </label>
 
                 <textarea
@@ -84,14 +85,14 @@
 
             </div>
 
-            <!-- Price and stock -->
+            <!-- Price + stock -->
             <div class="row g-2">
 
-                <!-- Product price -->
+                <!-- CENA -->
                 <div class="col-6">
 
                     <label class="form-label fw-semibold small mb-1">
-                        Price
+                        Cena
                     </label>
 
                     <input
@@ -104,11 +105,11 @@
 
                 </div>
 
-                <!-- Product stock -->
+                <!-- Stock field -->
                 <div class="col-6">
 
                     <label class="form-label fw-semibold small mb-1">
-                        Stock
+                        Stan
                     </label>
 
                     <input
@@ -122,11 +123,11 @@
 
             </div>
 
-            <!-- Product type -->
+             <!-- Product type selection -->
             <div>
 
                 <label class="form-label fw-semibold small mb-1">
-                    Product type
+                    Typ produktu
                 </label>
 
                 <select
@@ -135,25 +136,25 @@
                 >
 
                     <option value="food" <?=$productType === 'food' ? 'selected' : ''?>>
-                        Food
+                        Jedzenie
                     </option>
 
                     <option value="drink" <?=$productType === 'drink' ? 'selected' : ''?>>
-                        Drink
+                        Napój
                     </option>
 
                     <option value="school" <?=$productType === 'school' ? 'selected' : ''?>>
-                        School
+                        Szkoła
                     </option>
 
                 </select>
 
             </div>
 
-            <!-- Product status switches -->
+            <!-- Status switches -->
             <div class="row g-2">
 
-                <!-- Product availability -->
+                 <!-- Availability switch -->
                 <div class="col-6">
 
                     <div class="form-check form-switch">
@@ -166,14 +167,14 @@
                         >
 
                         <label class="form-check-label">
-                            Available
+                            Dostępny
                         </label>
 
                     </div>
 
                 </div>
 
-                <!-- Product active status -->
+                <!-- Active switch -->
                 <div class="col-6">
 
                     <div class="form-check form-switch">
@@ -186,7 +187,7 @@
                         >
 
                         <label class="form-check-label">
-                            Active
+                            Aktywny
                         </label>
 
                     </div>
@@ -195,30 +196,32 @@
 
             </div>
 
+            <!-- Add product mode -->
             <?php if($button === "add") { ?>
 
             <div class="mt-auto d-flex">
 
-                <!-- Add product button -->
+                 <!-- Add button -->
                 <button
                     type="submit"
                     name="actionBtn"
                     value="add"
                     class="btn btn-dark fw-semibold col-6"
                 >
-                    Add product
+                    Dodaj produkt
                 </button>
 
-                <!-- Reset form button -->
+                <!-- Reset form -->
                 <button
                     type="reset"
                     class="btn btn-danger fw-semibold ms-1 col-6"
                 >
-                    Clear
+                    Wyczyść
                 </button>
 
             </div>
 
+             <!-- Edit product mode -->
             <?php } else {?>
 
             <div class="d-flex mt-auto align-items-center">
@@ -243,7 +246,7 @@
                     value="update"
                     class="btn btn-dark fw-semibold col-8 ms-auto"
                 >
-                    Save changes
+                    Zapisz zmiany
                 </button>
 
             </div>
