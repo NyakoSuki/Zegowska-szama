@@ -9,6 +9,8 @@ $site = basename($_SERVER['PHP_SELF']);
         class="row g-4"
     >
         <?php
+
+        // Get products with active discounts
         $query = $connection->query
         ("
         SELECT
@@ -51,14 +53,18 @@ $site = basename($_SERVER['PHP_SELF']);
 
         $totalPrice = 0;
 
+        // Loop through all products
         while ($row = $query->fetch_assoc())
         {
             $productId = (int)($row["id"]);
+
+            // Show only cart products on cart page
             if($site === "cart.php")
             {
                 if (!isset($cart[$productId])) continue;
             }
 
+            // Product data
             $productName = $row["name"];
             $productDescription = $row["description"];
             $productType = $row["type"];
@@ -68,25 +74,32 @@ $site = basename($_SERVER['PHP_SELF']);
             $productIsActive = (int)($row["is_active"]);
             $productImg = $row["img"];
 
+            // Discount data
             $discountProcent = (int)($row["procent"]);
             $discountStartDate = $row["start_date"];
             $discountEndDate = $row["end_date"];
 
             $quantity = $cart[$productId] ?? 1;
 
+            // Product availability
             $isAvailable = ($productIsAvailable === 1 && ($productStock === -1 || $productStock > 0));
 
+            // Skip inactive products
             $isActive = ($productIsActive === 1);
             if(!$isActive) continue;
 
+            // Calculate discounted price
             $isDiscounted = $discountProcent !== 0;
+
             if($isDiscounted)
                 $truePrice = round(($productPrice * $quantity ?? 1) * (1 - $discountProcent / 100), 2);
             else
                 $truePrice = ($productPrice * $quantity ?? 1);
 
+            // Add to total cart price
             $totalPrice += $truePrice;
         ?>
+
         <div
             class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl-2"
         >
@@ -102,20 +115,27 @@ $site = basename($_SERVER['PHP_SELF']);
                 data-available="<?= $productIsAvailable?>"
                 data-discount="<?= $discountProcent?>"
             >
+
+                <!-- Product image -->
                 <img
                     src="<?=PUBLIC_URL . "img/products/" . $productImg?>"
                     alt="<?= $productName ?>"
                     class="card-img-top h2 text-center p-0 m-0 align-self-center
                     <?= ($productType === 'drink') ? 'w-25' : ''?>"
                 >
+
                 <div
                     class="p-2 d-flex flex-column flex-grow-1"
                 >
+
+                    <!-- Product name -->
                     <p
                         class="fw-bold h3"
                     >
                         <?= $productName ?>
                     </p>
+
+                    <!-- Product description -->
                     <small>
                         <?= $productDescription ?>
                     </small>
@@ -123,12 +143,16 @@ $site = basename($_SERVER['PHP_SELF']);
                     <div
                         class="d-flex mt-auto p-0 m-0 gap-2"
                     >
+
+                        <!-- Original price -->
                         <p
                             class="fw-bold p-0 m-0 mt-auto
                             <?= $isDiscounted ? 'text-decoration-line-through small' : ''?>"
                         >
                             <?= number_format($productPrice * ($quantity ?? 1), 2)?> zł
                         </p>
+
+                        <!-- Discounted price -->
                         <p
                             class="fw-bold p-0 m-0 h4 text-warning align-self-end"
                         >
@@ -137,13 +161,17 @@ $site = basename($_SERVER['PHP_SELF']);
 
                         <?php if($site === "shop.php") { ?>
 
+                            <!-- Discount badge -->
                             <p
                                 class="fw-bold p-0 m-0 h5 bg-danger text-light ms-auto rounded-5 p-1 m-1
                                 <?= $isDiscounted ?  '' : 'd-none'?>"
                             >
                                 -<?= $discountProcent?>%
                             </p>
+
                     </div>
+
+                            <!-- Add to cart button -->
                             <button
                                 type="button"
                                 class="btn w-100 fw-semibold shadow-sm p-1 m-0
@@ -155,15 +183,19 @@ $site = basename($_SERVER['PHP_SELF']);
                                 data-bs-product-name="<?= $productName ?>"
                                 data-bs-product-stock="<?= $productStock ?>"
                             >
-                                🛒 Dodaj do koszyka
+                                🛒 Add to cart
                             </button>
 
                         <?php } elseif($site === "cart.php") { ?>
                         
                     </div>
+
+                        <!-- Quantity controls -->
                         <div
                             class="input-group mb-3"
                         >
+
+                            <!-- Decrease quantity -->
                             <form
                                 class="decForm input-group-text p-0 border-0 bg-transparent"
                             >
@@ -172,16 +204,19 @@ $site = basename($_SERVER['PHP_SELF']);
                                     name="id"
                                     value="<?= $productId?>"
                                 >
+
                                 <input
                                     type="hidden"
                                     name="quantity"
                                     value="<?= $quantity?>"
                                 >
+
                                 <input
                                     type="hidden"
                                     name="left"
                                     value="<?= $productStock?>"
                                 >
+
                                 <button
                                     name="incBtn"
                                     class="btn btn-outline-secondary rounded-0 rounded-start"
@@ -191,6 +226,7 @@ $site = basename($_SERVER['PHP_SELF']);
                                 </button>
                             </form>
 
+                            <!-- Quantity input -->
                             <input
                                 data-product-id="<?=$productId?>"
                                 data-product-left="<?=$productStock?>"
@@ -201,22 +237,27 @@ $site = basename($_SERVER['PHP_SELF']);
                                 max="10"
                             >
 
+                            <!-- Increase quantity -->
                             <form class="incForm input-group-text p-0 border-0 bg-transparent">
+
                                 <input
                                     type="hidden"
                                     name="id"
                                     value="<?= $productId?>"
                                 >
+
                                 <input
                                     type="hidden"
                                     name="quantity"
                                     value="<?= $quantity?>"
                                 >
+
                                 <input
                                     type="hidden"
                                     name="left"
                                     value="<?= $productStock?>"
                                 >
+
                                 <button
                                     name="incBtn"
                                     class="btn btn-outline-secondary rounded-0 rounded-end"
@@ -224,9 +265,12 @@ $site = basename($_SERVER['PHP_SELF']);
                                 >
                                     +
                                 </button>
+
                             </form>
+
                         </div>
 
+                        <!-- Remove product button -->
                         <form
                             class="removeForm m-0"
                         >
@@ -235,10 +279,11 @@ $site = basename($_SERVER['PHP_SELF']);
                                 name="id"
                                 value="<?= $productId?>"
                             >
+
                             <button
                                 class="btn btn-outline-danger btn-sm w-100"
                             >
-                                🗑️ Usuń z koszyka
+                                🗑️ Remove from cart
                             </button>
                         </form>
 

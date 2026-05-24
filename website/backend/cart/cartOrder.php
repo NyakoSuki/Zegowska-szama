@@ -11,7 +11,7 @@ if (empty($cart)) {
     exit;
 }
 
-// Pobierz tylko produkty które są w koszyku
+// Get only products that are in your cart
 $ids = implode(",", array_map('intval', array_keys($cart)));
 
 $products = $connection->query("
