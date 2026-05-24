@@ -201,8 +201,8 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
     </main>
 
 
-<script src="<?=PUBLIC_URL?>js/auth/animation.js"></script>
-<script src="<?=PUBLIC_URL?>js/shared/showPassword.js"></script>
+<script src="<?=PUBLIC_URL?>js/auth/authAnimation.js"></script>
+<script src="<?=PUBLIC_URL?>js/shared/passwordShow.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>

@@ -50,7 +50,7 @@ $site = basename($_SERVER['PHP_SELF']);
         ) d ON p.id = d.product_id
         ORDER BY p.type;
         ");
-
+        
         $totalPrice = 0;
 
         // Loop through all products
