@@ -19,40 +19,40 @@ $img = $_POST["imgInp"] ?? "";
 $action = $_POST["actionBtn"] ?? '';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST")
-                {
-                http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
-            }
+{
+    http_response_code(400);
+    echo json_encode
+    ([
+        "success" => false,
+        "message" => "SQL error"
+    ]);
+    exit;
+}
 if(empty($name) || empty($price))
-                {
-                http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
-            }
+{
+    http_response_code(400);
+    echo json_encode
+    ([
+        "success" => false,
+        "message" => "SQL error"
+    ]);
+    exit;
+}
 
 // UPDATE PRODUCT
 if ($action === "update")
 {
     // GUARD CLAUSES
     if (empty($id))
-                    {
-                http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
-            }
+    {
+        http_response_code(400);
+        echo json_encode
+        ([
+            "success" => false,
+            "message" => "SQL error"
+        ]);
+        exit;
+    }
 
 
         $stmt = $connection->prepare
@@ -64,12 +64,12 @@ exit;
             if (!$stmt)
             {
                 http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
+                echo json_encode
+                ([
+                    "success" => false,
+                    "message" => "SQL error"
+                ]);
+                exit;
             }
 
         $stmt->bind_param
@@ -94,23 +94,25 @@ exit;
 
     // EXECUTE UPDATE
     if (!$stmt->execute())
-                {
-                http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
-            }
+    {
+        http_response_code(400);
+        echo json_encode
+        ([
+            "success" => false,
+            "message" => "SQL error"
+        ]);
+        exit;
+    }
 
     header('Content-Type: application/json');
-echo json_encode([
-    "success" => true,
-    "message" => "Pomyślnie zapisano zmiany"
-]);
-exit;
-}
+
+    http_response_code(400);
+    echo json_encode
+    ([
+        "success" => false,
+        "message" => "SQL error"
+    ]);
+    exit;
 
 
 if ($action === "add")
@@ -126,14 +128,14 @@ if ($action === "add")
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         ");
             if (!$stmt)
-                {
+            {
                 http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
+                echo json_encode
+                ([
+                    "success" => false,
+                    "message" => "SQL error"
+                ]);
+                exit;
             }
 
         $stmt->bind_param
@@ -151,20 +153,22 @@ exit;
 
     // EXECUTE UPDATE
         if (!$stmt->execute())
-                {
-                http_response_code(400);
-
-echo json_encode([
-    "success" => false,
-    "message" => "SQL error"
-]);
-exit;
-            }
+        {
+            http_response_code(400);
+            echo json_encode
+            ([
+                "success" => false,
+                "message" => "SQL error"
+            ]);
+            exit;
+        }
 
     header('Content-Type: application/json');
-echo json_encode([
-    "success" => true,
-    "message" => "Pomyślnie dodano nowy produkt"
-]);
-exit;
+
+    echo json_encode
+    ([
+        "success" => true,
+        "message" => "Pomyślnie dodano nowy produkt"
+    ]);
+    exit;
 }

@@ -53,27 +53,27 @@ form.addEventListener("submit", function(e)
         method: "POST",
         body: formData
     })
-    .then(async response =>
+    .then(async (response) =>
     {
-        const text = await response.text();
-
+        const data = await response.json();
+    
         if (!response.ok)
         {
-            throw new Error(text);
+            throw new Error(data.message);
         }
-
-        return text;
+    
+        return data;
     })
-    .then((text) =>
+    .then((data) =>
     {
-        result.innerHTML = text
-
-        toast.show();
-        modal.hide();
+        result.innerHTML = data.message;
     })
-    .catch(error =>
+    .catch((error) =>
     {
-        result.innerHTML = error.message;
+        result.innerHTML = error;
+    })
+    .finally(() =>
+    {
         toast.show();
     });
 });
