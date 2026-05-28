@@ -139,23 +139,21 @@ $username = $row["username"];
 
     </div>
 </div>
-        <form
-            action="<?=BACKEND_URL?>theme.php"
-            methode="post"
-        >
             <button
+                id="themeToggle"
                 type="submit"
                 class="btn btn-dark m-1"
             >
-                Motyw: <?=$_SESSION["theme"] === "dark" ? "Jasny" : "Ciemy";?>
+                Zmień motyw
             </button>
-        </form>
-    </main>
+               
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <?php include "popups.php"?>
     <script src="<?=PUBLIC_URL?>js/account/theme.js"></script>
     <script src="<?=PUBLIC_URL?>js/shared/showPassword.js"></script>
+    <script src="<?=PUBLIC_URL?>js/shared/theme.js"></script>
+    
 </body>
 </html>

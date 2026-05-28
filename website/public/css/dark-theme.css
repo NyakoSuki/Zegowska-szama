@@ -1,30 +1,115 @@
-/*---MAIN---*/
-.dark *
+body.darkTheme
 {
-    color: var(--white);
-}
-body.dark
-{
-    background: #f8f5ec;
-}
-.dark ::placeholder 
-{
-    color: var(--light-gray);
+    background: #222020 !important;
 }
 
+/*---MAIN---*/
+body.darkTheme *
+{
+    color: #f1f1f1;
+}
+
+body.darkTheme ::placeholder
+{
+    color: #cccccc;
+}
 
 /*---HEADER---*/
-.dark header
+body.darkTheme header
 {
-    background: linear-gradient(60deg, var(--white) 0%, var(--dark-gray) 20%, var(--dark-gray) 80%, var(--white) 100%);
-    box-shadow: 0 0 10px var(--dark-gray);
-    min-height: 120px;
-    opacity: 80%;
+    background: linear-gradient(60deg,#000000 0%,#1f1f1f 20%,#1f1f1f 80%,#000000 100%);
+    box-shadow: 0 0 10px #000000;
+    opacity: 1;
 }
 
+/*--BUTTON ANIMATIONS---*/
+body.darkTheme button
+{
+    background: #2c2c2c;
+    color: #ffffff;
+    box-shadow: 1px 1px 4px #000000 !important;
+}
+
+body.darkTheme a
+{
+    color: #ffffff;
+}
+
+body.darkTheme button:hover,
+body.darkTheme a:hover
+{
+    color: #ffffff;
+    background: #3a3a3a;
+}
+
+body.darkTheme button:active,
+body.darkTheme a:active
+{
+    background: #222222;
+}
 
 /*---PRODUCTS---*/
+body.darkTheme .product
+{
+    background: #1e1e1e;
+    border-color: #444 !important;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
 
+body.darkTheme .product img
+{
+    filter: brightness(0.92);
+}
 
+/*---MENU---*/
+body.darkTheme .naviImg
+{
+    filter: brightness(0.9);
+}
 
-/*---BOOTSRTAP---*/
+/*---FILTERS---*/
+body.darkTheme #filters
+{
+    background: #1f1f1f;
+    border-left: 1px solid #444;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+}
+
+/*---INPUTS---*/
+body.darkTheme input
+{
+    background: #2b2b2b;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+/*---BOOTSTRAP FIXES---*/
+body.darkTheme .btn-light
+{
+    background: #2b2b2b !important;
+    color: white !important;
+    border-color: #555 !important;
+}
+
+body.darkTheme .btn-outline-secondary
+{
+    color: #dddddd !important;
+    border-color: #666 !important;
+}
+
+body.darkTheme .btn-outline-danger
+{
+    color: #ff8b8b !important;
+    border-color: #aa4444 !important;
+}
+
+body.darkTheme .bg-light
+{
+    background: #1f1f1f !important;
+}
+
+body.darkTheme .text-dark
+{
+    color: #f1f1f1 !important;
+}
+

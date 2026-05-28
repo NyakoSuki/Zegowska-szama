@@ -171,4 +171,4 @@ if ($action === "add")
         "message" => "Pomyślnie dodano nowy produkt"
     ]);
     exit;
-}
+}}
