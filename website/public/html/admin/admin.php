@@ -40,7 +40,7 @@ include BACKEND_PATH . "database/database.php";
 
                 <div class="mb-3">
                     <a href="user.php" class="btn btn-dark w-100 m-1">
-                        Zarządzanie Urzytkownikami
+                        Zarządzanie Użytkownikami
                     </a>
                 </div>
 
