@@ -166,26 +166,17 @@
 
 
 
-
 <!-- ORDER DETAILS -->
-<div
-    class="modal fade"
-    id="detailsModal"
-    tabindex="-1"
->
+<div class="modal fade" id="detailsModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-white rounded-4 shadow">
 
             <div class="modal-header">
                 <h5 class="modal-title">Zamówienie</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" tabindex="-1"></button>
             </div>
 
-            <input type="hidden" id="orderIdInput">
-            <div class="modal-body" id="modal-body">
-
-                
-
+            <div class="modal-body">
             </div>
 
         </div>

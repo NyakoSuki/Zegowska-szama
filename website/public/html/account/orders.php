@@ -96,6 +96,6 @@ include PUBLIC_PATH . "html/shared/header.php";
     <?php include "popups.php"?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <?php include BACKEND_PATH . "config/config.js.php"?>
-    <script src="<?=PUBLIC_URL?>js/account/details.js"></script>
+    <script src="<?=PUBLIC_URL?>js/account/orderDetails.js"></script>
 </body>
 </html>
