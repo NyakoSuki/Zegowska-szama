@@ -46,6 +46,5 @@ include BACKEND_PATH . "database/database.php";
     <?php include PUBLIC_PATH . "html/shared/popup.php"?>
     <script src="<?=PUBLIC_URL?>js/shop/cartAdd.js"></script>
     <script src="<?=PUBLIC_URL?>js/shop/shopFilter.js"></script>
-    <script src="<?=PUBLIC_URL?>js/shared/theme.js"></script>
 </body>
 </html>

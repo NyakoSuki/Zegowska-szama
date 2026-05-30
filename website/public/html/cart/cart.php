@@ -94,6 +94,5 @@ $cart = $_SESSION["cart"] ?? [];
     <?php include "popup.php"?>
     <?php include PUBLIC_PATH . "html/shared/popup.php"?>
     <script src="<?= PUBLIC_URL ?>js/cart/cartUpdate.js"></script>
-    <script src="<?=PUBLIC_URL?>js/shared/theme.js"></script>
 </body>
 </html>

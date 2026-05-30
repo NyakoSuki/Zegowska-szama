@@ -76,7 +76,7 @@
             </a>
 
             <?php if($site === "shop.php" || (isset($folder) && $folder === "admin")) { ?>
-
+            
             <button
                 type="button"
                 id="filterBtn"
