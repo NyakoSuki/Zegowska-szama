@@ -83,41 +83,6 @@ $folder = basename(__DIR__);
 include PUBLIC_PATH . "html/shared/header.php";
 ?>
 
-<!-- FILTRY -->
-<section
-    id="filters"
-    class="filterDisabled col-12 col-sm-6 col-lg-4 col-xxl-4 h-75 overflow-auto"
->
-    <div class="card bg-white">
-        <div class="card-body">
-            <h6 class="mb-3 fw-bold">Filtry</h6>
-
-            <input type="text" id="searchInput" class="form-control bg-light mb-2"
-                   placeholder="Szukaj: imię, e-mail, nr zamówienia…">
-
-            <input type="number" id="filterMin" class="form-control bg-light mb-2"
-                   step="0.01" min="0" placeholder="Cena min (zł)">
-
-            <input type="number" id="filterMax" class="form-control bg-light mb-3"
-                   step="0.01" min="0" placeholder="Cena max (zł)">
-
-            <hr>
-            <h6 class="mb-3 fw-bold">Status</h6>
-
-            <div class="d-flex flex-wrap gap-3 mb-3">
-                <?php foreach ($statusLabels as $val => $lbl): ?>
-                <div class="form-check">
-                    <input class="form-check-input status-filter"
-                           type="checkbox" id="f_<?= $val ?>" value="<?= $val ?>" checked>
-                    <label class="form-check-label" for="f_<?= $val ?>"><?= $lbl ?></label>
-                </div>
-                <?php endforeach; ?>
-            </div>
-
-            <button id="resetFilters" class="btn btn-danger col-8 offset-2">Reset</button>
-        </div>
-    </div>
-</section>
 
 <!-- LISTA ZAMÓWIEŃ -->
 <section class="container-fluid my-4 px-3">
