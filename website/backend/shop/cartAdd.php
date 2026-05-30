@@ -4,17 +4,20 @@ header('Content-Type: application/json');
 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/Zegowska-szama/website/backend/config/config.php";
 
-
+// Initialize cart in session if it doesn't exist yet
 if (!isset($_SESSION["cart"]))
 {
     $_SESSION["cart"] = [];
 }
-$id = (int)($_POST["id"] ?? '');
-$name = $_POST["name"] ?? '';
-$quantity = (int)($_POST["quantity"] ?? '');
-$left = (int)($_POST["left"] ?? 1);
 
-if(empty($id))
+// Read and sanitize POST input
+$id       = (int)($_POST["id"]       ?? '');
+$name     = $_POST["name"]           ?? '';
+$quantity = (int)($_POST["quantity"] ?? '');
+$left     = (int)($_POST["left"]     ?? 1); // -1 means unlimited stock
+
+// Guard – product ID must be provided
+if (empty($id))
 {
     http_response_code(404);
     echo json_encode
@@ -24,7 +27,9 @@ if(empty($id))
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
-if($quantity < 1)
+
+// Guard – quantity must be at least 1
+if ($quantity < 1)
 {
     http_response_code(409);
     echo json_encode
@@ -34,7 +39,9 @@ if($quantity < 1)
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
-if(($_SESSION["cart"][$id] ?? 0) + $quantity > 10)
+
+// Guard – cart limit of 10 units per product
+if (($_SESSION["cart"][$id] ?? 0) + $quantity > 10)
 {
     http_response_code(409);
     echo json_encode
@@ -43,9 +50,10 @@ if(($_SESSION["cart"][$id] ?? 0) + $quantity > 10)
         "message" => 'Nie możesz mieć więcej niż 10 takich samych produktów w koszyku naraz! Posiadasz: ' . ($_SESSION['cart'][$id] ?? 0)
     ], JSON_UNESCAPED_UNICODE);
     exit;
-
 }
-if(($_SESSION["cart"][$id] ?? 0) + $quantity > $left && $left !== -1)
+
+// Guard – requested quantity must not exceed available stock (skip if unlimited)
+if (($_SESSION["cart"][$id] ?? 0) + $quantity > $left && $left !== -1)
 {
     http_response_code(409);
     echo json_encode
@@ -55,11 +63,14 @@ if(($_SESSION["cart"][$id] ?? 0) + $quantity > $left && $left !== -1)
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
+
+// Add quantity to cart and return success
 $_SESSION["cart"][$id] = ($_SESSION["cart"][$id] ?? 0) + $quantity;
-    http_response_code(200);
-    echo json_encode
-    ([
-        "success" => true,
-        "message" => 'Pomyślnie dodano "' . $name . '" w ilości: ' . $quantity
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
+
+http_response_code(200);
+echo json_encode
+([
+    "success" => true,
+    "message" => 'Pomyślnie dodano "' . $name . '" w ilości: ' . $quantity
+], JSON_UNESCAPED_UNICODE);
+exit;
