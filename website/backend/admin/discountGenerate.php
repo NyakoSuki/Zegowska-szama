@@ -35,9 +35,10 @@ $selectedIds = array_filter(array_map('intval', explode(",", $discountProducts))
         </div>
         <?php endif; ?>
 
-        <!-- Form -->
-        <form class="createDiscountForm d-flex h-100" method="" action="">
+        <?php if ($button === "add"): ?>
 
+        <!-- Form – tylko dla tworzenia -->
+        <form class="createDiscountForm d-flex h-100" method="" action="">
             <div class="p-3 d-flex flex-column flex-grow-1 gap-3">
 
                 <!-- Percent -->
@@ -64,7 +65,7 @@ $selectedIds = array_filter(array_map('intval', explode(",", $discountProducts))
                         <input
                             type="datetime-local"
                             name="startInp"
-                            value="<?=str_replace(' ', 'T', substr($discountStart, 0, 16))?>"
+                            value=""
                             class="form-control"
                         >
                     </div>
@@ -73,41 +74,33 @@ $selectedIds = array_filter(array_map('intval', explode(",", $discountProducts))
                         <input
                             type="datetime-local"
                             name="endInp"
-                            value="<?=str_replace(' ', 'T', substr($discountEnd, 0, 16))?>"
+                            value=""
                             class="form-control"
                         >
                     </div>
                 </div>
 
-                <!-- Products checkboxes -->
+                <!-- Products select -->
                 <div>
                     <label class="form-label fw-semibold small mb-1">Produkty objęte promocją</label>
-                    <div class="border rounded p-2 bg-light" style="max-height: 180px; overflow-y: auto;">
-                        <?php if (empty($allProducts)): ?>
-                            <small class="text-muted">Brak aktywnych produktów</small>
-                        <?php else: ?>
-                            <?php foreach ($allProducts as $prod):
-                                $checked = in_array((int)$prod['id'], $selectedIds) ? 'checked' : '';
-                            ?>
-                            <div class="form-check">
-                                <input
-                                    type="checkbox"
-                                    name="productsInp[]"
-                                    value="<?=(int)$prod['id']?>"
-                                    class="form-check-input"
-                                    <?=$checked?>
-                                >
-                                <label class="form-check-label">
+                    <?php if (empty($allProducts)): ?>
+                        <p class="text-muted small">Brak aktywnych produktów</p>
+                    <?php else: ?>
+                        <select
+                            name="productsInp[]"
+                            multiple
+                            class="form-select"
+                            style="min-height: 150px;"
+                        >
+                            <?php foreach ($allProducts as $prod): ?>
+                                <option value="<?=(int)$prod['id']?>">
                                     <?=htmlspecialchars($prod['name'])?>
-                                </label>
-                            </div>
+                                </option>
                             <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+                        </select>
+                        <small class="text-muted">Ctrl+klik aby wybrać kilka</small>
+                    <?php endif; ?>
                 </div>
-
-                <!-- Buttons -->
-                <?php if ($button === "add"): ?>
 
                 <div class="mt-auto d-flex">
                     <button type="submit" name="actionBtn" value="add" class="btn btn-dark fw-semibold col-6">
@@ -118,30 +111,88 @@ $selectedIds = array_filter(array_map('intval', explode(",", $discountProducts))
                     </button>
                 </div>
 
-                <?php else: ?>
-
-                <div class="d-flex mt-auto align-items-center gap-1">
-                    <label class="form-check-label text-muted small me-1">ID</label>
-                    <input
-                        name="idInp"
-                        class="border rounded-2 p-2 text-center"
-                        style="width: 50px;"
-                        value="<?=$discountId?>"
-                        type="number"
-                        readonly
-                    >
-                    <button type="submit" name="actionBtn" value="update" class="btn btn-dark fw-semibold flex-grow-1">
-                        Zapisz zmiany
-                    </button>
-                    <button type="submit" name="actionBtn" value="delete" class="btn btn-danger fw-semibold">
-                        Usuń
-                    </button>
-                </div>
-
-                <?php endif; ?>
-
             </div>
         </form>
+
+        <?php else: ?>
+
+        <!-- Podgląd – tylko dla istniejących promocji -->
+        <div class="p-3 d-flex flex-column flex-grow-1">
+
+            <!-- Duży procent na górze -->
+            <div class="text-center py-4 mb-3 rounded-3" style="background: rgba(0,0,0,.04);">
+                <span class="text-muted small d-block mb-1 text-uppercase ls-1" style="font-size: .7rem; letter-spacing: .08em;">Zniżka</span>
+                <span class="fw-bold lh-1" style="font-size: 3.5rem;"><?=$discountProcent?><span style="font-size: 1.8rem;">%</span></span>
+            </div>
+
+            <!-- Daty: dwie kafelki obok siebie -->
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <div class="rounded-3 p-3 h-100" style="background: rgba(0,0,0,.04);">
+                        <p class="text-muted mb-1" style="font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;">Od</p>
+                        <?php
+                            $startFormatted = date('d.m.Y', strtotime($discountStart));
+                            $startTime      = date('H:i',   strtotime($discountStart));
+                        ?>
+                        <p class="fw-semibold mb-0 lh-sm"><?=$startFormatted?></p>
+                        <p class="text-muted mb-0 small"><?=$startTime?></p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="rounded-3 p-3 h-100" style="background: rgba(0,0,0,.04);">
+                        <p class="text-muted mb-1" style="font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;">Do</p>
+                        <?php
+                            $endFormatted = date('d.m.Y', strtotime($discountEnd));
+                            $endTime      = date('H:i',   strtotime($discountEnd));
+                        ?>
+                        <p class="fw-semibold mb-0 lh-sm"><?=$endFormatted?></p>
+                        <p class="text-muted mb-0 small"><?=$endTime?></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista produktów – rośnie i wypełnia wolne miejsce -->
+            <?php
+            $assignedNames = array_values(array_filter(
+                array_map(fn($p) => in_array((int)$p['id'], $selectedIds)
+                    ? htmlspecialchars($p['name'])
+                    : null,
+                $allProducts)
+            ));
+            ?>
+            <div class="flex-grow-1 rounded-3 p-3 mb-3 overflow-auto" style="background: rgba(0,0,0,.04); min-height: 80px;">
+                <p class="text-muted mb-2" style="font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;">Produkty objęte promocją</p>
+                <?php if (empty($assignedNames)): ?>
+                    <p class="text-muted small mb-0 fst-italic">Brak przypisanych produktów</p>
+                <?php else: ?>
+                    <div class="d-flex flex-column gap-1">
+                        <?php foreach ($assignedNames as $n): ?>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="rounded-circle bg-secondary flex-shrink-0" style="width:6px;height:6px;"></span>
+                                <span class="small"><?=$n?></span>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <!-- Stopka: ID + przycisk Usuń -->
+            <form class="createDiscountForm" method="" action="">
+                <input type="hidden" name="idInp"      value="<?=$discountId?>">
+                <input type="hidden" name="procentInp" value="<?=$discountProcent?>">
+                <input type="hidden" name="startInp"   value="<?=str_replace(' ', 'T', substr($discountStart, 0, 16))?>">
+                <input type="hidden" name="endInp"     value="<?=str_replace(' ', 'T', substr($discountEnd, 0, 16))?>">
+                <div class="d-flex align-items-center">
+                    <span class="text-muted small">ID&nbsp;<strong>#<?=$discountId?></strong></span>
+                    <button type="submit" name="actionBtn" value="delete" class="btn btn-danger btn-sm fw-semibold ms-auto">
+                        Usuń promocję
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+        <?php endif; ?>
 
     </div>
 
