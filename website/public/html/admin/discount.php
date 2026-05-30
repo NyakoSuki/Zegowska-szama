@@ -83,53 +83,47 @@ while ($p = $prodQuery->fetch_assoc()) {
         </div>
     </section>
 
-    <section>
-        <div
-            id="filters"
-            class="filterDisabled col-12 col-sm-6 col-lg-4 col-xxl-4 h-75 overflow-auto"
-        >
-            <div class="card bg-white">
-                <div class="card-body">
-                    <h6 class="mb-3 fw-bold">Filtry</h6>
+   <section>
+    <div id="filters" class="filterDisabled col-12 col-sm-6 col-lg-4 col-xxl-4 h-75 overflow-auto">
+        <div class="card bg-white">
+            <div class="card-body">
 
-                    <input
-                        type="number"
-                        id="filterMin"
-                        class="form-control bg-light mb-2"
-                        placeholder="Procent min"
-                    >
-                    <input
-                        type="number"
-                        id="filterMax"
-                        class="form-control bg-light mb-3"
-                        placeholder="Procent max"
-                    >
+                <h6 class="mb-3 fw-bold">Filtry promocji</h6>
 
-                    <hr>
-                    <h6 class="mb-3 fw-bold">Status</h6>
-
-                    <div class="row g-2 mb-2">
-                        <div class="col g-2">
-                            <div class="form-check form-switch">
-                                <input id="filterIsActive" type="checkbox" class="form-check-input" checked>
-                                <label class="form-check-label">Aktywna</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input id="filterIsExpired" type="checkbox" class="form-check-input" checked>
-                                <label class="form-check-label">Wygasła</label>
-                            </div>
-                            <div class="form-check form-switch">
-                                <input id="filterIsFuture" type="checkbox" class="form-check-input" checked>
-                                <label class="form-check-label">Przyszła</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button id="resetFiltersBtn" class="btn btn-danger col-8 offset-2">Reset</button>
+                <!-- Zakres procentu -->
+                <label class="form-label small fw-semibold">Procent zniżki (%)</label>
+                <div class="d-flex gap-2 mb-3">
+                    <input type="number" id="filterMin" class="form-control bg-light"
+                           min="1" max="100" placeholder="Min %">
+                    <input type="number" id="filterMax" class="form-control bg-light"
+                           min="1" max="100" placeholder="Max %">
                 </div>
+
+                <hr>
+
+                <h6 class="mb-3 fw-bold">Status</h6>
+
+                <div class="form-check form-switch mb-2">
+                    <input id="filterIsActive" type="checkbox" class="form-check-input" checked>
+                    <label class="form-check-label">Aktywna teraz</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input id="filterIsAvailable" type="checkbox" class="form-check-input" checked>
+                    <label class="form-check-label">Przyszła</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input id="filterIsUnavailable" type="checkbox" class="form-check-input" checked>
+                    <label class="form-check-label">Wygasła</label>
+                </div>
+
+                <button id="resetFiltersBtn" class="btn btn-danger col-8 offset-2">
+                    Reset
+                </button>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <?php include BACKEND_PATH . "config/config.js.php"?>

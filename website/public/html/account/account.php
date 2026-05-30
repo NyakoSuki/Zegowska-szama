@@ -139,13 +139,6 @@ $username = $row["username"];
 
     </div>
 </div>
-            <button
-                id="themeToggle"
-                type="submit"
-                class="btn btn-dark m-1"
-            >
-                Zmień motyw
-            </button>
                
 
     
