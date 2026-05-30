@@ -15,12 +15,16 @@
                 >
                     Filtry
                 </p>
+
+                <!-- Text search by product name -->
                 <input
                     type="text"
                     id="filterName"
                     class="form-control bg-light mb-2"
                     placeholder="Szukaj po nazwie..."
                 >
+
+                <!-- Price range filter -->
                 <input
                     type="number"
                     id="filterMin"
@@ -35,6 +39,7 @@
                     step=0.01
                     placeholder="Cena maksymalna"
                 >
+
                 <hr>
                 <p
                     class="mb-3 fw-bold h6"
@@ -42,15 +47,19 @@
                     Zaznacz kategorie
                 </p>
 
+                <!-- Toggle buttons – active state handled in shopFilter.js -->
                 <div
                     class="row justify-content-center mb-1 gap-4"
                 >
+                    <!-- Show only available products (stock > 0 or unlimited) -->
                     <button
                         id="filterIsAvailable"
                         class="btn btn-info opacity-50 col-5 h-100 mb-2"
                     >
                         Dostępne
                     </button>
+
+                    <!-- Show only products with an active discount -->
                     <button 
                         id="filterIsDiscounted"
                         class="btn btn-info opacity-50 col-5 h-100"
@@ -59,6 +68,7 @@
                     </button>
                 </div>
 
+                <!-- Category filters -->
                 <div
                     class="row justify-content-center mb-4 gap-lg-4"
                 >
@@ -82,6 +92,7 @@
                     </button>
                 </div>
 
+                <!-- Reset all filters to default state -->
                 <button
                         id="resetFiltersBtn"
                         class="btn btn-danger col-8 offset-2"
