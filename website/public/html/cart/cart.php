@@ -84,11 +84,7 @@ $cart = $_SESSION["cart"] ?? [];
         </section>
 
 
-        <!--
-        < ====================PRODUCT LIST====================
-         -> gets generated in productGenerate.php
-        < ==================================================
-        -->
+        <!--gets generated in productGenerate.php -->
         <?php include BACKEND_PATH . "shared/productGenerate.php"?>
     </main>
 

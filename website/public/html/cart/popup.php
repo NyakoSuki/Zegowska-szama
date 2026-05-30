@@ -1,3 +1,4 @@
+<!-- ── Order modal – shown when user clicks "Zamawiam" in the cart ────────── -->
 <div
     class="modal fade"
     id="orderModal"
@@ -32,6 +33,7 @@
                     action="<?=BACKEND_URL?>cart/cartOrder.php"
                     method="post"
                 >
+                    <!-- Customer details -->
                     <input
                         type="text"
                         name="name"
@@ -46,12 +48,15 @@
                         placeholder="Email"
                         required
                     >
+
+                    <!-- Total price calculated server-side from session cart -->
                     <p
                         class="h6"
                     >
                         Całkowita cena do zapłaty: <?=$totalPrice ?? '0';?> zł
                     </p>
 
+                    <!-- Payment method – online is disabled (not yet implemented) -->
                     <label
                         class="fw-bold mb-1"
                     >
@@ -105,6 +110,7 @@
 
 
 
+<!-- ── Clear cart modal – asks for confirmation before wiping the cart ─────── -->
 <div
     class="modal fade"
     id="clearModal"
@@ -133,6 +139,7 @@
 
             <div
             class="modal-body">
+                <!-- POST to cartClear.php which resets $_SESSION["cart"] -->
                 <form
                     action="<?=BACKEND_URL?>cart/cartClear.php"
                     method="post"
