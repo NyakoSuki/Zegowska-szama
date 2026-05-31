@@ -84,6 +84,64 @@ include PUBLIC_PATH . "html/shared/header.php";
 ?>
 
 
+<section>
+    <div id="filters" class="filterDisabled col-12 col-sm-6 col-lg-4 col-xxl-4 h-75 overflow-auto">
+        <div class="card bg-white">
+            <div class="card-body">
+
+                <h6 class="mb-3 fw-bold">Filtry zamówień</h6>
+
+                <!-- Wyszukiwarka -->
+                <label class="form-label small fw-semibold">Szukaj</label>
+                <input type="text" id="searchInput" class="form-control bg-light mb-3"
+                       placeholder="Nazwa, e-mail lub nr zamówienia">
+
+                <hr>
+
+                <!-- Zakres ceny -->
+                <label class="form-label small fw-semibold">Cena zamówienia (zł)</label>
+                <div class="d-flex gap-2 mb-3">
+                    <input type="number" id="filterMin" class="form-control bg-light"
+                           min="0" step="0.01" placeholder="Min">
+                    <input type="number" id="filterMax" class="form-control bg-light"
+                           min="0" step="0.01" placeholder="Max">
+                </div>
+
+                <hr>
+
+                <!-- Statusy – value musi zgadzać się z data-status kart -->
+                <h6 class="mb-3 fw-bold">Status</h6>
+
+                <div class="form-check form-switch mb-2">
+                    <input type="checkbox" class="form-check-input status-filter"
+                           id="filterPending" value="pending" checked>
+                    <label class="form-check-label" for="filterPending">Oczekujące</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input type="checkbox" class="form-check-input status-filter"
+                           id="filterReady" value="ready" checked>
+                    <label class="form-check-label" for="filterReady">Gotowe</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                    <input type="checkbox" class="form-check-input status-filter"
+                           id="filterClaimed" value="claimed" checked>
+                    <label class="form-check-label" for="filterClaimed">Odebrane</label>
+                </div>
+                <div class="form-check form-switch mb-3">
+                    <input type="checkbox" class="form-check-input status-filter"
+                           id="filterCanceled" value="canceled" checked>
+                    <label class="form-check-label" for="filterCanceled">Anulowane</label>
+                </div>
+
+                <button id="resetFilters" class="btn btn-danger col-8 offset-2">
+                    Reset
+                </button>
+
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- LISTA ZAMÓWIEŃ -->
 <section class="container-fluid my-4 px-3">
     <h2 class="mb-3">Zamówienia</h2>
