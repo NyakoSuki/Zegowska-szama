@@ -11,8 +11,18 @@ $password = $_POST["password"] ?? "";
 
 
 // GUARD CLAUSES
-if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
-if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"])) exit;
+if ($_SERVER["REQUEST_METHOD"] !== "POST")
+{
+    $_SESSION['signup'] = true;
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php"); 
+    exit;
+}
+if (empty($_POST["username"]) || empty($_POST["email"]) || empty($_POST["password"]))
+{
+    $_SESSION['signup'] = true;
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php"); 
+    exit;
+}
 
 
 // CHECK IF USER EXISTS
@@ -32,6 +42,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) 
 {
     session_regenerate_id(true);
+    $_SESSION['signup'] = true;
     $_SESSION["error"] = "exists";
 
     header("Location: " . PUBLIC_URL . "html/auth/auth.php");
@@ -42,6 +53,7 @@ if ($result->num_rows > 0)
 if (mb_strlen($password) < 8) 
 {
     session_regenerate_id(true);
+    $_SESSION['signup'] = true;
     $_SESSION["error"] = "short";
 
     header("Location: " . PUBLIC_URL . "html/auth/auth.php");
@@ -67,6 +79,7 @@ $stmt->bind_param("sss", $username, $email, $hashed);
 
 // SUCCESS
 session_regenerate_id(true);
+$_SESSION['signup'] = true;
 $_SESSION["error"] = "none";
 
     header("Location: " . PUBLIC_URL . "html/auth/auth.php");

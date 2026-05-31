@@ -20,9 +20,12 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
     <main class="container-fluid">
 
     <?php
-    $signupErrors = ["exists","short","none"];
-    $active = (!empty($_SESSION['error']) && in_array($_SESSION['error'], $signupErrors))
-        ? "signup-active" : "";
+    $active = "";
+    if(isset($_SESSION['signup']))
+    {
+        $active = "signup-active";
+        unset($_SESSION['signup']);
+    }
     ?>
 
         <div class="container-box <?= $active ?>">
@@ -60,18 +63,18 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             >
 
                         <label class="m-0">Hasło:</label>
-                        <div class="input-group mb-2">
+                        <div class="input-group ms-0 mb-2 row">
                             <input
                                 id="loginPasswordInp"
                                 name="password"
                                 type="password"
-                                class="form-control bg-light mb-2"
+                                class="form-control bg-light mb-2 col-12 col-sm-8"
                                 placeholder="Hasło"
                                 
                             >
                             <button
                                 id="loginPasswordBtn"
-                                class="btn btn-light mb-2"
+                                class="btn btn-light mb-2 col-12 col-sm-4"
                                 type="button"
                             >
                             Pokaż
@@ -102,13 +105,13 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                         <div class="buttons">
                             <button
                                 type="submit"
-                                class="btn btn-success">
+                                class="btn btn-success mb-2">
                                 Zaloguj
                             </button>
 
                             <button
                                 type="reset"
-                                class="btn btn-danger">
+                                class="btn btn-danger mb-2">
                                 Wyczyść
                             </button>
                         </div>
@@ -139,18 +142,18 @@ if(!isset($_SESSION["theme"])) $_SESSION["theme"] = "light";
                             >
 
                         <label class="m-0">Hasło:</label><br>
-                        <div class="input-group mb-2">
+                        <div class="input-group ms-0 mb-2 row">
                             <input
                                 id="signupPasswordInp"
                                 name="password"
                                 type="password"
-                                class="form-control bg-light mb-2"
+                                class="form-control bg-light mb-2 col-12 col-sm-8"
                                 placeholder="Hasło"
                                 
                             >
                             <button
                                 id="signupPasswordBtn"
-                                class="btn btn-light mb-2"
+                                class="btn btn-light mb-2 col-12 col-sm-4"
                                 type="button"
                             >
                             Pokaż

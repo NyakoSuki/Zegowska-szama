@@ -8,8 +8,16 @@ $email = strtolower(trim($_POST["email"] ?? ''));
 $password = $_POST["password"] ?? '';
 
 // GUARD CLAUSES
-if ($_SERVER["REQUEST_METHOD"] !== "POST") exit;
-if (empty($_POST["email"]) || empty($_POST["password"])) exit;
+if ($_SERVER["REQUEST_METHOD"] !== "POST")
+{
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php"); 
+    exit;
+}
+if (empty($_POST["email"]) || empty($_POST["password"]))
+{
+    header("Location: " . PUBLIC_URL . "html/auth/auth.php"); 
+    exit;
+}
 
 $stmt = $connection->prepare
 ("
