@@ -10,8 +10,8 @@ $selectedIds = array_filter(array_map('intval', explode(",", $discountProducts))
         class="product border rounded shadow-sm bg-body h-100 d-flex flex-column overflow-hidden"
         data-id="<?=$discountId?>"
         data-procent="<?=$discountProcent?>"
-        data-start="<?=$discountStart?>"
-        data-end="<?=$discountEnd?>"
+        data-start="<?=str_replace(' ', 'T', $discountStart)?>"
+        data-end="<?=str_replace(' ', 'T', $discountEnd)?>"
         data-active="<?=$discountIsActiveNow?>"
         data-action="<?=$action?>"
     >
