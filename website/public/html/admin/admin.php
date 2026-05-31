@@ -6,8 +6,8 @@ include BACKEND_PATH . "database/database.php";
 
     if ($_SESSION["role"] !== "admin") 
     {
-        //header("Location: " . ACCOUNT_F_URL . "account.php");
-        //exit;
+        header("Location: " . ACCOUNT_F_URL . "account.php");
+        exit;
     }
 ?>
 <!DOCTYPE html>
