@@ -1,7 +1,10 @@
 <?php
-// orderGenerate.php – funkcje generujące fragmenty HTML dla zamówień
+// orderGenerate.php – HTML generation functions for orders
 
+// Status labels for display
 $statusLabels = ['pending' => 'Oczekujące', 'ready' => 'Gotowe', 'claimed' => 'Odebrane', 'canceled' => 'Anulowane'];
+
+// Maps current status to the next one
 $nextStep     = ['pending' => 'ready', 'ready' => 'claimed'];
 
 
@@ -9,7 +12,7 @@ function renderOrderCardHeader(array $order, array $statusLabels): void
 {
     $oid    = $order['order_id'];
     $status = $order['status'];
-    $label  = $statusLabels[$status] ?? $status;
+    $label  = $statusLabels[$status] ?? $status; // fallback to raw status
     $date   = htmlspecialchars($order['created_at']);
     echo <<<HTML
     <div class="card-header d-flex align-items-center gap-2">
@@ -25,7 +28,7 @@ function renderCustomerInfo(array $order): void
 {
     $name  = htmlspecialchars($order['customer_name']);
     $email = htmlspecialchars($order['email']);
-    $total = number_format((float)$order['total_price'], 2, ',', ' ');
+    $total = number_format((float)$order['total_price'], 2, ',', ' '); // Polish number format
     echo <<<HTML
     <div class="col-12 col-md-4">
         <p class="mb-1"><strong>Klient:</strong> $name</p>
@@ -84,7 +87,7 @@ function renderOrderActions(array $order, array $nextStep): void
 
     if (isset($nextStep[$status])) {
         $next   = $nextStep[$status];
-        $action = ($next === 'claimed') ? 'delete' : 'update';
+        $action = ($next === 'claimed') ? 'delete' : 'update'; // claimed = remove from active list
 
         echo '<form class="order-action-form">';
         echo "<input type=\"hidden\" name=\"order_id\"  value=\"$oid\">";
@@ -92,6 +95,7 @@ function renderOrderActions(array $order, array $nextStep): void
         echo "<input type=\"hidden\" name=\"actionBtn\" value=\"$action\">";
 
         if ($next === 'claimed') {
+            // Requires JS confirmation before submitting
             echo <<<HTML
             <button type="button" class="btn btn-success w-100 btn-sm needs-confirm">
                 Oznacz jako odebrane
@@ -104,6 +108,7 @@ function renderOrderActions(array $order, array $nextStep): void
         echo '</form>';
     }
 
+    // Cancel button – hidden for finished orders
     if ($status !== 'canceled' && $status !== 'claimed') {
         echo <<<HTML
         <form class="order-action-form">
@@ -115,6 +120,7 @@ function renderOrderActions(array $order, array $nextStep): void
         HTML;
     }
 
+    // No actions available for finished orders
     if ($status === 'claimed' || $status === 'canceled') {
         echo '<span class="text-muted small fst-italic">Brak akcji</span>';
     }
@@ -127,7 +133,7 @@ function renderOrderCard(array $order, array $statusLabels, array $nextStep): vo
 {
     $oid    = $order['order_id'];
     $status = $order['status'];
-    $name   = strtolower(htmlspecialchars($order['customer_name']));
+    $name   = strtolower(htmlspecialchars($order['customer_name'])); // lowercase for case-insensitive filtering
     $email  = strtolower(htmlspecialchars($order['email']));
     $price  = (float)$order['total_price'];
 
@@ -142,6 +148,7 @@ function renderOrderCard(array $order, array $statusLabels, array $nextStep): vo
 
     renderOrderCardHeader($order, $statusLabels);
 
+    // Three columns: customer info, products table, actions
     echo '<div class="card-body"><div class="row g-3">';
     renderCustomerInfo($order);
     renderProductsTable($order['products']);
