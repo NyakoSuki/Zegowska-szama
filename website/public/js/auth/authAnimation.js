@@ -1,5 +1,7 @@
 "use strict";
 
+//Toggles a class to trigger animation for signin signup
+
 document.addEventListener("DOMContentLoaded", () => 
 {
     const signinBtn = document.getElementById("loginBtn");
