@@ -1,5 +1,7 @@
 "use strict";
 
+// Toggles password field visibility
+
 function togglePassword(inp, btn)
 {
     if (inp.type === "password")
