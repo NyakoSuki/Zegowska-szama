@@ -1,5 +1,7 @@
 "use strict";
 
+// Handles cart actions: increment, decrement, remove items and quantity input
+
 const incForm = document.querySelectorAll(".incForm");
 const decForm = document.querySelectorAll(".decForm");
 const removeForm = document.querySelectorAll(".removeForm");
@@ -8,6 +10,7 @@ const addToCartToast = document.getElementById('addToCartToast');
 const toast = bootstrap.Toast.getOrCreateInstance(addToCartToast);
 const result = document.getElementById("addToCartResult");
 
+// Adds one unit of a product to the cart
 incForm.forEach(add =>
 {
     add.addEventListener("submit", function(e)
@@ -34,6 +37,7 @@ incForm.forEach(add =>
 });
 
 
+// Removes one unit of a product from the cart
 decForm.forEach(remove =>
 {
     remove.addEventListener("submit", function(e)
@@ -60,6 +64,7 @@ decForm.forEach(remove =>
 });
 
 
+// Removes a product entirely from the cart and shows a toast notification
 removeForm.forEach(trash =>
 {
     trash.addEventListener("submit", function(e)
@@ -101,6 +106,7 @@ removeForm.forEach(trash =>
 });
 
 
+// Updates product quantity on input blur and shows a toast notification
 const qtyInp = document.querySelectorAll(".qtyInp");
 qtyInp.forEach(qty => 
 {
@@ -143,6 +149,7 @@ qtyInp.forEach(qty =>
     });
 });
 
+// Shows a toast notification with a message stored in sessionStorage after reload
 window.addEventListener("DOMContentLoaded", () =>
 {
     const message = sessionStorage.getItem("toastMessage");
