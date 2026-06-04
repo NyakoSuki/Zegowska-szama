@@ -1,3 +1,5 @@
+<!--Site-wide sticky header with logo, branding and navigation-->
+
 <header
     class="container-fluid sticky-top p-3"
 >
