@@ -1,10 +1,11 @@
 "use strict";
 
-
+// Client-side product filtering by name, price, type and availability
 
 const filterBtn = document.getElementById("filterBtn");
 const filters = document.getElementById("filters");
 
+// Toggles filter panel visibility
 filterBtn.addEventListener("click", () => 
 {
     filters.classList.toggle("filterDisabled");
@@ -33,11 +34,14 @@ let includeSchool = false;
 const resetFiltersBtn = document.getElementById("resetFiltersBtn");
 
 
+// Toggles availability filter
 filterIsAvailable.addEventListener("click", ()=>
 {
     filterIsAvailable.classList.toggle("opacity-50");
     includeAvailable = !includeAvailable;
 })
+
+// Toggles discount filter
 filterIsDiscounted.addEventListener("click", ()=>
 {
     filterIsDiscounted.classList.toggle("opacity-50");
@@ -45,6 +49,7 @@ filterIsDiscounted.addEventListener("click", ()=>
 })
 
 
+// Toggles food/drink/school category filters
 filterFood.addEventListener("click", ()=>
 {
     filterFood.classList.toggle("opacity-50");
@@ -81,6 +86,7 @@ function filterProducts()
         const matchName = productName.includes(trueName);
         const matchPrice = productPrice >= trueMin && productPrice <= trueMax;
 
+        // Build list of selected types; empty means all types match
         const typesSelected = [];
         if (includeFood) typesSelected.push("food");
         if (includeDrink) typesSelected.push("drink");
@@ -102,6 +108,7 @@ function filterProducts()
     });
 }
 
+// Re-run filter on every input change
 filterName.addEventListener("input", filterProducts);
 filterMin.addEventListener("input", filterProducts);
 filterMax.addEventListener("input", filterProducts);
@@ -113,6 +120,7 @@ filterFood.addEventListener("click", filterProducts);
 filterDrink.addEventListener("click", filterProducts);
 filterSchool.addEventListener("click", filterProducts);
 
+// Resets all filters and re-runs filtering
 resetFiltersBtn.addEventListener("click", () => 
 {
     resetFilters();
