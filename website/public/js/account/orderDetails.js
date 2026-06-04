@@ -1,5 +1,7 @@
 "use strict";
 
+// Loads order details into a modal on details button click
+
 document.addEventListener("DOMContentLoaded", () => {
     const detailsBtn = document.querySelectorAll(".detailsBtn");
 
